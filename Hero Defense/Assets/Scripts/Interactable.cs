@@ -1,0 +1,51 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Interactable : MonoBehaviour {
+
+    public float interactionRadius = 1;
+    public Transform interactionTransform;
+
+    bool isFocus = false;
+    Transform player;
+
+    bool hasInteracted = false;
+
+    public virtual void Interact()
+    {
+        Debug.Log("Interacting with " + transform.name);
+    }
+
+    private void Update()
+    {
+        if (isFocus && !hasInteracted)
+        {
+            float distance = Vector3.Distance(player.position, interactionTransform.position);
+            if (distance <= interactionRadius){
+                Interact();
+                hasInteracted = true;
+            }
+        }
+    }
+
+    public void OnFocused(Transform playerTransform)
+    {
+        isFocus = true;
+        player = playerTransform;
+        hasInteracted = false;
+    }
+
+    public void OnDefocused()
+    {
+        isFocus = false;
+        player = null;
+        hasInteracted = false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(interactionTransform.position, interactionRadius);
+    }
+}
