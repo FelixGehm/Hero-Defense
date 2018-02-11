@@ -24,7 +24,8 @@ public class EquipmentManager : MonoBehaviour
 
     Inventory inventory;
 
-    public delegate void OnEquipmentChanged();
+    //Callback:
+    public delegate void OnEquipmentChanged(bool wasAdded, Equipment equip);
     public OnEquipmentChanged onEquipmentChangedCallback;
 
     void Start()
@@ -43,7 +44,7 @@ public class EquipmentManager : MonoBehaviour
         equipments.Add(equip);
 
         if (onEquipmentChangedCallback != null)
-            onEquipmentChangedCallback.Invoke();
+            onEquipmentChangedCallback.Invoke(true, equip);
 
 
         return true;
@@ -57,7 +58,7 @@ public class EquipmentManager : MonoBehaviour
             equipments.Remove(equip);
 
             if (onEquipmentChangedCallback != null)
-                onEquipmentChangedCallback.Invoke();
+                onEquipmentChangedCallback.Invoke(false, equip);
         }
         else
         {

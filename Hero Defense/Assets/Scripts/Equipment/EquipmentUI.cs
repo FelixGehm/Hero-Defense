@@ -20,7 +20,7 @@ public class EquipmentUI : MonoBehaviour
         slots = slotsParent.GetComponentsInChildren<EquipmentSlot>();
     }
 
-    void UpdateUI()
+    void UpdateUI(bool wasAdded, Equipment equip)
     {
         for (int i = 0; i < slots.Length; i++)
         {

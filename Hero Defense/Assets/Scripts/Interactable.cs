@@ -7,7 +7,8 @@ public class Interactable : MonoBehaviour {
     public float interactionRadius = 1;
     public Transform interactionTransform;
 
-    bool isFocus = false;
+    [HideInInspector]
+    public bool isFocus = false;
     Transform player;
 
     bool hasInteracted = false;
