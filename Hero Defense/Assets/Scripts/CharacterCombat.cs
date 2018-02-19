@@ -39,8 +39,6 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    //TODO: Auto Attack
-
     IEnumerator DoDamage(CharacterStats stats, float delay)
     {
         yield return new WaitForSeconds(delay);

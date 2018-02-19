@@ -3,10 +3,13 @@
 public class CharacterStats : MonoBehaviour {
     public Stat maxHealth;
     //nur in dieser klasse setzbar, aber von überall abrufbar
-    public int currentHealth { get; private set; }
+    public float currentHealth { get; private set; }
 
     public Stat damage;
     public Stat attackSpeed;
+   
+    public Stat attackRange;
+
 
     /*
     public Stat critChance;
@@ -25,7 +28,7 @@ public class CharacterStats : MonoBehaviour {
     }
 
     //evtl zusätzlich die Art des Schadens übergeben
-    public void TakeDamage (int damage)
+    public void TakeDamage (float damage)
     {
         damage -= armor.GetValue();
         damage = Mathf.Max(damage, 0);
@@ -40,5 +43,15 @@ public class CharacterStats : MonoBehaviour {
     public virtual void Die()
     {
         Debug.Log(transform.name + " died.");
+
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
+        //Draw AttackRange
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, (float)attackRange.GetValue());
     }
 }

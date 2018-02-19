@@ -9,17 +9,23 @@ public class PlayerMotor : MonoBehaviour {
 
     Transform target;
 
-
+    private bool faceOnly = false;
+    
 	// Use this for initialization
 	void Start () {
         agent = GetComponent<NavMeshAgent>();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
+
+
 		if(target != null)
         {
-            agent.SetDestination(target.position);
+            if(!faceOnly)
+            {
+                agent.SetDestination(target.position);
+            }
             FaceTarget();
         }
 	}
@@ -35,6 +41,8 @@ public class PlayerMotor : MonoBehaviour {
         agent.updateRotation = false;
 
         target = newTarget.interactionTransform;
+
+        faceOnly = false;
     }
 
     public void StopFollowingTarget()
@@ -43,6 +51,31 @@ public class PlayerMotor : MonoBehaviour {
         agent.updateRotation = true;
 
         target = null;
+    }
+
+    public void PauseFollowTarget()
+    {
+        Debug.Log("PauseFollowTarget():");
+        agent.SetDestination(transform.position);
+
+        faceOnly = true;
+    }
+
+    public void ContinueFollowTarget()
+    {
+        Debug.Log("ContinueFollowTarget():");
+
+        if(target != null)
+        {
+            agent.SetDestination(target.position);
+            faceOnly = false;
+        } else
+        {
+            Debug.Log("Couldn't continue following target. Might have disapeared or focus changed");
+        }
+        
+
+        
     }
 
     void FaceTarget()
