@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthBarManager : MonoBehaviour {
 
-    private Image foreGround;
+    public Image foreGround;
 
     private CharacterStats stats;
 
@@ -51,7 +51,7 @@ public class HealthBarManager : MonoBehaviour {
     {
         cam = Camera.main;
 
-        foreGround = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+        //foreGround = transform.GetChild(0).GetChild(0).GetComponent<Image>();
         //Debug.Log(foreGround.name);
 
         stats = transform.parent.parent.GetComponent<CharacterStats>();
