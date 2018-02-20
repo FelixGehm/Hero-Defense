@@ -46,10 +46,6 @@ public class Projectile : MonoBehaviour {
     void Damage(CharacterStats targetStats)
     {
         targetStats.TakeDamage(damage);
-        
-
-
-        targetStats.GetComponent<CharacterCombat>().healthBar.CurrentHealth = targetStats.currentHealth;
     }
 
     public void SetDamage(float _damage)

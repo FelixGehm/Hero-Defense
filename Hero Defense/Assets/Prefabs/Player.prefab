@@ -531,6 +531,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1677998418867418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4580521085324932}
+  m_Layer: 0
+  m_Name: Fire Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1679793003022920
 GameObject:
   m_ObjectHideFlags: 1
@@ -874,6 +889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4605255647245580}
+  - {fileID: 4580521085324932}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1228,6 +1244,19 @@ Transform:
   - {fileID: 4653952608396924}
   m_Father: {fileID: 4050162396986940}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4580521085324932
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1677998418867418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.208, z: 0.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4079440013813424}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4597199180043790
 Transform:
@@ -1618,6 +1647,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 0.2
+  healthBar: {fileID: 0}
+  isRanged: 1
+  projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
+    type: 2}
+  firePoint: {fileID: 4580521085324932}
 --- !u!114 &114521099582864942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1696,6 +1730,7 @@ MonoBehaviour:
   maxHealth:
     baseValue: 100
     modifiers: []
+  healthBarManager: {fileID: 114549880748218472}
   damage:
     baseValue: 10
     modifiers: []
@@ -1703,7 +1738,7 @@ MonoBehaviour:
     baseValue: 100
     modifiers: []
   attackRange:
-    baseValue: 3.5
+    baseValue: 10
     modifiers: []
   armor:
     baseValue: 5
