@@ -13,9 +13,15 @@ public class CharacterCombat : MonoBehaviour
 
     public event System.Action OnAttack;
 
-    private HealthBarManager healthBar;
+    [HideInInspector]
+    public HealthBarManager healthBar;
 
     CharacterStats myStats;
+
+    [Header("Set only for Ranged Characters")]
+    public bool isRanged = false;
+    public GameObject projectilePrefab;
+    public Transform firePoint;
 
     void Start()
     {
@@ -36,7 +42,16 @@ public class CharacterCombat : MonoBehaviour
         if (attackCooldown <= 0)
         {
             attackSpeed = (float)myStats.attackSpeed.GetValue() / 100;
-            StartCoroutine(DoDamage(targetStats, attackDelay));
+
+            if (!isRanged)
+            {
+StartCoroutine(DoDamage(targetStats, attackDelay));
+            }
+            else
+            {
+                shootProjectile(targetStats.transform);
+            }
+            
 
             if (OnAttack != null)
                 OnAttack();
@@ -52,5 +67,17 @@ public class CharacterCombat : MonoBehaviour
 
         Debug.Log("MyStats Health: " + stats.currentHealth);
         stats.GetComponent<CharacterCombat>().healthBar.CurrentHealth = stats.currentHealth;
+    }
+
+    private void shootProjectile(Transform target)
+    {
+        GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Projectile projectile = projectileGO.GetComponent<Projectile>();
+
+        if (projectile != null)
+        {
+            projectile.SetDamage(myStats.damage.GetValue());
+            projectile.SetTarget(target);
+        }
     }
 }
