@@ -50,6 +50,7 @@ public class CharacterCombat : MonoBehaviour
         yield return new WaitForSeconds(delay);
         stats.TakeDamage(myStats.damage.GetValue());
 
-        healthBar.CurrentHealth = myStats.currentHealth;
+        Debug.Log("MyStats Health: " + stats.currentHealth);
+        stats.GetComponent<CharacterCombat>().healthBar.CurrentHealth = stats.currentHealth;
     }
 }

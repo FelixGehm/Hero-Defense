@@ -13,13 +13,11 @@ public class Interactable : MonoBehaviour {
 
     bool hasInteracted = false;
 
-    private GameObject focusHaloPrefab;
-    private GameObject haloInstance; 
+    public GameObject haloInstance; 
 
     void Awake()
     {
-        // Funktioniert so leider nicht :(
-        focusHaloPrefab = (GameObject)Resources.Load("Focus_Sprite", typeof(GameObject));
+
     }
 
     public virtual void Interact()
@@ -46,7 +44,9 @@ public class Interactable : MonoBehaviour {
         player = playerTransform;
         hasInteracted = false;
 
-        haloInstance = Instantiate(focusHaloPrefab, transform.Find("GFX"), false);
+        haloInstance.SetActive(true);
+
+
     }
 
     public void OnDefocused()
@@ -55,7 +55,7 @@ public class Interactable : MonoBehaviour {
         player = null;
         hasInteracted = false;
 
-        Destroy(haloInstance, 0.2f);
+        haloInstance.SetActive(false);
     }
 
     private void OnDrawGizmosSelected()

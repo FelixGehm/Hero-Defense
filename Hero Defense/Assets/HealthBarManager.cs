@@ -9,6 +9,8 @@ public class HealthBarManager : MonoBehaviour {
 
     private CharacterStats stats;
 
+    private Camera cam;
+
 
     private float maxHealth;
     public float MaxHealth
@@ -20,6 +22,7 @@ public class HealthBarManager : MonoBehaviour {
         }
         set
         {
+            Debug.Log("Set MaxHealth()");
             maxHealth = value;
             foreGround.fillAmount = currentHealth / maxHealth;
         }
@@ -35,6 +38,7 @@ public class HealthBarManager : MonoBehaviour {
         }
         set
         {
+            //Debug.Log("Set CurrentHealth()");
             currentHealth = value;
             foreGround.fillAmount = currentHealth/maxHealth;
         }
@@ -45,13 +49,23 @@ public class HealthBarManager : MonoBehaviour {
 
     void Awake ()
     {
+        cam = Camera.main;
+
         foreGround = transform.GetChild(0).GetChild(0).GetComponent<Image>();
+        //Debug.Log(foreGround.name);
 
         stats = transform.parent.parent.GetComponent<CharacterStats>();
 
         maxHealth = stats.maxHealth.GetValue();
         currentHealth = maxHealth;
 	}
+
+    private void Update()
+    {
+
+        transform.rotation = cam.transform.rotation;
+
+    }
 
 
 
