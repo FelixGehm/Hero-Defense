@@ -7,30 +7,55 @@ public class WaveSpawner : MonoBehaviour {
     public GameObject toSpawnPrefab;
 
     public float timeBetweenWavesInSec = 4.0f;
+    private float waveCoolDown;
+
     
-    // Use this for initialization
-	void Start () {
-		
-	}
-	
-	
-    
-    // Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown("s"))
+
+    public bool autoSpawn = false;
+
+    public int enemysPerWave = 5;
+    public float waveSpawnDuration = 4.0f;
+
+    private void Awake()
+    {
+        waveCoolDown = timeBetweenWavesInSec;
+    }
+
+    void FixedUpdate () {
+        Debug.Log("wav");
+
+        if(!autoSpawn)
         {
-            Spawn(5, 3.0f);
+            if (Input.GetKeyDown("s"))
+            {
+                Spawn(enemysPerWave, waveSpawnDuration);
+            }
         }
+        else
+        {
+            waveCoolDown -= Time.deltaTime;
+
+            if (waveCoolDown <= 0)
+            {
+                Spawn(enemysPerWave, waveSpawnDuration);
+            }
+        }
+
+        
 	}
 
     private void Spawn(int no, float timeSpan)
     {
         float gap = timeSpan / no;
 
-        for (int i = 0; i <= no; i++)
+        for (int i = 0; i < no; i++)
         {
             float delay = i * gap;
             StartCoroutine("SpawnSingle", delay);
+        }
+        if(autoSpawn)
+        {
+            waveCoolDown = timeBetweenWavesInSec + timeSpan ;
         }
     }
 
