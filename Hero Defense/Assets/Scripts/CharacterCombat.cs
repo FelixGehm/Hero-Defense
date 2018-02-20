@@ -13,11 +13,17 @@ public class CharacterCombat : MonoBehaviour
 
     public event System.Action OnAttack;
 
+    private HealthBarManager healthBar;
+
     CharacterStats myStats;
 
     void Start()
     {
         myStats = GetComponent<CharacterStats>();
+
+        healthBar = transform.Find("GFX").Find("HealthBar").GetComponent<HealthBarManager>();
+
+        healthBar.MaxHealth = myStats.maxHealth.GetValue();
     }
 
     void Update()
@@ -43,5 +49,7 @@ public class CharacterCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         stats.TakeDamage(myStats.damage.GetValue());
+
+        healthBar.CurrentHealth = myStats.currentHealth;
     }
 }
