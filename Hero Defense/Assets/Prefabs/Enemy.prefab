@@ -227,6 +227,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 0.2
+  healthBar: {fileID: 0}
+  isRanged: 0
+  projectilePrefab: {fileID: 0}
+  firePoint: {fileID: 0}
 --- !u!114 &114298287775293178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -370,6 +374,7 @@ MonoBehaviour:
   maxHealth:
     baseValue: 40
     modifiers: []
+  healthBarManager: {fileID: 114635993733402010}
   damage:
     baseValue: 10
     modifiers: []

@@ -1,13 +1,32 @@
 ﻿using UnityEngine;
 
-public class CharacterStats : MonoBehaviour {
+public class CharacterStats : MonoBehaviour
+{
     public Stat maxHealth;
     //nur in dieser klasse setzbar, aber von überall abrufbar
-    public float currentHealth { get; private set; }
+    private float currentHealth;
+    public HealthBarManager healthBarManager;
+    public float CurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+        private set
+        {
+            currentHealth = value;
+
+            if (healthBarManager != null)
+            {
+                healthBarManager.CurrentHealth = value;
+            }
+
+        }
+    }
 
     public Stat damage;
     public Stat attackSpeed;
-   
+
     public Stat attackRange;
 
 
@@ -24,19 +43,19 @@ public class CharacterStats : MonoBehaviour {
 
     void Awake()
     {
-        currentHealth = maxHealth.GetValue();
+        CurrentHealth = maxHealth.GetValue();
     }
 
     //evtl zusätzlich die Art des Schadens übergeben
-    public void TakeDamage (float damage)
+    public void TakeDamage(float damage)
     {
         damage -= armor.GetValue();
         damage = Mathf.Max(damage, 0);
 
-        currentHealth -= damage;
+        CurrentHealth -= damage;
         Debug.Log(transform.name + " takes " + damage + " damage");
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
             Die();
     }
 

@@ -45,13 +45,13 @@ public class CharacterCombat : MonoBehaviour
 
             if (!isRanged)
             {
-StartCoroutine(DoDamage(targetStats, attackDelay));
+                StartCoroutine(DoDamage(targetStats, attackDelay));
             }
             else
             {
                 shootProjectile(targetStats.transform);
             }
-            
+
 
             if (OnAttack != null)
                 OnAttack();
@@ -64,9 +64,6 @@ StartCoroutine(DoDamage(targetStats, attackDelay));
     {
         yield return new WaitForSeconds(delay);
         stats.TakeDamage(myStats.damage.GetValue());
-
-        Debug.Log("MyStats Health: " + stats.currentHealth);
-        stats.GetComponent<CharacterCombat>().healthBar.CurrentHealth = stats.currentHealth;
     }
 
     private void shootProjectile(Transform target)
