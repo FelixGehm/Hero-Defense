@@ -22,8 +22,6 @@ public class WaveSpawner : MonoBehaviour {
     }
 
     void FixedUpdate () {
-        Debug.Log("wav");
-
         if(!autoSpawn)
         {
             if (Input.GetKeyDown("s"))

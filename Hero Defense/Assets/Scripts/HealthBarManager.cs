@@ -22,7 +22,7 @@ public class HealthBarManager : MonoBehaviour {
         }
         set
         {
-            Debug.Log("Set MaxHealth()");
+            Debug.Log("Set MaxHealth() to " + value);
             maxHealth = value;
             foreGround.fillAmount = currentHealth / maxHealth;
         }
