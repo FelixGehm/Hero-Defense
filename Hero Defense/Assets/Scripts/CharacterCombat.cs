@@ -41,7 +41,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if (attackCooldown <= 0)
         {
-            attackSpeed = (float)myStats.attackSpeed.GetValue() / 100;
+            attackSpeed = (float)myStats.attackSpeed.GetValue();
 
             if (!isRanged)
             {
