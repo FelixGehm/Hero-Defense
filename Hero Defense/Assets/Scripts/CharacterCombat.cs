@@ -13,8 +13,6 @@ public class CharacterCombat : MonoBehaviour
 
     public event System.Action OnAttack;
 
-    [HideInInspector]
-    public HealthBarManager healthBar;
 
     CharacterStats myStats;
 
@@ -26,10 +24,6 @@ public class CharacterCombat : MonoBehaviour
     void Start()
     {
         myStats = GetComponent<CharacterStats>();
-
-        healthBar = transform.Find("GFX").Find("HealthBar").GetComponent<HealthBarManager>();
-
-        healthBar.MaxHealth = myStats.maxHealth.GetValue();
     }
 
     void Update()
