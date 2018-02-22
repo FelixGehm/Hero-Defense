@@ -13,7 +13,9 @@ public class Interactable : MonoBehaviour {
 
     bool hasInteracted = false;
 
-    public GameObject haloInstance; 
+    public GameObject haloInstance;
+
+    public event System.Action OnDefocus;
 
     void Awake()
     {
@@ -46,7 +48,7 @@ public class Interactable : MonoBehaviour {
 
         haloInstance.SetActive(true);
 
-
+        
     }
 
     public void OnDefocused()
@@ -56,6 +58,11 @@ public class Interactable : MonoBehaviour {
         hasInteracted = false;
 
         haloInstance.SetActive(false);
+
+        if(OnDefocus != null)
+        {
+            OnDefocus();
+        }
     }
 
     private void OnDrawGizmosSelected()
