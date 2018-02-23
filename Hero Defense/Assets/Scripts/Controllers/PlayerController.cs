@@ -26,10 +26,17 @@ public class PlayerController : MonoBehaviour
             motor = GetComponent<PlayerMotor>();
             stats = GetComponent<PlayerStats>();
             combat = GetComponent<CharacterCombat>();
-
             cam = Camera.main;
-            cam.GetComponent<CameraController>().SetLookAt(transform);
         }    
+    }
+
+
+    
+
+    public void SetupCam()
+    {
+        cam = Camera.main;
+        cam.GetComponent<CameraController>().SetLookAt(transform);
     }
 
     // Update is called once per frame

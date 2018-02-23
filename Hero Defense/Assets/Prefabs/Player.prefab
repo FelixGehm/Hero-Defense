@@ -669,13 +669,13 @@ GameObject:
   - component: {fileID: 114711552374023346}
   - component: {fileID: 114510106975555844}
   - component: {fileID: 114282380712016258}
-  - component: {fileID: 114300027216132982}
   - component: {fileID: 95326391101983176}
   - component: {fileID: 114547859312986618}
-  - component: {fileID: 114715468649468812}
   - component: {fileID: 114587534174011980}
   - component: {fileID: 114574473558049274}
   - component: {fileID: 114936727937868750}
+  - component: {fileID: 114764706871393050}
+  - component: {fileID: 114974943202490854}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1633,27 +1633,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114300027216132982
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1812730854815454}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.5
-  m_VelocityThreshold: 0
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 5
-  m_InterpolateMovement: 10
 --- !u!114 &114373034935711094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1865,7 +1844,7 @@ MonoBehaviour:
   armor:
     baseValue: 5
     modifiers: []
---- !u!114 &114715468649468812
+--- !u!114 &114764706871393050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1873,12 +1852,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1812730854815454}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4a71d805239aa4fb9cf556c35d6147, type: 3}
+  m_Script: {fileID: 11500000, guid: fb72a1e4d2ec9d74994046fb5a0d3e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lerpRate: 10
-  tresholdPos: 0.5
-  tresholdRot: 5
+  componentsToDisable:
+  - {fileID: 114556741294838136}
+  - {fileID: 114468554818640190}
+  - {fileID: 114510106975555844}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &114936727937868750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1962,6 +1944,18 @@ MonoBehaviour:
   frameUpdateInterval: 0
   invFrameUpdateInterval: 0
   lastSentPos: {x: 0, y: 0, z: 0}
+--- !u!114 &114974943202490854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990692efa14a31a42bff7ce6588c8885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentsToDisable: []
 --- !u!136 &136897402607705822
 CapsuleCollider:
   m_ObjectHideFlags: 1

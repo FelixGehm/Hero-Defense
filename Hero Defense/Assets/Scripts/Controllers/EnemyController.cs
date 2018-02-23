@@ -11,7 +11,7 @@ public class EnemyController : NetworkBehaviour
 
 
     Transform destination;  //der nexus
-    Transform target;       //der spieler
+    Transform target;       //der nächstgelegene spieler
 
     float distanceToTarget;
     float distanceToDestination;
@@ -22,16 +22,29 @@ public class EnemyController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        target = PlayerManager.instance.player.transform;
+        SetupEnemy();
+
         destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
     }
 
-    // Update is called once per frame
+    public void SetupEnemy()
+    {
+        target = FindClosestPlayer().transform;
+        
+    }
+
     void Update()
     {
-        distanceToTarget = Vector3.Distance(target.position, transform.position);
+        if ( target == null)
+        {
+            target = FindClosestPlayer().transform;
+        } else
+        {
+            distanceToTarget = Vector3.Distance(target.position, transform.position);
+        }
+        
         distanceToDestination = Vector3.Distance(destination.position, transform.position);
 
         //vielleicht lieber über eine coroutine. könnte mit mehreren gegnern etwas viel perfomance schlucken?
@@ -71,6 +84,34 @@ public class EnemyController : NetworkBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
     }
 
+
+
+    // Returns the clostest Player to the Enemy
+    // If there are no Players registered in the PlayerManager, then returns null
+    private GameObject FindClosestPlayer()
+    {
+        float distanceToPlayer = float.MaxValue;
+        GameObject closestPlayer = null;
+
+
+        for (int i = 0; i< PlayerManager.instance.player.Length; i++)
+        {
+            if (PlayerManager.instance.player[i] != null)
+            {
+                float distance = Vector3.Distance(PlayerManager.instance.player[i].transform.position, transform.position);
+                if (distanceToPlayer > distance )
+                {
+                    distanceToPlayer = distance;
+                    closestPlayer = PlayerManager.instance.player[i];
+                }
+            }                        
+        }
+        return closestPlayer;
+        
+    }
+
+
+    // Draw LookRadius in Editor
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
