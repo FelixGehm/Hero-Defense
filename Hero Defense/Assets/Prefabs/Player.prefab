@@ -668,6 +668,14 @@ GameObject:
   - component: {fileID: 114468554818640190}
   - component: {fileID: 114711552374023346}
   - component: {fileID: 114510106975555844}
+  - component: {fileID: 114282380712016258}
+  - component: {fileID: 114300027216132982}
+  - component: {fileID: 95326391101983176}
+  - component: {fileID: 114547859312986618}
+  - component: {fileID: 114715468649468812}
+  - component: {fileID: 114587534174011980}
+  - component: {fileID: 114574473558049274}
+  - component: {fileID: 114936727937868750}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -885,7 +893,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1812730854815454}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -47.81, y: 0, z: -54.83}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4605255647245580}
@@ -1550,6 +1558,23 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731667275937284}
+  m_Enabled: 0
+  m_Avatar: {fileID: 9000000, guid: 4c282ea8af8a1cb4e9e515f12e91a548, type: 3}
+  m_Controller: {fileID: 9100000, guid: e3b4051335c7e4944997b36bc0721e77, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!95 &95326391101983176
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4c282ea8af8a1cb4e9e515f12e91a548, type: 3}
   m_Controller: {fileID: 9100000, guid: e3b4051335c7e4944997b36bc0721e77, type: 2}
@@ -1560,6 +1585,38 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114282380712016258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 226
+    i1: 118
+    i2: 165
+    i3: 52
+    i4: 193
+    i5: 8
+    i6: 88
+    i7: 36
+    i8: 153
+    i9: 78
+    i10: 77
+    i11: 224
+    i12: 200
+    i13: 24
+    i14: 170
+    i15: 180
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114294370013215102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1576,6 +1633,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114300027216132982
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.5
+  m_VelocityThreshold: 0
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 5
+  m_InterpolateMovement: 10
 --- !u!114 &114373034935711094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1646,8 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb7d32432d214146a4fd8f120de36ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  healthBar: {fileID: 0}
+  attackDelay: 0
   isRanged: 1
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
     type: 2}
@@ -1663,6 +1740,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c7d2723bab92e40b08ede3161975f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114547859312986618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95174867923757448}
+  m_ParameterSendBits: 7
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114549880748218472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1690,6 +1786,31 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &114574473558049274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114587534174011980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6587c27fd07824eb346469eb351e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nst: {fileID: 114936727937868750}
+  na: {fileID: 0}
+  rootRotId: 0
 --- !u!114 &114691030593264580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1736,14 +1857,111 @@ MonoBehaviour:
     baseValue: 10
     modifiers: []
   attackSpeed:
-    baseValue: 100
+    baseValue: 3
     modifiers: []
   attackRange:
-    baseValue: 10
+    baseValue: 7
     modifiers: []
   armor:
     baseValue: 5
     modifiers: []
+--- !u!114 &114715468649468812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4a71d805239aa4fb9cf556c35d6147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lerpRate: 10
+  tresholdPos: 0.5
+  tresholdRot: 5
+--- !u!114 &114936727937868750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1812730854815454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdf5a6b1cc27d74cab63a5666d2960a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  na: {fileID: 114574473558049274}
+  _state: 3
+  sendEveryXTick: 1
+  desiredBufferMS: 0.1
+  bufferDriftCorrectAmt: 0.1
+  autoKinematic: 1
+  allowOfftick: 1
+  sendOnEvent: 30
+  includedAxes: 7
+  keyEvery: 5
+  extrapolation: 0.5
+  extrapolationDivisor: 0
+  maxExtrapolates: 2
+  teleportThreshold: 1
+  cullUpperBits: 0
+  sequentialKeys: 5
+  rootRotationElement:
+    name: Root Rotation
+    isRoot: 1
+    index: 0
+    drawerHeight: 240
+    nst: {fileID: 0}
+    nstElementsEngine: {fileID: 0}
+    elementType: 1
+    sendCullMask: 30
+    keyRate: 5
+    gameobject: {fileID: 0}
+    extrapolation: 0.5
+    maxExtrapolates: 2
+    teleportOverride: 1
+    rewindGO: {fileID: 0}
+    lastSentKeyTime: 0
+    rotationType: 0
+    includedAxes: 7
+    totalBitsForQuat: 40
+    axes:
+    - res: 0.1
+      limitRange: 1
+      min: -85
+      max: 85
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    - res: 0.2
+      limitRange: 1
+      min: -180
+      max: 180
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    - res: 0.3
+      limitRange: 1
+      min: -180
+      max: 180
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    useLocal: 0
+  debugXform: 0
+  debugXformGO: {fileID: 0}
+  rb: {fileID: 0}
+  nstElementsEngine: {fileID: 114587534174011980}
+  nstSettings: {fileID: 0}
+  frameUpdateInterval: 0
+  invFrameUpdateInterval: 0
+  lastSentPos: {x: 0, y: 0, z: 0}
 --- !u!136 &136897402607705822
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2005,6 +2223,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 5.42}
+  m_AnchoredPosition: {x: 0, y: 3.72}
   m_SizeDelta: {x: 1.374, y: 0.749}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -2,6 +2,7 @@
 using UnityEngine;
 
 
+
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour
 {
@@ -17,19 +18,24 @@ public class PlayerController : MonoBehaviour
     CharacterStats enemyStats;
 
     bool isWaiting = false;
-
+    
     // Use this for initialization
     void Start()
     {
-        cam = Camera.main;
-        motor = GetComponent<PlayerMotor>();
-        stats = GetComponent<PlayerStats>();
-        combat = GetComponent<CharacterCombat>();
+        {
+            motor = GetComponent<PlayerMotor>();
+            stats = GetComponent<PlayerStats>();
+            combat = GetComponent<CharacterCombat>();
+
+            cam = Camera.main;
+            cam.GetComponent<CameraController>().SetLookAt(transform);
+        }    
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //no controlls if pointer is over ui
         if (EventSystem.current.IsPointerOverGameObject())
             return;
@@ -55,11 +61,11 @@ public class PlayerController : MonoBehaviour
 
                 if (focus != null && focus.GetType() == typeof(Enemy))
                 {
-                    enemyStats = focus.GetComponent<CharacterStats>();   
+                    enemyStats = focus.GetComponent<CharacterStats>();
                 }
 
 
-            }            
+            }
         }
 
         if (focus != null && focus.GetType() == typeof(Enemy))
@@ -88,6 +94,9 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
+
+  
 
     System.Collections.IEnumerator ResumeFollow(float delay)
     {

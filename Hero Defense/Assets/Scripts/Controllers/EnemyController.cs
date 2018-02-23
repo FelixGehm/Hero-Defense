@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class EnemyController : MonoBehaviour
+using UnityEngine.Networking;
+
+public class EnemyController : NetworkBehaviour
 {
 
     public float lookRadius = 10;

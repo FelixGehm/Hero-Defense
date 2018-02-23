@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.AI;
 
-public class CharacterAnimator : MonoBehaviour
+public class CharacterAnimator : NetworkBehaviour
 {
 
     const float locomotionAnimationSmoothTime = .1f;
@@ -13,9 +14,11 @@ public class CharacterAnimator : MonoBehaviour
     CharacterCombat characterCombat;
     PlayerController playerController;
 
+    [SyncVar]
+    float speedPercent;
 
 
-    // Use this for initialization
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -28,10 +31,19 @@ public class CharacterAnimator : MonoBehaviour
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        float speedPercent = agent.velocity.magnitude / agent.speed;
+
+        //if (!isLocalPlayer) { return; }
+
+        if (isLocalPlayer)
+        {
+            speedPercent = agent.velocity.magnitude / agent.speed;
+            CmdSetSpeedPercent(speedPercent);
+        }
+         
+        
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
 
@@ -44,5 +56,11 @@ public class CharacterAnimator : MonoBehaviour
     void StopAttackAnimation()
     {
         animator.SetBool("attackBool", false);
+    }
+
+    [Command]
+    void CmdSetSpeedPercent(float speed)
+    {
+        speedPercent = speed;
     }
 }

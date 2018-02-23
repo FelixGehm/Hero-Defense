@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-    public Transform lookTarget;
+    private Transform lookTarget;
     private Transform freeLookReference;
-
+    
     public Vector3 offset;
     public float zoomSpeed = 4;
     public float minZoom = 5;
@@ -23,11 +23,10 @@ public class CameraController : MonoBehaviour {
 
     void Start()
     {
-        //die kamera soll sich zu beginn immer im gleichen abstand über dem spieler befinden
-        FollowCam();
-        freeLookReference = new GameObject().transform;
-        freeLookReference.position = lookTarget.position;
+        
     }
+
+
 
     void Update()
     {
@@ -39,17 +38,31 @@ public class CameraController : MonoBehaviour {
 
     void LateUpdate()
     {
-        if (centerCam)
+        if (lookTarget != null)
         {
-            FollowCam();
+            if (centerCam)
+            {
+                FollowCam();
+            }
+            else
+            {
+                FreeCam();
+            }
         }
-        else
-        {
-            FreeCam();
-        }
+        
 
     }
 
+    public void SetLookAt(Transform target)
+    {
+        lookTarget = target;
+        freeLookReference = new GameObject().transform;
+        freeLookReference.position = lookTarget.position;
+        //Camera.main = GetComponent<Camera>();
+        
+        FollowCam();
+    }
+    
     private void FollowCam()
     {
         transform.position = lookTarget.position - offset * currentZoom;

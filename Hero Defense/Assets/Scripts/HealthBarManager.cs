@@ -47,13 +47,8 @@ public class HealthBarManager : MonoBehaviour {
 
 
 
-    void Awake ()
+    void Start ()
     {
-        cam = Camera.main;
-
-        //foreGround = transform.GetChild(0).GetChild(0).GetComponent<Image>();
-        //Debug.Log(foreGround.name);
-
         stats = transform.parent.parent.GetComponent<CharacterStats>();
 
         maxHealth = stats.maxHealth.GetValue();
@@ -62,8 +57,14 @@ public class HealthBarManager : MonoBehaviour {
 
     private void Update()
     {
-
-        transform.rotation = cam.transform.rotation;
+        if (cam != null)
+        {
+            transform.rotation = cam.transform.rotation;
+        } else
+        {
+            cam = Camera.main;
+        }
+        
 
     }
 
