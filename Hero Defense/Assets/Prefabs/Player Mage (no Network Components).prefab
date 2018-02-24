@@ -558,18 +558,11 @@ GameObject:
   - component: {fileID: 114149377069312342}
   - component: {fileID: 114200371605977638}
   - component: {fileID: 114000295459960716}
-  - component: {fileID: 114943746742148772}
-  - component: {fileID: 114397805347032092}
-  - component: {fileID: 114173218128162144}
   - component: {fileID: 95005397922365244}
-  - component: {fileID: 114594831769148310}
-  - component: {fileID: 114315021741486834}
-  - component: {fileID: 114829174946024976}
-  - component: {fileID: 114186246710007616}
-  - component: {fileID: 114324417475745064}
-  - component: {fileID: 114812341402156708}
+  - component: {fileID: 114700265152776702}
+  - component: {fileID: 114676957002297924}
   m_Layer: 0
-  m_Name: Player Mage
+  m_Name: Player Mage (no Network Components)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2228,121 +2221,6 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &114173218128162144
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465308012695672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 34
-    i1: 46
-    i2: 47
-    i3: 162
-    i4: 209
-    i5: 149
-    i6: 18
-    i7: 196
-    i8: 74
-    i9: 4
-    i10: 225
-    i11: 60
-    i12: 138
-    i13: 27
-    i14: 135
-    i15: 228
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &114186246710007616
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465308012695672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbdf5a6b1cc27d74cab63a5666d2960a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  na: {fileID: 114829174946024976}
-  _state: 3
-  sendEveryXTick: 1
-  desiredBufferMS: 0.1
-  bufferDriftCorrectAmt: 0.1
-  autoKinematic: 1
-  allowOfftick: 1
-  sendOnEvent: 30
-  includedAxes: 7
-  keyEvery: 5
-  extrapolation: 0.5
-  extrapolationDivisor: 0
-  maxExtrapolates: 2
-  teleportThreshold: 1
-  cullUpperBits: 0
-  sequentialKeys: 5
-  rootRotationElement:
-    name: Root Rotation
-    isRoot: 1
-    index: 0
-    drawerHeight: 240
-    nst: {fileID: 0}
-    nstElementsEngine: {fileID: 0}
-    elementType: 1
-    sendCullMask: 30
-    keyRate: 5
-    gameobject: {fileID: 0}
-    extrapolation: 0.5
-    maxExtrapolates: 2
-    teleportOverride: 1
-    rewindGO: {fileID: 0}
-    lastSentKeyTime: 0
-    rotationType: 0
-    includedAxes: 7
-    totalBitsForQuat: 40
-    axes:
-    - res: 0.1
-      limitRange: 1
-      min: -85
-      max: 85
-      bits: 0
-      range: 0
-      mult: 0
-      unmult: 0
-      wrap: 0
-    - res: 0.2
-      limitRange: 1
-      min: -180
-      max: 180
-      bits: 0
-      range: 0
-      mult: 0
-      unmult: 0
-      wrap: 0
-    - res: 0.3
-      limitRange: 1
-      min: -180
-      max: 180
-      bits: 0
-      range: 0
-      mult: 0
-      unmult: 0
-      wrap: 0
-    useLocal: 0
-  debugXform: 0
-  debugXformGO: {fileID: 0}
-  rb: {fileID: 0}
-  nstElementsEngine: {fileID: 114315021741486834}
-  nstSettings: {fileID: 0}
-  frameUpdateInterval: 0
-  invFrameUpdateInterval: 0
-  lastSentPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114200371605977638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2354,6 +2232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c7d2723bab92e40b08ede3161975f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMovedByAgent: 1
 --- !u!114 &114224037042292554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2387,7 +2266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foreGround: {fileID: 114709068842223652}
---- !u!114 &114315021741486834
+--- !u!114 &114676957002297924
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2395,30 +2274,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1465308012695672}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6587c27fd07824eb346469eb351e86, type: 3}
+  m_Script: {fileID: 11500000, guid: d0c9a6863c426a14aa69a4d9c5cda8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nst: {fileID: 114186246710007616}
-  na: {fileID: 0}
-  rootRotId: 0
---- !u!114 &114324417475745064
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465308012695672}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb72a1e4d2ec9d74994046fb5a0d3e4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  componentsToDisable:
-  - {fileID: 114149377069312342}
-  - {fileID: 114000295459960716}
-  - {fileID: 114397805347032092}
-  - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &114397805347032092
+  maxHealth:
+    baseValue: 100
+    modifiers: []
+  healthBarManager: {fileID: 114273475764378118}
+  damage:
+    baseValue: 10
+    modifiers: []
+  attackSpeed:
+    baseValue: 0.5
+    modifiers: []
+  attackRange:
+    baseValue: 10
+    modifiers: []
+  armor:
+    baseValue: 0
+    modifiers: []
+--- !u!114 &114700265152776702
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2429,30 +2304,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb7d32432d214146a4fd8f120de36ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0
+  attackDelay: 0.2
   isRanged: 1
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
     type: 2}
   firePoint: {fileID: 4413904445216224}
---- !u!114 &114594831769148310
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465308012695672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Animator: {fileID: 95005397922365244}
-  m_ParameterSendBits: 7
-  param0: 
-  param1: 
-  param2: 
-  param3: 
-  param4: 
-  param5: 
 --- !u!114 &114709068842223652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2507,29 +2363,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114812341402156708
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465308012695672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990692efa14a31a42bff7ce6588c8885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  componentsToDisable: []
---- !u!114 &114829174946024976
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465308012695672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114840480173762870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2546,33 +2379,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114943746742148772
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1465308012695672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0c9a6863c426a14aa69a4d9c5cda8dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth:
-    baseValue: 100
-    modifiers: []
-  healthBarManager: {fileID: 114273475764378118}
-  damage:
-    baseValue: 10
-    modifiers: []
-  attackSpeed:
-    baseValue: 3
-    modifiers: []
-  attackRange:
-    baseValue: 7
-    modifiers: []
-  armor:
-    baseValue: 5
-    modifiers: []
 --- !u!136 &136036096785012916
 CapsuleCollider:
   m_ObjectHideFlags: 1
