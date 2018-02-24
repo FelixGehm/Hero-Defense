@@ -61,7 +61,8 @@ public class WaveSpawner : NetworkBehaviour {
     IEnumerator SpawnSingle(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Instantiate(toSpawnPrefab,this.transform);
+        GameObject enemy =  Instantiate(toSpawnPrefab,this.transform);
+        NetworkServer.Spawn(enemy);
     }
 
 }

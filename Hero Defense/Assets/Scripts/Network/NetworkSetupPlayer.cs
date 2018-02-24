@@ -11,7 +11,6 @@ public class NetworkSetupPlayer : NetworkSetup {
 
         if (isLocalPlayer)
         {
-
             // Bind Camera to Player
             Camera.main.GetComponent<CameraController>().SetLookAt(transform);
 

@@ -6,6 +6,7 @@ public class NetworkSetupEnemy : NetworkSetup {
 
     void Start()
     {
+
         base.DisableComponents();
 
         if (isServer)
@@ -16,6 +17,17 @@ public class NetworkSetupEnemy : NetworkSetup {
             //PlayerManager.instance.RegisterPlayer(transform.gameObject);
         }
 
+    }
+
+    protected override void DisableComponents()
+    {
+        if (!isServer)
+        {
+            for (int i = 0; i < componentsToDisable.Length; i++)
+            {
+                componentsToDisable[i].enabled = false;
+            }
+        }
     }
 
     private void OnDestroy()
