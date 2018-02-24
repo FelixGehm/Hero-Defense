@@ -22,23 +22,25 @@ public class PlayerManager : MonoBehaviour {
     #endregion
 
     [SerializeField]
-    public GameObject[] player;
+    public GameObject player;
+
+    public GameObject[] players;
     
     public GameObject nexus;
 
     private void Start()
     {
-        player = new GameObject[3]; // Maximal 3 Spieler pro Lobby
+        players = new GameObject[3]; // Maximal 3 Spieler pro Lobby
 
     }
     
     public void RegisterPlayer(GameObject _player)
     {
-        for ( int i = 0; i< player.Length; i++)
+        for ( int i = 0; i< players.Length; i++)
         {
-            if (player[i] == null)
+            if (players[i] == null)
             {
-                player[i] = _player;
+                players[i] = _player;
                 return;
             }
         }
@@ -47,11 +49,11 @@ public class PlayerManager : MonoBehaviour {
 
     public void RemovePlayer(GameObject _player)
     {
-        for (int i = 0; i < player.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
-            if (player[i] == _player)
+            if (players[i] == _player)
             {
-                player[i] = null;
+                players[i] = null;
                 return;
             }
         }

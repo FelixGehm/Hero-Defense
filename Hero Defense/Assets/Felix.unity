@@ -2727,10 +2727,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1525191499}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13830d00a5a612c4ebc30ac86d0d830e, type: 3}
+  m_Script: {fileID: 11500000, guid: 61035ef2678b0d94c9fa88feaae13ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1454139475}
+  players: []
   nexus: {fileID: 709996533}
 --- !u!114 &1525191503
 MonoBehaviour:
