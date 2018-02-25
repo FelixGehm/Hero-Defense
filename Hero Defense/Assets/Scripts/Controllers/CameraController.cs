@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    public Transform player;
     private Transform lookTarget;
     private Transform freeLookReference;
     
@@ -23,7 +24,8 @@ public class CameraController : MonoBehaviour {
 
     void Start()
     {
-        
+        if (player != null)
+            SetLookAt(player);
     }
 
     void Update()

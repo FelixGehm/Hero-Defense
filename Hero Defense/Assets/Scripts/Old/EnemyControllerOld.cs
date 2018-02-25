@@ -2,19 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-<<<<<<< HEAD
-=======
-//using UnityEngine.Networking;
->>>>>>> 8e6d362fd04433e52a3d74c9ec2db3e75e0fe3e2
-
-public class EnemyController : MonoBehaviour
+public class EnemyControllerOld : MonoBehaviour
 {
 
     public float lookRadius = 10;
 
 
     Transform destination;  //der nexus
-    Transform target;       //der nächstgelegene spieler
+    Transform target;       //der spieler
 
     float distanceToTarget;
     float distanceToDestination;
@@ -25,29 +20,16 @@ public class EnemyController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        SetupEnemy();
-
+        target = PlayerManager.instance.player.transform;
         destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
     }
 
-    public void SetupEnemy()
-    {
-        target = FindClosestPlayer().transform;
-        
-    }
-
+    // Update is called once per frame
     void Update()
     {
-        if ( target == null)
-        {
-            target = FindClosestPlayer().transform;
-        } else
-        {
-            distanceToTarget = Vector3.Distance(target.position, transform.position);
-        }
-        
+        distanceToTarget = Vector3.Distance(target.position, transform.position);
         distanceToDestination = Vector3.Distance(destination.position, transform.position);
 
         //vielleicht lieber über eine coroutine. könnte mit mehreren gegnern etwas viel perfomance schlucken?
@@ -87,34 +69,6 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
     }
 
-
-
-    // Returns the clostest Player to the Enemy
-    // If there are no Players registered in the PlayerManager, then returns null
-    private GameObject FindClosestPlayer()
-    {
-        float distanceToPlayer = float.MaxValue;
-        GameObject closestPlayer = null;
-
-
-        for (int i = 0; i< PlayerManager.instance.players.Length; i++)
-        {
-            if (PlayerManager.instance.players[i] != null)
-            {
-                float distance = Vector3.Distance(PlayerManager.instance.players[i].transform.position, transform.position);
-                if (distanceToPlayer > distance )
-                {
-                    distanceToPlayer = distance;
-                    closestPlayer = PlayerManager.instance.players[i];
-                }
-            }                        
-        }
-        return closestPlayer;
-        
-    }
-
-
-    // Draw LookRadius in Editor
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
