@@ -63,9 +63,8 @@ public class CharacterStats : MonoBehaviour
         if(!isControlledByServer)
         {
             CurrentHealth -= CalcTakenDamage(damage);
+
             Debug.Log(transform.name + " takes " + damage + " damage");
-
-
 
             if (CurrentHealth <= 0)
                 Die();
