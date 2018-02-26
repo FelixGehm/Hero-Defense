@@ -6,14 +6,14 @@ using UnityEngine.Networking;
 public class NetworkSetup : NetworkBehaviour {
 
     [SerializeField]
-    protected Behaviour[] componentsToDisable;
+    Behaviour[] componentsToDisable;
 
     void Start()
     {
         DisableComponents();
     }
 
-    protected virtual void DisableComponents()
+    protected void DisableComponents()
     {
         if (!isLocalPlayer)
         {
