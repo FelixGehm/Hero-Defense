@@ -38,7 +38,7 @@ public class CharacterAnimator : MonoBehaviour
         {
             speedPercent = agent.velocity.magnitude / agent.speed;
         }
-        Debug.Log(speedPercent);
+        //Debug.Log(speedPercent);
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }

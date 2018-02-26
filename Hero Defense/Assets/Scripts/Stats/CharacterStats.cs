@@ -79,7 +79,7 @@ public class CharacterStats : MonoBehaviour
      */
     public float CalcTakenDamage(float incomingDamage)
     {
-        float damage = 0;
+        float damage = incomingDamage;
         damage -= armor.GetValue();
         damage = Mathf.Max(damage, 0);
         return damage;
@@ -90,7 +90,6 @@ public class CharacterStats : MonoBehaviour
         Debug.Log(transform.name + " died.");
 
     }
-
 
     private void OnDrawGizmosSelected()
     {

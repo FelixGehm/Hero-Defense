@@ -29,18 +29,32 @@ public class NetworkCharacterStats : NetworkBehaviour
 
     public void TakeDamage(float damage)
     {
-        if(isServer)
+        //Debug.Log("TakeDamage: dmg: "+ damage + " isServer = " + isServer );
+        if (isServer)
         {
-           syncedCurrentHealth -=  myStats.CalcTakenDamage(damage);
+            //Debug.Log("Calced Damage: " + myStats.CalcTakenDamage(damage));
+            syncedCurrentHealth -=  myStats.CalcTakenDamage(damage);
         }        
     }
 
+    // Zum Testen
     private void Update()
     {
         if(Input.GetKeyDown("d"))
         {
-            Debug.Log("TAKE DAMAGE");
-            TakeDamage(10.0f);
+            if (!isLocalPlayer)
+            {
+                TakeDamage(10.0f);
+            }
+        }
+
+        if (Input.GetKeyDown("a"))
+        {
+            if (isLocalPlayer)
+            {
+                TakeDamage(10.0f);
+            }
+
         }
     }
 }
