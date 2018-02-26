@@ -163,7 +163,62 @@ ModelImporter:
     7400014: tposee
     9500000: //RootNode
     13700000: Character_Mage
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bronze
+    second: {fileID: 2100000, guid: e63bd6d8fe494a54b8ae6456a0aff678, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Coat_Cloth
+    second: {fileID: 2100000, guid: f3bca1f37e007af4681b99d57b0b2d9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Crazy_Glowing_Magic_Material
+    second: {fileID: 2100000, guid: 7e5ef970a1455c3468c2af32a8f1f325, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: fc6df862a2789ef4a8747961a26c94a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Inner_Coat_Cloth
+    second: {fileID: 2100000, guid: a7fd0e6111f82e149b43406d7c972983, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leather
+    second: {fileID: 2100000, guid: c28bc14e0639afd4392484fcc25fff3a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rubber
+    second: {fileID: 2100000, guid: 14ca7041694b39b468537e11a4d7ef35, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin
+    second: {fileID: 2100000, guid: a868da0525f81374588751e606d24bd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trousers_Cloth
+    second: {fileID: 2100000, guid: d0b8201245bc6364ab8637bb782e5f2c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vest_Cloth
+    second: {fileID: 2100000, guid: ae60874e5b6891b4b99c7a0001bfbb89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Zink
+    second: {fileID: 2100000, guid: 88b25295590b0fc47823c59fe43f1937, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

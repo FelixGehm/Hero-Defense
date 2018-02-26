@@ -43,7 +43,8 @@ public class CharacterCombat : MonoBehaviour
             }
             else
             {
-                shootProjectile(targetStats.transform);
+                //shootProjectile(targetStats.transform);
+                StartCoroutine(ShootProjectile(targetStats.transform, attackDelay));
             }
 
 
@@ -60,8 +61,23 @@ public class CharacterCombat : MonoBehaviour
         stats.TakeDamage(myStats.damage.GetValue());
     }
 
+    /*
     private void shootProjectile(Transform target)
     {
+        GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Projectile projectile = projectileGO.GetComponent<Projectile>();
+
+        if (projectile != null)
+        {
+            projectile.SetDamage(myStats.damage.GetValue());
+            projectile.SetTarget(target);
+        }
+    }
+    */
+
+    IEnumerator ShootProjectile(Transform target, float delay)
+    {
+        yield return new WaitForSeconds(delay);
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         Projectile projectile = projectileGO.GetComponent<Projectile>();
 
