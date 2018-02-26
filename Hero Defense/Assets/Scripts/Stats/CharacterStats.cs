@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterStats : MonoBehaviour
+public class CharacterStats : NetworkBehaviour
 {
     public Stat maxHealth;
     //nur in dieser klasse setzbar, aber von überall abrufbar
 
 
 
-    //[SyncVar]
+    [SyncVar]
     private float syncCurrentHealth;            // Server aktualisiert Leben für alle Clients
 
     //private float currentLocalHealth;
@@ -23,11 +24,11 @@ public class CharacterStats : MonoBehaviour
         {
             syncCurrentHealth = value;
 
-            //TransmitHealth();
+            TransmitHealth();
 
 
 
-
+            
             if (healthBarManager != null)
             {
                 healthBarManager.CurrentHealth = value;
@@ -36,22 +37,19 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    /*
+
     [Command]
     void CmdProvideHealthToServer(float newCurrentHealth)
     {
         syncCurrentHealth = newCurrentHealth;
     }
-    */
 
-    /*
-// Client teilt Server Änderung mit
-[ClientCallback]
-void TransmitHealth()
-{
-    CmdProvideHealthToServer(syncCurrentHealth);
-}
-*/
+    // Client teilt Server Änderung mit
+    [ClientCallback]
+    void TransmitHealth()
+    {
+        CmdProvideHealthToServer(syncCurrentHealth);
+    }
 
 
     public Stat damage;

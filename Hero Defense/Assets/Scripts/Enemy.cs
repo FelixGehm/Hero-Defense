@@ -21,7 +21,7 @@ public class Enemy : Interactable
 
 
         // TODO Entscheiden welcher SPieler den Schaden bekommt, aktuell: immer 1. Spieler im Playermanager
-        CharacterCombat playerCombat = playerManager.players[0].GetComponent<CharacterCombat>();
+        CharacterCombat playerCombat = playerManager.player[0].GetComponent<CharacterCombat>();
         if (playerCombat != null)
         {
             playerCombat.Attack(myStats);

@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-<<<<<<< HEAD
-=======
-//using UnityEngine.Networking;
->>>>>>> 8e6d362fd04433e52a3d74c9ec2db3e75e0fe3e2
 
 public class EnemyController : MonoBehaviour
 {
@@ -97,15 +93,15 @@ public class EnemyController : MonoBehaviour
         GameObject closestPlayer = null;
 
 
-        for (int i = 0; i< PlayerManager.instance.players.Length; i++)
+        for (int i = 0; i< PlayerManager.instance.player.Length; i++)
         {
-            if (PlayerManager.instance.players[i] != null)
+            if (PlayerManager.instance.player[i] != null)
             {
-                float distance = Vector3.Distance(PlayerManager.instance.players[i].transform.position, transform.position);
+                float distance = Vector3.Distance(PlayerManager.instance.player[i].transform.position, transform.position);
                 if (distanceToPlayer > distance )
                 {
                     distanceToPlayer = distance;
-                    closestPlayer = PlayerManager.instance.players[i];
+                    closestPlayer = PlayerManager.instance.player[i];
                 }
             }                        
         }
