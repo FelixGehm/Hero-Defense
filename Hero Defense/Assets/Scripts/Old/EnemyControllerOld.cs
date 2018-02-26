@@ -20,8 +20,8 @@ public class EnemyControllerOld : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        target = PlayerManager.instance.player.transform;
-        destination = PlayerManager.instance.nexus.transform;
+        target = PlayerManagerOld.instance.player.transform;
+        destination = PlayerManagerOld.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
     }
