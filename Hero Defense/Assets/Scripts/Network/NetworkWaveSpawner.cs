@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class WaveSpawner : MonoBehaviour {
-    
+public class NetworkWaveSpawner : NetworkBehaviour
+{
     public GameObject toSpawnPrefab;
 
     // Values for autoSpawning
@@ -20,7 +21,8 @@ public class WaveSpawner : MonoBehaviour {
         waveCoolDown = timeBetweenWavesInSec;
     }
 
-    void FixedUpdate () {
+    void FixedUpdate()
+    {
             if (!autoSpawn)
             {
                 if (Input.GetKeyDown("s"))
@@ -37,7 +39,7 @@ public class WaveSpawner : MonoBehaviour {
                     Spawn(enemysPerWave, waveSpawnDuration);
                 }
             }
-	}
+    }
 
     private void Spawn(int no, float timeSpan)
     {
@@ -48,16 +50,21 @@ public class WaveSpawner : MonoBehaviour {
             float delay = i * gap;
             StartCoroutine("SpawnSingle", delay);
         }
-        if(autoSpawn)
+        if (autoSpawn)
         {
-            waveCoolDown = timeBetweenWavesInSec + timeSpan ;
+            waveCoolDown = timeBetweenWavesInSec + timeSpan;
         }
     }
 
     IEnumerator SpawnSingle(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Instantiate(toSpawnPrefab,this.transform);
+
+        Quaternion rot = transform.rotation;
+        Vector3 pos = transform.position;
+
+        GameObject enemy = Instantiate(toSpawnPrefab, pos, rot);
+        NetworkServer.Spawn(enemy);
     }
 
 }

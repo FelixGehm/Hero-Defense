@@ -1706,6 +1706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe525c8d5768c13448a46da1e7922f57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myStats: {fileID: 0}
   syncedCurrentHealth: 0
 --- !u!114 &114278115474437950
 MonoBehaviour:
