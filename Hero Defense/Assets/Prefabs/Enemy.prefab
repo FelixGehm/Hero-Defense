@@ -81,10 +81,10 @@ GameObject:
   - component: {fileID: 114997625769305516}
   - component: {fileID: 114257881360897476}
   - component: {fileID: 114159359483975904}
-  - component: {fileID: 114203303064331348}
   - component: {fileID: 114767756298488882}
   - component: {fileID: 114184656248976856}
   - component: {fileID: 114827226431441486}
+  - component: {fileID: 114581900842418514}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Untagged
@@ -263,20 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114203303064331348
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1787304293017474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb72a1e4d2ec9d74994046fb5a0d3e4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  componentsToDisable:
-  - {fileID: 114298287775293178}
-  - {fileID: 114560907743430452}
 --- !u!114 &114257881360897476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -346,6 +332,20 @@ MonoBehaviour:
   interactionTransform: {fileID: 4310512631370328}
   isFocus: 0
   haloInstance: {fileID: 1852830274291526}
+--- !u!114 &114581900842418514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1787304293017474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b62a0846b33d642a100f59ad8b59c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  componentsToDisable:
+  - {fileID: 114560907743430452}
+  - {fileID: 114298287775293178}
 --- !u!114 &114635993733402010
 MonoBehaviour:
   m_ObjectHideFlags: 1

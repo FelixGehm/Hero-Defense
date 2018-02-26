@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.Networking;
+using UnityEngine.Networking;
 using UnityEngine.AI;
 
-public class CharacterAnimator : MonoBehaviour
+public class CharacterAnimator : NetworkBehaviour
 {
 
     const float locomotionAnimationSmoothTime = .1f;
@@ -14,10 +14,10 @@ public class CharacterAnimator : MonoBehaviour
     CharacterCombat characterCombat;
     PlayerController playerController;
 
+    [SyncVar]
     float speedPercent;
 
-    [HideInInspector]
-    public bool isMovedByAgent = true;
+
 
     void Start()
     {
@@ -28,25 +28,28 @@ public class CharacterAnimator : MonoBehaviour
         characterCombat.OnAttack += StartAttackingAnimation;
 
         playerController = GetComponent<PlayerController>();
-
+        
     }
+
 
     void Update()
     {
 
-        if (isMovedByAgent)
+        //if (!isLocalPlayer) { return; }
+
+        if (isLocalPlayer)
         {
             speedPercent = agent.velocity.magnitude / agent.speed;
+            CmdSetSpeedPercent(speedPercent);
         }
-        Debug.Log(speedPercent);
-
+         
+        
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
 
     void StartAttackingAnimation()
     {
         animator.SetBool("attackBool", true);
-        animator.SetTrigger("attack");
         playerController.focus.OnDefocus += StopAttackAnimation;
     }
 
@@ -55,13 +58,9 @@ public class CharacterAnimator : MonoBehaviour
         animator.SetBool("attackBool", false);
     }
 
-    public float GetSpeedPercent()
+    [Command]
+    void CmdSetSpeedPercent(float speed)
     {
-        return speedPercent;
-    }
-
-    public void SetSpeedPercent(float _speedPercent)
-    {
-        speedPercent = _speedPercent;
+        speedPercent = speed;
     }
 }
