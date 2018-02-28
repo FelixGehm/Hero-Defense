@@ -22,7 +22,7 @@ public class HealthBarManager : MonoBehaviour {
         }
         set
         {
-            Debug.Log("Set MaxHealth() to " + value);
+           // Debug.Log("Set MaxHealth() to " + value);
             maxHealth = value;
             foreGround.fillAmount = currentHealth / maxHealth;
         }
@@ -50,6 +50,8 @@ public class HealthBarManager : MonoBehaviour {
     void Start ()
     {
         stats = transform.parent.parent.GetComponent<CharacterStats>();
+
+        //Debug.Log(stats);
 
         maxHealth = stats.maxHealth.GetValue();
         currentHealth = maxHealth;

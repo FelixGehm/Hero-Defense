@@ -12,6 +12,7 @@ public class CharacterAnimator : MonoBehaviour
     NavMeshAgent agent;
     Animator animator;
     CharacterCombat characterCombat;
+    NetworkCharacterCombat networkCharacterCombat;
     PlayerController playerController;
 
     float speedPercent;
@@ -24,8 +25,16 @@ public class CharacterAnimator : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
 
-        characterCombat = GetComponent<CharacterCombat>();
-        characterCombat.OnAttack += StartAttackingAnimation;
+        if(GetComponent<CharacterCombat>() == null)
+        {
+            networkCharacterCombat = GetComponent<NetworkCharacterCombat>();
+            networkCharacterCombat.OnAttack += StartAttackingAnimation;
+        }   
+        else
+        {
+            characterCombat = GetComponent<CharacterCombat>();
+            characterCombat.OnAttack += StartAttackingAnimation;
+        }
 
         playerController = GetComponent<PlayerController>();
 

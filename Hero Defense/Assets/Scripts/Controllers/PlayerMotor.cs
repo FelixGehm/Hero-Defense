@@ -55,7 +55,7 @@ public class PlayerMotor : MonoBehaviour {
 
     public void PauseFollowTarget()
     {
-        Debug.Log("PauseFollowTarget():");
+        //Debug.Log("PauseFollowTarget():");
         agent.SetDestination(transform.position);
 
         faceOnly = true;
@@ -63,7 +63,7 @@ public class PlayerMotor : MonoBehaviour {
 
     public void ContinueFollowTarget()
     {
-        Debug.Log("ContinueFollowTarget():");
+        //Debug.Log("ContinueFollowTarget():");
 
         if(target != null)
         {
@@ -71,7 +71,7 @@ public class PlayerMotor : MonoBehaviour {
             faceOnly = false;
         } else
         {
-            Debug.Log("Couldn't continue following target. Might have disapeared or focus changed");
+            //Debug.Log("Couldn't continue following target. Might have disapeared or focus changed");
         }
         
 

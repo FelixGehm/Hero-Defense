@@ -17,17 +17,23 @@ public class PlayerController : MonoBehaviour
 
     CharacterStats enemyStats;
 
+    [HideInInspector]
+    public bool isNetworkPlayer = false;
+    NetworkCharacterStats networkEnemyStats;
+
+    [Header("Set only for Network Player")]
+    public NetworkCharacterCombat networkCombat;
+
+
     bool isWaiting = false;
     
     // Use this for initialization
     void Start()
     {
-        {
-            motor = GetComponent<PlayerMotor>();
-            stats = GetComponent<PlayerStats>();
-            combat = GetComponent<CharacterCombat>();
-            cam = Camera.main;
-        }    
+        motor = GetComponent<PlayerMotor>();
+        stats = GetComponent<PlayerStats>();
+        combat = GetComponent<CharacterCombat>();
+        cam = Camera.main;
     }
 
 
@@ -68,7 +74,16 @@ public class PlayerController : MonoBehaviour
 
                 if (focus != null && focus.GetType() == typeof(Enemy))
                 {
-                    enemyStats = focus.GetComponent<CharacterStats>();
+
+                    if (!isNetworkPlayer)
+                    {
+                        enemyStats = focus.GetComponent<CharacterStats>();
+                    }
+                    else
+                    {
+                        networkEnemyStats = focus.GetComponent<NetworkCharacterStats>();
+                    }
+                    
                 }
 
 
@@ -86,11 +101,17 @@ public class PlayerController : MonoBehaviour
                 if (distance <= stats.attackRange.GetValue())
                 {
 
-                    Debug.Log("Enemy in Range");
+                    //Debug.Log("Enemy in Range");
                     isWaiting = true;
 
                     motor.PauseFollowTarget();
-                    combat.Attack(enemyStats);
+                    if(!isNetworkPlayer)
+                    {
+                        combat.Attack(enemyStats);
+                    } else
+                    {
+                        networkCombat.Attack(networkEnemyStats);
+                    }                    
 
                     if (focus != null)
                         //Debug.Log("Start Coroutine");
@@ -98,8 +119,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
-
     }
 
 
@@ -107,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     System.Collections.IEnumerator ResumeFollow(float delay)
     {
-        Debug.Log("Coroutine: resumeFollow()");
+        //Debug.Log("Coroutine: resumeFollow()");
         yield return new WaitForSeconds(delay);
 
         motor.ContinueFollowTarget();

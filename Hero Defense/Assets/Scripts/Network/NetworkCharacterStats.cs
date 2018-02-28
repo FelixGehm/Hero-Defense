@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
-[RequireComponent(typeof(PlayerStats))]
+[RequireComponent(typeof(CharacterStats))]
 public class NetworkCharacterStats : NetworkBehaviour
 {
-    public PlayerStats myStats;
+    public CharacterStats myStats;
 
 
   
@@ -13,7 +13,7 @@ public class NetworkCharacterStats : NetworkBehaviour
 
     private void OnChangedHealth(float currentHealth)
     {
-        Debug.Log("OnChangedHealth: new Value = " + currentHealth);
+        //Debug.Log("OnChangedHealth: new Value = " + currentHealth);
 
         myStats.CurrentHealth = currentHealth;
     }
@@ -21,23 +21,50 @@ public class NetworkCharacterStats : NetworkBehaviour
 
     void Awake()
     {
-        myStats = GetComponent<PlayerStats>();
+        myStats = GetComponent<CharacterStats>();
 
         syncedCurrentHealth = myStats.maxHealth.GetValue();
         myStats.isControlledByServer = true;
     }
 
+    
     public void TakeDamage(float damage)
     {
-        //Debug.Log("TakeDamage: dmg: "+ damage + " isServer = " + isServer );
-        if (isServer)
+        //Debug.Log("TakeDamage: dmg: "+ damage + " isServer = " + isServer + "; isLocalPlayer = "+isLocalPlayer);
+        //if (isServer)
         {
-            //Debug.Log("Calced Damage: " + myStats.CalcTakenDamage(damage));
+            //Debug.Log("Calculated Damage: " + myStats.CalcTakenDamage(damage));
             syncedCurrentHealth -=  myStats.CalcTakenDamage(damage);
+
+            //TransmitAttack();
         }        
     }
 
-    // Zum Testen
+    public CharacterStats getStats()
+    {
+        return myStats;
+    }
+
+    [Command]
+    void CmdProvideHealthToServer(float health)
+    {
+        Debug.Log("CmdProvideHealthToServer:");
+        syncedCurrentHealth = health;
+    }
+
+    [ClientCallback]
+    void TransmitAttack()
+    {
+        //Debug.Log(transform.name + " TransmitAttack(): isLocalPlayer = " + isLocalPlayer);
+        Debug.Log(transform.name + " TransmitAttack(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
+        //if (isLocalPlayer)
+        //if (!isServer)
+        {
+            CmdProvideHealthToServer(syncedCurrentHealth);
+        }
+    }
+
+    /* Zum Testen
     private void Update()
     {
         if(Input.GetKeyDown("d"))
@@ -56,5 +83,5 @@ public class NetworkCharacterStats : NetworkBehaviour
             }
 
         }
-    }
+    }*/
 }

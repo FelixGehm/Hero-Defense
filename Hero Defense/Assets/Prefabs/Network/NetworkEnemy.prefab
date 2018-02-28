@@ -80,9 +80,10 @@ GameObject:
   - component: {fileID: 114298287775293178}
   - component: {fileID: 114560907743430452}
   - component: {fileID: 114997625769305516}
+  - component: {fileID: 114951834692446166}
+  - component: {fileID: 114616726437262826}
   - component: {fileID: 114257881360897476}
   - component: {fileID: 114159359483975904}
-  - component: {fileID: 114870706592016520}
   - component: {fileID: 114093369887503892}
   - component: {fileID: 114446434441212120}
   - component: {fileID: 114862387978249014}
@@ -252,7 +253,7 @@ MonoBehaviour:
     name: Root Rotation
     isRoot: 1
     index: 0
-    drawerHeight: 0
+    drawerHeight: 240
     nst: {fileID: 0}
     nstElementsEngine: {fileID: 0}
     elementType: 1
@@ -429,6 +430,17 @@ MonoBehaviour:
   interactionTransform: {fileID: 4310512631370328}
   isFocus: 0
   haloInstance: {fileID: 1852830274291526}
+--- !u!114 &114616726437262826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1787304293017474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c488e37dc113fac47a34f2cea6b2f7a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114635993733402010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -482,27 +494,6 @@ MonoBehaviour:
   nst: {fileID: 114093369887503892}
   na: {fileID: 0}
   rootRotId: 0
---- !u!114 &114870706592016520
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1787304293017474}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114875835530580340
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,6 +531,19 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114951834692446166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1787304293017474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe525c8d5768c13448a46da1e7922f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myStats: {fileID: 114997625769305516}
+  syncedCurrentHealth: 0
 --- !u!114 &114997625769305516
 MonoBehaviour:
   m_ObjectHideFlags: 1

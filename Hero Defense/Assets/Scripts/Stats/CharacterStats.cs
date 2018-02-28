@@ -8,7 +8,7 @@ public class CharacterStats : MonoBehaviour
 
     public Stat maxHealth;
 
-    [HideInInspector]
+    //[HideInInspector]
     public bool isControlledByServer = false;
 
     private float currentHealth;            
@@ -25,6 +25,11 @@ public class CharacterStats : MonoBehaviour
             if (healthBarManager != null)
             {
                 healthBarManager.CurrentHealth = value;
+
+                if(currentHealth <= 0)
+                {
+                    Die();
+                }
             }
         }
     }
@@ -60,7 +65,9 @@ public class CharacterStats : MonoBehaviour
     */
     public void TakeDamage(float damage)
     {
-        if(!isControlledByServer)
+        Debug.Log("TakeDamage: dmg: " + damage + " isControlledByServer = "+ isControlledByServer );
+
+        if (!isControlledByServer)
         {
             CurrentHealth -= CalcTakenDamage(damage);
 
