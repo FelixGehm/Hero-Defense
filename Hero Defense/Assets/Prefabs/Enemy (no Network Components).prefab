@@ -127,7 +127,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1787304293017474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8023689, y: 0, z: -7.26493}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4578866993432210}
@@ -154,7 +154,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420653983797416}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.98, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 224997914115681790}
@@ -372,10 +372,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0606f572cf382c43aaea27921044445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarManager: {fileID: 114635993733402010}
   maxHealth:
     baseValue: 40
     modifiers: []
-  healthBarManager: {fileID: 114635993733402010}
+  isControlledByServer: 0
   damage:
     baseValue: 10
     modifiers: []
@@ -400,7 +401,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195773135808422460
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -419,7 +420,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!212 &212565172521329914
