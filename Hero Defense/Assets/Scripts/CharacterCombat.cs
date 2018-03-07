@@ -13,7 +13,6 @@ public class CharacterCombat : MonoBehaviour
 
     public event System.Action OnAttack;
 
-
     CharacterStats myStats;
 
     [Header("Set only for Ranged Characters")]
@@ -39,7 +38,7 @@ public class CharacterCombat : MonoBehaviour
 
             if (!isRanged)
             {
-                StartCoroutine(DoDamage(targetStats, attackDelay));
+                StartCoroutine(DoMeleeDamage(targetStats, attackDelay));
             }
             else
             {
@@ -55,7 +54,7 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    IEnumerator DoDamage(CharacterStats stats, float delay)
+    IEnumerator DoMeleeDamage(CharacterStats stats, float delay)
     {
         yield return new WaitForSeconds(delay);
         stats.TakeDamage(myStats.damage.GetValue());

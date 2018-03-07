@@ -18247,6 +18247,11 @@ Prefab:
       propertyPath: nstSettings
       value: 
       objectReference: {fileID: 719324413}
+    - target: {fileID: 114956156520426332, guid: 1d6024e6addffdb41ae8003dae40ea4c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d6024e6addffdb41ae8003dae40ea4c, type: 2}
   m_IsPrefabParent: 0

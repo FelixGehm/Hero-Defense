@@ -11,8 +11,10 @@ public class CharacterAnimator : MonoBehaviour
 
     NavMeshAgent agent;
     Animator animator;
+
     CharacterCombat characterCombat;
     NetworkCharacterCombat networkCharacterCombat;
+
     PlayerController playerController;
 
     float speedPercent;
@@ -28,12 +30,12 @@ public class CharacterAnimator : MonoBehaviour
         if(GetComponent<CharacterCombat>() == null)
         {
             networkCharacterCombat = GetComponent<NetworkCharacterCombat>();
-            networkCharacterCombat.OnAttack += StartAttackingAnimation;
+            networkCharacterCombat.OnAttack += StartAttackAnimation;
         }   
         else
         {
             characterCombat = GetComponent<CharacterCombat>();
-            characterCombat.OnAttack += StartAttackingAnimation;
+            characterCombat.OnAttack += StartAttackAnimation;
         }
 
         playerController = GetComponent<PlayerController>();
@@ -52,7 +54,7 @@ public class CharacterAnimator : MonoBehaviour
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
 
-    void StartAttackingAnimation()
+    void StartAttackAnimation()
     {
         animator.SetBool("attackBool", true);
         animator.SetTrigger("attack");

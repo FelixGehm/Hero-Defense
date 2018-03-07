@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Interactable focus;
+    //public event System.Action OnRemoveFocus;
 
     public LayerMask rightClickMask;
 
@@ -23,6 +24,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Set only for Network Player")]
     public NetworkCharacterCombat networkCombat;
+
+    
 
 
     bool isWaiting = false;
