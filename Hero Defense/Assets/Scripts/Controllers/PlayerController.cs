@@ -7,7 +7,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Interactable focus;
-    //public event System.Action OnRemoveFocus;
+
+    public event System.Action OnFocusNull;
 
     public LayerMask rightClickMask;
 
@@ -51,6 +52,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(focus == null && OnFocusNull != null)
+        {
+            OnFocusNull();
+        }
 
         //no controlls if pointer is over ui
         if (EventSystem.current.IsPointerOverGameObject())

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-//using UnityEngine.Networking;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class CharacterAnimator : MonoBehaviour
@@ -27,18 +24,20 @@ public class CharacterAnimator : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
 
-        if(GetComponent<CharacterCombat>() == null)
+        if (GetComponent<CharacterCombat>() == null)
         {
             networkCharacterCombat = GetComponent<NetworkCharacterCombat>();
             networkCharacterCombat.OnAttack += StartAttackAnimation;
-        }   
+        }
         else
         {
             characterCombat = GetComponent<CharacterCombat>();
             characterCombat.OnAttack += StartAttackAnimation;
         }
 
+    
         playerController = GetComponent<PlayerController>();
+        playerController.OnFocusNull += StopAttackAnimation;
 
     }
 
@@ -48,8 +47,7 @@ public class CharacterAnimator : MonoBehaviour
         if (isMovedByAgent)
         {
             speedPercent = agent.velocity.magnitude / agent.speed;
-        }
-        //Debug.Log(speedPercent);
+        }        
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
