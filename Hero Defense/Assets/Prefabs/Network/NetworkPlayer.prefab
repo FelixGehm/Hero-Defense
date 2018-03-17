@@ -156,6 +156,10 @@ GameObject:
   - component: {fileID: 114359792580615324}
   - component: {fileID: 114834012654970428}
   - component: {fileID: 114407499841936828}
+  - component: {fileID: 114899644331539466}
+  - component: {fileID: 114163940093743100}
+  - component: {fileID: 114702156961160118}
+  - component: {fileID: 114870695363659910}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -1638,6 +1642,18 @@ MonoBehaviour:
   componentsToDisable:
   - {fileID: 114027344568857116}
   - {fileID: 114474283249777258}
+  - {fileID: 114899644331539466}
+--- !u!114 &114163940093743100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f54f7265906dfce409ae4c13bb7b0f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114199499742551658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1916,6 +1932,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a527bc0c0cd3f4da205334ba1cc8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114702156961160118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc309fb829b3aa74e9c238c48590c5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isControlledByNetwork: 0
+  teleportPoint: {x: 0, y: 0, z: 0}
+  castTime: 2.5
 --- !u!114 &114702853326103970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1958,6 +1988,33 @@ MonoBehaviour:
   nst: {fileID: 114546617227769426}
   na: {fileID: 0}
   rootRotId: 0
+--- !u!114 &114870695363659910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 585355a1c8ad85e4cb4718e24d1894e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114899644331539466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b435e736e01ec843923290206299edf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportKey: 98
+  abilityOneKey: 113
+  abilityTwoKey: 119
+  abilityThreeKey: 101
+  abilityFourKey: 114
 --- !u!114 &114956156520426332
 MonoBehaviour:
   m_ObjectHideFlags: 1

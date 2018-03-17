@@ -114,11 +114,11 @@ namespace emotitron.Network.NST
 		{
 			Rect r = EditorGUILayout.GetControlRect(true, 34);
 
-			float vw = r.width + 18;
-			float pad = 6;
-			GUI.DrawTexture(new Rect(pad, r.yMin + 2, vw - pad * 2, 32), bTexture);
-			GUI.DrawTexture(new Rect(vw - 160 - pad, r.yMin + 2, 160, 32), rTexture);
-			GUI.DrawTexture(new Rect(pad, r.yMin + 2, 128, 32), lTexture);
+			//float vw = r.width + 18;
+			//float pad = 6;
+			//GUI.DrawTexture(new Rect(pad, r.yMin + 2, vw - pad * 2, 32), bTexture);
+			//GUI.DrawTexture(new Rect(vw - 160 - pad, r.yMin + 2, 160, 32), rTexture);
+			//GUI.DrawTexture(new Rect(pad, r.yMin + 2, 128, 32), lTexture);
 		}
 	}
 

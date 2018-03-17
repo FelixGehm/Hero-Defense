@@ -8,6 +8,10 @@ public class NetworkSyncAnimations : NetworkBehaviour
     [SyncVar]
     float speedPercent;
 
+    /*
+    [SyncVar]
+    bool isAttacking = false;
+    */
     CharacterAnimator characterAnimator;
 
     private void Start()

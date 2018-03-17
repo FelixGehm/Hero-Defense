@@ -73,9 +73,6 @@ public class PlayerMotor : MonoBehaviour {
         {
             //Debug.Log("Couldn't continue following target. Might have disapeared or focus changed");
         }
-        
-
-        
     }
 
     void FaceTarget()
