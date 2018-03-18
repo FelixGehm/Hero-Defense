@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 114163940093743100}
   - component: {fileID: 114702156961160118}
   - component: {fileID: 114870695363659910}
+  - component: {fileID: 114259321967336452}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -1726,6 +1727,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myStats: {fileID: 0}
   syncedCurrentHealth: 0
+--- !u!114 &114259321967336452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7084b7d79b68b47839576e674b2f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114322717026101452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1943,7 +1955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc309fb829b3aa74e9c238c48590c5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isControlledByNetwork: 0
   teleportPoint: {x: 0, y: 0, z: 0}
   castTime: 2.5
 --- !u!114 &114702853326103970

@@ -18,6 +18,11 @@ public class EnemyController : MonoBehaviour
 
     NavMeshAgent agent;
     CharacterCombat combat;
+    NetworkCharacterCombat networkCombat;
+
+    bool isNetworkEnemy = false;
+
+    
 
     // Use this for initialization
     void Start()
@@ -27,6 +32,11 @@ public class EnemyController : MonoBehaviour
         destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
+        if (combat == null)
+        {
+            isNetworkEnemy = true;
+            networkCombat = GetComponent<NetworkCharacterCombat>();
+        }
     }
 
     public void SetupEnemy()
@@ -37,7 +47,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if ( target == null)
+        if ( target == null && !isTaunted)
         {
             target = FindClosestPlayer().transform;
         } else
@@ -49,17 +59,27 @@ public class EnemyController : MonoBehaviour
 
         //vielleicht lieber über eine coroutine. könnte mit mehreren gegnern etwas viel perfomance schlucken?
         //hier vielleicht ab einer bestimmenten distanz zum nexus den Spieler ignorieren?
-        if (distanceToTarget <= lookRadius)
+        if (distanceToTarget <= lookRadius || isTaunted)
         {
             //Moving to Player and attack
             agent.SetDestination(target.position);
 
             if (distanceToTarget <= agent.stoppingDistance)
             {
+                //CharacterStats targetStats = target.GetComponent<CharacterStats>();
                 CharacterStats targetStats = target.GetComponent<CharacterStats>();
+                //Debug.Log("targetStats= "+targetStats);
                 if (targetStats != null)
                 {
-                    combat.Attack(targetStats);
+                    if(!isNetworkEnemy)
+                    {
+                        combat.Attack(targetStats);
+                    } else
+                    {
+                        NetworkCharacterStats ncs = target.GetComponent<NetworkCharacterStats>();
+                        networkCombat.Attack(ncs);
+                    }
+                    
                 }
 
                 FaceTarget(target);
@@ -84,6 +104,32 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
     }
 
+    #region Taunt
+
+    public bool isTaunted = false;
+
+    /// <summary>
+    /// TauntAbility 
+    /// </summary>
+    /// <param name="tauntTarget"></param>
+    /// <param name="duration"></param>
+    public void GetTaunted(Transform tauntTarget, float duration)
+    {
+        Debug.Log("enemy got taunted from " + tauntTarget.name);
+
+        isTaunted = true;
+        target = tauntTarget;
+
+        StartCoroutine(EndTauntAfter(duration));
+    }
+
+    private IEnumerator EndTauntAfter(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        isTaunted = false;
+
+    }
+    #endregion 
 
 
     // Returns the clostest Player to the Enemy

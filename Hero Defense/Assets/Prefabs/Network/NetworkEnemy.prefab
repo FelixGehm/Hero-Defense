@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 114862387978249014}
   m_Layer: 8
   m_Name: NetworkEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 0
+  isTaunted: 0
 --- !u!114 &114445123525202334
 MonoBehaviour:
   m_ObjectHideFlags: 1
