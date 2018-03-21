@@ -11,7 +11,9 @@ public class EnemyController : MonoBehaviour
 
 
     Transform destination;  //der nexus
+
     Transform target;       //der nächstgelegene spieler
+
 
     float distanceToTarget;
     float distanceToDestination;
@@ -22,7 +24,7 @@ public class EnemyController : MonoBehaviour
 
     bool isNetworkEnemy = false;
 
-    
+
 
     // Use this for initialization
     void Start()
@@ -42,19 +44,19 @@ public class EnemyController : MonoBehaviour
     public void SetupEnemy()
     {
         target = FindClosestPlayer().transform;
-        
     }
 
     void Update()
     {
-        if ( target == null && !isTaunted)
+        if (target == null && !isTaunted)
         {
             target = FindClosestPlayer().transform;
-        } else
+        }
+        else
         {
             distanceToTarget = Vector3.Distance(target.position, transform.position);
         }
-        
+
         distanceToDestination = Vector3.Distance(destination.position, transform.position);
 
         //vielleicht lieber über eine coroutine. könnte mit mehreren gegnern etwas viel perfomance schlucken?
@@ -71,15 +73,16 @@ public class EnemyController : MonoBehaviour
                 //Debug.Log("targetStats= "+targetStats);
                 if (targetStats != null)
                 {
-                    if(!isNetworkEnemy)
+                    if (!isNetworkEnemy)
                     {
                         combat.Attack(targetStats);
-                    } else
+                    }
+                    else
                     {
                         NetworkCharacterStats ncs = target.GetComponent<NetworkCharacterStats>();
                         networkCombat.Attack(ncs);
                     }
-                    
+
                 }
 
                 FaceTarget(target);
@@ -118,6 +121,7 @@ public class EnemyController : MonoBehaviour
         Debug.Log("enemy got taunted from " + tauntTarget.name);
 
         isTaunted = true;
+
         target = tauntTarget;
 
         StartCoroutine(EndTauntAfter(duration));
@@ -140,20 +144,19 @@ public class EnemyController : MonoBehaviour
         GameObject closestPlayer = null;
 
 
-        for (int i = 0; i< PlayerManager.instance.players.Length; i++)
+        for (int i = 0; i < PlayerManager.instance.players.Length; i++)
         {
             if (PlayerManager.instance.players[i] != null)
             {
                 float distance = Vector3.Distance(PlayerManager.instance.players[i].transform.position, transform.position);
-                if (distanceToPlayer > distance )
+                if (distanceToPlayer > distance)
                 {
                     distanceToPlayer = distance;
                     closestPlayer = PlayerManager.instance.players[i];
                 }
-            }                        
+            }
         }
         return closestPlayer;
-        
     }
 
 

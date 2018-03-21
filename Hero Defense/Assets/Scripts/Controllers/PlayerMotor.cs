@@ -16,7 +16,6 @@ public class PlayerMotor : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
     }
 	
-	// Update is called once per frame
 	void Update () {
 
 

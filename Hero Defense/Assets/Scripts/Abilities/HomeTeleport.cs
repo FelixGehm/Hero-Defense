@@ -5,12 +5,13 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(CharacterEventManager), typeof(PlayerMotor), typeof(PlayerController))]
-public class HomeTeleport : MonoBehaviour {
-    
-    public Vector3 teleportPoint;
+public class HomeTeleport : MonoBehaviour
+{
+
+    private Vector3 teleportPoint;
 
     private PlayerMotor motor;
-  
+
 
     public float castTime = 0.5f;
     public float getCastTime()
@@ -18,34 +19,34 @@ public class HomeTeleport : MonoBehaviour {
         return castTime;
     }
 
-    private bool isCasting = false;
+    Coroutine co;       // Reffereenz auf laufende Coroutine für den Fall, dass abgebrochen wird
 
-	void Start () {
+    void Start()
+    {
         GetComponent<CharacterEventManager>().OnTeleport += TeleportHome;
         GetComponent<CharacterEventManager>().OnCastCancel += CancelTeleport;
-        
-        motor = GetComponent<PlayerMotor>();
-    
-        teleportPoint = GameObject.Find("HomeTeleportPoint").transform.position;
-	}
 
-    
+        motor = GetComponent<PlayerMotor>();
+
+        teleportPoint = GameObject.Find("HomeTeleportPoint").transform.position;
+    }
+
+
 
     public void TeleportHome()
     {
-        //Debug.Log("TeleportHome():");
-        StartCoroutine(TeleportAfterDelay(castTime));
+       co = StartCoroutine(TeleportAfterDelay(castTime));
     }
 
     public void CancelTeleport()
     {
-        isCasting = false;
+        StopCoroutine(co);
     }
 
     IEnumerator TeleportAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay);        
-        transform.position = teleportPoint;        
+        yield return new WaitForSeconds(delay);
+        transform.position = teleportPoint;
         motor.MoveToPoint(teleportPoint);
     }
 }

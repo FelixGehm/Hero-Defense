@@ -2,6 +2,9 @@
 
 public class CharacterEventManager : MonoBehaviour
 {
+    public enum eventType{ teleport, one, two, three, four }
+
+
     public event System.Action OnTeleport;
 
     public event System.Action OnAbilityOne;

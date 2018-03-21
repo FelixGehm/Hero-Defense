@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(CharacterStats))]
 public class NetworkCharacterStats : NetworkBehaviour
 {
-    public CharacterStats myStats;
+    private CharacterStats myStats;
 
 
   

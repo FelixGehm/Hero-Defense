@@ -6,24 +6,25 @@ using emotitron.Network.NST;
 
 
 
-[RequireComponent(typeof(HomeTeleport), typeof(NetworkSyncTransform), typeof(CharacterEventManager))]
+[RequireComponent(typeof(NetworkSyncTransform), typeof(CharacterEventManager), typeof(PlayerMotor))]
 public class NetworkTeleportHome : NetworkBehaviour
 {
-    HomeTeleport homeTeleport;
+    private Vector3 teleportPoint;
+
     NetworkSyncTransform NST;
     CharacterEventManager characterEventManager;
+    PlayerMotor motor;
     
     void Start()
-    {
-        homeTeleport = GetComponent<HomeTeleport>();
-
-        castTime = homeTeleport.getCastTime();
-
+    {        
         NST = GetComponent<NetworkSyncTransform>();
 
         characterEventManager = GetComponent<CharacterEventManager>();
 
-        if (isServer)
+        teleportPoint = GameObject.Find("HomeTeleportPoint").transform.position;
+        motor = GetComponent<PlayerMotor>();
+
+        //if (isServer)
         {
             characterEventManager.OnTeleport += TeleportHome;
         }
@@ -34,10 +35,11 @@ public class NetworkTeleportHome : NetworkBehaviour
         StartCoroutine(TeleportAfterDelay(castTime));
     }
 
-    float castTime;
+    public float castTime = 0.5f;
     IEnumerator TeleportAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        NST.Teleport(homeTeleport.teleportPoint, transform.rotation, true);
+        NST.Teleport(teleportPoint, transform.rotation, true);
+        motor.MoveToPoint(teleportPoint);
     }
 }

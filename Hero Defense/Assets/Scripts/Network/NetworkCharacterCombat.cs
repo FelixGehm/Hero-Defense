@@ -96,7 +96,7 @@ public class NetworkCharacterCombat : NetworkBehaviour
 
     // Wird vom Server ausgeführt sobald das Cmd von einem Client aufgerufen wird
     [Command]
-    void CmdProvidePulletToServer(NetworkInstanceId targetId, float damage)
+    void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
     {
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
@@ -121,7 +121,7 @@ public class NetworkCharacterCombat : NetworkBehaviour
         Debug.Log(transform.name + " TransmitBullet(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
         if (!isServer)
         {
-            CmdProvidePulletToServer(id, damage);
+            CmdSpawnBulletOnServer(id, damage);
         }
     }
 }
