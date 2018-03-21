@@ -28,13 +28,13 @@ public class TauntAbility : MonoBehaviour
         if (currentCooldown <= 0)
         {
             currentCooldown = abilityCooldown;
-            TauntNearByEnemys();
+            TauntNearbyEnemys();
         }
     }
 
-    private void TauntNearByEnemys()
+    private void TauntNearbyEnemys()
     {
-        Debug.Log("TauntNerByEnemys(): ");
+        Debug.Log("TauntNearbyEnemys(): ");
         List<GameObject> closeEnemys = FindEnemysInRange(range);
         foreach (GameObject enemy in closeEnemys)
         {

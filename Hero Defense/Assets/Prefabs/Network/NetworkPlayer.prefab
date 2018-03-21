@@ -147,8 +147,10 @@ GameObject:
   - component: {fileID: 136062751201614316}
   - component: {fileID: 54582689625285952}
   - component: {fileID: 95566796414262270}
-  - component: {fileID: 114140388690092532}
+  - component: {fileID: 114163940093743100}
+  - component: {fileID: 114899644331539466}
   - component: {fileID: 114027344568857116}
+  - component: {fileID: 114140388690092532}
   - component: {fileID: 114474283249777258}
   - component: {fileID: 114217145630490388}
   - component: {fileID: 114702853326103970}
@@ -156,11 +158,10 @@ GameObject:
   - component: {fileID: 114441419098395818}
   - component: {fileID: 114547999922988478}
   - component: {fileID: 114359792580615324}
-  - component: {fileID: 114899644331539466}
-  - component: {fileID: 114163940093743100}
   - component: {fileID: 114072098684567304}
   - component: {fileID: 114870695363659910}
   - component: {fileID: 114259321967336452}
+  - component: {fileID: 114903351983420732}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -2025,6 +2026,17 @@ MonoBehaviour:
   abilityTwoKey: 119
   abilityThreeKey: 101
   abilityFourKey: 114
+--- !u!114 &114903351983420732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8a7face6a4d964fbce2acec986dd00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114956156520426332
 MonoBehaviour:
   m_ObjectHideFlags: 1

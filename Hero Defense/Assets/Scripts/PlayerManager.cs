@@ -21,8 +21,7 @@ public class PlayerManager : MonoBehaviour {
     }
     #endregion
 
-    [SerializeField]
-    public GameObject player;
+    
 
     public GameObject[] players;
     
@@ -64,4 +63,6 @@ public class PlayerManager : MonoBehaviour {
     {
         //hier implementieren, was passieren soll, wenn spieler stirbt
     }
+
+
 }

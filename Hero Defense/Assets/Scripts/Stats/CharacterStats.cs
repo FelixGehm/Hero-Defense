@@ -2,17 +2,20 @@
 
 public class CharacterStats : MonoBehaviour
 {
-    
-    
+
+
     public HealthBarManager healthBarManager;
 
     public Stat maxHealth;
 
+    private UIHealthBar uIHealthBar;
+
+
     //[HideInInspector]
     public bool isControlledByServer = false;
 
-    private float currentHealth;            
-    public float CurrentHealth
+    private float currentHealth;
+    public virtual float CurrentHealth
     {
         get
         {
@@ -21,19 +24,30 @@ public class CharacterStats : MonoBehaviour
         set
         {
             currentHealth = value;
-            
-            if (healthBarManager != null)
+
+            if (healthBarManager != null )
             {
                 healthBarManager.CurrentHealth = value;
 
-                if(currentHealth <= 0)
+
+                Debug.Log(gameObject.name.Substring(0, 11));
+               int isLocalPlayer = string.Compare("LocalPlayer", gameObject.name.Substring(0, 10));
+
+                Debug.Log(isLocalPlayer);
+
+                if (uIHealthBar != null && !gameObject.CompareTag("Enemy") && isLocalPlayer == 1)
+                {
+                    uIHealthBar.CurrentHealth = value;
+                }
+
+                if (currentHealth <= 0)
                 {
                     Die();
                 }
             }
         }
     }
-    
+
 
     public Stat damage;
     public Stat attackSpeed;
@@ -55,6 +69,8 @@ public class CharacterStats : MonoBehaviour
     void Awake()
     {
         CurrentHealth = maxHealth.GetValue();
+
+        uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
     }
 
 
@@ -65,7 +81,7 @@ public class CharacterStats : MonoBehaviour
     */
     public void TakeDamage(float damage)
     {
-        Debug.Log("TakeDamage: dmg: " + damage + " isControlledByServer = "+ isControlledByServer );
+        Debug.Log("TakeDamage: dmg: " + damage + " isControlledByServer = " + isControlledByServer);
 
         if (!isControlledByServer)
         {
@@ -75,7 +91,7 @@ public class CharacterStats : MonoBehaviour
 
             if (CurrentHealth <= 0)
                 Die();
-        }        
+        }
     }
 
 
