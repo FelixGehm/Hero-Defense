@@ -155,13 +155,14 @@ GameObject:
   - component: {fileID: 114217145630490388}
   - component: {fileID: 114702853326103970}
   - component: {fileID: 114956156520426332}
+  - component: {fileID: 114903351983420732}
   - component: {fileID: 114441419098395818}
   - component: {fileID: 114547999922988478}
   - component: {fileID: 114359792580615324}
   - component: {fileID: 114072098684567304}
   - component: {fileID: 114870695363659910}
   - component: {fileID: 114259321967336452}
-  - component: {fileID: 114903351983420732}
+  - component: {fileID: 114695483465087732}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -1956,6 +1957,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a527bc0c0cd3f4da205334ba1cc8bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114695483465087732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31369c10545b3314487c99abacf1a934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityCooldown: 2
+  dashDistance: 6
+  dashTime: 0.5
 --- !u!114 &114702853326103970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1968,10 +1983,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarManager: {fileID: 114477823578069368}
+  isControlledByServer: 0
   maxHealth:
     baseValue: 10000
     modifiers: []
-  isControlledByServer: 0
   damage:
     baseValue: 10
     modifiers: []

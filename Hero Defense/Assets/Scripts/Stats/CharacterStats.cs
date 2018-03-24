@@ -6,10 +6,17 @@ public class CharacterStats : MonoBehaviour
 
     public HealthBarManager healthBarManager;
 
-    public Stat maxHealth;
+
 
     private UIHealthBar uIHealthBar;
 
+
+    void Awake()
+    {
+        CurrentHealth = maxHealth.GetValue();
+
+        uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
+    }
 
     //[HideInInspector]
     public bool isControlledByServer = false;
@@ -25,15 +32,11 @@ public class CharacterStats : MonoBehaviour
         {
             currentHealth = value;
 
-            if (healthBarManager != null )
+            if (healthBarManager != null)
             {
                 healthBarManager.CurrentHealth = value;
 
-
-                Debug.Log(gameObject.name.Substring(0, 11));
-               int isLocalPlayer = string.Compare("LocalPlayer", gameObject.name.Substring(0, 10));
-
-                Debug.Log(isLocalPlayer);
+                int isLocalPlayer = string.Compare("LocalPlayer", gameObject.name.Substring(0, 10));
 
                 if (uIHealthBar != null && !gameObject.CompareTag("Enemy") && isLocalPlayer == 1)
                 {
@@ -48,6 +51,7 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
+    public Stat maxHealth;
 
     public Stat damage;
     public Stat attackSpeed;
@@ -66,12 +70,7 @@ public class CharacterStats : MonoBehaviour
 
     //public Stat moveSpeed;
 
-    void Awake()
-    {
-        CurrentHealth = maxHealth.GetValue();
 
-        uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
-    }
 
 
     //evtl zusätzlich die Art des Schadens übergeben

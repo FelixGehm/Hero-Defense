@@ -40,7 +40,7 @@ public class CharacterEventManager : MonoBehaviour
 
     public void AbilityTwo()
     {
-        Debug.Log("AbilityTwo():");
+        //Debug.Log("AbilityTwo():");
 
         if (OnAbilityTwo != null)
         {
