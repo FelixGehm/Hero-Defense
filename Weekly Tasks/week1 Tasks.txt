@@ -1,0 +1,19 @@
+Aufgaben woche 1: 29.03 - 05.03
+
+Felix: - hitboxen anpassen
+       - autoatack listening
+       - fähigkeit für mage
+
+
+Sven: - fähigkeit für gunslinger
+
+Flo: - Netzwerk anpassen 
+
+Moritz: - Welten Bildung / Story Hintergrund 
+          (-Energie- Mineral/Kristall)
+	- Word doc / Konzept Art
+
+Clara: - Welten Bildung / Story Hintergrund
+          (-Energie- Mineral/Kristall)
+       - Word doc / Konzept Art
+

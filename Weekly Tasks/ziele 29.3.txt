@@ -1,0 +1,17 @@
+Hero Defens - idea building
+
+Ziele: 
+
+Spielf‰higer Prototyp
+
+.4 Spielf‰hige Helden mit individuellen F‰higkeiten
+.Funktionierendes Item System (balanced)
+.min eine Spielbare Map (")
+.min 3 Gegnertypen 
+.min 1 Boss
+.faires Kampfsystem
+.Steuerung soll Spaﬂ machen
+.Netzwerk, client Host
+.komplette Corporate Identity 
+.Jungle
+
