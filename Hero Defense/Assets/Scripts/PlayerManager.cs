@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void Start()
     {
-        players = new GameObject[3]; // Maximal 3 Spieler pro Lobby
+        players = new GameObject[4]; // Maximal 4 Spieler pro Lobby
 
     }
     

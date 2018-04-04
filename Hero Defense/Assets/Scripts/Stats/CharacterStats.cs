@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class CharacterStats : MonoBehaviour
+
+/// <summary>
+/// Muss von NetworkBehaviour erben, da auf diverse Variablen daraus zugegriffen wird, und mit SyncVars gearbeitet wird.
+/// </summary>
+public class CharacterStats : NetworkBehaviour
 {
 
 
     public HealthBarManager healthBarManager;
-
-
-
     private UIHealthBar uIHealthBar;
 
 
@@ -16,34 +18,41 @@ public class CharacterStats : MonoBehaviour
         CurrentHealth = maxHealth.GetValue();
 
         uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
+
+        //isLocalPlayer = string.Compare("LocalPlayer", gameObject.name.Substring(0, 10));
+        isEnemy = gameObject.CompareTag("Enemy");
     }
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool isControlledByServer = false;
 
-    private float currentHealth;
+    private bool isEnemy;
+
+    [SyncVar]
+    private float syncedCurrentHealth;
     public virtual float CurrentHealth
     {
         get
         {
-            return currentHealth;
+            return syncedCurrentHealth;
         }
         set
         {
-            currentHealth = value;
+            Debug.Log("Health Changed to " + value);
+            syncedCurrentHealth = value;
 
             if (healthBarManager != null)
             {
                 healthBarManager.CurrentHealth = value;
 
-                int isLocalPlayer = string.Compare("LocalPlayer", gameObject.name.Substring(0, 10));
 
-                if (uIHealthBar != null && !gameObject.CompareTag("Enemy") && isLocalPlayer == 1)
+
+                if (uIHealthBar != null && !isEnemy && isLocalPlayer)
                 {
                     uIHealthBar.CurrentHealth = value;
                 }
 
-                if (currentHealth <= 0)
+                if (syncedCurrentHealth <= 0)
                 {
                     Die();
                 }
@@ -53,59 +62,80 @@ public class CharacterStats : MonoBehaviour
 
     public Stat maxHealth;
 
-    public Stat damage;
-    public Stat attackSpeed;
-
-    public Stat attackRange;
-
-
-    /*
-    public Stat critChance;
-    public Stat critDamage;
-    */
-
+    public Stat physicalDamage;
     public Stat armor;
 
-    //TODO: Elementar Resistenzen, Elementar Schadensarten
+    public Stat magicDamage;
+    public Stat magicResistance;
 
-    //public Stat moveSpeed;
+    public Stat critChance;
+    public Stat critDamage;
 
+    public Stat attackSpeed;
+    public Stat attackRange;
 
+    public Stat moveSpeed;
 
+    // TODO: Stats im Netzwerk synchronisieren
 
-    //evtl zusätzlich die Art des Schadens übergeben
-    /*
-    * Sobald der Spieler im Netzwork ist, speichert er nicht mehr selbst sein Leben und sollte somit auch keine Änderungen daran vornehmen.
-    * Der Server kümmert sich um Änderungen und Teilt diese den CharakterStats mit.
-    */
-    public void TakeDamage(float damage)
+    #region Physical
+    public void TakePhysicalDamage(float pDamage)
     {
-        Debug.Log("TakeDamage: dmg: " + damage + " isControlledByServer = " + isControlledByServer);
+        Debug.Log("TakePhyDam");
 
-        if (!isControlledByServer)
+        if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
         {
-            CurrentHealth -= CalcTakenDamage(damage);
+            return;
+        }
 
-            Debug.Log(transform.name + " takes " + damage + " damage");
+        //if (!isControlledByServer)
+        {
+            CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
+
+            Debug.Log(transform.name + " takes " + pDamage + " pDamage");
 
             if (CurrentHealth <= 0)
                 Die();
         }
     }
 
-
-    /*
-     * Da im NetworkCharakter Controller der Server bei Mulitplayer das aktuelle Laben hält, 
-     * habe ich diese Methode eingeführt, die auf Basis der eigenen Stats den angerichteten Schaden ausrechnet.
-     * So kann sowohl lokal, als auch außerhalb der zugefügte Schaden berechnet werden.     * 
-     */
-    public float CalcTakenDamage(float incomingDamage)
+    private float CalcTakenPhysicalDamage(float incomingDamage)
     {
         float damage = incomingDamage;
         damage -= armor.GetValue();
         damage = Mathf.Max(damage, 0);
         return damage;
     }
+    #endregion
+
+    #region Magical
+    public void TakeMagicDamage(float mDamage)
+    {
+        if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
+        {
+            return;
+        }
+
+        //if (!isControlledByServer)
+        {
+            CurrentHealth -= CalcTakenPhysicalDamage(mDamage);
+
+            Debug.Log(transform.name + " takes " + mDamage + " mDamage");
+
+            if (CurrentHealth <= 0)
+                Die();
+        }
+    }
+    
+    public float CalcTakenMagicalDamage(float incomingDamage)
+    {
+        float damage = incomingDamage;
+        damage -= magicResistance.GetValue();
+        damage = Mathf.Max(damage, 0);
+        return damage;
+    }
+
+    #endregion
 
     public virtual void Die()
     {
@@ -113,11 +143,41 @@ public class CharacterStats : MonoBehaviour
 
     }
 
+    #region Network
+    /// <summary>
+    /// Für eine (relativ) ausführliche Erklärung zu Command und ClientCallBack:
+    ///     siehe CharacterEventManager
+    /// </summary>
+
+    /*
+    [Command]
+    void CmdProvideHealthToServer(float health)
+    {
+        Debug.Log("CmdProvideHealthToServer:");
+        syncedCurrentHealth = health;
+    }
+
+    [ClientCallback]
+    void TransmitAttack()
+    {
+        //Debug.Log(transform.name + " TransmitAttack(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
+        {
+            CmdProvideHealthToServer(syncedCurrentHealth);
+        }
+    }
+    */
+    #endregion
+
+
+    #region Editor
+    /// <summary>
+    /// Draw AttackRange in Editor
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
-        //Draw AttackRange
-
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, (float)attackRange.GetValue());
     }
+
+    #endregion
 }

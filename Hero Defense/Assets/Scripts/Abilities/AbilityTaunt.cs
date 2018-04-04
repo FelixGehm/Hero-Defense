@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TauntAbility : MonoBehaviour
+public class AbilityTaunt : MonoBehaviour
 {
     static float abilityCooldown = 3.0f;
     float currentCooldown = abilityCooldown;

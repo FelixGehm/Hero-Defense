@@ -42,14 +42,14 @@ public class NetworkProjectile : NetworkBehaviour {
 
     void HitTarget()
     {
-        Damage(target.GetComponent<NetworkCharacterStats>());
+        Damage(target.GetComponent<CharacterStats>());
         
         Destroy(gameObject);
     }
 
-    void Damage(NetworkCharacterStats targetStats)
+    void Damage(CharacterStats targetStats)
     {
-        targetStats.TakeDamage(damage);
+        targetStats.TakePhysicalDamage(damage);        
     }
 
     public void SetDamage(float _damage)

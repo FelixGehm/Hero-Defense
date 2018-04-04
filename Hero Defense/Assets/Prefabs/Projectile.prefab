@@ -22,7 +22,11 @@ GameObject:
   - component: {fileID: 33831047400640590}
   - component: {fileID: 135640182961596182}
   - component: {fileID: 23408713408984296}
-  - component: {fileID: 114658901639606958}
+  - component: {fileID: 114666201381591128}
+  - component: {fileID: 114875907997669616}
+  - component: {fileID: 114929737980880788}
+  - component: {fileID: 114436366157053040}
+  - component: {fileID: 114176421464875792}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -84,7 +88,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619547177321574}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114658901639606958
+--- !u!114 &114176421464875792
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -92,10 +96,150 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619547177321574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b5f1aa637447cb4ebcbfd8809b1dbf4, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d2b959f5f529494faeb6adc8de4f770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 70
+--- !u!114 &114436366157053040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619547177321574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6587c27fd07824eb346469eb351e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nst: {fileID: 114666201381591128}
+  na: {fileID: 0}
+  rootRotId: 0
+--- !u!114 &114666201381591128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619547177321574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdf5a6b1cc27d74cab63a5666d2960a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  na: {fileID: 114929737980880788}
+  _state: 3
+  sendEveryXTick: 1
+  desiredBufferMS: 0.1
+  bufferDriftCorrectAmt: 0.1
+  autoKinematic: 1
+  allowOfftick: 1
+  sendOnEvent: 30
+  includedAxes: 7
+  keyEvery: 5
+  extrapolation: 0.5
+  extrapolationDivisor: 0
+  maxExtrapolates: 2
+  teleportThreshold: 1
+  cullUpperBits: 0
+  sequentialKeys: 5
+  rootRotationElement:
+    name: Root Rotation
+    isRoot: 1
+    index: 0
+    drawerHeight: 0
+    nst: {fileID: 0}
+    nstElementsEngine: {fileID: 0}
+    elementType: 1
+    sendCullMask: 30
+    keyRate: 5
+    gameobject: {fileID: 0}
+    extrapolation: 0.5
+    maxExtrapolates: 2
+    teleportOverride: 1
+    rewindGO: {fileID: 0}
+    lastSentKeyTime: 0
+    rotationType: 0
+    includedAxes: 7
+    totalBitsForQuat: 40
+    axes:
+    - res: 0.1
+      limitRange: 1
+      min: -85
+      max: 85
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    - res: 0.2
+      limitRange: 1
+      min: -180
+      max: 180
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    - res: 0.3
+      limitRange: 1
+      min: -180
+      max: 180
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    useLocal: 0
+  debugXform: 0
+  debugXformGO: {fileID: 0}
+  rb: {fileID: 0}
+  nstElementsEngine: {fileID: 114436366157053040}
+  nstSettings: {fileID: 0}
+  frameUpdateInterval: 0
+  invFrameUpdateInterval: 0
+  lastSentPos: {x: 0, y: 0, z: 0}
+--- !u!114 &114875907997669616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619547177321574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 211
+    i1: 38
+    i2: 170
+    i3: 4
+    i4: 255
+    i5: 248
+    i6: 136
+    i7: 20
+    i8: 168
+    i9: 118
+    i10: 2
+    i11: 208
+    i12: 113
+    i13: 8
+    i14: 178
+    i15: 229
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114929737980880788
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619547177321574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135640182961596182
 SphereCollider:
   m_ObjectHideFlags: 1

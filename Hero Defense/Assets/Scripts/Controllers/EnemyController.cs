@@ -20,7 +20,6 @@ public class EnemyController : MonoBehaviour
 
     NavMeshAgent agent;
     CharacterCombat combat;
-    NetworkCharacterCombat networkCombat;
 
     bool isNetworkEnemy = false;
 
@@ -34,11 +33,6 @@ public class EnemyController : MonoBehaviour
         destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
-        if (combat == null)
-        {
-            isNetworkEnemy = true;
-            networkCombat = GetComponent<NetworkCharacterCombat>();
-        }
     }
 
     public void SetupEnemy()
@@ -68,21 +62,12 @@ public class EnemyController : MonoBehaviour
 
             if (distanceToTarget <= agent.stoppingDistance)
             {
-                //CharacterStats targetStats = target.GetComponent<CharacterStats>();
                 CharacterStats targetStats = target.GetComponent<CharacterStats>();
-                //Debug.Log("targetStats= "+targetStats);
+                
                 if (targetStats != null)
                 {
-                    if (!isNetworkEnemy)
-                    {
-                        combat.Attack(targetStats);
-                    }
-                    else
-                    {
-                        NetworkCharacterStats ncs = target.GetComponent<NetworkCharacterStats>();
-                        networkCombat.Attack(ncs);
-                    }
-
+                    Debug.Log(combat);
+                    combat.Attack(targetStats);
                 }
 
                 FaceTarget(target);

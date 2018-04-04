@@ -36,8 +36,8 @@ public class Projectile : MonoBehaviour {
 
     void HitTarget()
     {
-        //TODO: instantiate particles
-        //TODO: substract hitpoints
+        //TODO: instantiate particles       ???
+        //TODO: substract hitpoints         ???
         Damage(target.GetComponent<CharacterStats>());
         Destroy(gameObject);
 
@@ -45,7 +45,7 @@ public class Projectile : MonoBehaviour {
 
     void Damage(CharacterStats targetStats)
     {
-        targetStats.TakeDamage(damage);
+        targetStats.TakePhysicalDamage(damage);
     }
 
     public void SetDamage(float _damage)

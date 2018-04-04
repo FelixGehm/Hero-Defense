@@ -1,17 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(CharacterStats))]
-public class CharacterCombat : MonoBehaviour
+public class CharacterCombat : NetworkBehaviour
 {
-    //to match damage output with animation
-    public float attackDelay = 0.2f;
+    public float attackDelay = 0.2f;    //to match damage output with animation
 
     private float attackSpeed;
     private float attackCooldown;
 
-    public event System.Action OnAttack;
+    public event System.Action OnAttack;    //Todo: Event nach CharacterEventController verlegen vielleicht ????(wegen Übersichtlichkeit)
 
     CharacterStats myStats;
 
@@ -42,10 +41,8 @@ public class CharacterCombat : MonoBehaviour
             }
             else
             {
-                //shootProjectile(targetStats.transform);
                 StartCoroutine(ShootProjectile(targetStats.transform, attackDelay));
             }
-
 
             if (OnAttack != null)
                 OnAttack();
@@ -54,35 +51,73 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    IEnumerator DoMeleeDamage(CharacterStats stats, float delay)
+    IEnumerator DoMeleeDamage(CharacterStats stats, float delay)        //TODO
     {
         yield return new WaitForSeconds(delay);
-        stats.TakeDamage(myStats.damage.GetValue());
+        stats.TakePhysicalDamage(myStats.physicalDamage.GetValue());
     }
-
-    /*
-    private void shootProjectile(Transform target)
-    {
-        GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Projectile projectile = projectileGO.GetComponent<Projectile>();
-        if (projectile != null)
-        {
-            projectile.SetDamage(myStats.damage.GetValue());
-            projectile.SetTarget(target);
-        }
-    }
-    */
 
     IEnumerator ShootProjectile(Transform target, float delay)
     {
         yield return new WaitForSeconds(delay);
+
+        if (isServer)   // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
+        {
+            GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
+
+            if (projectile != null)
+            {
+                projectile.SetDamage(myStats.physicalDamage.GetValue());
+                projectile.SetTarget(target);
+            }
+
+
+//            Debug.Log("ShootProjectile before spawning projectile on server");
+            NetworkServer.Spawn(projectileGO);
+         //   Debug.Log("ShootProjectile after spawning projectile on server");
+        }
+        else
+        {
+            AskServerToSpawnBullet(target, myStats.physicalDamage.GetValue());
+        }
+
+    }
+
+    #region Network
+    /// <summary>
+    /// Für eine (relativ) ausführliche Erklärung zu Command und ClientCallBack:
+    ///     siehe CharacterEventManager
+    /// </summary>
+
+    [Command]
+    void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
+    {
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        Projectile projectile = projectileGO.GetComponent<Projectile>();
+        NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
 
         if (projectile != null)
         {
-            projectile.SetDamage(myStats.damage.GetValue());
-            projectile.SetTarget(target);
+            projectile.SetDamage(myStats.physicalDamage.GetValue());
+            projectile.SetTarget(targetId);
+        }
+
+        //Debug.Log(projectileGO);
+        NetworkServer.Spawn(projectileGO);
+    }
+
+
+    [ClientCallback]
+    void AskServerToSpawnBullet(Transform target, float damage)
+    {
+        NetworkInstanceId id = target.gameObject.GetComponent<NetworkIdentity>().netId;
+
+        //Debug.Log(transform.name + " TransmitBullet(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
+        if (!isServer)
+        {
+            CmdSpawnBulletOnServer(id, damage);
         }
     }
+
+    #endregion
 }
