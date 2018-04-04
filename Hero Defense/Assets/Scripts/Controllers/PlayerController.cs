@@ -21,16 +21,11 @@ public class PlayerController : MonoBehaviour
 
     [HideInInspector]
     public bool isNetworkPlayer = false;
-    NetworkCharacterStats networkEnemyStats;
-
-    [Header("Set only for Network Player")]
-    public NetworkCharacterCombat networkCombat;
-
     
 
 
     bool isWaiting = false;
-    
+
     // Use this for initialization
     void Start()
     {
@@ -41,7 +36,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    
+
 
     public void SetupCam()
     {
@@ -52,7 +47,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(focus == null && OnFocusNull != null)
+        if (focus == null && OnFocusNull != null)
         {
             OnFocusNull();
         }
@@ -82,16 +77,7 @@ public class PlayerController : MonoBehaviour
 
                 if (focus != null && focus.GetType() == typeof(Enemy))
                 {
-
-                    if (!isNetworkPlayer)
-                    {
-                        enemyStats = focus.GetComponent<CharacterStats>();
-                    }
-                    else
-                    {
-                        networkEnemyStats = focus.GetComponent<NetworkCharacterStats>();
-                    }
-                    
+                    enemyStats = focus.GetComponent<CharacterStats>();
                 }
 
 
@@ -113,13 +99,9 @@ public class PlayerController : MonoBehaviour
                     isWaiting = true;
 
                     motor.PauseFollowTarget();
-                    if(!isNetworkPlayer)
-                    {
-                        combat.Attack(enemyStats);
-                    } else
-                    {
-                        networkCombat.Attack(networkEnemyStats);
-                    }                    
+
+                    combat.Attack(enemyStats);
+
 
                     if (focus != null)
                         //Debug.Log("Start Coroutine");
@@ -130,7 +112,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-  
+
 
     System.Collections.IEnumerator ResumeFollow(float delay)
     {

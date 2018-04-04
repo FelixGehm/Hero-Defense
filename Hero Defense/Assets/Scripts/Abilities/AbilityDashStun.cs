@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class DashStunAbility : MonoBehaviour
+public class AbilityDashStun : MonoBehaviour
 {
 
     private NavMeshAgent agent;

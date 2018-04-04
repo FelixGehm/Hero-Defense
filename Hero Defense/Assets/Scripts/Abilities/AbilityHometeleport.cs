@@ -7,7 +7,7 @@ using emotitron.Network.NST;
 
 
 [RequireComponent(typeof(NetworkSyncTransform), typeof(CharacterEventManager), typeof(PlayerMotor))]
-public class NetworkTeleportHome : NetworkBehaviour
+public class AbilityHometeleport : NetworkBehaviour
 {
     private Vector3 teleportPoint;
 

@@ -19,14 +19,14 @@ public class PlayerStats : CharacterStats {
         if (wasAdded)
         {
             //Add Modfifiers
-            damage.AddModifier(equipment.damage);
+            physicalDamage.AddModifier(equipment.damage);
             armor.AddModifier(equipment.armor);
 
         }
         else
         {
             //Remove Modfiers
-            damage.RemoveModifier(equipment.damage);
+            physicalDamage.RemoveModifier(equipment.damage);
             armor.RemoveModifier(equipment.damage);
         }
     }

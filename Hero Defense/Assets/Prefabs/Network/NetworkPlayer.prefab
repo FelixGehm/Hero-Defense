@@ -152,17 +152,15 @@ GameObject:
   - component: {fileID: 114027344568857116}
   - component: {fileID: 114140388690092532}
   - component: {fileID: 114474283249777258}
-  - component: {fileID: 114217145630490388}
   - component: {fileID: 114702853326103970}
   - component: {fileID: 114956156520426332}
   - component: {fileID: 114903351983420732}
   - component: {fileID: 114441419098395818}
   - component: {fileID: 114547999922988478}
-  - component: {fileID: 114359792580615324}
-  - component: {fileID: 114072098684567304}
   - component: {fileID: 114870695363659910}
   - component: {fileID: 114259321967336452}
   - component: {fileID: 114695483465087732}
+  - component: {fileID: 114453215123688528}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -1609,18 +1607,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isNetworkPlayer: 0
-  networkCombat: {fileID: 114359792580615324}
---- !u!114 &114072098684567304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f6aa9396c4d306459bc56692869d85c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  networkCombat: {fileID: 0}
 --- !u!114 &114118448682317134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1727,18 +1714,6 @@ MonoBehaviour:
     i15: 76
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &114217145630490388
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe525c8d5768c13448a46da1e7922f57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncedCurrentHealth: 0
 --- !u!114 &114259321967336452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1778,22 +1753,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114359792580615324
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c488e37dc113fac47a34f2cea6b2f7a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDelay: 0.2
-  isRanged: 1
-  projectilePrefab: {fileID: 1475254467947496, guid: 65e265ad1b80ae44780d4512a3f2a400,
-    type: 2}
-  firePoint: {fileID: 4156884402912856}
 --- !u!114 &114396502109073638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1840,6 +1799,22 @@ MonoBehaviour:
   param3: 
   param4: 
   param5: 
+--- !u!114 &114453215123688528
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb7d32432d214146a4fd8f120de36ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 0.2
+  isRanged: 1
+  projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
+    type: 2}
+  firePoint: {fileID: 4156884402912856}
 --- !u!114 &114474283249777258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1987,8 +1962,23 @@ MonoBehaviour:
   maxHealth:
     baseValue: 10000
     modifiers: []
-  damage:
+  physicalDamage:
     baseValue: 10
+    modifiers: []
+  armor:
+    baseValue: 5
+    modifiers: []
+  magicDamage:
+    baseValue: 0
+    modifiers: []
+  magicResistance:
+    baseValue: 0
+    modifiers: []
+  critChance:
+    baseValue: 0
+    modifiers: []
+  critDamage:
+    baseValue: 0
     modifiers: []
   attackSpeed:
     baseValue: 3
@@ -1996,8 +1986,8 @@ MonoBehaviour:
   attackRange:
     baseValue: 7
     modifiers: []
-  armor:
-    baseValue: 5
+  moveSpeed:
+    baseValue: 0
     modifiers: []
 --- !u!114 &114834012654970428
 MonoBehaviour:

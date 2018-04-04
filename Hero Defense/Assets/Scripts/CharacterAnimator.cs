@@ -10,7 +10,7 @@ public class CharacterAnimator : MonoBehaviour
     Animator animator;
 
     CharacterCombat characterCombat;
-    NetworkCharacterCombat networkCharacterCombat;
+    
 
     PlayerController playerController;
 
@@ -24,17 +24,9 @@ public class CharacterAnimator : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
 
-        if (GetComponent<CharacterCombat>() == null)
-        {
-            networkCharacterCombat = GetComponent<NetworkCharacterCombat>();
-            networkCharacterCombat.OnAttack += StartAttackAnimation;
-        }
-        else
-        {
-            characterCombat = GetComponent<CharacterCombat>();
-            characterCombat.OnAttack += StartAttackAnimation;
-        }
-
+        characterCombat = GetComponent<CharacterCombat>();
+        characterCombat.OnAttack += StartAttackAnimation;
+        
     
         playerController = GetComponent<PlayerController>();
         playerController.OnFocusNull += StopAttackAnimation;
