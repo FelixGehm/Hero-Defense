@@ -56,7 +56,6 @@ public class EnemyController : MonoBehaviour
                 
                 if (targetStats != null)
                 {
-                    Debug.Log(combat);
                     combat.Attack(targetStats);
                 }
 

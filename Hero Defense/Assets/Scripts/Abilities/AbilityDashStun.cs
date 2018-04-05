@@ -2,11 +2,12 @@
 using System.Collections;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent),typeof(PlayerController))]
 public class AbilityDashStun : MonoBehaviour
 {
 
     private NavMeshAgent agent;
+    private PlayerController pc;
     private Camera cam;
 
     public float abilityCooldown = 4.0f;
@@ -23,6 +24,8 @@ public class AbilityDashStun : MonoBehaviour
         GetComponent<CharacterEventManager>().OnAbilityTwo += Cast;
 
         agent = GetComponent<NavMeshAgent>();
+
+        pc = GetComponent<PlayerController>();
 
         cam = Camera.main;
     }
@@ -56,7 +59,7 @@ public class AbilityDashStun : MonoBehaviour
         StartCoroutine(ResetSpeedAfterTime(agent.speed, dashTime));
         agent.speed = dashSpeed;
 
-        //transform.position += dashSpeed * GetDirectionVectorBetweenPlayerAndMouse();
+        pc.isWaiting = true;        
     }
 
 
@@ -65,6 +68,7 @@ public class AbilityDashStun : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         agent.speed = oldSpeed;
+        pc.isWaiting = false;
     }
 
     private void Stun()
@@ -86,5 +90,13 @@ public class AbilityDashStun : MonoBehaviour
 
         Vector3 direction = Vector3.Normalize(mousePos - playerPos);
         return direction;
+    }
+    /// <summary>
+    /// Draw Dash-Distance
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, dashDistance);
     }
 }

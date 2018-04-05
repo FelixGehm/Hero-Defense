@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     CharacterStats enemyStats;
 
-    bool isWaiting = false;
+    public bool isWaiting = false;
 
     // Use this for initialization
     void Start()
@@ -79,8 +79,6 @@ public class PlayerController : MonoBehaviour
                 {
                     enemyStats = focus.GetComponent<CharacterStats>();
                 }
-
-
             }
         }
 
@@ -94,7 +92,6 @@ public class PlayerController : MonoBehaviour
 
                 if (distance <= stats.attackRange.GetValue())
                 {
-
                     //Debug.Log("Enemy in Range");
                     isWaiting = true;
 
@@ -107,8 +104,6 @@ public class PlayerController : MonoBehaviour
                     {
                         StartCoroutine(ResumeFollow(1.0f / stats.attackSpeed.GetValue()));
                     }
-
-
                 }
             }
         }
