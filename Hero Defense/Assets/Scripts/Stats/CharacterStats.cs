@@ -28,7 +28,13 @@ public class CharacterStats : NetworkBehaviour
 
     private bool isEnemy;
 
-    [SyncVar]
+
+    /// <summary>
+    /// Bei SyncVars kann man sogenannte Hooks anhängen. Das sind Methoden, die ausgeführt werden, sobald der Server die aktuallisierte Variable gesendet hat. 
+    /// Sobald der Server den Wert für eine SyncVar bei den Clients ändert, wird dieser Hook dann ausgeführt.
+    /// In diesem Fall wird dies angewandt, umd den Property, der auf die Syncvar verweist ebenfalls zu aktuallisieren.
+    /// </summary>
+    [SyncVar(hook = "OnChangeHealth")]
     private float syncedCurrentHealth;
     public virtual float CurrentHealth
     {
@@ -38,7 +44,12 @@ public class CharacterStats : NetworkBehaviour
         }
         set
         {
-            Debug.Log("Health Changed to " + value);
+            //Debug.Log("Health Changed to " + value);
+            if(value > maxHealth.GetValue())
+            {
+                value = maxHealth.GetValue();
+            }
+
             syncedCurrentHealth = value;
 
             if (healthBarManager != null)
@@ -59,6 +70,13 @@ public class CharacterStats : NetworkBehaviour
             }
         }
     }
+
+
+    private void OnChangeHealth(float newHealth)
+    {
+        CurrentHealth = newHealth;      //Property CurrentHealth muss ebenfalls synchronisiert werden, damit die Healthbar angepasst wird.
+    }
+
 
     public Stat maxHealth;
 
@@ -81,7 +99,7 @@ public class CharacterStats : NetworkBehaviour
     #region Physical
     public void TakePhysicalDamage(float pDamage)
     {
-        Debug.Log("TakePhyDam");
+        //Debug.Log("TakePhyDam");
 
         if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
         {
@@ -92,7 +110,7 @@ public class CharacterStats : NetworkBehaviour
         {
             CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
 
-            Debug.Log(transform.name + " takes " + pDamage + " pDamage");
+            //Debug.Log(transform.name + " takes " + pDamage + " pDamage");
 
             if (CurrentHealth <= 0)
                 Die();

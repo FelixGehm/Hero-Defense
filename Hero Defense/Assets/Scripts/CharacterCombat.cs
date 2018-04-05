@@ -22,6 +22,9 @@ public class CharacterCombat : NetworkBehaviour
     void Start()
     {
         myStats = GetComponent<CharacterStats>();
+
+        attackDelay = 1.0f/ myStats.attackSpeed.GetValue();
+
     }
 
     void Update()
@@ -33,7 +36,7 @@ public class CharacterCombat : NetworkBehaviour
     {
         if (attackCooldown <= 0)
         {
-            attackSpeed = (float)myStats.attackSpeed.GetValue();
+            attackSpeed = myStats.attackSpeed.GetValue();
 
             if (!isRanged)
             {
@@ -47,7 +50,7 @@ public class CharacterCombat : NetworkBehaviour
             if (OnAttack != null)
                 OnAttack();
 
-            attackCooldown = 1 / attackSpeed;
+            attackCooldown = 1.0f / attackSpeed;
         }
     }
 

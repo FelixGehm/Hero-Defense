@@ -11,7 +11,6 @@ public class NetworkSetupEnemy : NetworkSetup {
         if (isServer)
         {
             GetComponent<EnemyController>().enabled = true;
-            GetComponent<EnemyController>().SetupEnemy();
             
             // Register Enemy in PlayerManager ?? 
             //PlayerManager.instance.RegisterPlayer(transform.gameObject);

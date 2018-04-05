@@ -43,9 +43,6 @@ public class NetworkSetupPlayer : NetworkSetup {
 
             // Register Player in PlayerManager
             PlayerManager.instance.RegisterPlayer(transform.gameObject);
-
-            // activate NetworkCombat
-            GetComponent<PlayerController>().isNetworkPlayer = true;
         }
             
     }

@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Interactable focus;
+    private Vector3? destination;       //nullable Vector3
 
     public event System.Action OnFocusNull;
 
@@ -19,11 +20,6 @@ public class PlayerController : MonoBehaviour
 
     CharacterStats enemyStats;
 
-    [HideInInspector]
-    public bool isNetworkPlayer = false;
-    
-
-
     bool isWaiting = false;
 
     // Use this for initialization
@@ -34,9 +30,6 @@ public class PlayerController : MonoBehaviour
         combat = GetComponent<CharacterCombat>();
         cam = Camera.main;
     }
-
-
-
 
     public void SetupCam()
     {
@@ -66,8 +59,15 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.collider.tag == "Walkable")
                 {
-                    motor.MoveToPoint(hit.point);
-                    RemoveFocus();
+                    if (!isWaiting)
+                    {
+                        motor.MoveToPoint(hit.point);
+                        RemoveFocus();
+                    }
+                    else
+                    {
+                        destination = hit.point;
+                    }
                 }
                 else
                 {
@@ -104,8 +104,11 @@ public class PlayerController : MonoBehaviour
 
 
                     if (focus != null)
-                        //Debug.Log("Start Coroutine");
-                        StartCoroutine(ResumeFollow(stats.attackSpeed.GetValue() / 100));
+                    {
+                        StartCoroutine(ResumeFollow(1.0f / stats.attackSpeed.GetValue()));
+                    }
+
+
                 }
             }
         }
@@ -119,7 +122,16 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Coroutine: resumeFollow()");
         yield return new WaitForSeconds(delay);
 
-        motor.ContinueFollowTarget();
+        if (destination != null)
+        {
+            RemoveFocus();
+            motor.MoveToPoint(destination);
+            destination = null;
+        }
+        else
+        {
+            motor.ContinueFollowTarget();
+        }
         isWaiting = false;
     }
 

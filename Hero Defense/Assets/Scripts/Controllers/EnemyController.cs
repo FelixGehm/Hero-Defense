@@ -21,24 +21,14 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent agent;
     CharacterCombat combat;
 
-    bool isNetworkEnemy = false;
-
-
-
     // Use this for initialization
     void Start()
     {
-        SetupEnemy();
-
         destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
     }
-
-    public void SetupEnemy()
-    {
-        target = FindClosestPlayer().transform;
-    }
+    
 
     void Update()
     {

@@ -146,15 +146,15 @@ GameObject:
   - component: {fileID: 195492980322751752}
   - component: {fileID: 136062751201614316}
   - component: {fileID: 54582689625285952}
+  - component: {fileID: 114140388690092532}
+  - component: {fileID: 114903351983420732}
   - component: {fileID: 95566796414262270}
   - component: {fileID: 114163940093743100}
   - component: {fileID: 114899644331539466}
   - component: {fileID: 114027344568857116}
-  - component: {fileID: 114140388690092532}
   - component: {fileID: 114474283249777258}
   - component: {fileID: 114702853326103970}
   - component: {fileID: 114956156520426332}
-  - component: {fileID: 114903351983420732}
   - component: {fileID: 114441419098395818}
   - component: {fileID: 114547999922988478}
   - component: {fileID: 114870695363659910}
@@ -1606,8 +1606,6 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
-  isNetworkPlayer: 0
-  networkCombat: {fileID: 0}
 --- !u!114 &114118448682317134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1981,7 +1979,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   attackSpeed:
-    baseValue: 3
+    baseValue: 0.5
     modifiers: []
   attackRange:
     baseValue: 7

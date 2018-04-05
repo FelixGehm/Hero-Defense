@@ -34,6 +34,11 @@ public class PlayerMotor : MonoBehaviour {
         agent.SetDestination(point);
     }
 
+    public void MoveToPoint(Vector3? point)
+    {
+        agent.SetDestination((Vector3)point);
+    }
+
     public void FollowTarget (Interactable newTarget)
     {
         agent.stoppingDistance = newTarget.interactionRadius;
