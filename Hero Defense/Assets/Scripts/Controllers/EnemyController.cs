@@ -85,11 +85,6 @@ public class EnemyController : MonoBehaviour
 
     public bool isTaunted = false;
 
-    /// <summary>
-    /// TauntAbility 
-    /// </summary>
-    /// <param name="tauntTarget"></param>
-    /// <param name="duration"></param>
     public void GetTaunted(Transform tauntTarget, float duration)
     {
         Debug.Log("enemy got taunted from " + tauntTarget.name);
@@ -101,7 +96,7 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(EndTauntAfter(duration));
     }
 
-    private IEnumerator EndTauntAfter(float duration)
+    IEnumerator EndTauntAfter(float duration)
     {
         yield return new WaitForSeconds(duration);
         isTaunted = false;
