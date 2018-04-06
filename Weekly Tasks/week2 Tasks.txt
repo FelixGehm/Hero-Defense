@@ -1,0 +1,18 @@
+Aufgaben woche 2: 05.04 - 12.03
+
+Felix: - hitboxen anpassen
+       - autoatack listening
+       - fähigkeit für mage
+
+
+Sven: - fähigkeit für gunslinger
+
+Flo: - fähigkeiten Tank
+
+Moritz: - Welten Bildung / Story Hintergrund 
+          (-Energie- Mineral/Kristall)
+	- Word doc / Konzept Art
+	- ui?
+
+Clara: - Konzept Art
+
