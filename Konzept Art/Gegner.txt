@@ -1,0 +1,36 @@
+0704
+
+Gegner
+
+Maschine 
+Mutant 
+
+Baseunit Eins
+	KLEINE NAHKAMPF
+	-Masse statt klasse 
+	-schnell 
+	-klein
+	-wenig Schaden
+	-Nahkampf
+	-(Spinnen)
+	-Krabbelficher
+
+Baseunit Zwei
+	TANK NAHKAMPF
+	-langsam
+	-muskulös
+	-viel Schaden
+	-Anführer
+	-mechanischer Arm
+	-
+
+Baseunit Drei
+	MAGE FERNKAMPF
+	-energie Schaden
+	-Gewehr
+	-schlank
+	-schmächtig
+	-kein Nahkämpfer
+
+	
+

@@ -1,18 +1,21 @@
-Aufgaben woche 2: 05.04 - 12.03
+Aufgaben woche 2: 05.04 - 11.04
 
 Felix: - hitboxen anpassen
        - autoatack listening
        - fähigkeit für mage
+       - Wellensystem
 
 
-Sven: - fähigkeit für gunslinger
+Sven: - (fähigkeit für gunslinger)
+      - Modellierung Baseunit Eins?? Wenn Clara fertig
+      - MAp Prototyp/ Gebirge?
 
-Flo: - fähigkeiten Tank
+Flo: - implementierung Statuseffekte
 
-Moritz: - Welten Bildung / Story Hintergrund 
-          (-Energie- Mineral/Kristall)
-	- Word doc / Konzept Art
-	- ui?
+Moritz: - UI Prototyp
+	- Story
 
-Clara: - Konzept Art
+Clara: - Konzept Art Gegner Baseunit Eins
+       - Moodboard
+       - Story
 

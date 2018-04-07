@@ -1,0 +1,32 @@
+UI Componenten
+
+-eigenes Leben
+-Mitspieler Leben + Name
+-Nexus Leben
+-anvisiertes Ziel
+	-Leben
+	-Namen
+	-Bild
+	-Level
+       (-während des Castens?)
+-Minimap
+	-abgespeckte Version der Map
+	-Mitspieler Pos (blau)
+	-eigene Pos (grün)
+	-Gegner Pos (rot)
+	-Nexus
+
+	-Symbol fürs Camp
+	-countdown wen Camp tot
+	||
+	-kein countdown, symbol weg
+-Spielzeit
+-Aktuelle Wave
+-Nächste Wave (Gegnervorschau)
+-Anzahl der Gegner (aktuell)
+-Stats Button
+	-öffnet Fenster mit: Anzahl kills,...
+-Items
+-Resourcen
+-Icons für Statuseffekte
+
