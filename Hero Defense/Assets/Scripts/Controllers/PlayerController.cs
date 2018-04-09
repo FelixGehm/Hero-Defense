@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Interactable focus;
-    private Vector3? destination;       //nullable Vector3
+    //private Vector3? destination;       //nullable Vector3
 
     public event System.Action OnFocusNull;
 
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     PlayerMotor motor;
     PlayerStats stats;
     CharacterCombat combat;
-    CharacterAnimator animator;
+    //CharacterAnimator animator;
     CharacterStats enemyStats;
 
     public bool isWaiting = false;
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         stats = GetComponent<PlayerStats>();
         combat = GetComponent<CharacterCombat>();
-        animator = GetComponent<CharacterAnimator>();
+        //animator = GetComponent<CharacterAnimator>();
         cam = Camera.main;
     }
 
@@ -93,26 +93,25 @@ public class PlayerController : MonoBehaviour
     bool wasAttacking = false;
     private void KeepTrackOfTarget()
     {
-        
         if (focus != null && focus.GetType() == typeof(Enemy))
         {
             // Entfernung Player und Gegner
             float distance = Vector3.Distance(focus.transform.position, transform.position);
 
-            if (distance <= stats.attackRange.GetValue())
+            if (distance <= stats.attackRange.GetValue() && combat.GetAttackCooldown() <= 0)
             {
                 combat.Attack(enemyStats);
                 wasAttacking = true;
                 motor.PauseFollowTarget();
             }
-            else if (!animator.IsInAttackAnimation() && focus != null)
+            else if (combat.GetAttackCooldown() <= 0)
             {
                 motor.ContinueFollowTarget();
             }
 
         }
         //setzt die destination des agent zurück sobald der Gegner tot ist.
-        if(wasAttacking && focus == null)
+        if (wasAttacking && focus == null)
         {
             motor.MoveToPoint(transform.position);
             wasAttacking = false;

@@ -104,6 +104,10 @@ public class CharacterCombat : NetworkBehaviour
             OnAttackCanceled();
     }
 
+    public float GetAttackCooldown()
+    {
+        return attackCooldown;
+    }
     #region Network
     /// <summary>
     /// Für eine (relativ) ausführliche Erklärung zu Command und ClientCallBack:

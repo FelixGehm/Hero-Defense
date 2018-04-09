@@ -65,6 +65,7 @@ public class CharacterAnimator : MonoBehaviour
         speedPercent = _speedPercent;
     }
 
+    /*
     public bool IsInAttackAnimation()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
@@ -72,4 +73,6 @@ public class CharacterAnimator : MonoBehaviour
 
         return false;
     }
+    */
+    
 }
