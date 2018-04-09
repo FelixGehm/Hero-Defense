@@ -1980,7 +1980,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   attackSpeed:
-    baseValue: 1
+    baseValue: 0.5
     modifiers: []
   attackRange:
     baseValue: 7
