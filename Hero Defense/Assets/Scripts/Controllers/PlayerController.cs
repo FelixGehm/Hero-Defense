@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Interactable focus;
-    private Vector3? destination;       //nullable Vector3
+    //private Vector3? destination;       //nullable Vector3
 
     public event System.Action OnFocusNull;
 
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     PlayerMotor motor;
     PlayerStats stats;
     CharacterCombat combat;
-
+    //CharacterAnimator animator;
     CharacterStats enemyStats;
 
     public bool isWaiting = false;
@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         stats = GetComponent<PlayerStats>();
         combat = GetComponent<CharacterCombat>();
+        //animator = GetComponent<CharacterAnimator>();
         cam = Camera.main;
     }
 
@@ -40,10 +41,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (focus == null && OnFocusNull != null)
-        {
+        //Debug.Log(isWaiting);
+        if (OnFocusNull != null)
             OnFocusNull();
-        }
+
+
+        //Das muss hier oben stehen, da sonst vorher returned werden könnte
+        KeepTrackOfTarget();
+
 
         //no controlls if pointer is over ui
         if (EventSystem.current.IsPointerOverGameObject())
@@ -59,14 +64,17 @@ public class PlayerController : MonoBehaviour
             {
                 if (hit.collider.tag == "Walkable")
                 {
-                    if (!isWaiting)
+                    if (!combat.isAttacking)
                     {
                         motor.MoveToPoint(hit.point);
                         RemoveFocus();
                     }
-                    else
+                    else //cancel Auto attack
                     {
-                        destination = hit.point;
+                        combat.CancelAttack();
+                        combat.isAttacking = false;
+                        motor.MoveToPoint(hit.point);
+                        RemoveFocus();
                     }
                 }
                 else
@@ -81,53 +89,33 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-
+    }
+    bool wasAttacking = false;
+    private void KeepTrackOfTarget()
+    {
         if (focus != null && focus.GetType() == typeof(Enemy))
         {
+            // Entfernung Player und Gegner
+            float distance = Vector3.Distance(focus.transform.position, transform.position);
 
-            if (!isWaiting)
+            if (distance <= stats.attackRange.GetValue() && combat.GetAttackCooldown() <= 0)
             {
-                // Entfernung Player und Gegner
-                float distance = Vector3.Distance(focus.transform.position, transform.position);
-
-                if (distance <= stats.attackRange.GetValue())
-                {
-                    //Debug.Log("Enemy in Range");
-                    isWaiting = true;
-
-                    motor.PauseFollowTarget();
-
-                    combat.Attack(enemyStats);
-
-
-                    if (focus != null)
-                    {
-                        StartCoroutine(ResumeFollow(1.0f / stats.attackSpeed.GetValue()));
-                    }
-                }
+                combat.Attack(enemyStats);
+                wasAttacking = true;
+                motor.PauseFollowTarget();
             }
+            else if (combat.GetAttackCooldown() <= 0)
+            {
+                motor.ContinueFollowTarget();
+            }
+
         }
-    }
-
-
-
-
-    System.Collections.IEnumerator ResumeFollow(float delay)
-    {
-        //Debug.Log("Coroutine: resumeFollow()");
-        yield return new WaitForSeconds(delay);
-
-        if (destination != null)
+        //setzt die destination des agent zurück sobald der Gegner tot ist.
+        if (wasAttacking && focus == null)
         {
-            RemoveFocus();
-            motor.MoveToPoint(destination);
-            destination = null;
+            motor.MoveToPoint(transform.position);
+            wasAttacking = false;
         }
-        else
-        {
-            motor.ContinueFollowTarget();
-        }
-        isWaiting = false;
     }
 
     void SetFocus(Interactable newFocus)
@@ -153,5 +141,6 @@ public class PlayerController : MonoBehaviour
 
         focus = null;
         motor.StopFollowingTarget();
+        wasAttacking = false;
     }
 }

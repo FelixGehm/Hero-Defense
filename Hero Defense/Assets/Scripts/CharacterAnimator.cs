@@ -10,7 +10,8 @@ public class CharacterAnimator : MonoBehaviour
     Animator animator;
 
     CharacterCombat characterCombat;
-    
+
+    PlayerMotor motor;
 
     PlayerController playerController;
 
@@ -23,14 +24,13 @@ public class CharacterAnimator : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-
+        motor = GetComponent<PlayerMotor>();
         characterCombat = GetComponent<CharacterCombat>();
-        characterCombat.OnAttack += StartAttackAnimation;
-        
-    
         playerController = GetComponent<PlayerController>();
-        playerController.OnFocusNull += StopAttackAnimation;
 
+        characterCombat.OnAttack += StartAttackAnimation;
+        motor.OnPlayerMoved += StopAttackAnimation;
+        //characterCombat.OnAttackCanceled += StopAttackAnimation;
     }
 
     void Update()
@@ -39,21 +39,20 @@ public class CharacterAnimator : MonoBehaviour
         if (isMovedByAgent)
         {
             speedPercent = agent.velocity.magnitude / agent.speed;
-        }        
+        }
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
 
     void StartAttackAnimation()
     {
-        animator.SetBool("attackBool", true);
+        animator.SetBool("cancelAttack", false);
         animator.SetTrigger("attack");
-        playerController.focus.OnDefocus += StopAttackAnimation;
     }
 
     void StopAttackAnimation()
     {
-        animator.SetBool("attackBool", false);
+        animator.SetBool("cancelAttack", true);
     }
 
     public float GetSpeedPercent()
@@ -65,4 +64,15 @@ public class CharacterAnimator : MonoBehaviour
     {
         speedPercent = _speedPercent;
     }
+
+    /*
+    public bool IsInAttackAnimation()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+            return true;
+
+        return false;
+    }
+    */
+    
 }

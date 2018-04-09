@@ -10,7 +10,12 @@ public class CharacterCombat : NetworkBehaviour
     private float attackSpeed;
     private float attackCooldown;
 
-    public event System.Action OnAttack;    //Todo: Event nach CharacterEventController verlegen vielleicht ????(wegen Übersichtlichkeit)
+    [HideInInspector]
+    public bool isAttacking; //Immer true von start der Animation bis zur eigentlichen attack (also nach dem delay), nicht über die gesamte animation!
+    private Coroutine attack;
+
+    public event System.Action OnAttack;    //Todo: Event nach CharacterEventController verlegen vielleicht ????(wegen Übersichtlichkeit)  //ich finde das sollte hier bleiben, weil nur combatbezogen (Felix)
+    public event System.Action OnAttackCanceled;
 
     CharacterStats myStats;
 
@@ -23,7 +28,7 @@ public class CharacterCombat : NetworkBehaviour
     {
         myStats = GetComponent<CharacterStats>();
 
-        attackDelay = 1.0f/ myStats.attackSpeed.GetValue();
+        //attackDelay = 1.0f/ myStats.attackSpeed.GetValue();
 
     }
 
@@ -40,11 +45,13 @@ public class CharacterCombat : NetworkBehaviour
 
             if (!isRanged)
             {
-                StartCoroutine(DoMeleeDamage(targetStats, attackDelay));
+                isAttacking = true;
+                attack = StartCoroutine(DoMeleeDamage(targetStats, attackDelay));
             }
             else
             {
-                StartCoroutine(ShootProjectile(targetStats.transform, attackDelay));
+                isAttacking = true;
+                attack = StartCoroutine(ShootProjectile(targetStats.transform, attackDelay));
             }
 
             if (OnAttack != null)
@@ -57,13 +64,14 @@ public class CharacterCombat : NetworkBehaviour
     IEnumerator DoMeleeDamage(CharacterStats stats, float delay)        //TODO
     {
         yield return new WaitForSeconds(delay);
+        isAttacking = false;
         stats.TakePhysicalDamage(myStats.physicalDamage.GetValue());
     }
 
     IEnumerator ShootProjectile(Transform target, float delay)
     {
         yield return new WaitForSeconds(delay);
-
+        isAttacking = false;
         if (isServer)   // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
         {
             GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -76,9 +84,9 @@ public class CharacterCombat : NetworkBehaviour
             }
 
 
-//            Debug.Log("ShootProjectile before spawning projectile on server");
+            //            Debug.Log("ShootProjectile before spawning projectile on server");
             NetworkServer.Spawn(projectileGO);
-         //   Debug.Log("ShootProjectile after spawning projectile on server");
+            //   Debug.Log("ShootProjectile after spawning projectile on server");
         }
         else
         {
@@ -87,6 +95,19 @@ public class CharacterCombat : NetworkBehaviour
 
     }
 
+    public void CancelAttack()
+    {
+        if (attack != null)
+            StopCoroutine(attack);
+
+        if (OnAttackCanceled != null)
+            OnAttackCanceled();
+    }
+
+    public float GetAttackCooldown()
+    {
+        return attackCooldown;
+    }
     #region Network
     /// <summary>
     /// Für eine (relativ) ausführliche Erklärung zu Command und ClientCallBack:
