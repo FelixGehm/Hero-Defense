@@ -145,7 +145,7 @@ MonoBehaviour:
     name: Root Rotation
     isRoot: 1
     index: 0
-    drawerHeight: 0
+    drawerHeight: 240
     nst: {fileID: 0}
     nstElementsEngine: {fileID: 0}
     elementType: 1
