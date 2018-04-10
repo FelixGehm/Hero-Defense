@@ -1,13 +1,11 @@
 ﻿using UnityEngine.EventSystems;
 using UnityEngine;
-
-
+using System.Collections;
 
 [RequireComponent(typeof(PlayerMotor))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : CrowdControllable
 {
     public Interactable focus;
-    //private Vector3? destination;       //nullable Vector3
 
     public event System.Action OnFocusNull;
 
@@ -17,7 +15,6 @@ public class PlayerController : MonoBehaviour
     PlayerMotor motor;
     PlayerStats stats;
     CharacterCombat combat;
-    //CharacterAnimator animator;
     CharacterStats enemyStats;
 
     public bool isWaiting = false;
@@ -28,7 +25,6 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         stats = GetComponent<PlayerStats>();
         combat = GetComponent<CharacterCombat>();
-        //animator = GetComponent<CharacterAnimator>();
         cam = Camera.main;
     }
 
@@ -41,7 +37,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(isWaiting);
         if (OnFocusNull != null)
             OnFocusNull();
 
@@ -90,6 +85,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
     bool wasAttacking = false;
     private void KeepTrackOfTarget()
     {
@@ -143,4 +139,54 @@ public class PlayerController : MonoBehaviour
         motor.StopFollowingTarget();
         wasAttacking = false;
     }
+
+    #region CrowdControllable
+    public override IEnumerator GetTaunted(Transform tauntTarget, float duration)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override IEnumerator GetStunned(float duration)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override IEnumerator GetSilenced(float duration)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override IEnumerator GetBlinded(float duration)
+    {
+        combat.isBlinded = true;
+        yield return new WaitForSeconds(duration);
+        combat.isBlinded = false;
+    }
+
+    public override IEnumerator GetCrippled(float duration, float percent)
+    {
+        float oldSpeed = motor.GetAgentSpeed();
+
+        motor.SetAgentSpeed(percent * oldSpeed);
+
+        yield return new WaitForSeconds(duration);
+
+        motor.SetAgentSpeed(oldSpeed);
+    }
+
+    public override IEnumerator GetBleedingWound(int ticks, float percentPerTick)
+    {
+        yield return new WaitForSeconds(1.0f);
+        
+        float damageDealed = stats.CurrentHealth * percentPerTick;
+        stats.TakeTrueDamage(damageDealed);
+
+        ticks -= 1;
+        if (ticks > 0)
+        {
+            StartCoroutine(GetBleedingWound(ticks, percentPerTick));
+        }
+    }
+
+    #endregion
 }

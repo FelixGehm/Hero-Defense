@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 //using UnityEngine.Networking;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : CrowdControllable
 {
 
     public float lookRadius = 10;
@@ -21,57 +21,72 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent agent;
     CharacterCombat combat;
 
-    // Use this for initialization
     void Start()
     {
+        base.Start();
+
         destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
     }
-    
+
 
     void Update()
     {
-        if (target == null && !isTaunted)
+        if (myStatuses.Contains(Status.bleeding))
         {
-            target = FindClosestPlayer().transform;
+
+        }
+
+        if (myStatuses.Contains(Status.stunned))
+        {
+            // Tue nichts, solange bis der Stun vorbei ist.
         }
         else
         {
-            distanceToTarget = Vector3.Distance(target.position, transform.position);
-        }
-
-        distanceToDestination = Vector3.Distance(destination.position, transform.position);
-
-        //vielleicht lieber über eine coroutine. könnte mit mehreren gegnern etwas viel perfomance schlucken?
-        //hier vielleicht ab einer bestimmenten distanz zum nexus den Spieler ignorieren?
-        if (distanceToTarget <= lookRadius || isTaunted)
-        {
-            //Moving to Player and attack
-            agent.SetDestination(target.position);
-
-            if (distanceToTarget <= agent.stoppingDistance)
+            if (target == null && !myStatuses.Contains(Status.taunted))
             {
-                CharacterStats targetStats = target.GetComponent<CharacterStats>();
-                
-                if (targetStats != null)
+                target = FindClosestPlayer().transform;
+            }
+            else
+            {
+                distanceToTarget = Vector3.Distance(target.position, transform.position);
+            }
+
+            distanceToDestination = Vector3.Distance(destination.position, transform.position);
+
+            //vielleicht lieber über eine coroutine. könnte mit mehreren gegnern etwas viel perfomance schlucken?
+            //hier vielleicht ab einer bestimmenten distanz zum nexus den Spieler ignorieren?
+            if (distanceToTarget <= lookRadius || myStatuses.Contains(Status.taunted))
+            {
+                //Moving to Player and attack
+                agent.SetDestination(target.position);
+
+                if (distanceToTarget <= agent.stoppingDistance)
                 {
-                    combat.Attack(targetStats);
+                    CharacterStats targetStats = target.GetComponent<CharacterStats>();
+
+                    if (targetStats != null)
+                    {
+                        combat.Attack(targetStats);
+                    }
+
+                    FaceTarget(target);
                 }
 
-                FaceTarget(target);
             }
-
-        }
-        else
-        {
-            //Moving to Nexus
-            agent.SetDestination(destination.position);
-            if (distanceToDestination <= agent.stoppingDistance)
+            else
             {
-                FaceTarget(destination);
+                //Moving to Nexus
+                agent.SetDestination(destination.position);
+                if (distanceToDestination <= agent.stoppingDistance)
+                {
+                    FaceTarget(destination);
+                }
             }
         }
+
+
     }
 
     void FaceTarget(Transform _target)
@@ -81,28 +96,7 @@ public class EnemyController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5);
     }
 
-    #region Taunt
 
-    public bool isTaunted = false;
-
-    public void GetTaunted(Transform tauntTarget, float duration)
-    {
-        Debug.Log("enemy got taunted from " + tauntTarget.name);
-
-        isTaunted = true;
-
-        target = tauntTarget;
-
-        StartCoroutine(EndTauntAfter(duration));
-    }
-
-    IEnumerator EndTauntAfter(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        isTaunted = false;
-
-    }
-    #endregion 
 
 
     // Returns the clostest Player to the Enemy
@@ -128,11 +122,82 @@ public class EnemyController : MonoBehaviour
         return closestPlayer;
     }
 
-
     // Draw LookRadius in Editor
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
     }
+
+    #region CrowdControlable
+
+    public override IEnumerator GetTaunted(Transform tauntTarget, float duration)
+    {
+
+        while (myStatuses.Contains(Status.taunted))    // Da man nur von einem Ziel gleichzeitig getaunted sein kann, werden zunächst alle bestehenden Taunts entfernt!
+        {
+            myStatuses.Remove(Status.taunted);
+        }
+
+        myStatuses.Add(Status.taunted);
+
+        target = tauntTarget;
+
+        yield return new WaitForSeconds(duration);
+        myStatuses.Remove(Status.taunted);
+    }
+
+    public override IEnumerator GetStunned(float duration)
+    {
+        myStatuses.Add(Status.stunned);
+        agent.SetDestination(transform.position);       // agent-Destination auf aktuelle Position setzen
+
+        yield return new WaitForSeconds(duration);
+
+        myStatuses.Remove(Status.stunned);
+    }
+
+    public override IEnumerator GetSilenced(float duration)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override IEnumerator GetBlinded(float duration)
+    {
+        combat.isBlinded = true;
+        yield return new WaitForSeconds(duration);
+        combat.isBlinded = false;
+    }
+
+    public override IEnumerator GetCrippled(float duration, float percent)
+    {
+        float oldSpeed = agent.speed;
+
+        agent.speed = percent * oldSpeed;
+
+        yield return new WaitForSeconds(duration);
+
+        agent.speed = oldSpeed;
+    }
+
+    public override IEnumerator GetBleedingWound(int ticks, float percentPerTick)
+    {
+        //myStatuses.Add(Status.bleeding);    // Für Variante mit Ticks in jedem Frame
+        yield return new WaitForSeconds(1.0f);
+
+        CharacterStats myStats = combat.GetCharacterStats();
+
+        float damageDealed = myStats.CurrentHealth * percentPerTick;
+        myStats.TakeTrueDamage(damageDealed);        
+        
+        ticks -= 1;
+        if( ticks > 0)
+        {
+            StartCoroutine(GetBleedingWound(ticks, percentPerTick));
+        }      
+
+        //myStatuses.Remove(Status.bleeding);
+    }
+
+    #endregion
 }

@@ -22,8 +22,6 @@ public class PlayerMotor : MonoBehaviour
 
     void Update()
     {
-
-
         if (target != null)
         {
             if (!faceOnly)
@@ -34,20 +32,22 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    public void SetAgentSpeed(float newSpeed)
+    {
+        agent.speed = newSpeed;
+    }
+
+    public float GetAgentSpeed()
+    {
+        return agent.speed;
+    }
+
     public void MoveToPoint(Vector3 point)
     {
         agent.SetDestination(point);
         if (OnPlayerMoved != null)
             OnPlayerMoved();
     }
-    /*
-    public void MoveToPoint(Vector3? point)
-    {
-        agent.SetDestination((Vector3)point);
-        if (OnPlayerMoved != null)
-            OnPlayerMoved();
-    }
-    */
 
     public void FollowTarget(Interactable newTarget)
     {

@@ -19,6 +19,9 @@ public class CharacterCombat : NetworkBehaviour
 
     CharacterStats myStats;
 
+    [HideInInspector]
+    public bool isBlinded = false;
+
     [Header("Set only for Ranged Characters")]
     public bool isRanged = false;
     public GameObject projectilePrefab;
@@ -35,6 +38,15 @@ public class CharacterCombat : NetworkBehaviour
     void Update()
     {
         attackCooldown -= Time.deltaTime;
+    }
+
+    /// <summary>
+    /// Wird genutzt von dem EnemyController um an die Stats ranzukommen und weitere abhängigkeiten zu vermeiden.
+    /// </summary>
+    /// <returns></returns>
+    public CharacterStats GetCharacterStats()
+    {
+        return myStats;
     }
 
     public void Attack(CharacterStats targetStats)
@@ -79,7 +91,14 @@ public class CharacterCombat : NetworkBehaviour
 
             if (projectile != null)
             {
-                projectile.SetDamage(myStats.physicalDamage.GetValue());
+                if(isBlinded)
+                {
+                    projectile.SetDamage(0);
+                } else
+                {
+                    projectile.SetDamage(myStats.physicalDamage.GetValue());
+                }
+                
                 projectile.SetTarget(target);
             }
 
@@ -122,7 +141,14 @@ public class CharacterCombat : NetworkBehaviour
 
         if (projectile != null)
         {
-            projectile.SetDamage(myStats.physicalDamage.GetValue());
+            if (isBlinded)
+            {
+                projectile.SetDamage(0);
+            }
+            else
+            {
+                projectile.SetDamage(myStats.physicalDamage.GetValue());
+            }
             projectile.SetTarget(targetId);
         }
 

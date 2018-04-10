@@ -40,7 +40,7 @@ public class AbilityTaunt : MonoBehaviour
         {
             EnemyController ec = enemy.GetComponent<EnemyController>();
 
-            ec.GetTaunted(this.transform, duration);
+            StartCoroutine(ec.GetTaunted(this.transform, duration));
         }
     }
     

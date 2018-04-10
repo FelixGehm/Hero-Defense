@@ -36,6 +36,7 @@ public class CharacterStats : NetworkBehaviour
     /// </summary>
     [SyncVar(hook = "OnChangeHealth")]
     private float syncedCurrentHealth;
+
     public virtual float CurrentHealth
     {
         get
@@ -45,7 +46,7 @@ public class CharacterStats : NetworkBehaviour
         set
         {
             //Debug.Log("Health Changed to " + value);
-            if(value > maxHealth.GetValue())
+            if (value > maxHealth.GetValue())
             {
                 value = maxHealth.GetValue();
             }
@@ -96,6 +97,24 @@ public class CharacterStats : NetworkBehaviour
 
     // TODO: Stats im Netzwerk synchronisieren
 
+    #region TrueDamage
+    public void TakeTrueDamage(float tDamage)
+    {
+        //Debug.Log("TakePhyDam");
+
+        if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
+        {
+            return;
+        }        
+        
+        float damage = tDamage;
+        damage = Mathf.Max(damage, 0);      // Check if damage is < 0, if yes -> set to 0
+
+        CurrentHealth -= damage;
+    }
+
+    #endregion
+
     #region Physical
     public void TakePhysicalDamage(float pDamage)
     {
@@ -106,15 +125,7 @@ public class CharacterStats : NetworkBehaviour
             return;
         }
 
-        //if (!isControlledByServer)
-        {
-            CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
-
-            //Debug.Log(transform.name + " takes " + pDamage + " pDamage");
-
-            if (CurrentHealth <= 0)
-                Die();
-        }
+        CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
     }
 
     private float CalcTakenPhysicalDamage(float incomingDamage)
@@ -134,17 +145,9 @@ public class CharacterStats : NetworkBehaviour
             return;
         }
 
-        //if (!isControlledByServer)
-        {
-            CurrentHealth -= CalcTakenPhysicalDamage(mDamage);
-
-            Debug.Log(transform.name + " takes " + mDamage + " mDamage");
-
-            if (CurrentHealth <= 0)
-                Die();
-        }
+        CurrentHealth -= CalcTakenPhysicalDamage(mDamage);
     }
-    
+
     public float CalcTakenMagicalDamage(float incomingDamage)
     {
         float damage = incomingDamage;
@@ -160,32 +163,6 @@ public class CharacterStats : NetworkBehaviour
         Debug.Log(transform.name + " died.");
 
     }
-
-    #region Network
-    /// <summary>
-    /// Für eine (relativ) ausführliche Erklärung zu Command und ClientCallBack:
-    ///     siehe CharacterEventManager
-    /// </summary>
-
-    /*
-    [Command]
-    void CmdProvideHealthToServer(float health)
-    {
-        Debug.Log("CmdProvideHealthToServer:");
-        syncedCurrentHealth = health;
-    }
-
-    [ClientCallback]
-    void TransmitAttack()
-    {
-        //Debug.Log(transform.name + " TransmitAttack(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
-        {
-            CmdProvideHealthToServer(syncedCurrentHealth);
-        }
-    }
-    */
-    #endregion
-
 
     #region Editor
     /// <summary>
