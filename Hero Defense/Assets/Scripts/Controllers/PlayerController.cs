@@ -67,7 +67,7 @@ public class PlayerController : CrowdControllable
                     else //cancel Auto attack
                     {
                         combat.CancelAttack();
-                        combat.isAttacking = false;
+                        //combat.isAttacking = false;
                         motor.MoveToPoint(hit.point);
                         RemoveFocus();
                     }
@@ -76,6 +76,8 @@ public class PlayerController : CrowdControllable
                 {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
                     if (interactable != null) SetFocus(interactable);
+
+                    if (combat.isAttacking) combat.CancelAttack();
                 }
 
                 if (focus != null && focus.GetType() == typeof(Enemy))
@@ -100,11 +102,14 @@ public class PlayerController : CrowdControllable
                 wasAttacking = true;
                 motor.PauseFollowTarget();
             }
+            else if (combat.GetAttackCooldown() > 0)
+            {
+                motor.PauseFollowTarget();
+            }
             else if (combat.GetAttackCooldown() <= 0)
             {
                 motor.ContinueFollowTarget();
             }
-
         }
         //setzt die destination des agent zurück sobald der Gegner tot ist.
         if (wasAttacking && focus == null)
@@ -177,7 +182,7 @@ public class PlayerController : CrowdControllable
     public override IEnumerator GetBleedingWound(int ticks, float percentPerTick)
     {
         yield return new WaitForSeconds(1.0f);
-        
+
         float damageDealed = stats.CurrentHealth * percentPerTick;
         stats.TakeTrueDamage(damageDealed);
 

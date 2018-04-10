@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class CharacterAnimator : MonoBehaviour
@@ -47,7 +48,16 @@ public class CharacterAnimator : MonoBehaviour
     void StartAttackAnimation()
     {
         animator.SetBool("cancelAttack", false);
-        animator.SetTrigger("attack");
+        
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+        {
+            animator.Play("Shoot", -1, 0f);                              //Wenn die Animation bereits läuft und der Trigger gesetzt wird, wird sie nicht restarted. Deshalb hier manuell
+        }                                                                
+        else
+        {
+            animator.SetTrigger("attack");
+        }
+
     }
 
     void StopAttackAnimation()
@@ -74,5 +84,5 @@ public class CharacterAnimator : MonoBehaviour
         return false;
     }
     */
-    
+
 }

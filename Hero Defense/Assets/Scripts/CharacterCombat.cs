@@ -121,6 +121,9 @@ public class CharacterCombat : NetworkBehaviour
 
         if (OnAttackCanceled != null)
             OnAttackCanceled();
+
+        isAttacking = false;
+        attackCooldown = 0;
     }
 
     public float GetAttackCooldown()
