@@ -6,6 +6,7 @@ using System.Collections;
 public class PlayerController : CrowdControllable
 {
     public Interactable focus;
+    private Interactable oldFocus;
 
     public event System.Action OnFocusNull;
 
@@ -77,7 +78,9 @@ public class PlayerController : CrowdControllable
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
                     if (interactable != null) SetFocus(interactable);
 
-                    if (combat.isAttacking) combat.CancelAttack();
+                    if (combat.isAttacking && focus != oldFocus) combat.CancelAttack();
+
+                    oldFocus = focus;
                 }
 
                 if (focus != null && focus.GetType() == typeof(Enemy))
@@ -102,7 +105,7 @@ public class PlayerController : CrowdControllable
                 wasAttacking = true;
                 motor.PauseFollowTarget();
             }
-            else if (combat.GetAttackCooldown() > 0)
+            else if (distance <= stats.attackRange.GetValue() && combat.GetAttackCooldown() > 0)
             {
                 motor.PauseFollowTarget();
             }

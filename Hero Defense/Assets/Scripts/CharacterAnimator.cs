@@ -14,7 +14,7 @@ public class CharacterAnimator : MonoBehaviour
 
     PlayerMotor motor;
 
-    PlayerController playerController;
+    //PlayerController playerController;        //Wird garnicht genutzt?
 
     float speedPercent;
 
@@ -27,11 +27,11 @@ public class CharacterAnimator : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         motor = GetComponent<PlayerMotor>();
         characterCombat = GetComponent<CharacterCombat>();
-        playerController = GetComponent<PlayerController>();
+        //playerController = GetComponent<PlayerController>();
 
         characterCombat.OnAttack += StartAttackAnimation;
         motor.OnPlayerMoved += StopAttackAnimation;
-        //characterCombat.OnAttackCanceled += StopAttackAnimation;
+        characterCombat.OnAttackCanceled += StopAttackAnimation;
     }
 
     void Update()
@@ -48,15 +48,17 @@ public class CharacterAnimator : MonoBehaviour
     void StartAttackAnimation()
     {
         animator.SetBool("cancelAttack", false);
-        
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
         {
-            animator.Play("Shoot", -1, 0f);                              //Wenn die Animation bereits läuft und der Trigger gesetzt wird, wird sie nicht restarted. Deshalb hier manuell
-        }                                                                
+            animator.Play("Shoot", -1, 0f); //Animation wird direkt abgespielt. Würde sie geblended werden, sähe das merkwürdig aus. Warum? Verstehe ich auch nicht...
+        }
         else
         {
-            animator.SetTrigger("attack");
+            animator.SetTrigger("attack");  //Animation wird Geblendet
         }
+
+        //animator.SetTrigger("attack");
 
     }
 
