@@ -33,7 +33,7 @@ public class CharacterEventManager : NetworkBehaviour
         }
         set
         {
-            if(value == true)
+            if(OnCastCancel != null && value == true)
             {
                 OnCastCancel();
             }

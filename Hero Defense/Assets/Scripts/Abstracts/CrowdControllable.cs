@@ -54,7 +54,7 @@ public abstract class CrowdControllable : MonoBehaviour
     /// 
     /// </summary>
     /// <param name="duration"></param>
-    /// <param name="livePerTick"></param>
+    /// <param name="percentPerTick"></param>
     /// <returns></returns>
-    abstract public IEnumerator GetBleedingWound(int duration, float livePerTick);
+    abstract public IEnumerator GetBleedingWound(int duration, float percentPerTick);
 }

@@ -12,7 +12,7 @@ public class EnemyController : CrowdControllable
 
     Transform destination;  //der nexus
 
-    Transform target;       //der nächstgelegene spieler
+    public Transform target;       //der nächstgelegene spieler     // nach tests wieder protected machen!!!
 
 
     float distanceToTarget;
@@ -21,7 +21,7 @@ public class EnemyController : CrowdControllable
     NavMeshAgent agent;
     CharacterCombat combat;
 
-    void Start()
+    public override void Start()
     {
         base.Start();
 
@@ -33,11 +33,6 @@ public class EnemyController : CrowdControllable
 
     void Update()
     {
-        if (myStatuses.Contains(Status.bleeding))
-        {
-
-        }
-
         if (myStatuses.Contains(Status.stunned))
         {
             // Tue nichts, solange bis der Stun vorbei ist.
@@ -185,18 +180,18 @@ public class EnemyController : CrowdControllable
     public override IEnumerator GetBleedingWound(int ticks, float percentPerTick)
     {
         //myStatuses.Add(Status.bleeding);    // Für Variante mit Ticks in jedem Frame
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.3f);
 
         CharacterStats myStats = combat.GetCharacterStats();
 
         float damageDealed = myStats.CurrentHealth * percentPerTick;
-        myStats.TakeTrueDamage(damageDealed);        
-        
+        myStats.TakeTrueDamage(damageDealed);
+
         ticks -= 1;
-        if( ticks > 0)
+        if (ticks > 0)
         {
             StartCoroutine(GetBleedingWound(ticks, percentPerTick));
-        }      
+        }
 
         //myStatuses.Remove(Status.bleeding);
     }

@@ -19,11 +19,8 @@ public class PlayerController : CrowdControllable
     CharacterStats enemyStats;
     CharacterEventManager playerEventManager;
 
-
-    public bool isWaiting = false;
-
     // Use this for initialization
-    void Start()
+    public override void Start()
     {
         base.Start();
 
@@ -32,7 +29,7 @@ public class PlayerController : CrowdControllable
         combat = GetComponent<CharacterCombat>();
         cam = Camera.main;
 
-        playerEventManager = GetComponent<CharacterEventManager>();  
+        playerEventManager = GetComponent<CharacterEventManager>();
     }
 
     public void SetupCam()
@@ -44,7 +41,7 @@ public class PlayerController : CrowdControllable
     // Update is called once per frame
     void Update()
     {
-        
+
 
         if (OnFocusNull != null)
             OnFocusNull();
@@ -61,7 +58,11 @@ public class PlayerController : CrowdControllable
         //no controlls if pointer is over ui
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-
+        /*
+        //no controlls if player is taunted
+        if (myStatuses.Contains(Status.taunted))
+            return;
+        */
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -108,7 +109,7 @@ public class PlayerController : CrowdControllable
     {
         //Debug.Log("KeepTrackOfTarget()");
         if (focus != null && focus.GetType() == typeof(Enemy))
-        {            
+        {
             float distance = Vector3.Distance(focus.transform.position, transform.position);    // Entfernung Player und Gegner
 
             if (distance <= stats.attackRange.GetValue() && combat.GetAttackCooldown() <= 0)
@@ -163,21 +164,31 @@ public class PlayerController : CrowdControllable
     #region CrowdControllable
     public override IEnumerator GetTaunted(Transform tauntTarget, float duration)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("NOT WORKING RIGHT NOW");
+
+        focus = tauntTarget.GetComponent<Interactable>();
+
+        myStatuses.Add(Status.taunted);
+        yield return new WaitForSeconds(duration);
+        //throw new System.NotImplementedException();
+
+        myStatuses.Remove(Status.taunted);
     }
 
     public override IEnumerator GetStunned(float duration)
     {
-        // ??
-        // ??
-        // ??
+        if (combat.isAttacking)
+            combat.CancelAttack();
+
+        //cancel all abilities
+        RemoveFocus();     //ja oder nein?
+
         myStatuses.Add(Status.stunned);
 
-        motor.StopFollowingTarget();
         motor.MoveToPoint(transform.position);
 
         yield return new WaitForSeconds(duration);
-        myStatuses.Remove(Status.stunned);        
+        myStatuses.Remove(Status.stunned);
     }
 
     public override IEnumerator GetSilenced(float duration)

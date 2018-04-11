@@ -51,8 +51,10 @@ public class AbilityDashStun : MonoBehaviour
             //Dash();
             //Stun();
 
+            
             PlayerController pc = GetComponent<PlayerController>();
-            StartCoroutine(pc.GetStunned(stunDuration));
+            //StartCoroutine(pc.GetStunned(stunDuration));
+            StartCoroutine(pc.GetSilenced(stunDuration));
         }
     }
 
@@ -66,7 +68,7 @@ public class AbilityDashStun : MonoBehaviour
         StartCoroutine(ResetSpeedAfterTime(agent.speed, dashTime));
         agent.speed = dashSpeed;
 
-        pc.isWaiting = true;        
+        //pc.isWaiting = true;        
     }
 
 
@@ -75,7 +77,7 @@ public class AbilityDashStun : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         agent.speed = oldSpeed;
-        pc.isWaiting = false;
+        //pc.isWaiting = false;
     }
 
     private void Stun()
@@ -84,11 +86,11 @@ public class AbilityDashStun : MonoBehaviour
         List<GameObject> closeEnemys = FindEnemysInRange(stunRange);
         foreach (GameObject enemy in closeEnemys)
         {
-            EnemyController ec = enemy.GetComponent<EnemyController>();
+            CrowdControllable cc = enemy.GetComponent<CrowdControllable>();
 
-            //StartCoroutine(ec.GetStunned(stunDuration));
+            StartCoroutine(cc.GetStunned(stunDuration));
 
-            //StartCoroutine(ec.GetBleedingWound(3, 0.05f));
+            StartCoroutine(cc.GetBleedingWound(10, 0.05f));
 
             
         }
