@@ -140,9 +140,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4631042060067436}
   - component: {fileID: 114199770825507326}
-  - component: {fileID: 114407499841936828}
-  - component: {fileID: 114834012654970428}
-  - component: {fileID: 114546617227769426}
+  - component: {fileID: 114203585584148308}
+  - component: {fileID: 114996979881506710}
+  - component: {fileID: 114967110113210864}
   - component: {fileID: 195492980322751752}
   - component: {fileID: 136062751201614316}
   - component: {fileID: 54582689625285952}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 114956156520426332}
   - component: {fileID: 114441419098395818}
   - component: {fileID: 114547999922988478}
-  - component: {fileID: 114870695363659910}
+  - component: {fileID: 114803630525136480}
   - component: {fileID: 114259321967336452}
   - component: {fileID: 114695483465087732}
   - component: {fileID: 114453215123688528}
@@ -1713,6 +1713,22 @@ MonoBehaviour:
     i15: 76
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114203585584148308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6587c27fd07824eb346469eb351e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nst: {fileID: 114967110113210864}
+  na: {fileID: 0}
+  rootRotId: 0
+  elementCount: 0
+  frameCount: 0
 --- !u!114 &114259321967336452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1768,17 +1784,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114407499841936828
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114441419098395818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1810,6 +1815,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDelay: 0.2
+  isAttacking: 0
+  isBlinded: 0
   isRanged: 1
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
     type: 2}
@@ -1837,89 +1844,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foreGround: {fileID: 114199499742551658}
---- !u!114 &114546617227769426
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbdf5a6b1cc27d74cab63a5666d2960a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  na: {fileID: 114407499841936828}
-  _state: 3
-  sendEveryXTick: 1
-  desiredBufferMS: 0.1
-  bufferDriftCorrectAmt: 0.1
-  autoKinematic: 1
-  allowOfftick: 1
-  sendOnEvent: 30
-  includedAxes: 7
-  keyEvery: 5
-  extrapolation: 0.5
-  extrapolationDivisor: 0
-  maxExtrapolates: 2
-  teleportThreshold: 1
-  cullUpperBits: 0
-  sequentialKeys: 5
-  rootRotationElement:
-    name: Root Rotation
-    isRoot: 1
-    index: 0
-    drawerHeight: 240
-    nst: {fileID: 0}
-    nstElementsEngine: {fileID: 0}
-    elementType: 1
-    sendCullMask: 30
-    keyRate: 5
-    gameobject: {fileID: 0}
-    extrapolation: 0.5
-    maxExtrapolates: 2
-    teleportOverride: 1
-    rewindGO: {fileID: 0}
-    lastSentKeyTime: 0
-    rotationType: 0
-    includedAxes: 7
-    totalBitsForQuat: 40
-    axes:
-    - res: 0.1
-      limitRange: 1
-      min: -85
-      max: 85
-      bits: 0
-      range: 0
-      mult: 0
-      unmult: 0
-      wrap: 0
-    - res: 0.2
-      limitRange: 1
-      min: -180
-      max: 180
-      bits: 0
-      range: 0
-      mult: 0
-      unmult: 0
-      wrap: 0
-    - res: 0.3
-      limitRange: 1
-      min: -180
-      max: 180
-      bits: 0
-      range: 0
-      mult: 0
-      unmult: 0
-      wrap: 0
-    useLocal: 0
-  debugXform: 0
-  debugXformGO: {fileID: 0}
-  rb: {fileID: 0}
-  nstElementsEngine: {fileID: 114834012654970428}
-  nstSettings: {fileID: 0}
-  frameUpdateInterval: 0
-  invFrameUpdateInterval: 0
-  lastSentPos: {x: 0, y: 0, z: 0}
 --- !u!114 &114547999922988478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1945,6 +1869,8 @@ MonoBehaviour:
   abilityCooldown: 2
   dashDistance: 6
   dashTime: 0.5
+  stunRange: 10
+  stunDuration: 5
 --- !u!114 &114702853326103970
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1988,21 +1914,7 @@ MonoBehaviour:
   moveSpeed:
     baseValue: 0
     modifiers: []
---- !u!114 &114834012654970428
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6587c27fd07824eb346469eb351e86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nst: {fileID: 114546617227769426}
-  na: {fileID: 0}
-  rootRotId: 0
---- !u!114 &114870695363659910
+--- !u!114 &114803630525136480
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2053,6 +1965,101 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMovedByAgent: 1
+--- !u!114 &114967110113210864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbdf5a6b1cc27d74cab63a5666d2960a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  na: {fileID: 114996979881506710}
+  _state: 2
+  ignoreStateUntil: 2
+  sendEveryXTick: 1
+  desiredBufferMS: 0.1
+  bufferDriftCorrectAmt: 0.1
+  autoKinematic: 1
+  allowOfftick: 1
+  sendOnEvent: 30
+  includedAxes: 7
+  keyEvery: 5
+  extrapolation: 0.5
+  extrapolationDivisor: 0
+  maxExtrapolates: 2
+  teleportThreshold: 2
+  bitCullingLevel: 0
+  sequentialKeys: 5
+  rootRotationElement:
+    name: Root Rotation
+    isRoot: 1
+    index: 0
+    drawerHeight: 240
+    nst: {fileID: 0}
+    na: {fileID: 0}
+    elementType: 1
+    sendCullMask: 30
+    keyRate: 5
+    gameobject: {fileID: 0}
+    extrapolation: 0.5
+    maxExtrapolates: 2
+    teleportOverride: 1
+    rewindGO: {fileID: 0}
+    lastSentKeyTime: 0
+    snapshotFrameId: 0
+    targetFrameId: 0
+    rotationType: 0
+    includedAxes: 7
+    totalBitsForQuat: 40
+    axes:
+    - res: 0.1
+      limitRange: 1
+      min: -85
+      max: 85
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    - res: 0.2
+      limitRange: 1
+      min: -180
+      max: 180
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    - res: 0.3
+      limitRange: 1
+      min: -180
+      max: 180
+      bits: 0
+      range: 0
+      mult: 0
+      unmult: 0
+      wrap: 0
+    useLocal: 0
+  debugXform: 0
+  rb: {fileID: 0}
+  nstElementsEngine: {fileID: 114203585584148308}
+  frameUpdateInterval: 0
+  invFrameUpdateInterval: 0
+  lastSentPos: {x: 0, y: 0, z: 0}
+--- !u!114 &114996979881506710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d501a2550997b7d46ad6f4a1272f3861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136062751201614316
 CapsuleCollider:
   m_ObjectHideFlags: 1

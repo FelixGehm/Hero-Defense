@@ -159,7 +159,9 @@ public class EnemyController : CrowdControllable
 
     public override IEnumerator GetSilenced(float duration)
     {
+        Debug.Log("Keine Implementierung. Wird erst bei Bossen wichtig!");
         throw new System.NotImplementedException();
+
     }
 
     public override IEnumerator GetBlinded(float duration)

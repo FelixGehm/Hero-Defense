@@ -86,7 +86,7 @@ public class CharacterCombat : NetworkBehaviour
         isAttacking = false;
         if (isServer)   // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
         {
-            GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            GameObject projectileGO = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
 
             if (projectile != null)

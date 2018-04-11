@@ -48,8 +48,11 @@ public class AbilityDashStun : MonoBehaviour
         {
             currentCooldown = abilityCooldown;
 
-            Dash();
-            Stun();
+            //Dash();
+            //Stun();
+
+            PlayerController pc = GetComponent<PlayerController>();
+            StartCoroutine(pc.GetStunned(stunDuration));
         }
     }
 
@@ -83,9 +86,11 @@ public class AbilityDashStun : MonoBehaviour
         {
             EnemyController ec = enemy.GetComponent<EnemyController>();
 
-            StartCoroutine(ec.GetStunned(stunDuration));
+            //StartCoroutine(ec.GetStunned(stunDuration));
 
-            StartCoroutine(ec.GetBleedingWound(3, 0.05f));
+            //StartCoroutine(ec.GetBleedingWound(3, 0.05f));
+
+            
         }
     }
 

@@ -17,16 +17,22 @@ public class PlayerController : CrowdControllable
     PlayerStats stats;
     CharacterCombat combat;
     CharacterStats enemyStats;
+    CharacterEventManager playerEventManager;
+
 
     public bool isWaiting = false;
 
     // Use this for initialization
     void Start()
     {
+        base.Start();
+
         motor = GetComponent<PlayerMotor>();
         stats = GetComponent<PlayerStats>();
         combat = GetComponent<CharacterCombat>();
         cam = Camera.main;
+
+        playerEventManager = GetComponent<CharacterEventManager>();  
     }
 
     public void SetupCam()
@@ -38,9 +44,15 @@ public class PlayerController : CrowdControllable
     // Update is called once per frame
     void Update()
     {
+        
+
         if (OnFocusNull != null)
             OnFocusNull();
 
+        if (myStatuses.Contains(Status.stunned))
+        {
+            return;
+        }
 
         //Das muss hier oben stehen, da sonst vorher returned werden könnte
         KeepTrackOfTarget();
@@ -94,10 +106,10 @@ public class PlayerController : CrowdControllable
     bool wasAttacking = false;
     private void KeepTrackOfTarget()
     {
+        //Debug.Log("KeepTrackOfTarget()");
         if (focus != null && focus.GetType() == typeof(Enemy))
-        {
-            // Entfernung Player und Gegner
-            float distance = Vector3.Distance(focus.transform.position, transform.position);
+        {            
+            float distance = Vector3.Distance(focus.transform.position, transform.position);    // Entfernung Player und Gegner
 
             if (distance <= stats.attackRange.GetValue() && combat.GetAttackCooldown() <= 0)
             {
@@ -156,12 +168,23 @@ public class PlayerController : CrowdControllable
 
     public override IEnumerator GetStunned(float duration)
     {
-        throw new System.NotImplementedException();
+        // ??
+        // ??
+        // ??
+        myStatuses.Add(Status.stunned);
+
+        motor.StopFollowingTarget();
+        motor.MoveToPoint(transform.position);
+
+        yield return new WaitForSeconds(duration);
+        myStatuses.Remove(Status.stunned);        
     }
 
     public override IEnumerator GetSilenced(float duration)
     {
-        throw new System.NotImplementedException();
+        playerEventManager.IsSilenced = true;
+        yield return new WaitForSeconds(duration);
+        playerEventManager.IsSilenced = false;
     }
 
     public override IEnumerator GetBlinded(float duration)

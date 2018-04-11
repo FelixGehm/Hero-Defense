@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 114038163670618730}
   - component: {fileID: 114644244158134742}
   - component: {fileID: 114182442433588026}
+  - component: {fileID: 114915923532411422}
   m_Layer: 0
   m_Name: Magic Projectile
   m_TagString: Untagged
@@ -151,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   na: {fileID: 114644244158134742}
   _state: 3
+  ignoreStateUntil: 2
   sendEveryXTick: 1
   desiredBufferMS: 0.1
   bufferDriftCorrectAmt: 0.1
@@ -163,7 +165,7 @@ MonoBehaviour:
   extrapolationDivisor: 0
   maxExtrapolates: 2
   teleportThreshold: 1
-  cullUpperBits: 0
+  bitCullingLevel: 0
   sequentialKeys: 5
   rootRotationElement:
     name: Root Rotation
@@ -171,7 +173,7 @@ MonoBehaviour:
     index: 0
     drawerHeight: 0
     nst: {fileID: 0}
-    nstElementsEngine: {fileID: 0}
+    na: {fileID: 0}
     elementType: 1
     sendCullMask: 30
     keyRate: 5
@@ -181,6 +183,8 @@ MonoBehaviour:
     teleportOverride: 1
     rewindGO: {fileID: 0}
     lastSentKeyTime: 0
+    snapshotFrameId: 0
+    targetFrameId: 0
     rotationType: 0
     includedAxes: 7
     totalBitsForQuat: 40
@@ -214,10 +218,8 @@ MonoBehaviour:
       wrap: 0
     useLocal: 0
   debugXform: 0
-  debugXformGO: {fileID: 0}
   rb: {fileID: 0}
   nstElementsEngine: {fileID: 114182442433588026}
-  nstSettings: {fileID: 0}
   frameUpdateInterval: 0
   invFrameUpdateInterval: 0
   lastSentPos: {x: 0, y: 0, z: 0}
@@ -235,6 +237,8 @@ MonoBehaviour:
   nst: {fileID: 114038163670618730}
   na: {fileID: 0}
   rootRotId: 0
+  elementCount: 0
+  frameCount: 0
 --- !u!114 &114241226110337496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,6 +294,17 @@ MonoBehaviour:
     i15: 217
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114915923532411422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220129495896500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d501a2550997b7d46ad6f4a1272f3861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135303510183113204
 SphereCollider:
   m_ObjectHideFlags: 1
