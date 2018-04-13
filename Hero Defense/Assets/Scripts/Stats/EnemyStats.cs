@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class EnemyStats : CharacterStats {
 
@@ -9,6 +10,6 @@ public class EnemyStats : CharacterStats {
         base.Die();
 
         //death stuff
-        Destroy(gameObject);
+        NetworkServer.Destroy(gameObject);
     }
 }

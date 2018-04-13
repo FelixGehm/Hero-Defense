@@ -12,7 +12,6 @@ public class CharacterStats : NetworkBehaviour
     public HealthBarManager healthBarManager;
     private UIHealthBar uIHealthBar;
 
-
     void Awake()
     {
         CurrentHealth = maxHealth.GetValue();
@@ -87,8 +86,11 @@ public class CharacterStats : NetworkBehaviour
     public Stat magicDamage;
     public Stat magicResistance;
 
+    [Header("0.0 = 0% CritChance, 1.0 = 100% CritChance")]
     public Stat critChance;
-    public Stat critDamage;
+
+    [Header ("1.0 = 100% Damage, 1.5 = 150% Damage, 2 = 200% Damage")]
+    public Stat critDamage;     
 
     public Stat attackSpeed;
     public Stat attackRange;
@@ -161,7 +163,6 @@ public class CharacterStats : NetworkBehaviour
     public virtual void Die()
     {
         Debug.Log(transform.name + " died.");
-
     }
 
     #region Editor

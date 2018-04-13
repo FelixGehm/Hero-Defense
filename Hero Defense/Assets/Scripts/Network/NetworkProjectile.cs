@@ -9,11 +9,11 @@ public class NetworkProjectile : NetworkBehaviour {
 
     private Transform target;
     private float damage = 0;
-
+    
 	void Update () {
 		if(target == null)
         {
-            Destroy(gameObject);
+            NetworkServer.Destroy(gameObject);
             return;
         }
 
@@ -34,17 +34,11 @@ public class NetworkProjectile : NetworkBehaviour {
         this.target = target;
     }
 
-    public void SetTarget(NetworkInstanceId targetId)
-    {
-        Transform target = NetworkServer.FindLocalObject(targetId).transform;
-        this.target = target;
-    }
-
     void HitTarget()
     {
         Damage(target.GetComponent<CharacterStats>());
-        
-        Destroy(gameObject);
+
+        NetworkServer.Destroy(gameObject);
     }
 
     void Damage(CharacterStats targetStats)

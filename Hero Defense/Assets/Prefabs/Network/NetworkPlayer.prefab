@@ -1606,7 +1606,6 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
-  isWaiting: 0
 --- !u!114 &114118448682317134
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1900,10 +1899,10 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   critChance:
-    baseValue: 0
+    baseValue: 0.5
     modifiers: []
   critDamage:
-    baseValue: 0
+    baseValue: 1.5
     modifiers: []
   attackSpeed:
     baseValue: 0.5

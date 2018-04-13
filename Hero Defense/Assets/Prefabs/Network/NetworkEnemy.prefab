@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0fb58660bfc9b42b6ebc484ccb8748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookRadius: 6.69
+  lookRadius: 0
   target: {fileID: 0}
 --- !u!114 &114445123525202334
 MonoBehaviour:
