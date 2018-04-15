@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(NavMeshAgent),typeof(PlayerController))]
 public class AbilityDashStun : MonoBehaviour
@@ -17,6 +18,9 @@ public class AbilityDashStun : MonoBehaviour
     public float dashTime = 0.5f;
 
     private float dashSpeed; // gets calculated
+
+    public float stunRange = 10.0f;
+    public float stunDuration = 2.0f;
 
     // Use this for initialization
     void Start()
@@ -46,6 +50,7 @@ public class AbilityDashStun : MonoBehaviour
 
             Dash();
             Stun();
+            
         }
     }
 
@@ -59,7 +64,7 @@ public class AbilityDashStun : MonoBehaviour
         StartCoroutine(ResetSpeedAfterTime(agent.speed, dashTime));
         agent.speed = dashSpeed;
 
-        pc.isWaiting = true;        
+        //pc.isWaiting = true;        
     }
 
 
@@ -68,12 +73,19 @@ public class AbilityDashStun : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         agent.speed = oldSpeed;
-        pc.isWaiting = false;
+        //pc.isWaiting = false;
     }
 
     private void Stun()
     {
 
+        List<GameObject> closeEnemys = FindEnemysInRange(stunRange);
+        foreach (GameObject enemy in closeEnemys)
+        {
+            CrowdControllable cc = enemy.GetComponent<CrowdControllable>();
+            
+            StartCoroutine(cc.GetStunned(stunDuration));
+        }
     }
 
     private Vector3 GetDirectionVectorBetweenPlayerAndMouse()
@@ -91,6 +103,37 @@ public class AbilityDashStun : MonoBehaviour
         Vector3 direction = Vector3.Normalize(mousePos - playerPos);
         return direction;
     }
+
+    /// <summary>
+    /// Sucht nach Gameobjekten in der angegebenen Reichweite mit dem Tag "Enemy" und gibt eine List mit den Gameobjekten zurück.
+    /// </summary>
+    /// <param name="range"></param>
+    /// <returns></returns>
+    private List<GameObject> FindEnemysInRange(float range)
+    {
+        List<GameObject> closeEnemys = new List<GameObject>();
+
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log("enemys with tag = " + enemys.Length);
+
+        // check distance and add to List if in range
+        foreach (GameObject enemy in enemys)
+        {
+            float distance = Vector3.Distance(enemy.transform.position, transform.position);
+
+            Debug.Log("enemy distance = " + distance);
+            if (distance <= range)
+            {
+                closeEnemys.Add(enemy);
+                Debug.Log("enemy added to list");
+            }
+        }
+        Debug.Log("FindEnemysInRange(): ");
+        Debug.Log("closeEnemys.Count = " + closeEnemys.Count);
+
+        return closeEnemys;
+    }
+
     /// <summary>
     /// Draw Dash-Distance
     /// </summary>

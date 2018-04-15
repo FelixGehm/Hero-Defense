@@ -7,12 +7,7 @@ public class PlayerStats : CharacterStats {
 	// Use this for initialization
 	void Start () {
         EquipmentManager.instance.onEquipmentChangedCallback += OnEquipmentChanged;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	}	
 
     void OnEquipmentChanged(bool wasAdded, Equipment equipment)
     {

@@ -19,13 +19,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4755202207305130}
+  - component: {fileID: 114875907997669616}
+  - component: {fileID: 114145439896530578}
+  - component: {fileID: 114294691606199220}
+  - component: {fileID: 114539743340081108}
   - component: {fileID: 33831047400640590}
   - component: {fileID: 135640182961596182}
   - component: {fileID: 23408713408984296}
-  - component: {fileID: 114666201381591128}
-  - component: {fileID: 114875907997669616}
-  - component: {fileID: 114929737980880788}
-  - component: {fileID: 114436366157053040}
   - component: {fileID: 114176421464875792}
   m_Layer: 0
   m_Name: Projectile
@@ -88,6 +88,22 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619547177321574}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114145439896530578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619547177321574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6587c27fd07824eb346469eb351e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nst: {fileID: 114539743340081108}
+  na: {fileID: 0}
+  rootRotId: 0
+  elementCount: 0
+  frameCount: 0
 --- !u!114 &114176421464875792
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 70
---- !u!114 &114436366157053040
+--- !u!114 &114294691606199220
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -108,13 +124,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619547177321574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc6587c27fd07824eb346469eb351e86, type: 3}
+  m_Script: {fileID: 11500000, guid: d501a2550997b7d46ad6f4a1272f3861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nst: {fileID: 114666201381591128}
-  na: {fileID: 0}
-  rootRotId: 0
---- !u!114 &114666201381591128
+--- !u!114 &114539743340081108
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -125,8 +138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdf5a6b1cc27d74cab63a5666d2960a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  na: {fileID: 114929737980880788}
-  _state: 3
+  na: {fileID: 114294691606199220}
+  _state: 2
+  ignoreStateUntil: 2
   sendEveryXTick: 1
   desiredBufferMS: 0.1
   bufferDriftCorrectAmt: 0.1
@@ -138,16 +152,16 @@ MonoBehaviour:
   extrapolation: 0.5
   extrapolationDivisor: 0
   maxExtrapolates: 2
-  teleportThreshold: 1
-  cullUpperBits: 0
+  teleportThreshold: 2
+  bitCullingLevel: 0
   sequentialKeys: 5
   rootRotationElement:
     name: Root Rotation
     isRoot: 1
     index: 0
-    drawerHeight: 0
+    drawerHeight: 240
     nst: {fileID: 0}
-    nstElementsEngine: {fileID: 0}
+    na: {fileID: 0}
     elementType: 1
     sendCullMask: 30
     keyRate: 5
@@ -157,6 +171,8 @@ MonoBehaviour:
     teleportOverride: 1
     rewindGO: {fileID: 0}
     lastSentKeyTime: 0
+    snapshotFrameId: 0
+    targetFrameId: 0
     rotationType: 0
     includedAxes: 7
     totalBitsForQuat: 40
@@ -190,10 +206,8 @@ MonoBehaviour:
       wrap: 0
     useLocal: 0
   debugXform: 0
-  debugXformGO: {fileID: 0}
   rb: {fileID: 0}
-  nstElementsEngine: {fileID: 114436366157053040}
-  nstSettings: {fileID: 0}
+  nstElementsEngine: {fileID: 114145439896530578}
   frameUpdateInterval: 0
   invFrameUpdateInterval: 0
   lastSentPos: {x: 0, y: 0, z: 0}
@@ -229,17 +243,6 @@ MonoBehaviour:
     i15: 229
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114929737980880788
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1619547177321574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &135640182961596182
 SphereCollider:
   m_ObjectHideFlags: 1

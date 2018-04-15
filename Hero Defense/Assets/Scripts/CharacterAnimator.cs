@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class CharacterAnimator : MonoBehaviour
@@ -10,9 +11,10 @@ public class CharacterAnimator : MonoBehaviour
     Animator animator;
 
     CharacterCombat characterCombat;
-    
 
-    PlayerController playerController;
+    PlayerMotor motor;
+
+    //PlayerController playerController;        //Wird garnicht genutzt?
 
     float speedPercent;
 
@@ -23,14 +25,13 @@ public class CharacterAnimator : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-
+        motor = GetComponent<PlayerMotor>();
         characterCombat = GetComponent<CharacterCombat>();
-        characterCombat.OnAttack += StartAttackAnimation;
-        
-    
-        playerController = GetComponent<PlayerController>();
-        playerController.OnFocusNull += StopAttackAnimation;
+        //playerController = GetComponent<PlayerController>();
 
+        characterCombat.OnAttack += StartAttackAnimation;
+        motor.OnPlayerMoved += StopAttackAnimation;
+        characterCombat.OnAttackCanceled += StopAttackAnimation;
     }
 
     void Update()
@@ -39,21 +40,31 @@ public class CharacterAnimator : MonoBehaviour
         if (isMovedByAgent)
         {
             speedPercent = agent.velocity.magnitude / agent.speed;
-        }        
+        }
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
 
     void StartAttackAnimation()
     {
-        animator.SetBool("attackBool", true);
-        animator.SetTrigger("attack");
-        playerController.focus.OnDefocus += StopAttackAnimation;
+        animator.SetBool("cancelAttack", false);
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+        {
+            animator.Play("Shoot", -1, 0f); //Animation wird direkt abgespielt. Würde sie geblended werden, sähe das merkwürdig aus. Warum? Verstehe ich auch nicht...
+        }
+        else
+        {
+            animator.SetTrigger("attack");  //Animation wird Geblendet
+        }
+
+        //animator.SetTrigger("attack");
+
     }
 
     void StopAttackAnimation()
     {
-        animator.SetBool("attackBool", false);
+        animator.SetBool("cancelAttack", true);
     }
 
     public float GetSpeedPercent()
@@ -65,4 +76,15 @@ public class CharacterAnimator : MonoBehaviour
     {
         speedPercent = _speedPercent;
     }
+
+    /*
+    public bool IsInAttackAnimation()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
+            return true;
+
+        return false;
+    }
+    */
+
 }

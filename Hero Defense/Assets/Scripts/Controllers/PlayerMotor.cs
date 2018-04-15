@@ -4,42 +4,52 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class PlayerMotor : MonoBehaviour {
+public class PlayerMotor : MonoBehaviour
+{
     NavMeshAgent agent;
 
     Transform target;
 
     private bool faceOnly = false;
-    
-	// Use this for initialization
-	void Start () {
+
+    public event System.Action OnPlayerMoved;
+
+    // Use this for initialization
+    void Start()
+    {
         agent = GetComponent<NavMeshAgent>();
     }
-	
-	void Update () {
 
-
-		if(target != null)
+    void Update()
+    {
+        if (target != null)
         {
-            if(!faceOnly)
+            if (!faceOnly)
             {
                 agent.SetDestination(target.position);
             }
             FaceTarget();
         }
-	}
+    }
+
+    public void SetAgentSpeed(float newSpeed)
+    {
+        agent.speed = newSpeed;
+    }
+
+    public float GetAgentSpeed()
+    {
+        return agent.speed;
+    }
 
     public void MoveToPoint(Vector3 point)
     {
         agent.SetDestination(point);
+        if (OnPlayerMoved != null)
+            OnPlayerMoved();
     }
 
-    public void MoveToPoint(Vector3? point)
-    {
-        agent.SetDestination((Vector3)point);
-    }
-
-    public void FollowTarget (Interactable newTarget)
+    public void FollowTarget(Interactable newTarget)
     {
         agent.stoppingDistance = newTarget.interactionRadius;
         agent.updateRotation = false;
@@ -61,7 +71,6 @@ public class PlayerMotor : MonoBehaviour {
     {
         //Debug.Log("PauseFollowTarget():");
         agent.SetDestination(transform.position);
-
         faceOnly = true;
     }
 
@@ -69,13 +78,15 @@ public class PlayerMotor : MonoBehaviour {
     {
         //Debug.Log("ContinueFollowTarget():");
 
-        if(target != null)
+        if (target != null)
         {
             agent.SetDestination(target.position);
             faceOnly = false;
-        } else
+        }
+        else
         {
             //Debug.Log("Couldn't continue following target. Might have disapeared or focus changed");
+            agent.SetDestination(transform.position);
         }
     }
 

@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114865381408695500}
   - component: {fileID: 114540490143672806}
   - component: {fileID: 114696987724298182}
+  - component: {fileID: 114746626334693876}
   m_Layer: 0
   m_Name: NetworkProjectile
   m_TagString: Untagged
@@ -102,6 +103,8 @@ MonoBehaviour:
   nst: {fileID: 114865381408695500}
   na: {fileID: 0}
   rootRotId: 0
+  elementCount: 0
+  frameCount: 0
 --- !u!114 &114540490143672806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,6 +149,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+--- !u!114 &114746626334693876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1475254467947496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d501a2550997b7d46ad6f4a1272f3861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114797229906366982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,6 +171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SyncVarDirtyBits: 0
+  m_LastSendTime: 0
+  m_SyncVarGuard: 0
+  m_MyView: {fileID: 0}
+  NI: {fileID: 0}
+  nst: {fileID: 0}
+  nstSettings: {fileID: 0}
+  _nstIdSyncvar: 0
 --- !u!114 &114865381408695500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   na: {fileID: 114797229906366982}
   _state: 3
+  ignoreStateUntil: 2
   sendEveryXTick: 1
   desiredBufferMS: 0.1
   bufferDriftCorrectAmt: 0.1
@@ -182,7 +205,7 @@ MonoBehaviour:
   extrapolationDivisor: 0
   maxExtrapolates: 2
   teleportThreshold: 1
-  cullUpperBits: 0
+  bitCullingLevel: 0
   sequentialKeys: 5
   rootRotationElement:
     name: Root Rotation
@@ -190,7 +213,7 @@ MonoBehaviour:
     index: 0
     drawerHeight: 240
     nst: {fileID: 0}
-    nstElementsEngine: {fileID: 0}
+    na: {fileID: 0}
     elementType: 1
     sendCullMask: 30
     keyRate: 5
@@ -200,6 +223,8 @@ MonoBehaviour:
     teleportOverride: 1
     rewindGO: {fileID: 0}
     lastSentKeyTime: 0
+    snapshotFrameId: 0
+    targetFrameId: 0
     rotationType: 0
     includedAxes: 7
     totalBitsForQuat: 40
@@ -233,10 +258,8 @@ MonoBehaviour:
       wrap: 0
     useLocal: 0
   debugXform: 0
-  debugXformGO: {fileID: 0}
   rb: {fileID: 0}
   nstElementsEngine: {fileID: 114013194156854430}
-  nstSettings: {fileID: 0}
   frameUpdateInterval: 0
   invFrameUpdateInterval: 0
   lastSentPos: {x: 0, y: 0, z: 0}

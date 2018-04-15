@@ -24,6 +24,24 @@ public class CharacterEventManager : NetworkBehaviour
 
     #endregion
 
+    
+    private bool isSilenced = false;
+    public bool IsSilenced {
+        get
+        {
+            return isSilenced;
+        }
+        set
+        {
+            if(OnCastCancel != null && value == true)
+            {
+                OnCastCancel();
+            }
+
+            isSilenced = value;
+        }
+    }
+
 
     #region Methoden zum Triggern der Actions
     /// <summary>
@@ -35,7 +53,7 @@ public class CharacterEventManager : NetworkBehaviour
 
         TransmitEvent(CharacterEventManager.eventType.teleport);
 
-        if (OnTeleport != null)
+        if (OnTeleport != null && !isSilenced)
         {
             OnTeleport();
         }
@@ -47,7 +65,7 @@ public class CharacterEventManager : NetworkBehaviour
 
         TransmitEvent(CharacterEventManager.eventType.one);
 
-        if (OnAbilityOne != null)
+        if (OnAbilityOne != null && !isSilenced)
         {
             OnAbilityOne();
         }
@@ -59,7 +77,7 @@ public class CharacterEventManager : NetworkBehaviour
 
         TransmitEvent(CharacterEventManager.eventType.two);
 
-        if (OnAbilityTwo != null)
+        if (OnAbilityTwo != null && !isSilenced)
         {
             OnAbilityTwo();
         }
@@ -71,7 +89,7 @@ public class CharacterEventManager : NetworkBehaviour
 
         TransmitEvent(CharacterEventManager.eventType.three);
 
-        if (OnAbilityThree != null)
+        if (OnAbilityThree != null && !isSilenced)
         {
             OnAbilityThree();
         }
@@ -83,7 +101,7 @@ public class CharacterEventManager : NetworkBehaviour
 
         TransmitEvent(CharacterEventManager.eventType.four);
 
-        if (OnAbilityFour != null)
+        if (OnAbilityFour != null && !isSilenced)
         {
             OnAbilityFour();
         }

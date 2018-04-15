@@ -24,10 +24,7 @@ public class AbilityHometeleport : NetworkBehaviour
         teleportPoint = GameObject.Find("HomeTeleportPoint").transform.position;
         motor = GetComponent<PlayerMotor>();
 
-        //if (isServer)
-        {
-            characterEventManager.OnTeleport += TeleportHome;
-        }
+        characterEventManager.OnTeleport += TeleportHome;
     }
 
     void TeleportHome()
@@ -39,7 +36,7 @@ public class AbilityHometeleport : NetworkBehaviour
     IEnumerator TeleportAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        NST.Teleport(teleportPoint, transform.rotation, true);
+        NST.Teleport(teleportPoint, transform.rotation);
         motor.MoveToPoint(teleportPoint);
     }
 }
