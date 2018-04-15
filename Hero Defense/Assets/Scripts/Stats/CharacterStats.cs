@@ -7,8 +7,6 @@ using UnityEngine.Networking;
 /// </summary>
 public class CharacterStats : NetworkBehaviour
 {
-
-
     public HealthBarManager healthBarManager;
     private UIHealthBar uIHealthBar;
 
@@ -21,9 +19,6 @@ public class CharacterStats : NetworkBehaviour
         //isLocalPlayer = string.Compare("LocalPlayer", gameObject.name.Substring(0, 10));
         isEnemy = gameObject.CompareTag("Enemy");
     }
-
-    [HideInInspector]
-    public bool isControlledByServer = false;
 
     private bool isEnemy;
 
@@ -80,6 +75,31 @@ public class CharacterStats : NetworkBehaviour
 
     public Stat maxHealth;
 
+
+    protected static float timeBetweenTicksForHealthRegeneration = 1.0f;
+    protected float currentTickCoolDown = timeBetweenTicksForHealthRegeneration;
+
+    protected void Update()
+    {
+        if(isServer)
+        {
+            currentTickCoolDown -= Time.deltaTime;
+
+            if (currentTickCoolDown <= 0)
+            {
+                currentTickCoolDown = timeBetweenTicksForHealthRegeneration;
+
+                //Debug.Log("Time= "+Time.time);
+
+                CurrentHealth += maxHealth.GetValue() * healthRegeneration.GetValue();
+            }
+        }
+        
+    }
+
+    [Header("0.0 = 0% Health returned per tick, 1.0 = 100% Health returned per tick")]
+    public Stat healthRegeneration;
+
     public Stat physicalDamage;
     public Stat armor;
 
@@ -89,8 +109,8 @@ public class CharacterStats : NetworkBehaviour
     [Header("0.0 = 0% CritChance, 1.0 = 100% CritChance")]
     public Stat critChance;
 
-    [Header ("1.0 = 100% Damage, 1.5 = 150% Damage, 2 = 200% Damage")]
-    public Stat critDamage;     
+    [Header("1.0 = 100% Damage, 1.5 = 150% Damage, 2 = 200% Damage")]
+    public Stat critDamage;
 
     public Stat attackSpeed;
     public Stat attackRange;
@@ -101,14 +121,12 @@ public class CharacterStats : NetworkBehaviour
 
     #region TrueDamage
     public void TakeTrueDamage(float tDamage)
-    {
-        //Debug.Log("TakePhyDam");
-
+    {     
         if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
         {
             return;
-        }        
-        
+        }
+
         float damage = tDamage;
         damage = Mathf.Max(damage, 0);      // Check if damage is < 0, if yes -> set to 0
 

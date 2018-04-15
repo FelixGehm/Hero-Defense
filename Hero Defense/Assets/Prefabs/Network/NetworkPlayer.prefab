@@ -1816,7 +1816,7 @@ MonoBehaviour:
   attackDelay: 0.2
   isAttacking: 0
   isBlinded: 0
-  isRanged: 1
+  isRanged: 0
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
     type: 2}
   firePoint: {fileID: 4156884402912856}
@@ -1882,9 +1882,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarManager: {fileID: 114477823578069368}
-  isControlledByServer: 0
   maxHealth:
     baseValue: 10000
+    modifiers: []
+  healthRegeneration:
+    baseValue: 0.005
     modifiers: []
   physicalDamage:
     baseValue: 10
@@ -1899,7 +1901,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   critChance:
-    baseValue: 0.5
+    baseValue: 0.15
     modifiers: []
   critDamage:
     baseValue: 1.5

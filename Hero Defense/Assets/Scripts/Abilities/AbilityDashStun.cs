@@ -50,13 +50,7 @@ public class AbilityDashStun : MonoBehaviour
 
             Dash();
             Stun();
-
-            //CrowdControllable cc = enemy.GetComponent<CrowdControllable>();
-            //PlayerController cc = GetComponent<PlayerController>();
-            //StartCoroutine(cc.GetStunned(stunDuration));
-            //StartCoroutine(pc.GetBleedingWound(9, 0.2f));
-            //StartCoroutine(pc.GetCrippled(stunDuration, 0.6f));
-            //StartCoroutine(pc.GetSilenced(stunDuration));
+            
         }
     }
 
@@ -89,17 +83,8 @@ public class AbilityDashStun : MonoBehaviour
         foreach (GameObject enemy in closeEnemys)
         {
             CrowdControllable cc = enemy.GetComponent<CrowdControllable>();
-
-            //StartCoroutine(cc.GetStunned(stunDuration));
-
-            //StartCoroutine(cc.GetStunned(stunDuration));
-            //StartCoroutine(cc.GetBleedingWound(9, 0.04f));
-            StartCoroutine(cc.GetCrippled(stunDuration, 0.6f));
-            //StartCoroutine(pc.GetSilenced(stunDuration));
-
-            //StartCoroutine(cc.GetBleedingWound(10, 0.05f));
-
             
+            StartCoroutine(cc.GetStunned(stunDuration));
         }
     }
 
