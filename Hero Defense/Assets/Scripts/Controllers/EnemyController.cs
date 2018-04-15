@@ -41,16 +41,12 @@ public class EnemyController : CrowdControllable
         {
             if (target == null && !myStatuses.Contains(Status.taunted))
             {
-                target = FindClosestPlayer().transform;
-            }
-            else
-            {
-                distanceToTarget = Vector3.Distance(target.position, transform.position);
+                target = FindClosestPlayer().transform;               
             }
 
+            distanceToTarget = Vector3.Distance(target.position, transform.position);
             distanceToDestination = Vector3.Distance(destination.position, transform.position);
 
-            //vielleicht lieber über eine coroutine. könnte mit mehreren gegnern etwas viel perfomance schlucken?
             //hier vielleicht ab einer bestimmenten distanz zum nexus den Spieler ignorieren?
             if (distanceToTarget <= lookRadius || myStatuses.Contains(Status.taunted))
             {
@@ -63,6 +59,7 @@ public class EnemyController : CrowdControllable
 
                     if (targetStats != null)
                     {
+                        Debug.Log("Attack!");
                         combat.Attack(targetStats);
                     }
 
