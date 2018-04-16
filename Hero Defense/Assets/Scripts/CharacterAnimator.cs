@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Networking;
 
 public class CharacterAnimator : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class CharacterAnimator : MonoBehaviour
     CharacterCombat characterCombat;
 
     PlayerMotor motor;
+
+    NetworkAnimator netAnimator;
 
     //PlayerController playerController;        //Wird garnicht genutzt?
 
@@ -28,6 +31,7 @@ public class CharacterAnimator : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         characterCombat = GetComponent<CharacterCombat>();
         //playerController = GetComponent<PlayerController>();
+        netAnimator = GetComponent<NetworkAnimator>();
 
         characterCombat.OnAttack += StartAttackAnimation;
         motor.OnPlayerMoved += StopAttackAnimation;
@@ -36,11 +40,8 @@ public class CharacterAnimator : MonoBehaviour
 
     void Update()
     {
+        speedPercent = agent.velocity.magnitude / agent.speed;
 
-        if (isMovedByAgent)
-        {
-            speedPercent = agent.velocity.magnitude / agent.speed;
-        }
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
@@ -51,15 +52,17 @@ public class CharacterAnimator : MonoBehaviour
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
         {
+            //netAnimator.SetTrigger("attack");
             animator.Play("Shoot", -1, 0f); //Animation wird direkt abgespielt. Würde sie geblended werden, sähe das merkwürdig aus. Warum? Verstehe ich auch nicht...
         }
         else
         {
+            //netAnimator.SetTrigger("attack");
             animator.SetTrigger("attack");  //Animation wird Geblendet
         }
 
         //animator.SetTrigger("attack");
-
+        //netAnimator.SetTrigger("attack");
     }
 
     void StopAttackAnimation()
@@ -72,10 +75,12 @@ public class CharacterAnimator : MonoBehaviour
         return speedPercent;
     }
 
+    
     public void SetSpeedPercent(float _speedPercent)
     {
         speedPercent = _speedPercent;
     }
+    
 
     /*
     public bool IsInAttackAnimation()

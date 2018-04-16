@@ -428,7 +428,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4592743154409312}
   - component: {fileID: 114589926837847246}
-  - component: {fileID: 114112133626384690}
   - component: {fileID: 114404076510769978}
   - component: {fileID: 114454999008940368}
   - component: {fileID: 195707809328749902}
@@ -444,7 +443,6 @@ GameObject:
   - component: {fileID: 114930475561565776}
   - component: {fileID: 114790621340633260}
   - component: {fileID: 114147072069385658}
-  - component: {fileID: 114702874197182986}
   - component: {fileID: 114859464242066602}
   - component: {fileID: 114592445048548012}
   - component: {fileID: 114800046063625972}
@@ -2207,17 +2205,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114112133626384690
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422401169816076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fb6e4dcd9e447a46a6fd759fb93eca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114127049271089758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2334,7 +2321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbdf5a6b1cc27d74cab63a5666d2960a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  na: {fileID: 114112133626384690}
+  na: {fileID: 0}
   _state: 3
   ignoreStateUntil: 2
   sendEveryXTick: 1
@@ -2422,7 +2409,6 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
-  isWaiting: 0
 --- !u!114 &114533616463788054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2470,6 +2456,7 @@ MonoBehaviour:
   - {fileID: 114529040285466688}
   - {fileID: 114447337375912430}
   - {fileID: 114127049271089758}
+  - {fileID: 114790621340633260}
 --- !u!114 &114589926837847246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2501,7 +2488,7 @@ MonoBehaviour:
     i14: 7
     i15: 235
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114592445048548012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2520,17 +2507,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1220129495896500, guid: a5cfbfc8b48acec46b1620ec788755d9,
     type: 2}
   firePoint: {fileID: 4514958889319778}
---- !u!114 &114702874197182986
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422401169816076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2a527bc0c0cd3f4da205334ba1cc8bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114790621340633260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2616,9 +2592,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarManager: {fileID: 114975630948991240}
-  isControlledByServer: 0
   maxHealth:
     baseValue: 10000
+    modifiers: []
+  healthRegeneration:
+    baseValue: 0
     modifiers: []
   physicalDamage:
     baseValue: 10
