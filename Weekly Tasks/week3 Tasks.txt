@@ -1,0 +1,29 @@
+Aufgaben woche 3: 11.04 - 18.04
+
+Felix: 
+	- fähigkeit für mage
+	- Wellensystem
+	- netzwerk animation
+	- animation feinschliff autoattack
+
+Sven:
+	- fähigkeit für Gunslinger
+	- Modellierung Baseunit Eins?? Wenn Clara fertig
+	- Charakter feinschliff
+	- Animationen
+
+Flo: 
+	- implementierung Nahkampf
+	- fähigkeiten von Sven
+	- Netzwerk Lobby 
+
+Moritz: 
+	- UI Prototyp
+	- Story
+
+Clara:  
+	- Konzept Art Gegner Baseunit Eins
+	- Moodboard
+	- Story
+	- Map Design
+
