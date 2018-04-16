@@ -145,8 +145,8 @@ public class EnemyController : CrowdControllable
         agent.SetDestination(transform.position);       // agent-Destination auf aktuelle Position setzen
 
         yield return new WaitForSeconds(duration);
-
-        myStatuses.Remove(Status.stunned);
+        
+            myStatuses.Remove(Status.stunned);
     }
 
     public override IEnumerator GetSilenced(float duration)
@@ -193,5 +193,10 @@ public class EnemyController : CrowdControllable
         //myStatuses.Remove(Status.bleeding);
     }
 
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
     #endregion
 }
