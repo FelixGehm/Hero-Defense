@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(PlayerMotor))]
-public class PlayerController : CrowdControllable
+public class MyPlayerController : CrowdControllable
 {
     public Interactable focus;
     private Interactable oldFocus;

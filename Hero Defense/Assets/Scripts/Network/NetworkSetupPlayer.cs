@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NetworkSetupPlayer : NetworkSetup {
+public class NetworkSetupPlayer : NetworkSetup
+{
 
     //public bool localPlayer = false;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start()
     {
         base.DisableComponents();
 
         if (isLocalPlayer)
         {
-            if(isServer)
+            if (isServer)
             {
                 transform.name = "LocalPlayer as Server";
-            } else
+            }
+            else
             {
                 transform.name = "LocalPlayer as Client";
             }
-            
-        } else
+
+        }
+        else
         {
             if (isClient)
             {
@@ -33,7 +36,8 @@ public class NetworkSetupPlayer : NetworkSetup {
             }
         }
 
-        
+
+
         if (isLocalPlayer)
         {
             //localPlayer = true;
@@ -44,7 +48,7 @@ public class NetworkSetupPlayer : NetworkSetup {
             // Register Player in PlayerManager
             PlayerManager.instance.RegisterPlayer(transform.gameObject);
         }
-            
+
     }
 
     private void OnDestroy()

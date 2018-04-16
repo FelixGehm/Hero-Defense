@@ -3,12 +3,12 @@ using System.Collections;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(NavMeshAgent),typeof(PlayerController))]
+[RequireComponent(typeof(NavMeshAgent),typeof(MyPlayerController))]
 public class AbilityDashStun : MonoBehaviour
 {
 
     private NavMeshAgent agent;
-    private PlayerController pc;
+    private MyPlayerController pc;
     private Camera cam;
 
     public float abilityCooldown = 4.0f;
@@ -29,7 +29,7 @@ public class AbilityDashStun : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
-        pc = GetComponent<PlayerController>();
+        pc = GetComponent<MyPlayerController>();
 
         cam = Camera.main;
     }

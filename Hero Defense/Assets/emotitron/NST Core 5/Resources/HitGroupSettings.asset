@@ -13,6 +13,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitGroupTags:
   - Default
-  - Crit
-  - Eyes
-  - Armored

@@ -6,7 +6,7 @@ public class TestTauntOnPlayer : MonoBehaviour {
 
 
     Transform player;
-    PlayerController pc;
+    MyPlayerController pc;
     // Use this for initialization
     void Start () {
         
@@ -18,7 +18,7 @@ public class TestTauntOnPlayer : MonoBehaviour {
         {
             player = GetComponent<EnemyController>().target;
 
-            pc = player.GetComponent<PlayerController>();
+            pc = player.GetComponent<MyPlayerController>();
 
 
             Debug.Log("TAUNTTEST");

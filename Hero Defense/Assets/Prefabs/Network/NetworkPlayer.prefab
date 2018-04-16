@@ -1726,7 +1726,7 @@ MonoBehaviour:
   nst: {fileID: 114967110113210864}
   na: {fileID: 0}
   rootRotId: 0
-  elementCount: 0
+  elementCount: 1
   frameCount: 0
 --- !u!114 &114259321967336452
 MonoBehaviour:
@@ -1999,12 +1999,12 @@ MonoBehaviour:
     isRoot: 1
     index: 0
     drawerHeight: 240
-    nst: {fileID: 0}
-    na: {fileID: 0}
+    nst: {fileID: 114967110113210864}
+    na: {fileID: 114996979881506710}
     elementType: 1
     sendCullMask: 30
     keyRate: 5
-    gameobject: {fileID: 0}
+    gameobject: {fileID: 1118349031133886}
     extrapolation: 0.5
     maxExtrapolates: 2
     teleportOverride: 1
