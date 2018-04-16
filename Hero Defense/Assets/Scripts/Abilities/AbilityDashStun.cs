@@ -8,7 +8,7 @@ public class AbilityDashStun : MonoBehaviour
 {
 
     private NavMeshAgent agent;
-    private MyPlayerController pc;
+    //private MyPlayerController pc;
     private Camera cam;
 
     public float abilityCooldown = 4.0f;
@@ -29,7 +29,7 @@ public class AbilityDashStun : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
 
-        pc = GetComponent<MyPlayerController>();
+        //pc = GetComponent<MyPlayerController>();
 
         cam = Camera.main;
     }

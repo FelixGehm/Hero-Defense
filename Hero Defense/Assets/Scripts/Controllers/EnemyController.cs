@@ -192,11 +192,10 @@ public class EnemyController : CrowdControllable
 
         //myStatuses.Remove(Status.bleeding);
     }
-
+    #endregion
 
     private void OnDestroy()
     {
         StopAllCoroutines();
     }
-    #endregion
 }
