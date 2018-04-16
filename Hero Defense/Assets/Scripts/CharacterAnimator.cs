@@ -56,20 +56,13 @@ public class CharacterAnimator : MonoBehaviour
         }
         else
         {
-            //animator.SetBool("attack", true);
-            StartCoroutine(TriggerAttackAnimation());      
+            //animator.SetTrigger("attack");
+            netAnimator.SetTrigger("attack");
+            if (NetworkServer.active) animator.ResetTrigger("attack");
         }
 
         //animator.SetTrigger("attack");
         //netAnimator.SetTrigger("attack");
-    }
-
-    IEnumerator TriggerAttackAnimation()
-    {
-        animator.SetBool("attack", true);
-        //yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(0.1f);
-        animator.SetBool("attack", false);
     }
 
     void StopAttackAnimation()
