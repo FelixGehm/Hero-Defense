@@ -1813,10 +1813,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb7d32432d214146a4fd8f120de36ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDelay: 0.2
+  attackDelay: 0.3
   isAttacking: 0
   isBlinded: 0
-  isRanged: 0
+  isRanged: 1
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
     type: 2}
   firePoint: {fileID: 4156884402912856}

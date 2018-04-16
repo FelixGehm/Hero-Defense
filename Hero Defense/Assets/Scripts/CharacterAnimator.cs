@@ -52,21 +52,29 @@ public class CharacterAnimator : MonoBehaviour
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
         {
-            //netAnimator.SetTrigger("attack");
             animator.Play("Shoot", -1, 0f); //Animation wird direkt abgespielt. Würde sie geblended werden, sähe das merkwürdig aus. Warum? Verstehe ich auch nicht...
         }
         else
         {
-            //netAnimator.SetTrigger("attack");
-            animator.SetTrigger("attack");  //Animation wird Geblendet
+            //animator.SetBool("attack", true);
+            StartCoroutine(TriggerAttackAnimation());      
         }
 
         //animator.SetTrigger("attack");
         //netAnimator.SetTrigger("attack");
     }
 
+    IEnumerator TriggerAttackAnimation()
+    {
+        animator.SetBool("attack", true);
+        //yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.1f);
+        animator.SetBool("attack", false);
+    }
+
     void StopAttackAnimation()
     {
+        animator.SetBool("attack", false);
         animator.SetBool("cancelAttack", true);
     }
 
