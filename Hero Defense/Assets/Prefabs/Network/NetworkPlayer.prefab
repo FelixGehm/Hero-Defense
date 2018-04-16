@@ -156,7 +156,6 @@ GameObject:
   - component: {fileID: 114702853326103970}
   - component: {fileID: 114956156520426332}
   - component: {fileID: 114441419098395818}
-  - component: {fileID: 114547999922988478}
   - component: {fileID: 114803630525136480}
   - component: {fileID: 114259321967336452}
   - component: {fileID: 114695483465087732}
@@ -1642,6 +1641,7 @@ MonoBehaviour:
   - {fileID: 114027344568857116}
   - {fileID: 114474283249777258}
   - {fileID: 114899644331539466}
+  - {fileID: 114956156520426332}
 --- !u!114 &114163940093743100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1794,7 +1794,7 @@ MonoBehaviour:
   m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Animator: {fileID: 95480034951089182}
+  m_Animator: {fileID: 95566796414262270}
   m_ParameterSendBits: 7
   param0: 
   param1: 
@@ -1843,17 +1843,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foreGround: {fileID: 114199499742551658}
---- !u!114 &114547999922988478
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2a527bc0c0cd3f4da205334ba1cc8bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114695483465087732
 MonoBehaviour:
   m_ObjectHideFlags: 1
