@@ -47,7 +47,7 @@ public class CharacterCombat : NetworkBehaviour
         float damageDone = myStats.physicalDamage.GetValue();   //get normal Damage from Stats
         if (CheckForCrit())                                     //check if crit did happen
         {
-            Debug.Log("CRIT! from "+transform.name);
+            //Debug.Log("CRIT! from "+transform.name);
             damageDone = CalcCritDamage();                      //calc new Damage
         }
 
@@ -95,30 +95,34 @@ public class CharacterCombat : NetworkBehaviour
 
         if (isServer)   // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
         {
-            GameObject projectileGO = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
-
-            if (projectile != null)
-            {
-                if (isBlinded)
-                {
-                    projectile.SetDamage(0);
-                }
-                else
-                {
-                    projectile.SetDamage(damageDone);
-                }
-
-                projectile.SetTarget(target);
-            }
-            
-            NetworkServer.Spawn(projectileGO);
+            SpawnBullet(target, damageDone);
         }
         else
         {
             TellServerToSpawnBullet(target, damageDone);
         }
 
+    }
+
+    private void SpawnBullet(Transform target, float damageDone)
+    {
+        //Debug.Log("SpawnBullet(): taget="+ target+", damage ="+damageDone);
+
+        GameObject projectileGO = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
+
+        if (projectile != null)
+        {
+            if (isBlinded)
+            {                
+                projectile.InitBullet(target, 0);
+            }
+            else
+            {
+                projectile.InitBullet(target, damageDone);
+            }            
+        }
+        NetworkServer.Spawn(projectileGO);
     }
 
     public void CancelAttack()
@@ -177,6 +181,8 @@ public class CharacterCombat : NetworkBehaviour
     [Command]
     void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
     {
+        Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
+
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
 
@@ -184,15 +190,15 @@ public class CharacterCombat : NetworkBehaviour
         {
             if (isBlinded)
             {
-                projectile.SetDamage(0);
+                projectile.InitBullet(targetTransform, 0);
             }
             else
             {
-                projectile.SetDamage(damage);
+                projectile.InitBullet(targetTransform, damage);
             }
 
-            Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
-            projectile.SetTarget(targetTransform);
+            
+            
             //projectile.SetTarget(transform);
         }
 

@@ -59,7 +59,7 @@ public class EnemyController : CrowdControllable
 
                     if (targetStats != null)
                     {
-                        Debug.Log("Attack!");
+                        //Debug.Log("Attack!");
                         combat.Attack(targetStats);
                     }
 
