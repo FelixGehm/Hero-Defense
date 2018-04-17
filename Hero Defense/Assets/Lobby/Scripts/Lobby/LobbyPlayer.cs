@@ -144,7 +144,7 @@ namespace Prototype.NetworkLobby
                 return;
 
             int localPlayerCount = 0;
-            foreach (PlayerController p in ClientScene.localPlayers)
+            foreach (UnityEngine.Networking.PlayerController p in ClientScene.localPlayers)
                 localPlayerCount += (p == null || p.playerControllerId == -1) ? 0 : 1;
 
             removePlayerButton.interactable = localPlayerCount > 1;

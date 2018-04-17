@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(NavMeshAgent),typeof(MyPlayerController))]
+[RequireComponent(typeof(NavMeshAgent),typeof(PlayerController))]
 public class AbilityDashStun : MonoBehaviour
 {
 
