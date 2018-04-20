@@ -1,0 +1,16 @@
+Roadmap - 18.04.
+
+MS1
+	- ein Charakter mit Fähigkeiten
+	- Wellensystem mit einem Gegnertyp
+	- Nexus ist zerstörbar -> beendet das Spiel
+
+MS2 
+	- funktionierendes HUD -> Effekte werden synchron dargestellt
+	- zweiter Charakter mit Fähigkeiten
+	
+MS3
+	- Items und Ressourcen
+	- UI für Item und Resourcen System
+	- Jungle
+	- Bossgegner
