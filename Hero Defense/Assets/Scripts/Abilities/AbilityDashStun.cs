@@ -114,22 +114,22 @@ public class AbilityDashStun : MonoBehaviour
         List<GameObject> closeEnemys = new List<GameObject>();
 
         GameObject[] enemys = GameObject.FindGameObjectsWithTag("Enemy");
-        Debug.Log("enemys with tag = " + enemys.Length);
+        //Debug.Log("enemys with tag = " + enemys.Length);
 
         // check distance and add to List if in range
         foreach (GameObject enemy in enemys)
         {
             float distance = Vector3.Distance(enemy.transform.position, transform.position);
 
-            Debug.Log("enemy distance = " + distance);
+            //Debug.Log("enemy distance = " + distance);
             if (distance <= range)
             {
                 closeEnemys.Add(enemy);
-                Debug.Log("enemy added to list");
+                //Debug.Log("enemy added to list");
             }
         }
-        Debug.Log("FindEnemysInRange(): ");
-        Debug.Log("closeEnemys.Count = " + closeEnemys.Count);
+        //Debug.Log("FindEnemysInRange(): ");
+        //Debug.Log("closeEnemys.Count = " + closeEnemys.Count);
 
         return closeEnemys;
     }

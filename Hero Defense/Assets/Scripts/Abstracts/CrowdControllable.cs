@@ -8,13 +8,18 @@ public abstract class CrowdControllable : MonoBehaviour
 
     //protected Status myStatus = Status._default;
 
-    protected List<Status> myStatuses;    // Jedes mal, wenn ein Statuseffekt auf mich angewandt wird, muss die Klasse, die diese Abstrakte Klasse implementiert,
-                                        // dafür sorgen, dass er der Liste hinzugefügt und beim AUslaufen des Effekts wieder entfernt wird.
+    public ObservableStatusCollection myStatuses;    // Jedes mal, wenn ein Statuseffekt auf mich angewandt wird, muss die Klasse, die diese Abstrakte Klasse implementiert,
+                                                      // dafür sorgen, dass er der Liste hinzugefügt und beim Auslaufen des Effekts wieder entfernt wird.
 
-
-    public virtual void Start()
+    public ObservableStatusCollection GetObservableStatusCollection()
     {
-        myStatuses = new List<Status>();
+        return myStatuses;
+    }
+
+
+    public virtual void Awake()
+    {
+        myStatuses = new ObservableStatusCollection();
     }
 
     /// <summary>

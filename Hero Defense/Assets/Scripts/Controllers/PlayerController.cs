@@ -19,10 +19,9 @@ public class PlayerController : CrowdControllable
     CharacterStats enemyStats;
     CharacterEventManager playerEventManager;
 
-    // Use this for initialization
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         motor = GetComponent<PlayerMotor>();
         stats = GetComponent<PlayerStats>();

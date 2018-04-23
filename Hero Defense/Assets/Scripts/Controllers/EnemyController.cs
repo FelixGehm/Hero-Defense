@@ -21,9 +21,9 @@ public class EnemyController : CrowdControllable
     NavMeshAgent agent;
     CharacterCombat combat;
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -176,7 +176,7 @@ public class EnemyController : CrowdControllable
 
     public override IEnumerator GetBleedingWound(int ticks, float percentPerTick)
     {
-        //myStatuses.Add(Status.bleeding);    // Für Variante mit Ticks in jedem Frame
+        myStatuses.Add(Status.bleeding);    // Für Variante mit Ticks in jedem Frame
         yield return new WaitForSeconds(0.3f);
 
         CharacterStats myStats = combat.GetCharacterStats();
@@ -190,7 +190,7 @@ public class EnemyController : CrowdControllable
             StartCoroutine(GetBleedingWound(ticks, percentPerTick));
         }
 
-        //myStatuses.Remove(Status.bleeding);
+        myStatuses.Remove(Status.bleeding);
     }
     #endregion
 

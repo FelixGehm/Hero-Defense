@@ -59,13 +59,14 @@ public class HealthBarManager : MonoBehaviour {
 
     private void Update()
     {
+        /*
         if (cam != null)
         {
             transform.rotation = cam.transform.rotation;
         } else
         {
             cam = Camera.main;
-        }
+        }*/
         
 
     }
