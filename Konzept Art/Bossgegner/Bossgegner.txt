@@ -1,0 +1,14 @@
+-ein Drehbarer Part mit mehreren Kanonen auf 360 Grad verteilt (6-10?)
+-muss sich so weit absenken können, dass sich diese auf Höhe der Spieler befinden
+-eine große Kanone
+
+Fähigkeit 1:
+Boss bleibt stehen, Drehbarer Kanonenpart rotiert kontinuierlich während alle Kanonen Kugeln abfeuern,
+denen die Spieler ausweichen müssen
+
+Fähigkeit 2:
+-Kanone schießt auf einen Spieler direkt (vielleicht immer den, der am weitesten entfernt ist?)
+-Schuss hat Explosionsradius
+-Vorher Anzeige eines Indicators, wo der Schuss landen wird
+
+Vielleicht noch eine Standardkanone, die durchgehend auf Spieler schießt?
