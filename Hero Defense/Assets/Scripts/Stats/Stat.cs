@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Stat {
+public class Stat
+{
 
-    [SerializeField]    
+    [SerializeField]
     private float baseValue;
 
     public List<float> modifiers = new List<float>();
@@ -24,7 +25,7 @@ public class Stat {
             modifiers.Add(modifier);
     }
 
-    public void RemoveModifier (float modifier)
+    public void RemoveModifier(float modifier)
     {
         if (modifier != 0)
             modifiers.Remove(modifier);

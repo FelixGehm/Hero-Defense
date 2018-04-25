@@ -16,13 +16,14 @@ public class PlayerStats : CharacterStats {
             //Add Modfifiers
             physicalDamage.AddModifier(equipment.damage);
             armor.AddModifier(equipment.armor);
-
+            attackSpeed.AddModifier(equipment.attackSpeed);
         }
         else
         {
             //Remove Modfiers
             physicalDamage.RemoveModifier(equipment.damage);
             armor.RemoveModifier(equipment.damage);
+            attackSpeed.RemoveModifier(equipment.attackSpeed);
         }
     }
 

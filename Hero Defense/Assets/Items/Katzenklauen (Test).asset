@@ -11,11 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5221d4c5f71001c488a0993ed8112f9b, type: 3}
   m_Name: Katzenklauen (Test)
   m_EditorClassIdentifier: 
-  name: Katzenklauen
+  name: New Item
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   damage: 5
   critChance: 0
   critDamage: 0
-  attackSpeed: 0
+  attackSpeed: 0.5
   armor: 0
   moveSpeed: 0

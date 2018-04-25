@@ -8,15 +8,15 @@ public class Equipment : Item
 {
     //nur vorschläge
     //die werte werden dann einfach auf die vorhandenen player stats aufaddiert
-    public int damage = 0;
-    public int critChance = 0;
-    public int critDamage = 0;
-    public int attackSpeed = 0;
+    public float damage = 0;
+    public float critChance = 0;
+    public float critDamage = 0;
+    public float attackSpeed = 0;
 
-    public int armor;
+    public float armor;
     //TODO: Elementar Resistenzen, Elementar Schadensarten
 
-    public int moveSpeed = 0;
+    public float moveSpeed = 0;
 
     public override void Use()
     {

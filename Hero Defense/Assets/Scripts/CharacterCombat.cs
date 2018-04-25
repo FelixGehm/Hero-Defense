@@ -58,12 +58,12 @@ public class CharacterCombat : NetworkBehaviour
             if (!isRanged)
             {
                 isAttacking = true;
-                attack = StartCoroutine(DoMeleeDamage(targetStats, damageDone, attackDelay));
+                attack = StartCoroutine(DoMeleeDamage(targetStats, damageDone, attackDelay * 1 / attackSpeed));
             }
             else
             {
                 isAttacking = true;
-                attack = StartCoroutine(ShootProjectile(targetStats.transform, damageDone, attackDelay));
+                attack = StartCoroutine(ShootProjectile(targetStats.transform, damageDone, attackDelay * 1 / attackSpeed));
             }
 
             if (OnAttack != null)
@@ -91,7 +91,7 @@ public class CharacterCombat : NetworkBehaviour
     IEnumerator ShootProjectile(Transform target, float damageDone, float delay)
     {
         yield return new WaitForSeconds(delay);
-        isAttacking = false;      
+        isAttacking = false;
 
         if (isServer)   // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
         {
@@ -114,13 +114,13 @@ public class CharacterCombat : NetworkBehaviour
         if (projectile != null)
         {
             if (isBlinded)
-            {                
+            {
                 projectile.InitBullet(target, 0);
             }
             else
             {
                 projectile.InitBullet(target, damageDone);
-            }            
+            }
         }
         NetworkServer.Spawn(projectileGO);
     }
@@ -150,7 +150,7 @@ public class CharacterCombat : NetworkBehaviour
         float randomNumber = Random.Range(0.0f, 1.0f);
         float critChance = myStats.critChance.GetValue();
 
-        if(critChance >=randomNumber)
+        if (critChance >= randomNumber)
         {
             isCrit = true;
         }
@@ -197,8 +197,8 @@ public class CharacterCombat : NetworkBehaviour
                 projectile.InitBullet(targetTransform, damage);
             }
 
-            
-            
+
+
             //projectile.SetTarget(transform);
         }
 
@@ -210,14 +210,14 @@ public class CharacterCombat : NetworkBehaviour
     void TellServerToSpawnBullet(Transform target, float damage)
     {
         NetworkInstanceId id = target.gameObject.GetComponent<NetworkIdentity>().netId;
-        
+
 
         //Debug.Log(transform.name + " TransmitBullet(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
         if (!isServer)
         {
             CmdSpawnBulletOnServer(id, damage);               // HIER TAUCHT DIE WARNUNG AUF. ICH GLAUBE ALLES FUNKTIONIERT SO WIE ES SOLL... 
-                                                                // ABER DIE WARNUNG NERVT!! UND ICH WEIß NICHT WIE ICH DIE LOS WERDEN KANN :(
-            //Debug.Log("CmdSpawnBulletOnServer()");
+                                                              // ABER DIE WARNUNG NERVT!! UND ICH WEIß NICHT WIE ICH DIE LOS WERDEN KANN :(
+                                                              //Debug.Log("CmdSpawnBulletOnServer()");
         }
     }
     #endregion
@@ -250,8 +250,8 @@ public class CharacterCombat : NetworkBehaviour
     /// <param name="targetStats"></param>
     [ClientCallback]
     void TellServerToDoMeleeDamage(CharacterStats targetStats, float damageDone)
-    {        
-        NetworkInstanceId id = targetStats.transform.gameObject.GetComponent<NetworkIdentity>().netId;        
+    {
+        NetworkInstanceId id = targetStats.transform.gameObject.GetComponent<NetworkIdentity>().netId;
 
         if (!isServer)
         {

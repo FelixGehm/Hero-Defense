@@ -25,9 +25,14 @@ public class EnemyController : CrowdControllable
     {
         base.Awake();
 
-        destination = PlayerManager.instance.nexus.transform;
+        //destination = PlayerManager.instance.nexus.transform;
         agent = GetComponent<NavMeshAgent>();
         combat = GetComponent<CharacterCombat>();
+    }
+
+    private void Start()
+    {
+        destination = PlayerManager.instance.nexus.transform;
     }
 
 

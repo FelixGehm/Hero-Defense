@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class CharacterAnimator : MonoBehaviour
 {
+    //Animationen können über die state machine abgespielt werden, indem die entsprechenden Attribute gesetzt werden (alles wird synchronisiert)
+    //Sollen Animationen direkt gestartet werden, muss dies über nsa.play... geschehen, damit alles synchronisiert wird
 
     const float locomotionAnimationSmoothTime = .1f;
 
@@ -17,25 +19,32 @@ public class CharacterAnimator : MonoBehaviour
 
     NetworkAnimator netAnimator;
 
+    NetworkSyncAnimations nsa;
+
+    CharacterStats myStats;
+
     //PlayerController playerController;        //Wird garnicht genutzt?
 
     float speedPercent;
 
-    [HideInInspector]
-    public bool isMovedByAgent = true;
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        //animator = GetComponentInChildren<Animator>();
         animator = GetComponentInChildren<Animator>();
         motor = GetComponent<PlayerMotor>();
+        myStats = GetComponent<CharacterStats>();
         characterCombat = GetComponent<CharacterCombat>();
         //playerController = GetComponent<PlayerController>();
         netAnimator = GetComponent<NetworkAnimator>();
+        nsa = GetComponent<NetworkSyncAnimations>();
 
         characterCombat.OnAttack += StartAttackAnimation;
         motor.OnPlayerMoved += StopAttackAnimation;
         characterCombat.OnAttackCanceled += StopAttackAnimation;
+        //myStats.attackSpeed.OnStatChanged += UpdateAttackAnimationSpeed;
+
+        UpdateAttackAnimationSpeed();
     }
 
     void Update()
@@ -50,15 +59,25 @@ public class CharacterAnimator : MonoBehaviour
     {
         animator.SetBool("cancelAttack", false);
 
+        UpdateAttackAnimationSpeed(); //TODO: Nicht hier, sondern nur dann, wenn sich der AttackSpeeed ändert
+
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot"))
         {
-            animator.Play("Shoot", -1, 0f); //Animation wird direkt abgespielt. Würde sie geblended werden, sähe das merkwürdig aus. Warum? Verstehe ich auch nicht...
+            //animator.Play("Shoot", -1, 0f); //Animation wird direkt abgespielt. Würde sie geblended werden, sähe das merkwürdig aus. Warum? Verstehe ich auch nicht...
+            nsa.PlayAttackAnimation();
+            //animator.SetTrigger("locoWithoutBlend");
+            //animator.SetTrigger("attackWithoutBlend");
+
+            //test
+            //netAnimator.SetTrigger("attack");
+            //if (NetworkServer.active) animator.ResetTrigger("attack");
         }
         else
         {
             //animator.SetTrigger("attack");
             netAnimator.SetTrigger("attack");
             if (NetworkServer.active) animator.ResetTrigger("attack");
+            //animator.SetTrigger("attackWithoutBlend");
         }
 
         //animator.SetTrigger("attack");
@@ -69,17 +88,17 @@ public class CharacterAnimator : MonoBehaviour
     {
         animator.SetBool("attack", false);
         animator.SetBool("cancelAttack", true);
+
+        //animator.ResetTrigger("attackWithoutBlend");
     }
 
-    public float GetSpeedPercent()
+    private void UpdateAttackAnimationSpeed()
     {
-        return speedPercent;
-    }
+        float attackCD = 1 / myStats.attackSpeed.GetValue();
+        float clipLength = animator.runtimeAnimatorController.animationClips[2].length;    //attack animation muss immer auf 2 liegen!!! der clip lässt sich nicht über den namen finden...
 
-    
-    public void SetSpeedPercent(float _speedPercent)
-    {
-        speedPercent = _speedPercent;
+        float animSpeed = clipLength / attackCD;
+        animator.SetFloat("attackAnimationSpeed", animSpeed);
     }
     
 
