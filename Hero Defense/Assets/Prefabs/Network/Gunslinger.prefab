@@ -159,6 +159,7 @@ GameObject:
   - component: {fileID: 114803630525136480}
   - component: {fileID: 114453215123688528}
   - component: {fileID: 114352492908675568}
+  - component: {fileID: 114017678300372106}
   m_Layer: 0
   m_Name: Gunslinger
   m_TagString: Untagged
@@ -1707,6 +1708,17 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &114017678300372106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2a527bc0c0cd3f4da205334ba1cc8bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114027344568857116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2084,7 +2096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c7d2723bab92e40b08ede3161975f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isMovedByAgent: 1
 --- !u!114 &114967110113210864
 MonoBehaviour:
   m_ObjectHideFlags: 1
