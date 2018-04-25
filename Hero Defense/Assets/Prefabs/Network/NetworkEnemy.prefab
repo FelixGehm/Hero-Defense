@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 114560907743430452}
   - component: {fileID: 114997625769305516}
   - component: {fileID: 114238095225148590}
+  - component: {fileID: 54084726387644112}
   m_Layer: 8
   m_Name: NetworkEnemy
   m_TagString: Enemy
@@ -305,6 +306,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420653983797416}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54084726387644112
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1787304293017474}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65820122317151386
 BoxCollider:
   m_ObjectHideFlags: 1

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Walkable
   - Enemy
+  - Fire
+  - Gunslinger-Q-Projectile
   layers:
   - Default
   - TransparentFX

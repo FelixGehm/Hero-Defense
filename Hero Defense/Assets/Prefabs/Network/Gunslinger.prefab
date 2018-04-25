@@ -157,11 +157,10 @@ GameObject:
   - component: {fileID: 114956156520426332}
   - component: {fileID: 114441419098395818}
   - component: {fileID: 114803630525136480}
-  - component: {fileID: 114259321967336452}
-  - component: {fileID: 114695483465087732}
   - component: {fileID: 114453215123688528}
+  - component: {fileID: 114352492908675568}
   m_Layer: 0
-  m_Name: NetworkPlayer
+  m_Name: Gunslinger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1343,7 +1342,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1118349031133886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.491032, y: 0.02000013, z: -25.708502}
+  m_LocalPosition: {x: -12.8, y: 0.02000013, z: -23.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4512134464556108}
@@ -1723,6 +1722,7 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
+  isCasting: 0
 --- !u!114 &114112510041019990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1857,18 +1857,6 @@ MonoBehaviour:
   rootRotId: 0
   elementCount: 1
   frameCount: 0
---- !u!114 &114259321967336452
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7084b7d79b68b47839576e674b2f23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 10
 --- !u!114 &114322717026101452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1896,6 +1884,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114352492908675568
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7eed44d1da747b4c8b74c65c65e3046, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityCooldown: 4
+  previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
+    type: 2}
+  projectilePrefab: {fileID: 1640169703100648, guid: 9b91f52cc1c22914aa73784a985c7adb,
+    type: 2}
+  projectileSpeed: 15
+  projectilePhysicalDamage: 100
 --- !u!114 &114396502109073638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1972,22 +1978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foreGround: {fileID: 114199499742551658}
---- !u!114 &114695483465087732
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118349031133886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31369c10545b3314487c99abacf1a934, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  abilityCooldown: 2
-  dashDistance: 6
-  dashTime: 0.5
-  stunRange: 10
-  stunDuration: 5
 --- !u!114 &114702853326103970
 MonoBehaviour:
   m_ObjectHideFlags: 1

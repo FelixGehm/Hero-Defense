@@ -37,7 +37,9 @@ public class PlayerController : CrowdControllable
         cam.GetComponent<CameraController>().SetLookAt(transform);
     }
 
-    // Update is called once per frame
+
+    public bool isCasting = false;
+    
     void Update()
     {
 
@@ -63,7 +65,7 @@ public class PlayerController : CrowdControllable
             return;
         */
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !isCasting)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
