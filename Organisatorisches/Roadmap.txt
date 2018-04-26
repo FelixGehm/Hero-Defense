@@ -14,3 +14,5 @@ MS3
 	- UI für Item und Resourcen System
 	- Jungle
 	- Bossgegner
+
+Deadline 31.08
