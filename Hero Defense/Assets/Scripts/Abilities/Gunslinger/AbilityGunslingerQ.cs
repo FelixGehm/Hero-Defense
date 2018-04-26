@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent(typeof(CharacterEventController))]
 public class AbilityGunslingerQ : NetworkBehaviour
 {
     private Camera cam;
@@ -22,7 +23,11 @@ public class AbilityGunslingerQ : NetworkBehaviour
     
 
     private bool isCasting = false;
-   
+
+    PlayerController pc;
+    CharacterEventController cec;
+
+    KeyCode abilityKey;
 
 
     // Use this for initialization
@@ -31,9 +36,14 @@ public class AbilityGunslingerQ : NetworkBehaviour
         GetComponent<CharacterEventManager>().OnAbilityOne += Cast;        
         cam = Camera.main;
 
-        
+        cec = GetComponent<CharacterEventController>();
+        pc = GetComponent<PlayerController>();
 
-        if(previewPrefab == null)
+        abilityKey = cec.abilityOneKey;
+
+
+
+        if (previewPrefab == null)
         {
             Debug.LogWarning("No Preview-Prefab on AbilityGunslingerQ!");
         }
@@ -43,6 +53,8 @@ public class AbilityGunslingerQ : NetworkBehaviour
             Debug.LogWarning("No Projectile-Prefab on AbilityGunslingerQ!");
         }
     }
+
+    bool skipFrame = false;
 
     void Update()
     {
@@ -59,18 +71,23 @@ public class AbilityGunslingerQ : NetworkBehaviour
                 previewGameObject.transform.rotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
             }
 
-            if (Input.GetMouseButtonDown(1))        // RightClick
+            if(!skipFrame)
             {
-                CancelCast();
-            }
+                if (Input.GetMouseButtonDown(1))        // RightClick
+                {
+                    CancelCast();
+                }
 
-            if (Input.GetMouseButtonDown(0))        // LeftClick
-            {
-                ShootProjectile( GetDirectionVectorBetweenPlayerAndMouse() );
-                isCasting = false;
-                GetComponent<PlayerController>().isCasting = false;
-                Destroy(previewGameObject);
+                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
+                {
+                    ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse());
+                    isCasting = false;
+                    pc.isCasting = false;
+                    cec.isCasting = false;
+                    Destroy(previewGameObject);
+                }
             }
+            skipFrame = false;            
         }
     }
 
@@ -80,15 +97,18 @@ public class AbilityGunslingerQ : NetworkBehaviour
         if (currentCooldown <= 0)
         {
             //Debug.Log("Cast(): GunslingerQ");
-            GetComponent<PlayerController>().isCasting = true;
-            ShowPreview();            
+            pc.isCasting = true;
+            cec.isCasting = true;
+            ShowPreview();
+            skipFrame = true;
         }
     }
 
     public void CancelCast()
     {
         isCasting = false;
-        GetComponent<PlayerController>().isCasting = false;
+        pc.isCasting = false;
+        cec.isCasting = false;
 
         Destroy(previewGameObject);
     }

@@ -13,6 +13,8 @@ public class AbilityHometeleport : NetworkBehaviour
 
     NetworkSyncTransform NST;
     CharacterEventManager characterEventManager;
+    CharacterEventController cec;
+
     PlayerMotor motor;
     
     void Start()
@@ -20,6 +22,7 @@ public class AbilityHometeleport : NetworkBehaviour
         NST = GetComponent<NetworkSyncTransform>();
 
         characterEventManager = GetComponent<CharacterEventManager>();
+        cec = GetComponent<CharacterEventController>();
 
         teleportPoint = GameObject.Find("HomeTeleportPoint").transform.position;
         motor = GetComponent<PlayerMotor>();
@@ -27,16 +30,34 @@ public class AbilityHometeleport : NetworkBehaviour
         characterEventManager.OnTeleport += TeleportHome;
     }
 
+    private void Update()
+    {
+        if (teleport!= null && Input.GetMouseButtonDown(1))        // RightClick
+        {
+            CancelTeleport();
+        }
+    }
+
+    Coroutine teleport;
     void TeleportHome()
     {
-        StartCoroutine(TeleportAfterDelay(castTime));
+        teleport = StartCoroutine(TeleportAfterDelay(castTime));
+        motor.MoveToPoint(transform.position);
     }
 
     public float castTime = 0.5f;
     IEnumerator TeleportAfterDelay(float delay)
     {
+        cec.isCasting = true;
         yield return new WaitForSeconds(delay);
         NST.Teleport(teleportPoint, transform.rotation);
         motor.MoveToPoint(teleportPoint);
+        cec.isCasting = false;
+    }
+
+    void CancelTeleport()
+    {
+        StopCoroutine(teleport);
+        cec.isCasting = false;
     }
 }

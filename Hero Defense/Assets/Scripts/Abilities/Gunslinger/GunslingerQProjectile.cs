@@ -46,18 +46,7 @@ public class GunslingerQProjectile : NetworkBehaviour
                 Destroy(this.gameObject);
             }
         }
-    }
-    /*
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Collison with: " + collision.gameObject.name);
-
-        if (isServer && collision.transform.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(damage);
-        }
-    }
-    */
+    } 
 
     private void OnTriggerEnter(Collider collision)
     {
