@@ -1,0 +1,287 @@
+fileFormatVersion: 2
+guid: c68e1d6409b36404dbfa019d98125447
+timeCreated: 1524919911
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Blade.L
+    100004: Blade.L_end
+    100006: Blade.R
+    100008: Blade.R_end
+    100010: BladeBackLeg.L
+    100012: BladeBackLeg.L_end
+    100014: BladeBackLeg.R
+    100016: BladeBackLeg.R_end
+    100018: BladeFrontLeg.L
+    100020: BladeFrontLeg.L_end
+    100022: BladeFrontLeg.R
+    100024: BladeFrontLeg.R_end
+    100026: Body
+    100028: //RootNode
+    100030: EnemySculptingLowPoly
+    100032: Head
+    100034: Head_end
+    100036: IKArm.L
+    100038: IKArm.L_end
+    100040: IKArm.R
+    100042: IKArm.R_end
+    100044: IKBackLeg.L
+    100046: IKBackLeg.L_end
+    100048: IKBackLeg.R
+    100050: IKBackLeg.R_end
+    100052: IKFrontLeg.L
+    100054: IKFrontLeg.L_end
+    100056: IKFrontLeg.R
+    100058: IKFrontLeg.R_end
+    100060: LowerArm.L
+    100062: LowerArm.R
+    100064: LowerBackLeg.L
+    100066: LowerBackLeg.R
+    100068: LowerFrontLeg.L
+    100070: LowerFrontLeg.R
+    100072: TargetArm.L
+    100074: TargetArm.L_end
+    100076: TargetArm.R
+    100078: TargetArm.R_end
+    100080: TargetBackLeg.L
+    100082: TargetBackLeg.L_end
+    100084: TargetBackLeg.R
+    100086: TargetBackLeg.R_end
+    100088: TargetFrontLeg.L
+    100090: TargetFrontLeg.L_end
+    100092: TargetFrontLeg.R
+    100094: TargetFrontLeg.R_end
+    100096: UpperArm.L
+    100098: UpperArm.R
+    100100: UpperBackLeg.L
+    100102: UpperBackLeg.R
+    100104: UpperFrontLeg.L
+    100106: UpperFrontLeg.R
+    400000: Armature
+    400002: Blade.L
+    400004: Blade.L_end
+    400006: Blade.R
+    400008: Blade.R_end
+    400010: BladeBackLeg.L
+    400012: BladeBackLeg.L_end
+    400014: BladeBackLeg.R
+    400016: BladeBackLeg.R_end
+    400018: BladeFrontLeg.L
+    400020: BladeFrontLeg.L_end
+    400022: BladeFrontLeg.R
+    400024: BladeFrontLeg.R_end
+    400026: Body
+    400028: //RootNode
+    400030: EnemySculptingLowPoly
+    400032: Head
+    400034: Head_end
+    400036: IKArm.L
+    400038: IKArm.L_end
+    400040: IKArm.R
+    400042: IKArm.R_end
+    400044: IKBackLeg.L
+    400046: IKBackLeg.L_end
+    400048: IKBackLeg.R
+    400050: IKBackLeg.R_end
+    400052: IKFrontLeg.L
+    400054: IKFrontLeg.L_end
+    400056: IKFrontLeg.R
+    400058: IKFrontLeg.R_end
+    400060: LowerArm.L
+    400062: LowerArm.R
+    400064: LowerBackLeg.L
+    400066: LowerBackLeg.R
+    400068: LowerFrontLeg.L
+    400070: LowerFrontLeg.R
+    400072: TargetArm.L
+    400074: TargetArm.L_end
+    400076: TargetArm.R
+    400078: TargetArm.R_end
+    400080: TargetBackLeg.L
+    400082: TargetBackLeg.L_end
+    400084: TargetBackLeg.R
+    400086: TargetBackLeg.R_end
+    400088: TargetFrontLeg.L
+    400090: TargetFrontLeg.L_end
+    400092: TargetFrontLeg.R
+    400094: TargetFrontLeg.R_end
+    400096: UpperArm.L
+    400098: UpperArm.R
+    400100: UpperBackLeg.L
+    400102: UpperBackLeg.R
+    400104: UpperFrontLeg.L
+    400106: UpperFrontLeg.R
+    2100000: No Name
+    4300000: EnemySculptingLowPoly
+    7400000: Armature|Attack
+    7400002: Armature|Idle
+    7400004: Armature|Run
+    9500000: //RootNode
+    13700000: EnemySculptingLowPoly
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: <Root Transform>
+    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
+      human bone 'LeftFoot' not found\n"
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 3
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Armature|Attack
+      takeName: Armature|Attack
+      firstFrame: 0
+      lastFrame: 31
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Idle
+      takeName: Armature|Idle
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature|Run
+      takeName: Armature|Run
+      firstFrame: 0
+      lastFrame: 24
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 1
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
