@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c68e1d6409b36404dbfa019d98125447
-timeCreated: 1524919911
+guid: 62c564af988353049893e47b963ebbce
+timeCreated: 1524931248
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -19,8 +19,8 @@ ModelImporter:
     100022: BladeFrontLeg.R
     100024: BladeFrontLeg.R_end
     100026: Body
-    100028: //RootNode
-    100030: EnemySculptingLowPoly
+    100028: EnemySculptingLowPoly
+    100030: //RootNode
     100032: Head
     100034: Head_end
     100036: IKArm.L
@@ -73,8 +73,8 @@ ModelImporter:
     400022: BladeFrontLeg.R
     400024: BladeFrontLeg.R_end
     400026: Body
-    400028: //RootNode
-    400030: EnemySculptingLowPoly
+    400028: EnemySculptingLowPoly
+    400030: //RootNode
     400032: Head
     400034: Head_end
     400036: IKArm.L
@@ -113,14 +113,49 @@ ModelImporter:
     400102: UpperBackLeg.R
     400104: UpperFrontLeg.L
     400106: UpperFrontLeg.R
-    2100000: No Name
+    2100000: MainMetal
+    2100002: Blade
+    2100004: Gears
+    2100006: Details
+    2100008: Display
+    2100010: Black
     4300000: EnemySculptingLowPoly
     7400000: Armature|Attack
     7400002: Armature|Idle
     7400004: Armature|Run
     9500000: //RootNode
     13700000: EnemySculptingLowPoly
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: 746bf7566af0ef74fba2c019af109a6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blade
+    second: {fileID: 2100000, guid: 02fddf4f44c5db141ac41c87b6d5b560, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Details
+    second: {fileID: 2100000, guid: 79ac9abefd701d0418c89866ea8cc124, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Display
+    second: {fileID: 2100000, guid: ec449957ba0c49d4883588942b9bc34e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gears
+    second: {fileID: 2100000, guid: 20f634b7ef18d1346840dfa5f56e5ddc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: MainMetal
+    second: {fileID: 2100000, guid: cb49b2a710b446141882cd10d6359c28, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -132,15 +167,14 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: <Root Transform>
-    rigImportErrors: "Invalid Avatar Rig Configuration. Missing or invalid transform:\n\tRequired
-      human bone 'LeftFoot' not found\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -276,7 +310,7 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
