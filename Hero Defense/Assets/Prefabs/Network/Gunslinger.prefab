@@ -1733,7 +1733,7 @@ MonoBehaviour:
   focus: {fileID: 0}
   rightClickMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
   isCasting: 0
 --- !u!114 &114112510041019990
 MonoBehaviour:
@@ -1914,6 +1914,9 @@ MonoBehaviour:
     type: 2}
   projectileSpeed: 15
   projectilePhysicalDamage: 100
+  rightClickMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &114396502109073638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2058,6 +2061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b435e736e01ec843923290206299edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCasting: 0
   teleportKey: 98
   abilityOneKey: 113
   abilityTwoKey: 119

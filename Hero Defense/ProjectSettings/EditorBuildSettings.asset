@@ -9,8 +9,11 @@ EditorBuildSettings:
     path: Assets/MPLobby.unity
     guid: bc81cd060e20ee448b382cf1a8ecb77d
   - enabled: 1
+    path: Assets/Main.unity
+    guid: 9df4c2c1bf1ce274683f771595bbfe74
+  - enabled: 0
     path: Assets/Flo.unity
     guid: da8f28177fa9bc24ea0eeaea1765dfb8
-  - enabled: 1
+  - enabled: 0
     path: Assets/Felix.unity
     guid: a8080b6b646ef8747af57cc09b3227df

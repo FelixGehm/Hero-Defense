@@ -1159,7 +1159,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 0
-  m_Text: NETWORK LOBBY EXAMPLE
+  m_Text: 'Hero Defence, Last Bastion
+
+'
 --- !u!114 &11403610
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3270,7 +3272,7 @@ MonoBehaviour:
   m_GamePlayerPrefab: {fileID: 1118349031133886, guid: 1d6024e6addffdb41ae8003dae40ea4c,
     type: 2}
   m_LobbyScene: MPLobby
-  m_PlayScene: Flo
+  m_PlayScene: Main
   lobbySlots: []
   prematchCountdown: 3
   topPanel: {fileID: 11424994}

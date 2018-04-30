@@ -37,11 +37,9 @@ GameObject:
   m_Component:
   - component: {fileID: 224669584744888600}
   - component: {fileID: 223727587321138882}
-  - component: {fileID: 114821176936278084}
   - component: {fileID: 114938992134987200}
   - component: {fileID: 212833026763249474}
-  - component: {fileID: 114702572002955282}
-  - component: {fileID: 114486933685797166}
+  - component: {fileID: 114677687489561042}
   m_Layer: 2
   m_Name: HealthBar
   m_TagString: Untagged
@@ -93,17 +91,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114486933685797166
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1324262250019498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ced2b563beefea499bbae6f3123ae6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114546857048653446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,7 +118,7 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114702572002955282
+--- !u!114 &114677687489561042
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -139,31 +126,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1324262250019498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d7c908a4bee7d643b71160ad3f9d7ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 1af8c6943e0d4874f914a157c20db7df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foreGround: {fileID: 0}
---- !u!114 &114821176936278084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1324262250019498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  foreGround: {fileID: 114209750573048450}
+  stats: {fileID: 0}
 --- !u!114 &114938992134987200
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,7 +229,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1584560790656912}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -271,8 +238,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.0848}
-  m_SizeDelta: {x: 0, y: 0.1696}
+  m_AnchoredPosition: {x: 0, y: 19.149984}
+  m_SizeDelta: {x: 0, y: 38.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224406629164848406
 RectTransform:
@@ -280,7 +247,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1308895098955910}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -290,8 +257,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.08225581}
-  m_SizeDelta: {x: 0, y: 0.1645}
+  m_AnchoredPosition: {x: 0, y: 19.15}
+  m_SizeDelta: {x: 0, y: 38.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224669584744888600
 RectTransform:
@@ -301,14 +268,14 @@ RectTransform:
   m_GameObject: {fileID: 1324262250019498}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6.438836, y: 0.97719836, z: -1}
   m_Children:
   - {fileID: 224406629164848406}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.446}
-  m_SizeDelta: {x: 1.776, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: -56.3}
+  m_SizeDelta: {x: 60, y: 38.3}
   m_Pivot: {x: 0.5, y: 0.5}

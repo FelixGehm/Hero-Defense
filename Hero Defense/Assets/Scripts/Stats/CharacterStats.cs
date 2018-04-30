@@ -14,10 +14,19 @@ public class CharacterStats : NetworkBehaviour
     {
         CurrentHealth = maxHealth.GetValue();
 
-        uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
-
-        //isLocalPlayer = string.Compare("LocalPlayer", gameObject.name.Substring(0, 10));
         isEnemy = gameObject.CompareTag("Enemy");
+
+        if (!isEnemy)
+        {
+            if (GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>() != null)
+            {
+                uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
+            }
+            else
+            {
+                Debug.LogWarning("No UIHealthBar Script Found");
+            }
+        }
     }
 
     private bool isEnemy;

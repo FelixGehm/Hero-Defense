@@ -16,6 +16,12 @@ public class GunslingerQProjectile : NetworkBehaviour
     private bool hasStartPoint = false;
     private Vector3 startPoint;
 
+    
+
+    //private int[] targets
+
+
+
     public void SetMaxDistance(float dist)
     {
         maxDistance = dist;
@@ -50,7 +56,7 @@ public class GunslingerQProjectile : NetworkBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Collison with: " + collision.gameObject.name);
+        //Debug.Log("Collison with: " + collision.gameObject.name);
 
         if (isServer && collision.transform.CompareTag("Enemy"))
         {

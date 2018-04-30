@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(CharacterEventController))]
@@ -9,23 +10,30 @@ public class AbilityGunslingerQ : NetworkBehaviour
     public float abilityCooldown = 4.0f;
     private float currentCooldown = 0.0f;
 
+    public float abilityCastTime = 1.3f;
+
+
     [Space]
     public GameObject previewPrefab;
     private GameObject previewGameObject;
-    
+
     [Header("Projectile settings")]
     public GameObject projectilePrefab;
 
-    public float projectileSpeed = 10.0f;   
+    public float projectileSpeed = 10.0f;
 
     public float projectilePhysicalDamage = 100.0f;
 
-    
+    public LayerMask rightClickMask;
+
+
 
     private bool isCasting = false;
+    private bool isAnimating = false;
 
     PlayerController pc;
     CharacterEventController cec;
+    PlayerMotor motor;
 
     KeyCode abilityKey;
 
@@ -33,11 +41,12 @@ public class AbilityGunslingerQ : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        GetComponent<CharacterEventManager>().OnAbilityOne += Cast;        
+        GetComponent<CharacterEventManager>().OnAbilityOne += Cast;
         cam = Camera.main;
 
         cec = GetComponent<CharacterEventController>();
         pc = GetComponent<PlayerController>();
+        motor = GetComponent<PlayerMotor>();
 
         abilityKey = cec.abilityOneKey;
 
@@ -58,45 +67,44 @@ public class AbilityGunslingerQ : NetworkBehaviour
 
     void Update()
     {
-        if(!isCasting)
+        if (isLocalPlayer)
         {
-            currentCooldown -= Time.deltaTime;
-        }
-        else
-        {
-            if (previewGameObject != null)
+            if (!isCasting)
             {
-                // Position und Rotation der Preview anpassen
-                previewGameObject.transform.position = transform.position;
-                previewGameObject.transform.rotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
+                currentCooldown -= Time.deltaTime;
             }
-
-            if(!skipFrame)
+            else
             {
-                if (Input.GetMouseButtonDown(1))        // RightClick
+                if (previewGameObject != null)
                 {
-                    CancelCast();
+                    // Position und Rotation der Preview anpassen
+                    previewGameObject.transform.position = transform.position;
+                    previewGameObject.transform.rotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
                 }
 
-                if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
+                if (!skipFrame)
                 {
-                    ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse());
-                    isCasting = false;
-                    pc.isCasting = false;
-                    cec.isCasting = false;
-                    Destroy(previewGameObject);
+                    if (Input.GetMouseButtonDown(1) && !isAnimating)        // RightClick
+                    {
+                        CancelCast();
+                    }
+
+                    if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
+                    {
+                        motor.MoveToPoint(transform.position);
+                        StartCoroutine( ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
+                    }
                 }
+                skipFrame = false;
             }
-            skipFrame = false;            
         }
     }
 
     public void Cast()
     {
-        
-        if (currentCooldown <= 0)
-        {
-            //Debug.Log("Cast(): GunslingerQ");
+
+        if (isLocalPlayer && currentCooldown <= 0)
+        {            
             pc.isCasting = true;
             cec.isCasting = true;
             ShowPreview();
@@ -121,20 +129,72 @@ public class AbilityGunslingerQ : NetworkBehaviour
         previewGameObject = Instantiate(previewPrefab);
     }
 
-    private void ShootProjectile(Vector3 direction)
+    private IEnumerator ShootProjectile(Vector3 direction)
     {
-     //   Debug.Log("ShootProjectile():");
+        
+
+        Vector3 firePoint = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetStartPos();
+        Quaternion rotation = previewGameObject.transform.rotation;
+        float maxDistance = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetDistance();
+
+        Destroy(previewGameObject);
+
+        //Debug.Log("ShootProjectile(): AnimationTime!");
+        isAnimating = true;
+
+        yield return new WaitForSeconds(abilityCastTime);
+        isAnimating = false;
+
+        //Debug.Log("ShootProjectile(): AnimationTime over!");
+
+        isCasting = false;
+        pc.isCasting = false;
+        cec.isCasting = false;        
 
         currentCooldown = abilityCooldown;
+
         
-        if(isServer)
+
+        if (isServer)
         {
-            CmdSpawnProjectileOnServer(projectilePhysicalDamage,direction);
-        } else
-        {
-            TellServerToSpawnProjectile(projectilePhysicalDamage, direction);
+            CmdSpawnProjectileOnServer(projectilePhysicalDamage, direction, firePoint, rotation, maxDistance);
         }
-        
+        else
+        {
+            TellServerToSpawnProjectile(projectilePhysicalDamage, direction, firePoint, rotation, maxDistance);
+        }
+
+    }
+
+    [Command]
+    void CmdSpawnProjectileOnServer(float damage, Vector3 direction, Vector3 firePoint, Quaternion rotation, float maxDistance)
+    {
+        //Debug.Log("CmdSpawnProjectileOnServer()");
+
+        GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint, rotation);
+        GunslingerQProjectile projectile = projectileGO.GetComponent<GunslingerQProjectile>();
+
+        if (projectile != null)
+        {
+            projectile.SetDirection(direction);
+            projectile.SetMaxDistance(maxDistance);
+            projectile.speed = projectileSpeed;
+            projectile.damage = damage;
+        }
+
+        //Debug.Log(projectileGO);
+        NetworkServer.Spawn(projectileGO);
+    }
+
+    [ClientCallback]
+    void TellServerToSpawnProjectile(float damage, Vector3 direction, Vector3 firePoint, Quaternion rotation, float maxDistance)
+    {
+        Debug.Log("TellServerToSpawnProjectile(float damage, Vector3 direction)");
+
+        if (!isServer)
+        {
+            CmdSpawnProjectileOnServer(damage, direction, firePoint, rotation, maxDistance);
+        }
     }
 
     private Vector3 GetDirectionVectorBetweenPlayerAndMouse()
@@ -142,15 +202,17 @@ public class AbilityGunslingerQ : NetworkBehaviour
         Vector3 playerPos = transform.position;
 
         Vector3 mousePos = new Vector3();
+
+
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 10000))
+        if (Physics.Raycast(ray, out hit, 100, rightClickMask))
         {
             mousePos = hit.point;
         }
 
         Vector3 direction = Vector3.Normalize(mousePos - playerPos);
-        
+
         return direction;
     }
 
@@ -162,42 +224,10 @@ public class AbilityGunslingerQ : NetworkBehaviour
 
         if (direction.x < 0.0f)
         {
-            angle = 360.0f-angle;
+            angle = 360.0f - angle;
         }
         //Debug.Log("angle = " + angle);
         return angle;
     }
 
-    [Command]
-    void CmdSpawnProjectileOnServer(float damage, Vector3 direction)
-    {
-
-        Vector3 firePoint = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetStartPos();
-
-        GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint, previewGameObject.transform.rotation);
-        GunslingerQProjectile projectile = projectileGO.GetComponent<GunslingerQProjectile>();
-
-        if (projectile != null)
-        {             
-            projectile.SetDirection(direction);
-
-            float maxDistance = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetDistance();
-            
-            projectile.SetMaxDistance(maxDistance);
-            projectile.speed = projectileSpeed;
-            projectile.damage = damage;
-        }
-
-        //Debug.Log(projectileGO);
-        NetworkServer.Spawn(projectileGO);
-    }
-
-    [ClientCallback]
-    void TellServerToSpawnProjectile(float damage, Vector3 direction)
-    {
-        if (!isServer)
-        {
-            CmdSpawnProjectileOnServer(damage, direction);
-        }
-    }
 }
