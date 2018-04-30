@@ -31,7 +31,7 @@ public class CharacterAnimator : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         //animator = GetComponentInChildren<Animator>();
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
         motor = GetComponent<PlayerMotor>();
         myStats = GetComponent<CharacterStats>();
         characterCombat = GetComponent<CharacterCombat>();

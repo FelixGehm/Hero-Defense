@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class NetworkSetupEnemy : NetworkSetup {
 
@@ -11,11 +12,31 @@ public class NetworkSetupEnemy : NetworkSetup {
         if (isServer)
         {
             GetComponent<EnemyController>().enabled = true;
-            
+
             // Register Enemy in PlayerManager ?? 
             //PlayerManager.instance.RegisterPlayer(transform.gameObject);
         }
+        else
+        {
+            GetComponent<EnemyAnimator>().enabled = false;
+        }
 
+    }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(1, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(2, true);
+    }
+
+    public override void PreStartClient()
+    {
+        base.PreStartClient();
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(1, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(2, true);
     }
 
     private void OnDestroy()

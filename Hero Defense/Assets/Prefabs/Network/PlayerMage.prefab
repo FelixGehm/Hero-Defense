@@ -2217,6 +2217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b435e736e01ec843923290206299edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCasting: 0
   teleportKey: 98
   abilityOneKey: 113
   abilityTwoKey: 119
@@ -2234,7 +2235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95834123367598526}
-  m_ParameterSendBits: 7
+  m_ParameterSendBits: 15
   param0: 
   param1: 
   param2: 
@@ -2410,6 +2411,7 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
+  isCasting: 0
 --- !u!114 &114533616463788054
 MonoBehaviour:
   m_ObjectHideFlags: 1
