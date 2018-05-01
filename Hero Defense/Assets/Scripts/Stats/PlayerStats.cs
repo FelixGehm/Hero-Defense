@@ -2,12 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : CharacterStats {
+public class PlayerStats : CharacterStats
+{
 
-	// Use this for initialization
-	void Start () {
+    public override void Awake()
+    {
+        base.Awake();
+
+        if (GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>() != null)
+        {
+            uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
+        }
+        else
+        {
+            Debug.LogWarning("No UIHealthBar Script Found");
+        }
+    }
+
+    // Use this for initialization
+    void Start()
+    {
         EquipmentManager.instance.onEquipmentChangedCallback += OnEquipmentChanged;
-	}	
+    }
 
     void OnEquipmentChanged(bool wasAdded, Equipment equipment)
     {

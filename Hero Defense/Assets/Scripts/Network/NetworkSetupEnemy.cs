@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class NetworkSetupEnemy : NetworkSetup {
+    public bool isAnimating = true;
 
     void Start()
     {
@@ -25,6 +26,8 @@ public class NetworkSetupEnemy : NetworkSetup {
 
     public override void OnStartLocalPlayer()
     {
+        if (!isAnimating) return;
+
         base.OnStartLocalPlayer();
         GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
         GetComponent<NetworkAnimator>().SetParameterAutoSend(1, true);
@@ -33,6 +36,8 @@ public class NetworkSetupEnemy : NetworkSetup {
 
     public override void PreStartClient()
     {
+        if (!isAnimating) return;
+
         base.PreStartClient();
         GetComponent<NetworkAnimator>().SetParameterAutoSend(0, true);
         GetComponent<NetworkAnimator>().SetParameterAutoSend(1, true);

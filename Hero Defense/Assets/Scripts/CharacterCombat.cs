@@ -70,7 +70,7 @@ public class CharacterCombat : NetworkBehaviour
                 OnAttack();
 
             attackCooldown = 1.0f / attackSpeed;
-            Debug.Log("attack");
+            //Debug.Log("attack");
         }
     }
 

@@ -10,7 +10,8 @@ public class EnemyController : CrowdControllable
     public float lookRadius = 10;
 
 
-    Transform destination;  //der nexus
+    Transform nexus;  //der nexus
+    CharacterStats nexusStats;
 
     public Transform target;       //der nächstgelegene spieler     // nach tests wieder protected machen!!!
 
@@ -20,6 +21,11 @@ public class EnemyController : CrowdControllable
 
     NavMeshAgent agent;
     CharacterCombat combat;
+
+    //Update the stopping Distances based on the target's size
+    [Header("Agent Stopping Distances")]
+    public float stoppingDistancePlayer = 1.2f;
+    public float stoppingDistanceNexus = 2;
 
     public override void Awake()
     {
@@ -32,7 +38,9 @@ public class EnemyController : CrowdControllable
 
     private void Start()
     {
-        destination = PlayerManager.instance.nexus.transform;
+        //nexus = PlayerManager.instance.nexus.transform;  //TODO: über GameManager holen
+        nexus = GameManager.instance.nexus.transform;
+        nexusStats = nexus.GetComponent<CharacterStats>();
     }
 
 
@@ -50,13 +58,14 @@ public class EnemyController : CrowdControllable
             }
 
             distanceToTarget = Vector3.Distance(target.position, transform.position);
-            distanceToDestination = Vector3.Distance(destination.position, transform.position);
+            distanceToDestination = Vector3.Distance(nexus.position, transform.position);
 
             //hier vielleicht ab einer bestimmenten distanz zum nexus den Spieler ignorieren?
             if (distanceToTarget <= lookRadius || myStatuses.Contains(Status.taunted))
             {
                 //Moving to Player and attack
                 agent.SetDestination(target.position);
+                agent.stoppingDistance = stoppingDistancePlayer;
 
                 if (distanceToTarget <= agent.stoppingDistance)
                 {
@@ -75,10 +84,12 @@ public class EnemyController : CrowdControllable
             else
             {
                 //Moving to Nexus
-                agent.SetDestination(destination.position);
-                if (distanceToDestination <= agent.stoppingDistance)
+                agent.SetDestination(nexus.position);
+                agent.stoppingDistance = stoppingDistanceNexus;
+                if (distanceToDestination <= agent.stoppingDistance && nexusStats.CurrentHealth >= 0)
                 {
-                    FaceTarget(destination);
+                    FaceTarget(nexus);
+                    combat.Attack(nexusStats);
                 }
             }
         }

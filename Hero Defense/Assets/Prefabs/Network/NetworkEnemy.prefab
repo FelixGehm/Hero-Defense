@@ -400,6 +400,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookRadius: 2
   target: {fileID: 0}
+  stoppingDistancePlayer: 1.2
+  stoppingDistanceNexus: 2
 --- !u!114 &114445123525202334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -413,6 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   componentsToDisable:
   - {fileID: 114298287775293178}
+  isAnimating: 0
 --- !u!114 &114506623545954114
 MonoBehaviour:
   m_ObjectHideFlags: 1

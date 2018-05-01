@@ -8,14 +8,15 @@ using UnityEngine.Networking;
 public class CharacterStats : NetworkBehaviour
 {
     public HealthBarManager healthBarManager;
-    private UIHealthBar uIHealthBar;
+    protected UIHealthBar uIHealthBar;
 
-    void Awake()
+    public virtual void Awake()
     {
         CurrentHealth = maxHealth.GetValue();
 
         isEnemy = gameObject.CompareTag("Enemy");
 
+        /*
         if (!isEnemy)
         {
             if (GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>() != null)
@@ -27,9 +28,10 @@ public class CharacterStats : NetworkBehaviour
                 Debug.LogWarning("No UIHealthBar Script Found");
             }
         }
+        */
     }
 
-    private bool isEnemy;
+    protected bool isEnemy;
 
 
     /// <summary>
@@ -40,7 +42,7 @@ public class CharacterStats : NetworkBehaviour
     [SyncVar(hook = "OnChangeHealth")]
     private float syncedCurrentHealth;
 
-    public virtual float CurrentHealth
+    public virtual float CurrentHealth  //TODO: Das kann doch einfach in PlayerStats überschrieben werden. Dann wird das etwas übersichtlicher
     {
         get
         {
@@ -90,7 +92,7 @@ public class CharacterStats : NetworkBehaviour
 
     protected void Update()
     {
-        if(isServer)
+        if (isServer)
         {
             currentTickCoolDown -= Time.deltaTime;
 
@@ -103,7 +105,7 @@ public class CharacterStats : NetworkBehaviour
                 CurrentHealth += maxHealth.GetValue() * healthRegeneration.GetValue();
             }
         }
-        
+
     }
 
     [Header("0.0 = 0% Health returned per tick, 1.0 = 100% Health returned per tick")]
@@ -130,7 +132,7 @@ public class CharacterStats : NetworkBehaviour
 
     #region TrueDamage
     public void TakeTrueDamage(float tDamage)
-    {     
+    {
         if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
         {
             return;
@@ -198,6 +200,8 @@ public class CharacterStats : NetworkBehaviour
     /// </summary>
     private void OnDrawGizmosSelected()
     {
+        if (attackRange.GetValue() == 0) return;
+
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, (float)attackRange.GetValue());
     }
