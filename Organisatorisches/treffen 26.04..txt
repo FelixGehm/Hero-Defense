@@ -1,0 +1,28 @@
+26.04.
+Gegnerverhalten
+
+Nahkampf
+
+Schaden über Nähe/Sicht
+
+Aggrowert
+- sichtaggro
+- kampfaggro
+
+Fähigkeiten visualisierung
+
+Gunslinger
+-Buff(W)
+	-Waffenattachment
+	-blaues Leuchten
+	
+-Granate
+	-aus starker Waffe
+
+-Durchschlagendes Geschoß
+	-am Arm 
+	-zweite Waffe?
+	-klingen
+
+-Ult
+	-mehrere Ziele

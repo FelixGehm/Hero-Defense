@@ -1,0 +1,25 @@
+Aufgaben Woche 5: 25.04. - 03.05.
+
+Felix: 
+	- Nexus Code
+	- Wellensystem
+	- Enemy behavior
+	- Aggro System
+
+Sven:
+	- fähigkeit für Gunslinger
+	- 4 spells Animationen
+	- AA - Animation
+	- Waffe hinzufügen
+
+Flo: 
+	- fähigkeiten von Sven 
+
+Moritz: 
+	- HUD in Unity
+	- Bilder für Fähigkeiten / Namen
+	- 
+
+Clara:  
+	- Artwork Kran
+	- Artwork kaputtes Gebäude
