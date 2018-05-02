@@ -158,8 +158,9 @@ GameObject:
   - component: {fileID: 114441419098395818}
   - component: {fileID: 114803630525136480}
   - component: {fileID: 114453215123688528}
-  - component: {fileID: 114352492908675568}
   - component: {fileID: 114017678300372106}
+  - component: {fileID: 114352492908675568}
+  - component: {fileID: 114083424393021974}
   m_Layer: 0
   m_Name: Gunslinger
   m_TagString: Untagged
@@ -1735,6 +1736,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   isCasting: 0
+--- !u!114 &114083424393021974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b38395e3345b2647936dc6af84c4c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityCooldown: 1
+  abilityCastTime: 0.3
+  manaPerSeconds: 0
+  physicalDamageBonus: 5
+  critChanceBonus: 0.05
 --- !u!114 &114112510041019990
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1908,12 +1925,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityCooldown: 4
+  abilityCastTime: 0.3
   previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
     type: 2}
   projectilePrefab: {fileID: 1640169703100648, guid: 9b91f52cc1c22914aa73784a985c7adb,
     type: 2}
   projectileSpeed: 15
-  projectilePhysicalDamage: 100
+  projectilePhysicalDamage: 10
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512

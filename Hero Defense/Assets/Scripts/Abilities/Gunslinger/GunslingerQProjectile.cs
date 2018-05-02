@@ -16,9 +16,8 @@ public class GunslingerQProjectile : NetworkBehaviour
     private bool hasStartPoint = false;
     private Vector3 startPoint;
 
-    
-
-    //private int[] targets
+    private int hitCounter = 0;
+    private float[] damageStages = { 1.0f, 0.75f, 0.5f };
 
 
 
@@ -56,11 +55,16 @@ public class GunslingerQProjectile : NetworkBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        //Debug.Log("Collison with: " + collision.gameObject.name);
+        Debug.Log("Collison with: " + collision.gameObject.name);
 
         if (isServer && collision.transform.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(damage);
+            collision.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(damage* damageStages[hitCounter]);
+
+            if(hitCounter < damageStages.Length-1)
+            {
+                hitCounter++;
+            }
         }
     }
 }

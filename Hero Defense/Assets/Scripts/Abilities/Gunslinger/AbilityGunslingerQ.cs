@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(CharacterEventController))]
-public class AbilityGunslingerQ : NetworkBehaviour
+public class AbilityGunslingerQ : AbilityBasic
 {
     private Camera cam;
 
-    public float abilityCooldown = 4.0f;
-    private float currentCooldown = 0.0f;
+    //public float abilityCooldown = 4.0f;
+    //private float currentCooldown = 0.0f;
 
-    public float abilityCastTime = 1.3f;
+    //public float abilityCastTime = 0.3f;
 
 
     [Space]
@@ -22,15 +22,15 @@ public class AbilityGunslingerQ : NetworkBehaviour
 
     public float projectileSpeed = 10.0f;
 
-    public float projectilePhysicalDamage = 100.0f;
+    public float projectilePhysicalDamage = 10.0f;
 
     public LayerMask rightClickMask;
 
 
-
+    /*
     private bool isCasting = false;
     private bool isAnimating = false;
-
+    */
     PlayerController pc;
     CharacterEventController cec;
     PlayerMotor motor;
@@ -65,13 +65,15 @@ public class AbilityGunslingerQ : NetworkBehaviour
 
     bool skipFrame = false;
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
+
         if (isLocalPlayer)
         {
             if (!isCasting)
             {
-                currentCooldown -= Time.deltaTime;
+                //currentCooldown -= Time.deltaTime;
             }
             else
             {
@@ -92,7 +94,7 @@ public class AbilityGunslingerQ : NetworkBehaviour
                     if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
                     {
                         motor.MoveToPoint(transform.position);
-                        StartCoroutine( ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
+                        StartCoroutine(ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
                     }
                 }
                 skipFrame = false;
@@ -100,11 +102,11 @@ public class AbilityGunslingerQ : NetworkBehaviour
         }
     }
 
-    public void Cast()
+    protected override void Cast()
     {
 
         if (isLocalPlayer && currentCooldown <= 0)
-        {            
+        {
             pc.isCasting = true;
             cec.isCasting = true;
             ShowPreview();
@@ -131,8 +133,6 @@ public class AbilityGunslingerQ : NetworkBehaviour
 
     private IEnumerator ShootProjectile(Vector3 direction)
     {
-        
-
         Vector3 firePoint = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetStartPos();
         Quaternion rotation = previewGameObject.transform.rotation;
         float maxDistance = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetDistance();
@@ -149,11 +149,11 @@ public class AbilityGunslingerQ : NetworkBehaviour
 
         isCasting = false;
         pc.isCasting = false;
-        cec.isCasting = false;        
+        cec.isCasting = false;
 
         currentCooldown = abilityCooldown;
 
-        
+
 
         if (isServer)
         {
@@ -189,7 +189,7 @@ public class AbilityGunslingerQ : NetworkBehaviour
     [ClientCallback]
     void TellServerToSpawnProjectile(float damage, Vector3 direction, Vector3 firePoint, Quaternion rotation, float maxDistance)
     {
-        Debug.Log("TellServerToSpawnProjectile(float damage, Vector3 direction)");
+        //Debug.Log("TellServerToSpawnProjectile(float damage, Vector3 direction)");
 
         if (!isServer)
         {
@@ -197,7 +197,7 @@ public class AbilityGunslingerQ : NetworkBehaviour
         }
     }
 
-    private Vector3 GetDirectionVectorBetweenPlayerAndMouse()
+    protected Vector3 GetDirectionVectorBetweenPlayerAndMouse()
     {
         Vector3 playerPos = transform.position;
 
@@ -216,7 +216,7 @@ public class AbilityGunslingerQ : NetworkBehaviour
         return direction;
     }
 
-    private float GetAngleFromDirection()
+    protected float GetAngleFromDirection()
     {
         float angle = 0.0f;
         Vector3 direction = GetDirectionVectorBetweenPlayerAndMouse();
