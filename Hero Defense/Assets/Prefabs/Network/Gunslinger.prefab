@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 114017678300372106}
   - component: {fileID: 114352492908675568}
   - component: {fileID: 114083424393021974}
+  - component: {fileID: 114169889219006038}
   m_Layer: 0
   m_Name: Gunslinger
   m_TagString: Untagged
@@ -1344,7 +1345,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1118349031133886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.8, y: 0.02000013, z: -23.65}
+  m_LocalPosition: {x: -40.649914, y: 0.02000013, z: -35.22155}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4512134464556108}
@@ -1811,6 +1812,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54f7265906dfce409ae4c13bb7b0f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114169889219006038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3787f828d2aed4d90734ccbb893750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityCooldown: 4
+  abilityCastTime: 0.3
+  rightClickMask:
+    serializedVersion: 2
+    m_Bits: 512
+  maxRange: 5
+  previewPrefab: {fileID: 1142147063469738, guid: 2049af36a1b236c48a43fcb46b74b2c9,
+    type: 2}
+  maxRangePrefab: {fileID: 1185851477789976, guid: bc1a89c6827e8cd4d905341ad1e5c14b,
+    type: 2}
 --- !u!114 &114199499742551658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2051,7 +2073,7 @@ MonoBehaviour:
     baseValue: 0.5
     modifiers: []
   attackRange:
-    baseValue: 7
+    baseValue: 1
     modifiers: []
   moveSpeed:
     baseValue: 0

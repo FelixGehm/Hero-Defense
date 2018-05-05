@@ -73,7 +73,7 @@ public class AbilityGunslingerQ : AbilityBasic
         {
             if (!isCasting)
             {
-                //currentCooldown -= Time.deltaTime;
+                //currentCooldown -= Time.deltaTime;   <-  base-Klasse übernimmt
             }
             else
             {
