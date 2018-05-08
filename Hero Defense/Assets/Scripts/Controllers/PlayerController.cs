@@ -184,6 +184,12 @@ public class PlayerController : CrowdControllable
         //cancel all abilities
         RemoveFocus();     //ja oder nein?
 
+
+        while (myStatuses.Contains(Status.stunned))
+        {
+            myStatuses.Remove(Status.stunned);
+        }
+
         myStatuses.Add(Status.stunned);
 
         motor.MoveToPoint(transform.position);

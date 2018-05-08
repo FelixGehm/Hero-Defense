@@ -71,11 +71,7 @@ public class AbilityGunslingerQ : AbilityBasic
 
         if (isLocalPlayer)
         {
-            if (!isCasting)
-            {
-                //currentCooldown -= Time.deltaTime;   <-  base-Klasse übernimmt
-            }
-            else
+            if (isCasting)
             {
                 if (previewGameObject != null)
                 {

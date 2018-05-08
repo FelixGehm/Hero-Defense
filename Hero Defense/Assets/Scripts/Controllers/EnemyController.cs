@@ -54,7 +54,7 @@ public class EnemyController : CrowdControllable
         {
             if (target == null && !myStatuses.Contains(Status.taunted))
             {
-                target = FindClosestPlayer().transform;               
+                target = FindClosestPlayer().transform;
             }
 
             distanceToTarget = Vector3.Distance(target.position, transform.position);
@@ -155,14 +155,30 @@ public class EnemyController : CrowdControllable
         myStatuses.Remove(Status.taunted);
     }
 
+    public void StunTest(float duration)
+    {
+        StartCoroutine(GetStunned(duration));
+    }
+
     public override IEnumerator GetStunned(float duration)
     {
+        Debug.Log("Stun with duration = " +duration);
+
+        while (myStatuses.Contains(Status.stunned))
+        {
+            myStatuses.Remove(Status.stunned);
+        }
+        
+
         myStatuses.Add(Status.stunned);
         agent.SetDestination(transform.position);       // agent-Destination auf aktuelle Position setzen
 
+        Debug.Log("Vor yield return");
         yield return new WaitForSeconds(duration);
-        
-            myStatuses.Remove(Status.stunned);
+
+        Debug.Log("End Stun");
+
+        myStatuses.Remove(Status.stunned);
     }
 
     public override IEnumerator GetSilenced(float duration)

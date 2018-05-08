@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 
     void OnGameEnded()
     {
-        Debug.Log("Game has ended.");
+        //Debug.Log("Game has ended.");
         //Destroy(nexus);
         //hier implementieren, was nach Spielende geschehen soll.
     }

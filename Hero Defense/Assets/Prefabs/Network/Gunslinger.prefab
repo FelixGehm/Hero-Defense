@@ -600,6 +600,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1627501574951990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4877013919601512}
+  m_Layer: 0
+  m_Name: Fire Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1631466273100096
 GameObject:
   m_ObjectHideFlags: 1
@@ -794,7 +809,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4156884402912856}
   m_Layer: 0
-  m_Name: Fire Point
+  m_Name: E-Spawn-Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -937,12 +952,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1869773740818968}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.208, z: 0.76}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.54, z: 0.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4631042060067436}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4190744877584986
 Transform:
@@ -1349,6 +1364,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4512134464556108}
+  - {fileID: 4877013919601512}
   - {fileID: 4156884402912856}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1563,6 +1579,19 @@ Transform:
   - {fileID: 4813854765837900}
   m_Father: {fileID: 4732725018304530}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4877013919601512
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1627501574951990}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.208, z: 0.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4631042060067436}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4904284518641314
 Transform:
@@ -1823,16 +1852,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3787f828d2aed4d90734ccbb893750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityCooldown: 4
+  abilityCooldown: 1
   abilityCastTime: 0.3
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512
-  maxRange: 5
+  maxThrowRange: 4
   previewPrefab: {fileID: 1142147063469738, guid: 2049af36a1b236c48a43fcb46b74b2c9,
     type: 2}
   maxRangePrefab: {fileID: 1185851477789976, guid: bc1a89c6827e8cd4d905341ad1e5c14b,
     type: 2}
+  grenadePrefab: {fileID: 1523425383353616, guid: ac5526485f72bba408c6bb7104f0a658,
+    type: 2}
+  firePoint: {fileID: 4156884402912856}
+  peakHeight: 1
+  explosionRadius: 2
+  explosionDamage: 10
+  stunDuration: 2
 --- !u!114 &114199499742551658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2009,7 +2045,7 @@ MonoBehaviour:
   isRanged: 1
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
     type: 2}
-  firePoint: {fileID: 4156884402912856}
+  firePoint: {fileID: 4877013919601512}
 --- !u!114 &114474283249777258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2073,7 +2109,7 @@ MonoBehaviour:
     baseValue: 0.5
     modifiers: []
   attackRange:
-    baseValue: 1
+    baseValue: 7
     modifiers: []
   moveSpeed:
     baseValue: 0

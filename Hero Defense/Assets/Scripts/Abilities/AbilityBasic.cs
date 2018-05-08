@@ -22,7 +22,7 @@ public abstract class AbilityBasic : NetworkBehaviour
         
     protected virtual void Update()
     {
-        if(isLocalPlayer)
+        if (isLocalPlayer)
         {
             if(!isCasting)
             {

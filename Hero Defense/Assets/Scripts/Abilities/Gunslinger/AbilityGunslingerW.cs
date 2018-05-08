@@ -45,9 +45,12 @@ public class AbilityGunslingerW : AbilityBasic
 
     protected override void Cast()
     {
+        
+
         if (isLocalPlayer && currentCooldown <= 0)
         {
             currentCooldown = abilityCooldown;
+
             if (!bonusIsActive)
             {
                 pc.isCasting = true;
@@ -69,11 +72,15 @@ public class AbilityGunslingerW : AbilityBasic
         bonusIsActive = true;
 
         // FIRE ANIMATION HERE! 
-        yield return new WaitForSeconds(abilityCastTime);        
+        yield return new WaitForSeconds(abilityCastTime);
+
+        // ANIMATION HERE vorbei! 
         physicalDamage.AddModifier(physicalDamageBonus);
         critChance.AddModifier(critChanceBonus);
 
         pc.isCasting = false;
         cec.isCasting = false;
     }
+
+
 }
