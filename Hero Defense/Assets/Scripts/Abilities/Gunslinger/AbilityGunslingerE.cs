@@ -35,8 +35,9 @@ public class AbilityGunslingerE : AbilityBasic
 
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         GetComponent<CharacterEventManager>().OnAbilityThree += Cast;
         cam = Camera.main;
 

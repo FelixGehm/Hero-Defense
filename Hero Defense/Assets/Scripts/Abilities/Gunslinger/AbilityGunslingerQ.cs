@@ -39,8 +39,9 @@ public class AbilityGunslingerQ : AbilityBasic
 
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         GetComponent<CharacterEventManager>().OnAbilityOne += Cast;
         cam = Camera.main;
 
@@ -61,6 +62,14 @@ public class AbilityGunslingerQ : AbilityBasic
         {
             Debug.LogWarning("No Projectile-Prefab on AbilityGunslingerQ!");
         }
+
+        /*
+        //Ability bei UI Anmelden  //TODO: in Oberklasse auslagern, ich will hier aber nicht allzuviel ändern solange wir in den gleichen Klassen schreiben
+        if (GameObject.Find("QImage"))
+        {
+            GameObject.Find("QImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+        }
+        */
     }
 
     bool skipFrame = false;

@@ -9,9 +9,9 @@ public class PlayerStats : CharacterStats
     {
         base.Awake();
 
-        if (GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>() != null)
+        if (GameObject.Find("UIHealthBar"))
         {
-            uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
+            uIHealthBar = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
         }
         else
         {

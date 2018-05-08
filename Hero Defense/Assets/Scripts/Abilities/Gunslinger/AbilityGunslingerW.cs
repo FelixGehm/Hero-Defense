@@ -21,8 +21,9 @@ public class AbilityGunslingerW : AbilityBasic
 
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         GetComponent<CharacterEventManager>().OnAbilityTwo += Cast;
 
         CharacterStats myStats = GetComponent<CharacterStats>();

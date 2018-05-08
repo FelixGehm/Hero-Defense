@@ -5,26 +5,33 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(CharacterEventController))]
 public abstract class AbilityBasic : NetworkBehaviour
 {
+    public enum Slot
+    {
+        Q, W, E, R
+    }
+
+    public Slot abilitySlot;
 
     public float abilityCooldown = 4.0f;
-    protected float currentCooldown = 0.0f;
+    [HideInInspector]
+    public float currentCooldown = 0.0f;
 
     public float abilityCastTime = 0.3f;
 
 
     protected bool isCasting = false;
     protected bool isAnimating = false;
-    
-    void Start()
-    {
 
+    protected virtual void Start()
+    {
+        RegisterAbilityToUI();
     }
-        
+
     protected virtual void Update()
     {
         if (isLocalPlayer)
         {
-            if(!isCasting)
+            if (!isCasting)
             {
                 currentCooldown -= Time.deltaTime;
             }
@@ -32,7 +39,32 @@ public abstract class AbilityBasic : NetworkBehaviour
     }
 
     protected abstract void Cast();
-    
+
+    private void RegisterAbilityToUI()
+    {
+        if (!GameObject.Find("QImage"))
+        {
+            Debug.Log("Ability UI Missing.");
+            return;
+        }
+
+        switch (abilitySlot)
+        {
+            case Slot.Q:
+                GameObject.Find("QImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                break;
+            case Slot.W:
+                GameObject.Find("WImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                break;
+            case Slot.E:
+                GameObject.Find("EImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                break;
+            case Slot.R:
+                GameObject.Find("RImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                break;
+        }
+    }
+
 
 
 }
