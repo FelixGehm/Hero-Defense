@@ -1,0 +1,25 @@
+Aufgaben Woche 7: 09.05. - 16.05.
+
+Felix: 
+	- Wellensystem
+	- Aggro System
+	- mageüberarbeiten
+	- fähigkeiten mage
+
+Sven:
+	- fähigkeit für Gunslinger
+	- AA - Animation
+	- animationen überarbeiten
+
+Flo: 
+	- stungranate kleinigkeiten
+	- mccree ulti
+
+Moritz: 
+	- HUD in Unity
+	- Namen Fähigkeiten
+	- startseite UI
+
+Clara:  
+	- Artwork hütte
+	- Artwork deko
