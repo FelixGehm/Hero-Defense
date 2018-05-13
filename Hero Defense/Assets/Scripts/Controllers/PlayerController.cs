@@ -38,14 +38,32 @@ public class PlayerController : CrowdControllable
     }
 
 
-    public bool isCasting = false;
-    
+
+    private bool isCasting = false;
+    public bool IsCasting
+    {
+        get
+        {
+            return isCasting;
+        }
+        set
+        {
+            //Debug.Log("IsCasting() value =" + value);
+            if (value == true)
+            {
+                combat.CancelAttack();
+                RemoveFocus();
+            }
+
+            isCasting = value;
+        }
+    }
+
     void Update()
     {
 
 
-        if (OnFocusNull != null)
-            OnFocusNull();
+        OnFocusNull?.Invoke();
 
         if (myStatuses.Contains(Status.stunned))
         {
@@ -163,7 +181,7 @@ public class PlayerController : CrowdControllable
     }
 
     #region CrowdControllable
-    public override IEnumerator GetTaunted(Transform tauntTarget, float duration)
+    protected override IEnumerator GetTauntedCo(Transform tauntTarget, float duration)
     {
         Debug.Log("NOT WORKING RIGHT NOW");
 
@@ -176,7 +194,7 @@ public class PlayerController : CrowdControllable
         myStatuses.Remove(Status.taunted);
     }
 
-    public override IEnumerator GetStunned(float duration)
+    protected override IEnumerator GetStunnedCo(float duration)
     {
         if (combat.isAttacking)
             combat.CancelAttack();
@@ -198,21 +216,21 @@ public class PlayerController : CrowdControllable
         myStatuses.Remove(Status.stunned);
     }
 
-    public override IEnumerator GetSilenced(float duration)
+    protected override IEnumerator GetSilencedCo(float duration)
     {
         playerEventManager.IsSilenced = true;
         yield return new WaitForSeconds(duration);
         playerEventManager.IsSilenced = false;
     }
 
-    public override IEnumerator GetBlinded(float duration)
+    protected override IEnumerator GetBlindedCo(float duration)
     {
         combat.isBlinded = true;
         yield return new WaitForSeconds(duration);
         combat.isBlinded = false;
     }
 
-    public override IEnumerator GetCrippled(float duration, float percent)
+    protected override IEnumerator GetCrippledCo(float duration, float percent)
     {
         float oldSpeed = motor.GetAgentSpeed();
 
@@ -223,7 +241,7 @@ public class PlayerController : CrowdControllable
         motor.SetAgentSpeed(oldSpeed);
     }
 
-    public override IEnumerator GetBleedingWound(int ticks, float percentPerTick)
+    protected override IEnumerator GetBleedingWoundCo(int ticks, float percentPerTick)
     {
         yield return new WaitForSeconds(1.0f);
 
@@ -233,7 +251,7 @@ public class PlayerController : CrowdControllable
         ticks -= 1;
         if (ticks > 0)
         {
-            StartCoroutine(GetBleedingWound(ticks, percentPerTick));
+            StartCoroutine(GetBleedingWoundCo(ticks, percentPerTick));
         }
     }
 

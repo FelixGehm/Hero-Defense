@@ -83,8 +83,7 @@ public class AbilityDashStun : MonoBehaviour
         foreach (GameObject enemy in closeEnemys)
         {
             CrowdControllable cc = enemy.GetComponent<CrowdControllable>();
-            
-            StartCoroutine(cc.GetStunned(stunDuration));
+            cc.GetStunned(stunDuration);
         }
     }
 

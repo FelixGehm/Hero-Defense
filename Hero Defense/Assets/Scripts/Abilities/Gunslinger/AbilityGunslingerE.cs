@@ -18,11 +18,7 @@ public class AbilityGunslingerE : AbilityBasic
     public GameObject grenadePrefab;
     public Transform firePoint;
 
-    private Camera cam;
-    private PlayerController pc;
-    private CharacterEventController cec;
-    private PlayerMotor motor;
-
+    
     KeyCode abilityKey;
 
 
@@ -39,16 +35,9 @@ public class AbilityGunslingerE : AbilityBasic
     {
         base.Start();
         GetComponent<CharacterEventManager>().OnAbilityThree += Cast;
-        cam = Camera.main;
-
-        cec = GetComponent<CharacterEventController>();
-        pc = GetComponent<PlayerController>();
-        motor = GetComponent<PlayerMotor>();
-
-        abilityKey = cec.abilityThreeKey;
 
 
-
+        abilityKey = characterEventController.abilityThreeKey;        
 
     }
 
@@ -84,7 +73,7 @@ public class AbilityGunslingerE : AbilityBasic
 
                 if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
                 {
-                    motor.MoveToPoint(transform.position);
+                    playerMotor.MoveToPoint(transform.position);
                     StartCoroutine(ThrowGrenade(landingPos));
                 }
             }
@@ -96,8 +85,8 @@ public class AbilityGunslingerE : AbilityBasic
     {
         if (isLocalPlayer && currentCooldown <= 0)
         {
-            pc.isCasting = true;
-            cec.isCasting = true;
+            playerController.IsCasting = true;
+            characterEventController.isCasting = true;
             skipFrame = true;
 
             SpawnPreview();
@@ -107,8 +96,8 @@ public class AbilityGunslingerE : AbilityBasic
     private void CancelCast()
     {
         isCasting = false;
-        pc.isCasting = false;
-        cec.isCasting = false;
+        playerController.IsCasting = false;
+        characterEventController.isCasting = false;
 
         Destroy(previewGameObject);
         Destroy(maxRangeGameObject);
@@ -141,12 +130,10 @@ public class AbilityGunslingerE : AbilityBasic
         //Debug.Log("AnimationTime over!");
 
         isCasting = false;
-        pc.isCasting = false;
-        cec.isCasting = false;
+        playerController.IsCasting = false;
+        characterEventController.isCasting = false;
 
         currentCooldown = abilityCooldown;
-
-
 
         if (isServer)
         {

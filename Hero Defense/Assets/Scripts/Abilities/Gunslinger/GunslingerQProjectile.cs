@@ -55,7 +55,7 @@ public class GunslingerQProjectile : NetworkBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("Collison with: " + collision.gameObject.name);
+        //Debug.Log("Collison with: " + collision.gameObject.name);
 
         if (isServer && collision.transform.CompareTag("Enemy"))
         {

@@ -139,7 +139,7 @@ public class EnemyController : CrowdControllable
 
     #region CrowdControlable
 
-    public override IEnumerator GetTaunted(Transform tauntTarget, float duration)
+    protected override IEnumerator GetTauntedCo(Transform tauntTarget, float duration)
     {
 
         while (myStatuses.Contains(Status.taunted))    // Da man nur von einem Ziel gleichzeitig getaunted sein kann, werden zunächst alle bestehenden Taunts entfernt!
@@ -157,12 +157,12 @@ public class EnemyController : CrowdControllable
 
     public void StunTest(float duration)
     {
-        StartCoroutine(GetStunned(duration));
+        StartCoroutine(GetStunnedCo(duration));
     }
 
-    public override IEnumerator GetStunned(float duration)
+    protected override IEnumerator GetStunnedCo(float duration)
     {
-        Debug.Log("Stun with duration = " +duration);
+        //Debug.Log("Stun with duration = " +duration);
 
         while (myStatuses.Contains(Status.stunned))
         {
@@ -172,30 +172,27 @@ public class EnemyController : CrowdControllable
 
         myStatuses.Add(Status.stunned);
         agent.SetDestination(transform.position);       // agent-Destination auf aktuelle Position setzen
-
-        Debug.Log("Vor yield return");
+                
         yield return new WaitForSeconds(duration);
-
-        Debug.Log("End Stun");
-
+        
         myStatuses.Remove(Status.stunned);
     }
 
-    public override IEnumerator GetSilenced(float duration)
+    protected override IEnumerator GetSilencedCo(float duration)
     {
         Debug.Log("Keine Implementierung. Wird erst bei Bossen wichtig!");
         throw new System.NotImplementedException();
 
     }
 
-    public override IEnumerator GetBlinded(float duration)
+    protected override IEnumerator GetBlindedCo(float duration)
     {
         combat.isBlinded = true;
         yield return new WaitForSeconds(duration);
         combat.isBlinded = false;
     }
 
-    public override IEnumerator GetCrippled(float duration, float percent)
+    protected override IEnumerator GetCrippledCo(float duration, float percent)
     {
         float oldSpeed = agent.speed;
 
@@ -206,7 +203,7 @@ public class EnemyController : CrowdControllable
         agent.speed = oldSpeed;
     }
 
-    public override IEnumerator GetBleedingWound(int ticks, float percentPerTick)
+    protected override IEnumerator GetBleedingWoundCo(int ticks, float percentPerTick)
     {
         myStatuses.Add(Status.bleeding);    // Für Variante mit Ticks in jedem Frame
         yield return new WaitForSeconds(0.3f);
@@ -219,7 +216,7 @@ public class EnemyController : CrowdControllable
         ticks -= 1;
         if (ticks > 0)
         {
-            StartCoroutine(GetBleedingWound(ticks, percentPerTick));
+            StartCoroutine(GetBleedingWoundCo(ticks, percentPerTick));
         }
 
         myStatuses.Remove(Status.bleeding);

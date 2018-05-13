@@ -39,8 +39,7 @@ public class AbilityTaunt : MonoBehaviour
         foreach (GameObject enemy in closeEnemys)
         {
             EnemyController ec = enemy.GetComponent<EnemyController>();
-
-            StartCoroutine(ec.GetTaunted(this.transform, duration));
+            ec.GetTaunted(this.transform, duration);            
         }
     }
     

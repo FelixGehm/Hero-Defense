@@ -54,7 +54,7 @@ public class AbilityGunslingerW : AbilityBasic
 
             if (!bonusIsActive)
             {
-                pc.isCasting = true;
+                pc.IsCasting = true;
                 cec.isCasting = true;
                 motor.MoveToPoint(transform.position);
                 StartCoroutine(ActivateBuff());
@@ -79,7 +79,7 @@ public class AbilityGunslingerW : AbilityBasic
         physicalDamage.AddModifier(physicalDamageBonus);
         critChance.AddModifier(critChanceBonus);
 
-        pc.isCasting = false;
+        pc.IsCasting = false;
         cec.isCasting = false;
     }
 

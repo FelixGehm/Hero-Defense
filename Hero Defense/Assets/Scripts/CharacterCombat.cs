@@ -128,11 +128,11 @@ public class CharacterCombat : NetworkBehaviour
 
     public void CancelAttack()
     {
+        Debug.Log("CancelAttack()");
         if (attack != null)
             StopCoroutine(attack);
 
-        if (OnAttackCanceled != null)
-            OnAttackCanceled();
+        OnAttackCanceled?.Invoke();
 
         isAttacking = false;
         attackCooldown = 0;

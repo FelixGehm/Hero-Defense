@@ -5,51 +5,36 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(CharacterEventController))]
 public class AbilityGunslingerQ : AbilityBasic
 {
-    private Camera cam;
-
-    //public float abilityCooldown = 4.0f;
-    //private float currentCooldown = 0.0f;
-
-    //public float abilityCastTime = 0.3f;
-
-
     [Space]
     public GameObject previewPrefab;
     private GameObject previewGameObject;
+
+    [Space]
+    public LayerMask rightClickMask;
 
     [Header("Projectile settings")]
     public GameObject projectilePrefab;
 
     public float projectileSpeed = 10.0f;
 
-    public float projectilePhysicalDamage = 10.0f;
+    public float projectilePhysicalDamageStart = 10.0f;
+    public float projectilePhysicalDamageMax = 100.0f;
 
-    public LayerMask rightClickMask;
-
-
-    /*
-    private bool isCasting = false;
-    private bool isAnimating = false;
-    */
-    PlayerController pc;
-    CharacterEventController cec;
-    PlayerMotor motor;
-
+    public float chargeTime = 2.0f;
+  
     KeyCode abilityKey;
 
+    float timeAtCastStart;
+    float timeAtShooting;
+    
 
-    // Use this for initialization
     protected override void Start()
     {
         base.Start();
         GetComponent<CharacterEventManager>().OnAbilityOne += Cast;
-        cam = Camera.main;
+     
 
-        cec = GetComponent<CharacterEventController>();
-        pc = GetComponent<PlayerController>();
-        motor = GetComponent<PlayerMotor>();
-
-        abilityKey = cec.abilityOneKey;
+        abilityKey = characterEventController.abilityOneKey;
 
 
 
@@ -62,14 +47,6 @@ public class AbilityGunslingerQ : AbilityBasic
         {
             Debug.LogWarning("No Projectile-Prefab on AbilityGunslingerQ!");
         }
-
-        /*
-        //Ability bei UI Anmelden  //TODO: in Oberklasse auslagern, ich will hier aber nicht allzuviel ändern solange wir in den gleichen Klassen schreiben
-        if (GameObject.Find("QImage"))
-        {
-            GameObject.Find("QImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
-        }
-        */
     }
 
     bool skipFrame = false;
@@ -98,8 +75,11 @@ public class AbilityGunslingerQ : AbilityBasic
 
                     if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
                     {
-                        motor.MoveToPoint(transform.position);
+                        playerMotor.MoveToPoint(transform.position);
                         StartCoroutine(ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
+                        
+                        timeAtShooting = Time.time;
+                        
                     }
                 }
                 skipFrame = false;
@@ -112,18 +92,21 @@ public class AbilityGunslingerQ : AbilityBasic
 
         if (isLocalPlayer && currentCooldown <= 0)
         {
-            pc.isCasting = true;
-            cec.isCasting = true;
+            playerController.IsCasting = true;
+            characterEventController.isCasting = true;
+
             ShowPreview();
             skipFrame = true;
+
+            timeAtCastStart = Time.time;
         }
     }
 
     public void CancelCast()
     {
         isCasting = false;
-        pc.isCasting = false;
-        cec.isCasting = false;
+        playerController.IsCasting = false;
+        characterEventController.isCasting = false;
 
         Destroy(previewGameObject);
     }
@@ -153,12 +136,25 @@ public class AbilityGunslingerQ : AbilityBasic
         //Debug.Log("ShootProjectile(): AnimationTime over!");
 
         isCasting = false;
-        pc.isCasting = false;
-        cec.isCasting = false;
+        playerController.IsCasting = false;
+        characterEventController.isCasting = false;
 
         currentCooldown = abilityCooldown;
 
+        // Calculate damage from projectile
+        float deltaT = timeAtShooting - timeAtCastStart;
+        float percentDamage;
 
+        if (deltaT >= chargeTime)
+        {
+            percentDamage = 1.0f;
+        } else
+        {
+            percentDamage = deltaT / chargeTime;
+        }
+
+        float projectilePhysicalDamage = Mathf.Lerp(projectilePhysicalDamageStart,projectilePhysicalDamageMax, percentDamage);
+        //Debug.Log("Damage done by Projectile ="+ projectilePhysicalDamage);
 
         if (isServer)
         {

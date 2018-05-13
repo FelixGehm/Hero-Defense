@@ -19,12 +19,24 @@ public abstract class AbilityBasic : NetworkBehaviour
     public float abilityCastTime = 0.3f;
 
 
+    protected Camera cam;
+    protected CharacterEventController characterEventController;
+    protected PlayerController playerController;
+    protected PlayerMotor playerMotor;
+
+        
+
     protected bool isCasting = false;
     protected bool isAnimating = false;
 
     protected virtual void Start()
     {
         RegisterAbilityToUI();
+
+        cam = Camera.main;
+        characterEventController = GetComponent<CharacterEventController>();
+        playerController = GetComponent<PlayerController>();
+        playerMotor = GetComponent<PlayerMotor>();
     }
 
     protected virtual void Update()
