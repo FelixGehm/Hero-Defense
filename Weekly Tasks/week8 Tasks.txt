@@ -1,0 +1,24 @@
+Aufgaben Woche 8: 16.05. - 23.05.
+
+Felix: 
+	- Wellensystem
+	- Aggro System
+	- mageüberarbeiten
+	- fähigkeiten mage
+
+Sven:
+	- fähigkeit für Gunslinger
+	- W - Animation
+	- ult Animation
+
+Flo: 
+	- mccree ulti
+
+Moritz: 
+	- HUD in Unity
+	- Namen Fähigkeiten
+	- startseite UI
+
+Clara:  
+	- Artwork hütte
+	- Artwork deko
