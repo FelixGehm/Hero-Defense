@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerStats : CharacterStats
 {
-
+    PlayerController pc;
     public override void Awake()
     {
         base.Awake();
@@ -22,6 +22,7 @@ public class PlayerStats : CharacterStats
     // Use this for initialization
     void Start()
     {
+        pc = GetComponent<PlayerController>();
         EquipmentManager.instance.onEquipmentChangedCallback += OnEquipmentChanged;
     }
 
@@ -47,5 +48,18 @@ public class PlayerStats : CharacterStats
     {
         base.Die();
         //PlayerManager.instance.KillPlayer();
+        if (isLocalPlayer && pc != null)
+        {
+            pc.KillPlayer();
+            //StartCoroutine(ReviveTest());
+        }
+    }
+
+    IEnumerator ReviveTest()        //TODO
+    {
+        yield return new WaitForSeconds(5);
+
+        pc.RevivePlayer();
+
     }
 }

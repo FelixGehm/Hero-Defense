@@ -50,6 +50,10 @@ public class NetworkSetupPlayer : NetworkSetup
             PlayerManager.instance.RegisterPlayer(transform.gameObject);
         }
 
+        //Give Every Player a unique ID as its name
+        string _ID = "Player " + GetComponent<NetworkIdentity>().netId;
+        transform.name = _ID;
+
     }
 
     public override void OnStartLocalPlayer()

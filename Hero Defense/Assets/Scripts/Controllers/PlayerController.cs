@@ -19,6 +19,8 @@ public class PlayerController : CrowdControllable
     CharacterStats enemyStats;
     CharacterEventManager playerEventManager;
 
+    private bool isDead;
+
     public override void Awake()
     {
         base.Awake();
@@ -63,9 +65,16 @@ public class PlayerController : CrowdControllable
     {
 
 
+        //test delete after
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            stats.TakeTrueDamage(1000);
+        }
+
+
         OnFocusNull?.Invoke();
 
-        if (myStatuses.Contains(Status.stunned))
+        if (myStatuses.Contains(Status.stunned) || isDead)
         {
             return;
         }
@@ -179,6 +188,38 @@ public class PlayerController : CrowdControllable
         motor.StopFollowingTarget();
         wasAttacking = false;
     }
+
+    public event System.Action OnPlayerKilled;
+    public event System.Action OnPlayerRevived;
+
+    public void KillPlayer()
+    {
+        if (combat.isAttacking)
+            combat.CancelAttack();
+
+        RemoveFocus();
+        motor.MoveToPoint(transform.position);
+
+        isDead = true;
+
+        if (OnPlayerKilled != null)
+            OnPlayerKilled();
+
+        this.gameObject.layer = 8;
+    }
+
+    public void RevivePlayer()
+    {
+        isDead = false;
+        this.gameObject.layer = 0;
+
+        stats.CurrentHealth = stats.maxHealth.GetValue();
+
+        if (OnPlayerRevived != null)
+            OnPlayerRevived();
+    }
+
+
 
     #region CrowdControllable
     protected override IEnumerator GetTauntedCo(Transform tauntTarget, float duration)

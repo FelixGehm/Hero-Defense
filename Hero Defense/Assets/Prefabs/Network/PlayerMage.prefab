@@ -447,9 +447,10 @@ GameObject:
   - component: {fileID: 114592445048548012}
   - component: {fileID: 114800046063625972}
   - component: {fileID: 114829703517517578}
+  - component: {fileID: 114012718501092438}
   m_Layer: 0
   m_Name: PlayerMage
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2206,6 +2207,21 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114012718501092438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422401169816076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5249d4e65bebfda409260126c1678b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySlot: 3
+  abilityCooldown: 4
+  currentCooldown: 0
+  abilityCastTime: 0.3
 --- !u!114 &114127049271089758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2411,7 +2427,6 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
-  isCasting: 0
 --- !u!114 &114533616463788054
 MonoBehaviour:
   m_ObjectHideFlags: 1
