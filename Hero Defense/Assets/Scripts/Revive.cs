@@ -4,11 +4,25 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
+
+//TODO targetClicked beim attacken zurücksetzen
+
+
 //Gives a player the ability to revive another player
+
+[RequireComponent(typeof(PlayerMotor))]
 public class Revive : AbilityBasic
 {
+    public LayerMask remotePlayerMask;
+    public float reviveDistance = 2;
 
     private bool wlnd;
+
+    PlayerMotor motor;
+
+    private bool targetClicked = false;
+    private Vector3 targetPosition;
+    private string targetID;
 
 
 
@@ -16,37 +30,77 @@ public class Revive : AbilityBasic
     protected override void Start()
     {
         base.Start();
+        motor = GetComponent<PlayerMotor>();
+        motor.OnPlayerMoved += () => targetClicked = false;
+        motor.OnFollowTarget += () => targetClicked = false;
     }
 
-    // Update is called once per frame
+
     protected override void Update()
     {
         base.Update();
         if (Input.GetMouseButtonDown(0))
         {
-            Cast();
+            RaycastHit hit;
+            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100, remotePlayerMask))
+            {
+                if (hit.collider.tag == "Player" && IsTargetDead(hit.collider.name))
+                {
+                    MoveToTarget(hit.collider.transform, hit);
+                }
+            }
         }
+
+        if (targetClicked)
+        {
+            float distanceToTarget = Vector3.Distance(targetPosition, transform.position);
+            if (distanceToTarget <= reviveDistance)
+            {
+                motor.StopMoving();
+                StartCoroutine(CastAfterDelay(abilityCastTime));
+            }
+        }
+    }
+
+    void MoveToTarget(Transform target, RaycastHit hit)
+    {
+        targetPosition = target.position;
+        motor.MoveToPoint(targetPosition);
+        targetClicked = true;
+        targetID = hit.collider.name;
+    }
+
+    bool IsTargetDead(string _ID)
+    {
+        return GameObject.Find(_ID).GetComponent<PlayerStats>().CurrentHealth <= 0;
+    }
+
+
+    IEnumerator CastAfterDelay(float delay)        //TODO
+    {
+        yield return new WaitForSeconds(delay);
+        Cast();
     }
 
     [Client]
     protected override void Cast()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-            if (hit.collider.tag == "Player")
-            {
-                Debug.Log(hit.collider.name + "was hit");
-                CmdRevivePlayer(hit.collider.name);
-            }
-        }
+        Debug.Log(targetID + " has been revived.");
+        CmdRevivePlayer(targetID);
+        targetClicked = false;
     }
 
     [Command]
     void CmdRevivePlayer(string _ID)
     {
-        Debug.Log(_ID + " has been revived.");
+        GameObject.Find(_ID).GetComponent<PlayerController>().RevivePlayer();
+        RpcRevivePlayer(_ID);
+    }
+
+    [ClientRpc]
+    void RpcRevivePlayer(string _ID)
+    {
         GameObject.Find(_ID).GetComponent<PlayerController>().RevivePlayer();
     }
 }

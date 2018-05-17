@@ -13,6 +13,7 @@ public class PlayerMotor : MonoBehaviour
     private bool faceOnly = false;
 
     public event System.Action OnPlayerMoved;
+    public event System.Action OnFollowTarget;
 
     // Use this for initialization
     void Start()
@@ -57,6 +58,9 @@ public class PlayerMotor : MonoBehaviour
         target = newTarget.interactionTransform;
 
         faceOnly = false;
+
+        if (OnFollowTarget != null)
+            OnFollowTarget();
     }
 
     public void StopFollowingTarget()
@@ -88,6 +92,11 @@ public class PlayerMotor : MonoBehaviour
             //Debug.Log("Couldn't continue following target. Might have disapeared or focus changed");
             agent.SetDestination(transform.position);
         }
+    }
+
+    public void StopMoving()
+    {
+        agent.ResetPath();
     }
 
     void FaceTarget()

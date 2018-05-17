@@ -19,7 +19,10 @@ public class PlayerController : CrowdControllable
     CharacterStats enemyStats;
     CharacterEventManager playerEventManager;
 
-    private bool isDead;
+    //public bool isDead;
+
+    public bool IsDead { get; private set; }
+
 
     public override void Awake()
     {
@@ -39,7 +42,7 @@ public class PlayerController : CrowdControllable
         cam.GetComponent<CameraController>().SetLookAt(transform);
     }
 
-
+   
 
     private bool isCasting = false;
     public bool IsCasting
@@ -70,11 +73,17 @@ public class PlayerController : CrowdControllable
         {
             stats.TakeTrueDamage(1000);
         }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            combat.TestKill();
+        }
+        //test end
+
 
 
         OnFocusNull?.Invoke();
 
-        if (myStatuses.Contains(Status.stunned) || isDead)
+        if (myStatuses.Contains(Status.stunned) || IsDead)
         {
             return;
         }
@@ -200,7 +209,7 @@ public class PlayerController : CrowdControllable
         RemoveFocus();
         motor.MoveToPoint(transform.position);
 
-        isDead = true;
+        IsDead = true;
 
         if (OnPlayerKilled != null)
             OnPlayerKilled();
@@ -210,7 +219,7 @@ public class PlayerController : CrowdControllable
 
     public void RevivePlayer()
     {
-        isDead = false;
+        IsDead = false;
         this.gameObject.layer = 0;
 
         stats.CurrentHealth = stats.maxHealth.GetValue();

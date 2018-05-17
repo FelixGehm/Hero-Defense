@@ -2218,10 +2218,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5249d4e65bebfda409260126c1678b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilitySlot: 3
+  abilitySlot: 4
   abilityCooldown: 4
   currentCooldown: 0
-  abilityCastTime: 0.3
+  abilityCastTime: 1
+  remotePlayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  reviveDistance: 2
 --- !u!114 &114127049271089758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2475,6 +2479,8 @@ MonoBehaviour:
   - {fileID: 114447337375912430}
   - {fileID: 114127049271089758}
   - {fileID: 114790621340633260}
+  - {fileID: 114012718501092438}
+  remoteLayerName: RemotePlayer
 --- !u!114 &114589926837847246
 MonoBehaviour:
   m_ObjectHideFlags: 1

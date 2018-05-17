@@ -7,7 +7,7 @@ public abstract class AbilityBasic : NetworkBehaviour
 {
     public enum Slot
     {
-        Q, W, E, R
+        Q, W, E, R, Revive
     }
 
     public Slot abilitySlot;
@@ -74,6 +74,10 @@ public abstract class AbilityBasic : NetworkBehaviour
             case Slot.R:
                 GameObject.Find("RImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
                 break;
+            case Slot.Revive:
+                Debug.Log("implmentation hier fehlt noch");
+                break;
+
         }
     }
 

@@ -55,7 +55,7 @@ public class PlayerStats : CharacterStats
         }
     }
 
-    IEnumerator ReviveTest()        //TODO
+    IEnumerator ReviveTest()        //TODO delete after
     {
         yield return new WaitForSeconds(5);
 

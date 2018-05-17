@@ -86,8 +86,14 @@ public class CharacterCombat : NetworkBehaviour
         {
             TellServerToDoMeleeDamage(targetStats, damageDone);
         }
-
     }
+
+    //Test
+    public void TestKill()
+    {
+        StartCoroutine(DoMeleeDamage(myStats, 100000, 1));
+    }
+    //test end
 
     IEnumerator ShootProjectile(Transform target, float damageDone, float delay)
     {

@@ -7,6 +7,8 @@ public class NetworkSetupPlayer : NetworkSetup
 {
 
     //public bool localPlayer = false;
+    [SerializeField]
+    string remoteLayerName = "RemotePlayer";
 
     // Use this for initialization
     void Start()
@@ -49,11 +51,20 @@ public class NetworkSetupPlayer : NetworkSetup
             // Register Player in PlayerManager
             PlayerManager.instance.RegisterPlayer(transform.gameObject);
         }
+        else
+        {
+            AssignRemoteLayer(); //Alle Remote Player werden auf einen layer gesetzt. z.b. beim reviven können dann nur diese abgefragt werden.
+        }
 
         //Give Every Player a unique ID as its name
         string _ID = "Player " + GetComponent<NetworkIdentity>().netId;
         transform.name = _ID;
 
+    }
+
+    void AssignRemoteLayer()
+    {
+        gameObject.layer = LayerMask.NameToLayer(remoteLayerName);
     }
 
     public override void OnStartLocalPlayer()
