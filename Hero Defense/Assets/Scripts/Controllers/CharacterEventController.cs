@@ -19,6 +19,8 @@ public class CharacterEventController : MonoBehaviour
     public KeyCode abilityThreeKey = KeyCode.E;
     public KeyCode abilityFourKey = KeyCode.R;
 
+    public KeyCode reviveKey = KeyCode.V;
+
     void Start()
     {
         characterEventManager = GetComponent<CharacterEventManager>();
@@ -51,6 +53,11 @@ public class CharacterEventController : MonoBehaviour
             if (Input.GetKeyDown(abilityFourKey))
             {
                 characterEventManager.AbilityFour();
+            }
+
+            if (Input.GetKeyDown(reviveKey))
+            {
+                characterEventManager.Revive();
             }
         }
     }

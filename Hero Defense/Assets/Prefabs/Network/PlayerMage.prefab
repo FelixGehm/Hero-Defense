@@ -2226,6 +2226,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   reviveDistance: 2
+  friendlyTargetCursor: {fileID: 2800000, guid: 7ce9f781067c8974a832e7fbac57d20b,
+    type: 3}
 --- !u!114 &114127049271089758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2243,6 +2245,7 @@ MonoBehaviour:
   abilityTwoKey: 119
   abilityThreeKey: 101
   abilityFourKey: 114
+  reviveKey: 118
 --- !u!114 &114147072069385658
 MonoBehaviour:
   m_ObjectHideFlags: 1

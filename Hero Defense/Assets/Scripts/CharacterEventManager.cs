@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 
 public class CharacterEventManager : NetworkBehaviour
 {
-    public enum eventType { teleport, one, two, three, four, cancel }
+    public enum eventType { teleport, one, two, three, four, cancel, revive }
 
     #region Actions
     /// <summary>
@@ -21,6 +21,8 @@ public class CharacterEventManager : NetworkBehaviour
     public event System.Action OnAbilityFour;
 
     public event System.Action OnCastCancel;
+
+    public event System.Action OnRevive;
 
     #endregion
 
@@ -56,6 +58,16 @@ public class CharacterEventManager : NetworkBehaviour
         if (OnTeleport != null && !isSilenced)
         {
             OnTeleport();
+        }
+    }
+
+    public void Revive()
+    {
+        TransmitEvent(CharacterEventManager.eventType.revive);
+
+        if(OnRevive != null && !isSilenced)
+        {
+            OnRevive();
         }
     }
 
@@ -152,6 +164,9 @@ public class CharacterEventManager : NetworkBehaviour
                 break;
             case CharacterEventManager.eventType.teleport:
                 Teleport();
+                break;
+            case CharacterEventManager.eventType.revive:
+                Revive();
                 break;
         }
 

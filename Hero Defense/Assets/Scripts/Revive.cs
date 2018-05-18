@@ -16,7 +16,7 @@ public class Revive : AbilityBasic
     public LayerMask remotePlayerMask;
     public float reviveDistance = 2;
 
-    private bool wlnd;
+    public Texture2D friendlyTargetCursor;
 
     PlayerMotor motor;
 
@@ -33,20 +33,29 @@ public class Revive : AbilityBasic
         motor = GetComponent<PlayerMotor>();
         motor.OnPlayerMoved += () => targetClicked = false;
         motor.OnFollowTarget += () => targetClicked = false;
+
+        motor.OnPlayerMoved += DisableAbility;
+        motor.OnFollowTarget += DisableAbility;
+
+        GetComponent<CharacterEventManager>().OnRevive += ActivateAbility;
     }
 
 
     protected override void Update()
     {
         base.Update();
-        if (Input.GetMouseButtonDown(0))
+        Debug.Log(isAbilityActivated);
+        //Debug.Log(currentCooldown);
+
+        if (IsAbilityActivated && Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100, remotePlayerMask))
             {
+                Debug.Log(hit.collider.name);
                 if (hit.collider.tag == "Player" && IsTargetDead(hit.collider.name))
-                {
+                {      
                     MoveToTarget(hit.collider.transform, hit);
                 }
             }
@@ -63,11 +72,45 @@ public class Revive : AbilityBasic
         }
     }
 
+    private bool isAbilityActivated; //just activated, not casted yet
+    public bool IsAbilityActivated
+    {
+        get
+        {
+            return isAbilityActivated;
+        }
+        set
+        {
+            isAbilityActivated = value;
+            if (value)
+            {
+                //set mouse indicator to revive
+                Cursor.SetCursor(friendlyTargetCursor, Vector2.zero, CursorMode.Auto);
+            }
+            else
+            {
+                //set mouse indicator to standard
+                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            }
+        }
+    }
+
+    private void DisableAbility()  //setzt die ability nur dann auf false; wenn sie true war, um zu verhindern, dass der mauszeiger unnötig oft erneuert wird
+    {
+        if (IsAbilityActivated) IsAbilityActivated = false;
+    }
+
+    private void ActivateAbility()
+    {
+        if (currentCooldown <= 0) IsAbilityActivated = true;
+    }
+
     void MoveToTarget(Transform target, RaycastHit hit)
     {
         targetPosition = target.position;
         motor.MoveToPoint(targetPosition);
         targetClicked = true;
+        IsAbilityActivated = false;
         targetID = hit.collider.name;
     }
 
@@ -77,7 +120,7 @@ public class Revive : AbilityBasic
     }
 
 
-    IEnumerator CastAfterDelay(float delay)        //TODO
+    IEnumerator CastAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
         Cast();
@@ -89,6 +132,7 @@ public class Revive : AbilityBasic
         Debug.Log(targetID + " has been revived.");
         CmdRevivePlayer(targetID);
         targetClicked = false;
+        currentCooldown = abilityCooldown;
     }
 
     [Command]

@@ -13,7 +13,7 @@ public abstract class AbilityBasic : NetworkBehaviour
     public Slot abilitySlot;
 
     public float abilityCooldown = 4.0f;
-    [HideInInspector]
+    //[HideInInspector]
     public float currentCooldown = 0.0f;
 
     public float abilityCastTime = 0.3f;

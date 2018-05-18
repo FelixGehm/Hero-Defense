@@ -213,14 +213,11 @@ public class PlayerController : CrowdControllable
 
         if (OnPlayerKilled != null)
             OnPlayerKilled();
-
-        this.gameObject.layer = 8;
     }
 
     public void RevivePlayer()
     {
         IsDead = false;
-        this.gameObject.layer = 0;
 
         stats.CurrentHealth = stats.maxHealth.GetValue();
 
