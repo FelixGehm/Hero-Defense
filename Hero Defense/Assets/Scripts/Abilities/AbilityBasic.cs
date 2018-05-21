@@ -43,7 +43,7 @@ public abstract class AbilityBasic : NetworkBehaviour
     {
         if (isLocalPlayer)
         {
-            if (!isCasting)
+            if (!isCasting && currentCooldown > 0)
             {
                 currentCooldown -= Time.deltaTime;
             }

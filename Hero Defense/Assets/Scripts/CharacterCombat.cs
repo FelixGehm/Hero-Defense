@@ -134,7 +134,7 @@ public class CharacterCombat : NetworkBehaviour
 
     public void CancelAttack()
     {
-        Debug.Log("CancelAttack()");
+        //Debug.Log("CancelAttack()");
         if (attack != null)
             StopCoroutine(attack);
 

@@ -31,6 +31,7 @@ public class AbilityGunslingerQ : AbilityBasic
     protected override void Start()
     {
         base.Start();
+
         GetComponent<CharacterEventManager>().OnAbilityOne += Cast;
      
 

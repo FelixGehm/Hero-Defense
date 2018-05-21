@@ -21,8 +21,7 @@ public class GunslingerEGrenade : NetworkBehaviour
     private float explosionDamage = 0;
 
     private float time = 0;
-
-    private bool explode = false;
+        
 
 
     public void Init(Vector3 start, Vector3 end, float height, float range, float damage, float stunTime)
