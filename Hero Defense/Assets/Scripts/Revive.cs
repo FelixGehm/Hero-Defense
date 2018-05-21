@@ -24,18 +24,18 @@ public class Revive : AbilityBasic
     private Vector3 targetPosition;
     private string targetID;
 
-
+    public event System.Action OnCasting;
 
     // Use this for initialization
     protected override void Start()
     {
         base.Start();
         motor = GetComponent<PlayerMotor>();
-        motor.OnPlayerMoved += () => targetClicked = false;
-        motor.OnFollowTarget += () => targetClicked = false;
+        //motor.OnPlayerMoved += () => targetClicked = false;
+        //motor.OnFollowTarget += () => targetClicked = false;
 
-        motor.OnPlayerMoved += DisableAbility;
-        motor.OnFollowTarget += DisableAbility;
+        //motor.OnPlayerMoved += DisableAbility;
+        //motor.OnFollowTarget += DisableAbility;
 
         GetComponent<CharacterEventManager>().OnRevive += ActivateAbility;
     }
@@ -44,7 +44,6 @@ public class Revive : AbilityBasic
     protected override void Update()
     {
         base.Update();
-        Debug.Log(isAbilityActivated);
         //Debug.Log(currentCooldown);
 
         if (IsAbilityActivated && Input.GetMouseButtonDown(0))
@@ -53,7 +52,6 @@ public class Revive : AbilityBasic
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 100, remotePlayerMask))
             {
-                Debug.Log(hit.collider.name);
                 if (hit.collider.tag == "Player" && IsTargetDead(hit.collider.name))
                 {      
                     MoveToTarget(hit.collider.transform, hit);
@@ -61,8 +59,18 @@ public class Revive : AbilityBasic
             }
         }
 
+        if(IsAbilityActivated && Input.GetMouseButtonDown(1))
+        {
+            DisableAbility();
+        }
+
         if (targetClicked)
         {
+            if (Input.GetMouseButtonDown(1)){
+                targetClicked = false;
+                DisableAbility();
+            }
+
             float distanceToTarget = Vector3.Distance(targetPosition, transform.position);
             if (distanceToTarget <= reviveDistance)
             {
@@ -122,6 +130,12 @@ public class Revive : AbilityBasic
 
     IEnumerator CastAfterDelay(float delay)
     {
+        targetClicked = false;
+        if (OnCasting != null)
+            OnCasting();
+
+        Debug.Log("Test");
+
         yield return new WaitForSeconds(delay);
         Cast();
     }

@@ -23,12 +23,17 @@ public class CharacterAnimator : MonoBehaviour
 
     CharacterStats myStats;
 
+    PlayerController pc;
+
+    Revive rev;
+
     //PlayerController playerController;        //Wird garnicht genutzt?
 
     float speedPercent;
 
     void Start()
     {
+        pc = GetComponent<PlayerController>();
         agent = GetComponent<NavMeshAgent>();
         //animator = GetComponentInChildren<Animator>();
         animator = GetComponent<Animator>();
@@ -38,11 +43,16 @@ public class CharacterAnimator : MonoBehaviour
         //playerController = GetComponent<PlayerController>();
         netAnimator = GetComponent<NetworkAnimator>();
         nsa = GetComponent<NetworkSyncAnimations>();
+        rev = GetComponent<Revive>();
 
         characterCombat.OnAttack += StartAttackAnimation;
         motor.OnPlayerMoved += StopAttackAnimation;
         characterCombat.OnAttackCanceled += StopAttackAnimation;
         //myStats.attackSpeed.OnStatChanged += UpdateAttackAnimationSpeed;
+        pc.OnPlayerKilled += StartDieAnimation;
+        pc.OnPlayerRevived += () => netAnimator.SetTrigger("revived");
+
+        rev.OnCasting += StartReviveAnimation;
 
         UpdateAttackAnimationSpeed();
     }
@@ -53,6 +63,18 @@ public class CharacterAnimator : MonoBehaviour
 
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
+    }
+
+    void StartDieAnimation()
+    {
+        netAnimator.SetTrigger("die");
+        animator.ResetTrigger("die");
+    }
+
+    void StartReviveAnimation()
+    {
+        netAnimator.SetTrigger("revive");
+        animator.ResetTrigger("revive");
     }
 
     void StartAttackAnimation()

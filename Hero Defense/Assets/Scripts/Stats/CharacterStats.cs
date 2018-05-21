@@ -72,6 +72,7 @@ public class CharacterStats : NetworkBehaviour
                 if (syncedCurrentHealth <= 0)
                 {
                     Die();
+                    Debug.Log("CurrentHealth: " + value);
                 }
             }
         }
@@ -102,7 +103,8 @@ public class CharacterStats : NetworkBehaviour
 
                 //Debug.Log("Time= "+Time.time);
 
-                CurrentHealth += maxHealth.GetValue() * healthRegeneration.GetValue();
+                if (CurrentHealth > 0)
+                    CurrentHealth += maxHealth.GetValue() * healthRegeneration.GetValue();
             }
         }
 
