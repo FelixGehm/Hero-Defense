@@ -1765,7 +1765,6 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 768
-  isCasting: 0
 --- !u!114 &114083424393021974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1777,7 +1776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b38395e3345b2647936dc6af84c4c37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilitySlot: 0
+  abilitySlot: 1
   abilityCooldown: 1
   currentCooldown: 0
   abilityCastTime: 0.3
@@ -1832,6 +1831,7 @@ MonoBehaviour:
   - {fileID: 114474283249777258}
   - {fileID: 114899644331539466}
   - {fileID: 114956156520426332}
+  remoteLayerName: RemotePlayer
 --- !u!114 &114163940093743100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1854,7 +1854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3787f828d2aed4d90734ccbb893750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilitySlot: 0
+  abilitySlot: 2
   abilityCooldown: 1
   currentCooldown: 0
   abilityCastTime: 0.3
@@ -2151,6 +2151,7 @@ MonoBehaviour:
   abilityTwoKey: 119
   abilityThreeKey: 101
   abilityFourKey: 114
+  reviveKey: 118
 --- !u!114 &114903351983420732
 MonoBehaviour:
   m_ObjectHideFlags: 1

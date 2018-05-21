@@ -16,9 +16,9 @@ public class UIHealthBarRegistration : NetworkBehaviour {
 
         stats = GetComponent<CharacterStats>();
 
-        if(GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>() != null)
+        if(GameObject.Find("UIHealthBar"))
         {
-            uiHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
+            uiHealthBar = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
 
             if (isLocalPlayer)
             {
