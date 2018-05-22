@@ -7,12 +7,15 @@ public class NetworkWaveSpawner : NetworkBehaviour
     public GameObject toSpawnPrefab;
 
     // Values for autoSpawning
+    [Header("auto spawning")]
     public bool autoSpawn = false;
     public float timeBetweenWavesInSec = 4.0f;
-    private float waveCoolDown;
+
+    public float waveCoolDown;
 
 
     // General Values
+    [Header("general")]
     public int enemysPerWave = 5;
     public float waveSpawnDuration = 4.0f;
 
@@ -21,24 +24,29 @@ public class NetworkWaveSpawner : NetworkBehaviour
         waveCoolDown = timeBetweenWavesInSec;
     }
 
-    void FixedUpdate()
+    void Update()
     {
-            if (!autoSpawn)
-            {
-                if (Input.GetKeyDown("s"))
-                {
-                    Spawn(enemysPerWave, waveSpawnDuration);
-                }
-            }
-            else
-            {
-                waveCoolDown -= Time.deltaTime;
+        if (Input.GetKeyDown("a") && isServer)
+        {
+            autoSpawn = !autoSpawn;
+        }
 
-                if (waveCoolDown <= 0)
-                {
-                    Spawn(enemysPerWave, waveSpawnDuration);
-                }
+        if (!autoSpawn)
+        {
+            if (Input.GetKeyDown("s"))
+            {
+                Spawn(enemysPerWave, waveSpawnDuration);
             }
+        }
+        else
+        {
+            waveCoolDown -= Time.deltaTime;
+
+            if (waveCoolDown <= 0)
+            {
+                Spawn(enemysPerWave, waveSpawnDuration);
+            }
+        }
     }
 
     private void Spawn(int no, float timeSpan)
