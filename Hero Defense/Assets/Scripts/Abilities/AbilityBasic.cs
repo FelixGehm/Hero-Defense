@@ -24,14 +24,17 @@ public abstract class AbilityBasic : NetworkBehaviour
     protected PlayerController playerController;
     protected PlayerMotor playerMotor;
 
-        
+
 
     protected bool isCasting = false;
     protected bool isAnimating = false;
 
+    public event System.Action OnAbilityCasting;
+
     protected virtual void Start()
     {
-        RegisterAbilityToUI();
+        if (isLocalPlayer)
+            RegisterAbilityToUI();
 
         cam = Camera.main;
         characterEventController = GetComponent<CharacterEventController>();
@@ -51,6 +54,12 @@ public abstract class AbilityBasic : NetworkBehaviour
     }
 
     protected abstract void Cast();
+
+    protected void TriggerAnimation()
+    {
+        if (OnAbilityCasting != null)
+            OnAbilityCasting();
+    }
 
     private void RegisterAbilityToUI()
     {

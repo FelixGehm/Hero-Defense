@@ -1582,7 +1582,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1354913620301676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.208, z: 0.76}
+  m_LocalPosition: {x: 0.012, y: 1.502, z: 1.329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4371927576001136}
@@ -2383,6 +2383,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c7d2723bab92e40b08ede3161975f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityQ: {fileID: 114765068897905960}
+  abilityW: {fileID: 114195931830590238}
+  abilityE: {fileID: 114437152337141624}
 --- !u!114 &114437152337141624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2397,7 +2400,7 @@ MonoBehaviour:
   abilitySlot: 2
   abilityCooldown: 1
   currentCooldown: 0
-  abilityCastTime: 0.3
+  abilityCastTime: 0.8
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512
@@ -2577,7 +2580,7 @@ MonoBehaviour:
   abilitySlot: 0
   abilityCooldown: 4
   currentCooldown: 0
-  abilityCastTime: 0.3
+  abilityCastTime: 1
   previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
     type: 2}
   rightClickMask:

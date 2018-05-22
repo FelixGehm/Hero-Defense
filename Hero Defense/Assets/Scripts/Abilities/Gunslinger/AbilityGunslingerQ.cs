@@ -122,8 +122,11 @@ public class AbilityGunslingerQ : AbilityBasic
 
     private IEnumerator ShootProjectile(Vector3 direction)
     {
+        TriggerAnimation();
+
         Vector3 firePoint = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetStartPos();
         Quaternion rotation = previewGameObject.transform.rotation;
+        transform.rotation = rotation;      //erstmal so... vielleicht lieber lerpen?
         float maxDistance = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetDistance();
 
         Destroy(previewGameObject);

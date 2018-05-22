@@ -8,6 +8,10 @@ public class CharacterAnimator : MonoBehaviour
     //Animationen können über die state machine abgespielt werden, indem die entsprechenden Attribute gesetzt werden (alles wird synchronisiert)
     //Sollen Animationen direkt gestartet werden, muss dies über nsa.play... geschehen, damit alles synchronisiert wird
 
+    public AbilityBasic abilityQ;
+    public AbilityBasic abilityW;
+    public AbilityBasic abilityE;
+
     const float locomotionAnimationSmoothTime = .1f;
 
     NavMeshAgent agent;
@@ -54,6 +58,10 @@ public class CharacterAnimator : MonoBehaviour
 
         rev.OnCasting += StartReviveAnimation;
 
+        abilityQ.OnAbilityCasting += StartQAnimation;
+        abilityW.OnAbilityCasting += StartWAnimation;
+        abilityE.OnAbilityCasting += StartEAnimation;
+
         UpdateAttackAnimationSpeed();
     }
 
@@ -75,6 +83,24 @@ public class CharacterAnimator : MonoBehaviour
     {
         netAnimator.SetTrigger("revive");
         animator.ResetTrigger("revive");
+    }
+
+    void StartQAnimation()
+    {
+        netAnimator.SetTrigger("abilityQ");
+        animator.ResetTrigger("abilityQ");
+    }
+
+    void StartWAnimation()
+    {
+        netAnimator.SetTrigger("abilityW");
+        animator.ResetTrigger("abilityW");
+    }
+
+    void StartEAnimation()
+    {
+        netAnimator.SetTrigger("abilityE");
+        animator.ResetTrigger("abilityE");
     }
 
     void StartAttackAnimation()

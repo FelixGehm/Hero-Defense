@@ -117,6 +117,7 @@ public class AbilityGunslingerE : AbilityBasic
 
     private IEnumerator ThrowGrenade(Vector3 landingPoint)
     {
+        TriggerAnimation();
 
         Destroy(maxRangeGameObject);
         Destroy(previewGameObject);

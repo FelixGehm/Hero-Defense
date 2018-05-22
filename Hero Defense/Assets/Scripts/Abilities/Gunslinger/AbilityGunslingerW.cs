@@ -71,7 +71,7 @@ public class AbilityGunslingerW : AbilityBasic
     private IEnumerator ActivateBuff()
     {
         bonusIsActive = true;
-
+        TriggerAnimation();
         // FIRE ANIMATION HERE! 
         yield return new WaitForSeconds(abilityCastTime);
 
