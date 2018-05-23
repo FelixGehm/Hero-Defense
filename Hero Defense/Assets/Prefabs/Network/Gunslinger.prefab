@@ -265,13 +265,14 @@ GameObject:
   - component: {fileID: 114296818498798276}
   - component: {fileID: 114421281484709074}
   - component: {fileID: 114601676757091702}
-  - component: {fileID: 114980368045429320}
-  - component: {fileID: 114846492038504016}
   - component: {fileID: 114672753146718544}
+  - component: {fileID: 114980368045429320}
+  - component: {fileID: 114246536329409764}
+  - component: {fileID: 114846492038504016}
   - component: {fileID: 114765068897905960}
   - component: {fileID: 114195931830590238}
   - component: {fileID: 114437152337141624}
-  - component: {fileID: 114246536329409764}
+  - component: {fileID: 114082407873826526}
   m_Layer: 0
   m_Name: Gunslinger
   m_TagString: Player
@@ -2221,6 +2222,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foreGround: {fileID: 114702956296429662}
+--- !u!114 &114082407873826526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217024187637938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3810f58f7d5cb4040958da265c1f3c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySlot: 0
+  abilityCooldown: 4
+  currentCooldown: 0
+  abilityCastTime: 0.3
+  previewPrefab: {fileID: 1651264465648246, guid: d46b8a545a11ece4a8580b8aa299f2ac,
+    type: 2}
+  projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
+    type: 2}
+  projectilePhysicalDamageStart: 40
+  projectilePhysicalDamageMax: 100
+  projectileSpeed: 30
+  chargeTime: 2
+  rightClickMask:
+    serializedVersion: 2
+    m_Bits: 256
+  firePoint: {fileID: 4516320836597954}
+  range: 21.2
+  timeBetweenShots: 0.1
+  maxNoTargets: 6
+  targets: []
 --- !u!114 &114131900589359770
 MonoBehaviour:
   m_ObjectHideFlags: 1

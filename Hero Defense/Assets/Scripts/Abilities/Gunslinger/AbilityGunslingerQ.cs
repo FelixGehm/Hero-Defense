@@ -21,19 +21,19 @@ public class AbilityGunslingerQ : AbilityBasic
     public float projectilePhysicalDamageMax = 100.0f;
 
     public float chargeTime = 2.0f;
-  
+
     KeyCode abilityKey;
 
     float timeAtCastStart;
     float timeAtShooting;
-    
+
 
     protected override void Start()
     {
         base.Start();
 
         GetComponent<CharacterEventManager>().OnAbilityOne += Cast;
-     
+
 
         abilityKey = characterEventController.abilityOneKey;
 
@@ -78,9 +78,9 @@ public class AbilityGunslingerQ : AbilityBasic
                     {
                         playerMotor.MoveToPoint(transform.position);
                         StartCoroutine(ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
-                        
+
                         timeAtShooting = Time.time;
-                        
+
                     }
                 }
                 skipFrame = false;
@@ -152,12 +152,13 @@ public class AbilityGunslingerQ : AbilityBasic
         if (deltaT >= chargeTime)
         {
             percentDamage = 1.0f;
-        } else
+        }
+        else
         {
             percentDamage = deltaT / chargeTime;
         }
 
-        float projectilePhysicalDamage = Mathf.Lerp(projectilePhysicalDamageStart,projectilePhysicalDamageMax, percentDamage);
+        float projectilePhysicalDamage = Mathf.Lerp(projectilePhysicalDamageStart, projectilePhysicalDamageMax, percentDamage);
         //Debug.Log("Damage done by Projectile ="+ projectilePhysicalDamage);
 
         if (isServer)
@@ -176,7 +177,7 @@ public class AbilityGunslingerQ : AbilityBasic
     {
         //Debug.Log("CmdSpawnProjectileOnServer()");
 
-        GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint, rotation);
+        GameObject projectileGO = Instantiate(projectilePrefab, firePoint, rotation);
         GunslingerQProjectile projectile = projectileGO.GetComponent<GunslingerQProjectile>();
 
         if (projectile != null)
@@ -194,8 +195,6 @@ public class AbilityGunslingerQ : AbilityBasic
     [ClientCallback]
     void TellServerToSpawnProjectile(float damage, Vector3 direction, Vector3 firePoint, Quaternion rotation, float maxDistance)
     {
-        //Debug.Log("TellServerToSpawnProjectile(float damage, Vector3 direction)");
-
         if (!isServer)
         {
             CmdSpawnProjectileOnServer(damage, direction, firePoint, rotation, maxDistance);

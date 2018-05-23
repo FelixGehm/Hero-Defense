@@ -72,7 +72,7 @@ public class CharacterStats : NetworkBehaviour
                 if (syncedCurrentHealth <= 0)
                 {
                     Die();
-                    Debug.Log("CurrentHealth: " + value);
+                    //Debug.Log("CurrentHealth: " + value);
                 }
             }
         }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -38,10 +36,19 @@ public class GunslingerEGrenade : NetworkBehaviour
         explosionDamage = damage;
         stunDuration = stunTime;
 
+
+        GunslingerEGrenadeDummy grenadeScriptDummy = GetComponent<GunslingerEGrenadeDummy>();
+        grenadeScriptDummy.Init(start, end, height,speedFaktor,yTreshold);
     }
 
     void FixedUpdate()
     {
+        if(!isServer)
+        {
+            this.enabled = false;
+            return;
+        }
+
         transform.position = Parabola(startPos, endPos, height, time * speedFaktor);
         time += Time.deltaTime;
 
@@ -57,10 +64,8 @@ public class GunslingerEGrenade : NetworkBehaviour
                 {
                     c.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(explosionDamage);
 
-                    EnemyController cc = c.gameObject.GetComponent<EnemyController>();
-
-                    //StartCoroutine(cc.GetStunned(stunDuration));                    
-                    cc.StunTest(stunDuration);
+                    EnemyController cc = c.gameObject.GetComponent<EnemyController>();                
+                    cc.GetStunned(stunDuration);
                 }
             }
             NetworkServer.Destroy(this.gameObject);

@@ -155,11 +155,6 @@ public class EnemyController : CrowdControllable
         myStatuses.Remove(Status.taunted);
     }
 
-    public void StunTest(float duration)
-    {
-        StartCoroutine(GetStunnedCo(duration));
-    }
-
     protected override IEnumerator GetStunnedCo(float duration)
     {
         //Debug.Log("Stun with duration = " +duration);

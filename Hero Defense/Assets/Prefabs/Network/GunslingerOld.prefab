@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 114352492908675568}
   - component: {fileID: 114083424393021974}
   - component: {fileID: 114169889219006038}
+  - component: {fileID: 114191153824593812}
   m_Layer: 0
   m_Name: GunslingerOld
   m_TagString: Untagged
@@ -1873,6 +1874,35 @@ MonoBehaviour:
   explosionRadius: 2
   explosionDamage: 10
   stunDuration: 2
+--- !u!114 &114191153824593812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118349031133886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3810f58f7d5cb4040958da265c1f3c0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySlot: 0
+  abilityCooldown: 4
+  currentCooldown: 0
+  abilityCastTime: 0.3
+  previewPrefab: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  projectilePhysicalDamageStart: 40
+  projectilePhysicalDamageMax: 100
+  projectileSpeed: 1
+  chargeTime: 2
+  rightClickMask:
+    serializedVersion: 2
+    m_Bits: 256
+  firePoint: {fileID: 0}
+  range: 10
+  timeBetweenShots: 0.1
+  maxNoTargets: 6
+  targets: []
 --- !u!114 &114199499742551658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2185,6 +2215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c7d2723bab92e40b08ede3161975f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityQ: {fileID: 0}
+  abilityW: {fileID: 0}
+  abilityE: {fileID: 0}
 --- !u!114 &114967110113210864
 MonoBehaviour:
   m_ObjectHideFlags: 1

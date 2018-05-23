@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 33576318494911466}
   - component: {fileID: 135045044069753476}
   - component: {fileID: 23058154679708840}
-  - component: {fileID: 54932728649067188}
-  - component: {fileID: 114836482857750504}
-  - component: {fileID: 114428997038180484}
   - component: {fileID: 114485059158348360}
-  - component: {fileID: 114160861378050424}
+  - component: {fileID: 114428997038180484}
   - component: {fileID: 114301332336061258}
+  - component: {fileID: 114160861378050424}
+  - component: {fileID: 114836482857750504}
+  - component: {fileID: 114672461790624028}
+  - component: {fileID: 54932728649067188}
   m_Layer: 0
   m_Name: Gunslinger-E-Grenade
   m_TagString: Untagged
@@ -175,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   na: {fileID: 114301332336061258}
-  _state: 2
+  _state: 0
   ignoreStateUntil: 2
   sendEveryXTick: 1
   desiredBufferMS: 0.1
@@ -195,7 +196,7 @@ MonoBehaviour:
     name: Root Rotation
     isRoot: 1
     index: 0
-    drawerHeight: 0
+    drawerHeight: 240
     nst: {fileID: 0}
     na: {fileID: 0}
     elementType: 1
@@ -247,6 +248,17 @@ MonoBehaviour:
   frameUpdateInterval: 0
   invFrameUpdateInterval: 0
   lastSentPos: {x: 0, y: 0, z: 0}
+--- !u!114 &114672461790624028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1523425383353616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12cff09d542f474479034fbbef3bb932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114836482857750504
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yTreshold: 0.2
+  speedFaktor: 1.5
 --- !u!135 &135045044069753476
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -25,7 +25,7 @@ public class AbilityGunslingerR : AbilityBasic
 
     [Space]
     public Transform firePoint;
-    //public float range = 10.0f;
+    public float range = 10.0f;
 
     public float timeBetweenShots = 0.1f;
     public int maxNoTargets = 6;
@@ -138,8 +138,13 @@ public class AbilityGunslingerR : AbilityBasic
             if (hit.collider.tag == "Enemy")
             {
                 Transform foundTarget = hit.transform;
-                // add found target to targets
-                targets.Add(foundTarget);
+
+                float distance = Vector3.Distance(foundTarget.position, transform.position);
+
+                if(distance <= range)
+                {
+                    targets.Add(foundTarget);
+                }                
 
                 // activate for target selection indicator
                 GameObject haloInstance = foundTarget.transform.Find("GFX").Find("Focus_Sprite").gameObject;
@@ -243,4 +248,14 @@ public class AbilityGunslingerR : AbilityBasic
             CmdSpawnProjectileOnServer(damage, id);
         }
     }
+
+    #region Editor
+    private void OnDrawGizmosSelected()
+    {
+        if (range <= 0) return;
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, (float)range);
+    }
+    #endregion
 }
