@@ -19,9 +19,7 @@ public class GunslingerEGrenade : NetworkBehaviour
     private float explosionDamage = 0;
 
     private float time = 0;
-        
-
-
+    
     public void Init(Vector3 start, Vector3 end, float height, float range, float damage, float stunTime)
     {
         startPos = start;
@@ -36,9 +34,8 @@ public class GunslingerEGrenade : NetworkBehaviour
         explosionDamage = damage;
         stunDuration = stunTime;
 
-
-        GunslingerEGrenadeDummy grenadeScriptDummy = GetComponent<GunslingerEGrenadeDummy>();
-        grenadeScriptDummy.Init(start, end, height,speedFaktor,yTreshold);
+        GunslingerEGrenadeDummy dummy = GetComponent<GunslingerEGrenadeDummy>();
+        dummy.Init(start, end, height,speedFaktor);
     }
 
     void FixedUpdate()

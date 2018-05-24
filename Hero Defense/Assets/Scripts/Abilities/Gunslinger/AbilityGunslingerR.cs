@@ -144,11 +144,11 @@ public class AbilityGunslingerR : AbilityBasic
                 if(distance <= range)
                 {
                     targets.Add(foundTarget);
-                }                
 
-                // activate for target selection indicator
-                GameObject haloInstance = foundTarget.transform.Find("GFX").Find("Focus_Sprite").gameObject;
-                haloInstance.SetActive(true);
+                    // activate for target selection indicator
+                    GameObject haloInstance = foundTarget.transform.Find("GFX").Find("Focus_Sprite").gameObject;
+                    haloInstance.SetActive(true);
+                }   
             }
         }
     }

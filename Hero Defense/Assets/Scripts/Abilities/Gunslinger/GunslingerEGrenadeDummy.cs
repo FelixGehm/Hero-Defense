@@ -4,20 +4,31 @@ using System;
 
 public class GunslingerEGrenadeDummy : NetworkBehaviour
 {
-    Vector3 startPos, endPos;
+    [SyncVar]
+    Vector3 startPos;
 
-    float height, time, speedFaktor, yTreshold;
+    [SyncVar]
+    Vector3 endPos;
 
+    [SyncVar]
+    float height;
 
-    public void Init(Vector3 startPos, Vector3 endPos, float height, float speedFaktor, float yTreshold)
+    [SyncVar]
+    float speedFaktor;
+
+    float time = 0;
+
+    [SyncVar]
+    Boolean wasInitiated = false;
+
+    public void Init(Vector3 startPos, Vector3 endPos, float height, float speedFaktor)
     {
         this.startPos = startPos;
         this.endPos = endPos;
         this.height = height;
         this.speedFaktor = speedFaktor;
-        this.yTreshold = yTreshold;
 
-        
+        wasInitiated = true;
     }
 
     void FixedUpdate()
@@ -28,19 +39,11 @@ public class GunslingerEGrenadeDummy : NetworkBehaviour
             return;
         }
 
-        try
+        if(wasInitiated)
         {
             transform.position = Parabola(startPos, endPos, height, time * speedFaktor);
-            time += Time.deltaTime;
-
-            if (transform.position.y <= yTreshold)
-            {
-                Destroy(this.gameObject);
-            }
-        } catch
-        {
-            // DO NOTHING
-        }        
+            time += Time.deltaTime;  
+        }      
     }
 
 

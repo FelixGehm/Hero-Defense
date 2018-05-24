@@ -7,13 +7,16 @@ public class HUDSimulator : MonoBehaviour {
 
 
 
-	public bool isImgOn;
+    public bool isImgOn = false;
 	public Image img;
 
 	void Start () {
 
-		img.enabled = true;
-		isImgOn = true;
+        if(img != null)
+        {
+            img.enabled = true;
+            isImgOn = true;
+        }		
 	}
 
 	void Update () {

@@ -2233,7 +2233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3810f58f7d5cb4040958da265c1f3c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilitySlot: 0
+  abilitySlot: 3
   abilityCooldown: 4
   currentCooldown: 0
   abilityCastTime: 0.3

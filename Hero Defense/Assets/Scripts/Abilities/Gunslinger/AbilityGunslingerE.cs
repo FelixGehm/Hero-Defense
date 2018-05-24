@@ -150,7 +150,7 @@ public class AbilityGunslingerE : AbilityBasic
     void CmdSpawnGrenadeOnServer(Vector3 start, Vector3 end, float height, float range, float damage, float stunTime)
     {
         GameObject grenadeGO = Instantiate(grenadePrefab, firePoint.position, transform.rotation);
-        
+        NetworkServer.Spawn(grenadeGO);
 
         GunslingerEGrenade grenadeScript = grenadeGO.GetComponent<GunslingerEGrenade>();
         if (grenadeScript != null)
@@ -158,7 +158,7 @@ public class AbilityGunslingerE : AbilityBasic
             grenadeScript.Init(start, end, height, range, damage, stunTime);
         }       
 
-        NetworkServer.Spawn(grenadeGO);
+        
     }
 
     [ClientCallback]
