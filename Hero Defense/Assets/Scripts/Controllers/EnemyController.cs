@@ -71,7 +71,7 @@ public class EnemyController : CrowdControllable
                 {
                     CharacterStats targetStats = target.GetComponent<CharacterStats>();
 
-                    if (targetStats != null)
+                    if (targetStats != null && targetStats.CurrentHealth > 0)
                     {
                         //Debug.Log("Attack!");
                         combat.Attack(targetStats);

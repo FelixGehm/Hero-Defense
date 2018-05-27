@@ -103,7 +103,7 @@ public class AbilityGunslingerR : AbilityBasic
 
     void SpawnPreview()
     {
-        Debug.Log("SpawnPreView()");
+        //Debug.Log("SpawnPreView()");
         previewGameObject = Instantiate(previewPrefab, transform.position, Quaternion.Euler(90, 0, 0));
     }
 
@@ -113,7 +113,7 @@ public class AbilityGunslingerR : AbilityBasic
 
         foreach (Transform t in targets)
         {
-            GameObject haloInstance = t.Find("GFX").Find("Focus_Sprite").gameObject;
+            GameObject haloInstance = t.Find("GFX").Find("GunslingerRIndicator").gameObject;
             haloInstance.SetActive(false);
         }
 
@@ -143,10 +143,13 @@ public class AbilityGunslingerR : AbilityBasic
 
                 if(distance <= range)
                 {
-                    targets.Add(foundTarget);
+                    if(!targets.Contains(foundTarget))
+                    {
+                        targets.Add(foundTarget);
+                    }                    
 
                     // activate for target selection indicator
-                    GameObject haloInstance = foundTarget.transform.Find("GFX").Find("Focus_Sprite").gameObject;
+                    GameObject haloInstance = foundTarget.transform.Find("GFX").Find("GunslingerRIndicator").gameObject;
                     haloInstance.SetActive(true);
                 }   
             }
@@ -158,7 +161,7 @@ public class AbilityGunslingerR : AbilityBasic
         timeAtShooting = Time.time;
         foreach (Transform t in targets)
         {
-            GameObject haloInstance = t.Find("GFX").Find("Focus_Sprite").gameObject;
+            GameObject haloInstance = t.Find("GFX").Find("GunslingerRIndicator").gameObject;
             haloInstance.SetActive(false);
         }
 

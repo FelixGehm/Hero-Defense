@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class WaveInfo : MonoBehaviour {
+public class WaveInfo : NetworkBehaviour {
 
     public Text text;
 
@@ -11,9 +12,17 @@ public class WaveInfo : MonoBehaviour {
 
     public NetworkWaveSpawner spawner;
 
+    [SyncVar(hook = "OnChangeText")]
+    private string networkString;
 
-	// Use this for initialization
-	void Start () {
+
+    void OnChangeText( string newText)
+    {
+        text.text = newText;
+    }
+
+    // Use this for initialization
+    void Start () {
 
         text.color = textColor;
 	}
@@ -23,18 +32,20 @@ public class WaveInfo : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if ( spawner == null)
+        if ( spawner == null || !isServer)
         {
             return;
         }
 
         int cooldown = (int) spawner.waveCoolDown;
 
-        if(cooldown != oldCooldown || oldWave != spawner.waveCounter)
+        if(  cooldown != oldCooldown || oldWave != spawner.waveCounter)
         {
             oldCooldown = cooldown;
 
-            text.text = "Wave " + spawner.waveCounter + "; Cooldown: " + cooldown +"; autospawn = " + spawner.autoSpawn;
+            networkString = "Wave " + spawner.waveCounter + "; Cooldown: " + cooldown + "; autospawn = " + spawner.autoSpawn;
+
+            text.text = networkString;
         }
 
 

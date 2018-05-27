@@ -56,9 +56,12 @@ public class AbilityGunslingerE : AbilityBasic
                 Vector3 direction = Vector3.Normalize(landingPos - transform.position);
 
                 landingPos = transform.position + maxThrowRange * direction;
+                landingPos.y = 0.1f;
             }
 
-            previewGameObject.transform.position = landingPos;
+            //previewGameObject.transform.position = landingPos;
+
+            previewGameObject.transform.position = new Vector3(landingPos.x, 0.1f, landingPos.z);
 
             maxRangeGameObject.transform.position = transform.position;
 
@@ -108,11 +111,11 @@ public class AbilityGunslingerE : AbilityBasic
     {
         isCasting = true;
 
-        previewGameObject = Instantiate(previewPrefab);
 
         maxRangeGameObject = Instantiate(maxRangePrefab);
+        previewGameObject = Instantiate(previewPrefab);        
 
-        maxRangeGameObject.transform.localScale += (new Vector3(1, 0, 1) * (maxThrowRange + 4));
+        //maxRangeGameObject.transform.localScale += (new Vector3(1,1,0) * maxThrowRange);
     }
 
     private IEnumerator ThrowGrenade(Vector3 landingPoint)
@@ -220,5 +223,15 @@ public class AbilityGunslingerE : AbilityBasic
         float distance = Vector3.Distance(transform.position, targetPos);
         return distance;
     }
+
+    #region Editor
+    private void OnDrawGizmosSelected()
+    {
+        if (maxThrowRange <= 0) return;
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, (float)maxThrowRange);
+    }
+    #endregion
 
 }

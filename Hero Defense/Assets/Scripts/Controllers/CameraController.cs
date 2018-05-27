@@ -18,6 +18,7 @@ public class CameraController : MonoBehaviour {
     public float panSpeed = 30;
     public float panBorderThickness = 10;
 
+    [SerializeField] //testing
     private float currentZoom = 10;
 
     private bool centerCam = true;

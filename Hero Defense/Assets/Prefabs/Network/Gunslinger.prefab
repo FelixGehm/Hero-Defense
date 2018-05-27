@@ -1454,7 +1454,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217024187637938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.5884352, y: 0.16, z: -6.6527157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4795684392900686}
@@ -2234,7 +2234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 3
-  abilityCooldown: 4
+  abilityCooldown: 60
   currentCooldown: 0
   abilityCastTime: 0.3
   previewPrefab: {fileID: 1651264465648246, guid: d46b8a545a11ece4a8580b8aa299f2ac,
@@ -2242,9 +2242,9 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
     type: 2}
   projectilePhysicalDamageStart: 40
-  projectilePhysicalDamageMax: 100
-  projectileSpeed: 30
-  chargeTime: 2
+  projectilePhysicalDamageMax: 70
+  projectileSpeed: 20
+  chargeTime: 5
   rightClickMask:
     serializedVersion: 2
     m_Bits: 256
@@ -2334,7 +2334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 4
-  abilityCooldown: 4
+  abilityCooldown: 60
   currentCooldown: 0
   abilityCastTime: 5
   remotePlayerMask:
@@ -2356,16 +2356,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBarManager: {fileID: 114073857278215730}
   maxHealth:
-    baseValue: 10000
+    baseValue: 300
     modifiers: []
   healthRegeneration:
-    baseValue: 0.005
+    baseValue: 0.001
     modifiers: []
   physicalDamage:
-    baseValue: 10
+    baseValue: 20
     modifiers: []
   armor:
-    baseValue: 5
+    baseValue: 0
     modifiers: []
   magicDamage:
     baseValue: 0
@@ -2380,10 +2380,10 @@ MonoBehaviour:
     baseValue: 1.5
     modifiers: []
   attackSpeed:
-    baseValue: 0.5
+    baseValue: 1
     modifiers: []
   attackRange:
-    baseValue: 7
+    baseValue: 8
     modifiers: []
   moveSpeed:
     baseValue: 0
@@ -2430,7 +2430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 2
-  abilityCooldown: 1
+  abilityCooldown: 18
   currentCooldown: 0
   abilityCastTime: 0.8
   rightClickMask:
@@ -2446,8 +2446,8 @@ MonoBehaviour:
   firePoint: {fileID: 4171625610971312}
   peakHeight: 1
   explosionRadius: 2
-  explosionDamage: 10
-  stunDuration: 2
+  explosionDamage: 5
+  stunDuration: 3
 --- !u!114 &114524779936978072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2610,7 +2610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 0
-  abilityCooldown: 4
+  abilityCooldown: 12
   currentCooldown: 0
   abilityCastTime: 1
   previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
@@ -2621,8 +2621,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1640169703100648, guid: 9b91f52cc1c22914aa73784a985c7adb,
     type: 2}
   projectileSpeed: 15
-  projectilePhysicalDamageStart: 10
-  projectilePhysicalDamageMax: 20
+  projectilePhysicalDamageStart: 40
+  projectilePhysicalDamageMax: 60
   chargeTime: 2
 --- !u!114 &114786002088767494
 MonoBehaviour:
