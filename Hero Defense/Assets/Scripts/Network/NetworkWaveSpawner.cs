@@ -13,6 +13,7 @@ public class NetworkWaveSpawner : NetworkBehaviour
 
     public float waveCoolDown;
 
+    public int waveCounter = 0;
 
     // General Values
     [Header("general")]
@@ -44,6 +45,7 @@ public class NetworkWaveSpawner : NetworkBehaviour
 
             if (waveCoolDown <= 0)
             {
+                waveCounter++;
                 Spawn(enemysPerWave, waveSpawnDuration);
             }
         }
