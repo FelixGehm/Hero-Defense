@@ -48,6 +48,7 @@ public class AbilityGunslingerR : AbilityBasic
     }
 
     bool skipFrame = true;
+    bool firstAnimTriggered = false;
 
     // Update is called once per frame
     protected override void Update()
@@ -67,28 +68,36 @@ public class AbilityGunslingerR : AbilityBasic
 
                     if (Input.GetMouseButtonDown(0))        // LeftClick 
                     {
-                        if(targets.Count < 6)
+                        if (targets.Count < 6)
                         {
                             MarkTarget();
-                        } else
+                        }
+                        else
                         {
                             StartCoroutine(ShootProjectiles());
                         }
-                        
+
                     }
 
                     if (Input.GetKeyDown(abilityKey))
-                    {                        
+                    {
                         StartCoroutine(ShootProjectiles());
                     }
                 }
                 skipFrame = false;
             }
+            if (Input.GetKeyUp(abilityKey) && !firstAnimTriggered)  //Workaround
+            {
+                TriggerAnimation();
+                firstAnimTriggered = true;
+            }
         }
+        Debug.Log(firstAnimTriggered);
     }
 
     protected override void Cast()
     {
+        //TriggerAnimation();                      // Felix: Wird die Animation hier getriggert funktioneirt sie beim Client nicht. Ich kann leider nicht nachvollziehen woran das liegen könnte. Methoden werden alle korrekt aufgerufen.
         playerMotor.MoveToPoint(transform.position);    // Stehen bleiben
 
         skipFrame = true;
@@ -109,6 +118,8 @@ public class AbilityGunslingerR : AbilityBasic
 
     void CancelCast()
     {
+        firstAnimTriggered = false;
+        CancelAnimation();
         Destroy(previewGameObject);
 
         foreach (Transform t in targets)
@@ -141,23 +152,26 @@ public class AbilityGunslingerR : AbilityBasic
 
                 float distance = Vector3.Distance(foundTarget.position, transform.position);
 
-                if(distance <= range)
+                if (distance <= range)
                 {
-                    if(!targets.Contains(foundTarget))
+                    if (!targets.Contains(foundTarget))
                     {
                         targets.Add(foundTarget);
-                    }                    
+                    }
 
                     // activate for target selection indicator
                     GameObject haloInstance = foundTarget.transform.Find("GFX").Find("GunslingerRIndicator").gameObject;
                     haloInstance.SetActive(true);
-                }   
+                }
             }
         }
     }
 
     private IEnumerator ShootProjectiles()
     {
+        
+        //TriggerAnimation();
+        //CancelAnimation();
         timeAtShooting = Time.time;
         foreach (Transform t in targets)
         {
@@ -186,11 +200,13 @@ public class AbilityGunslingerR : AbilityBasic
         isAnimating = true;
 
         yield return new WaitForSeconds(abilityCastTime);
+        firstAnimTriggered = false;
 
         bool isFirstShot = true;
         foreach (Transform target in targets)
         {
             // Animation ? 
+            TriggerSecondAnimation();
             if (!isFirstShot)
             {
                 yield return new WaitForSeconds(timeBetweenShots);
@@ -216,7 +232,7 @@ public class AbilityGunslingerR : AbilityBasic
         isCasting = false;
         playerController.IsCasting = false;
         characterEventController.isCasting = false;
-                
+
         targets.Clear();
         currentCooldown = abilityCooldown;
     }
@@ -239,7 +255,7 @@ public class AbilityGunslingerR : AbilityBasic
             projectile.speed = projectileSpeed;
         }
 
-        
+
         NetworkServer.Spawn(projectileGO);
     }
 

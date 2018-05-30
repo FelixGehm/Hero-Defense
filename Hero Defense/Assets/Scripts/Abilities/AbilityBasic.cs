@@ -30,6 +30,8 @@ public abstract class AbilityBasic : NetworkBehaviour
     protected bool isAnimating = false;
 
     public event System.Action OnAbilityCasting;
+    public event System.Action OnAbilitySecondCasting;
+    public event System.Action OnAbilityCancaled;
 
     protected virtual void Start()
     {
@@ -61,6 +63,18 @@ public abstract class AbilityBasic : NetworkBehaviour
             OnAbilityCasting();
     }
 
+    protected void TriggerSecondAnimation()
+    {
+        if (OnAbilityCasting != null)
+            OnAbilitySecondCasting();
+    }
+
+    protected void CancelAnimation()
+    {
+        if (OnAbilityCancaled != null)
+            OnAbilityCancaled();
+    }
+
     private void RegisterAbilityToUI()
     {
         if (!GameObject.Find("QImage"))
@@ -84,7 +98,7 @@ public abstract class AbilityBasic : NetworkBehaviour
                 GameObject.Find("RImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
                 break;
             case Slot.Revive:
-                Debug.Log("implmentation hier fehlt noch");
+                Debug.Log("implmentierung hier fehlt noch");
                 break;
 
         }

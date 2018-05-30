@@ -1454,7 +1454,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217024187637938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.5884352, y: 0.16, z: -6.6527157}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4795684392900686}
@@ -2418,6 +2418,7 @@ MonoBehaviour:
   abilityQ: {fileID: 114765068897905960}
   abilityW: {fileID: 114195931830590238}
   abilityE: {fileID: 114437152337141624}
+  abilityR: {fileID: 114082407873826526}
 --- !u!114 &114437152337141624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2530,7 +2531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animator: {fileID: 95148643980649348}
-  m_ParameterSendBits: 7
+  m_ParameterSendBits: 8191
   param0: 
   param1: 
   param2: 

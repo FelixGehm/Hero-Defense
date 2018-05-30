@@ -4685,6 +4685,7 @@ MonoBehaviour:
   pitch: 2
   panSpeed: 30
   panBorderThickness: 10
+  currentZoom: 10
 --- !u!81 &1740861224
 AudioListener:
   m_ObjectHideFlags: 0

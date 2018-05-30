@@ -74,6 +74,15 @@ public class NetworkSetupPlayer : NetworkSetup
         GetComponent<NetworkAnimator>().SetParameterAutoSend(1, true);
         GetComponent<NetworkAnimator>().SetParameterAutoSend(2, true);
         GetComponent<NetworkAnimator>().SetParameterAutoSend(3, true);
+
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(4, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(5, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(6, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(7, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(8, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(9, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(10, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(11, true);
     }
 
     public override void PreStartClient()
@@ -83,6 +92,15 @@ public class NetworkSetupPlayer : NetworkSetup
         GetComponent<NetworkAnimator>().SetParameterAutoSend(1, true);
         GetComponent<NetworkAnimator>().SetParameterAutoSend(2, true);
         GetComponent<NetworkAnimator>().SetParameterAutoSend(3, true);
+
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(4, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(5, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(6, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(7, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(8, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(9, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(10, true);
+        GetComponent<NetworkAnimator>().SetParameterAutoSend(11, true);
     }
 
     private void OnDestroy()

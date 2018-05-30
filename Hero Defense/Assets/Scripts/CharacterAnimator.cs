@@ -11,6 +11,7 @@ public class CharacterAnimator : MonoBehaviour
     public AbilityBasic abilityQ;
     public AbilityBasic abilityW;
     public AbilityBasic abilityE;
+    public AbilityBasic abilityR;
 
     const float locomotionAnimationSmoothTime = .1f;
 
@@ -61,6 +62,9 @@ public class CharacterAnimator : MonoBehaviour
         abilityQ.OnAbilityCasting += StartQAnimation;
         abilityW.OnAbilityCasting += StartWAnimation;
         abilityE.OnAbilityCasting += StartEAnimation;
+        abilityR.OnAbilityCasting += StartRAnimation;
+        abilityR.OnAbilitySecondCasting += StartSecondRAnimation;
+        abilityR.OnAbilityCancaled += CancelRAnimation;
 
         UpdateAttackAnimationSpeed();
     }
@@ -71,6 +75,12 @@ public class CharacterAnimator : MonoBehaviour
 
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
+    }
+
+    void TriggerAnimation(string animation)
+    {
+        netAnimator.SetTrigger(animation);
+        animator.ResetTrigger(animation);
     }
 
     void StartDieAnimation()
@@ -101,6 +111,26 @@ public class CharacterAnimator : MonoBehaviour
     {
         netAnimator.SetTrigger("abilityE");
         animator.ResetTrigger("abilityE");
+    }
+
+    void StartRAnimation()
+    {
+        Debug.Log("CharacterAnimator: StartRAnimation()");
+        //nsa.StartRAnimation();
+        netAnimator.SetTrigger("abilityR");
+        animator.ResetTrigger("abilityR");
+    }
+
+    void StartSecondRAnimation()
+    {
+        netAnimator.SetTrigger("abilityR2");
+        animator.ResetTrigger("abilityR2");
+    }
+
+    void CancelRAnimation()
+    {
+        netAnimator.SetTrigger("cancelR");
+        animator.ResetTrigger("cancelR");
     }
 
     void StartAttackAnimation()
@@ -148,7 +178,7 @@ public class CharacterAnimator : MonoBehaviour
         float animSpeed = clipLength / attackCD;
         animator.SetFloat("attackAnimationSpeed", animSpeed);
     }
-    
+
 
     /*
     public bool IsInAttackAnimation()

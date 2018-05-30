@@ -40,6 +40,32 @@ public class NetworkSyncAnimations : NetworkBehaviour
         }
     }
 
+    /*
+    public void StartRAnimation()
+    {
+        animator.SetTrigger("abilityR");
+        CmdSyncRAnimation();
+
+    }
+
+    [Command]
+    private void CmdSyncRAnimation()
+    {
+        //animator.SetTrigger("abilityR");
+        GameObject.Find(this.name).GetComponent<Animator>().SetTrigger("abilityR");
+        RpcSyncRAnimation();
+    }
+
+    [ClientRpc]
+    private void RpcSyncRAnimation()
+    {
+        //animator.SetTrigger("abilityR");
+        GameObject.Find(this.name).GetComponent<Animator>().SetTrigger("abilityR");
+    }
+    */
+
+
+
     public void PlayAttackAnimation()
     {
         animator.Play("Shoot", -1, 0f);
