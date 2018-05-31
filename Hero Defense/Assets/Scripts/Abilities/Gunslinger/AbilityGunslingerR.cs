@@ -92,7 +92,6 @@ public class AbilityGunslingerR : AbilityBasic
                 firstAnimTriggered = true;
             }
         }
-        Debug.Log(firstAnimTriggered);
     }
 
     protected override void Cast()
