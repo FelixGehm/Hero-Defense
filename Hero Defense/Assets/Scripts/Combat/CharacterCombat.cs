@@ -7,17 +7,17 @@ public class CharacterCombat : NetworkBehaviour
 {
     public float attackDelay = 0.2f;    //to match damage output with animation
 
-    private float attackSpeed;
-    private float attackCooldown;
+    protected float attackSpeed;
+    protected float attackCooldown;
 
     [HideInInspector]
     public bool isAttacking; //Immer true von start der Animation bis zur eigentlichen attack (also nach dem delay), nicht über die gesamte animation!
-    private Coroutine attack;
+    protected Coroutine attack;
 
-    public event System.Action OnAttack;    //Todo: Event nach CharacterEventController verlegen vielleicht ????(wegen Übersichtlichkeit)  //ich finde das sollte hier bleiben, weil nur combatbezogen (Felix)
+    public event System.Action OnAttack;
     public event System.Action OnAttackCanceled;
 
-    CharacterStats myStats;
+    protected CharacterStats myStats;
 
     [HideInInspector]
     public bool isBlinded = false;
@@ -27,12 +27,9 @@ public class CharacterCombat : NetworkBehaviour
     public GameObject projectilePrefab;
     public Transform firePoint;
 
-    void Start()
+    public virtual void Start()
     {
         myStats = GetComponent<CharacterStats>();
-
-        //attackDelay = 1.0f/ myStats.attackSpeed.GetValue();
-
     }
 
     void Update()
@@ -42,7 +39,7 @@ public class CharacterCombat : NetworkBehaviour
 
 
 
-    public void Attack(CharacterStats targetStats)
+    public virtual void Attack(CharacterStats targetStats)
     {
         float damageDone = myStats.physicalDamage.GetValue();   //get normal Damage from Stats
         if (CheckForCrit())                                     //check if crit did happen
@@ -66,15 +63,21 @@ public class CharacterCombat : NetworkBehaviour
                 attack = StartCoroutine(ShootProjectile(targetStats.transform, damageDone, attackDelay * 1 / attackSpeed));
             }
 
-            if (OnAttack != null)
-                OnAttack();
+            FireOnAttack();
 
             attackCooldown = 1.0f / attackSpeed;
             //Debug.Log("attack");
         }
     }
 
-    IEnumerator DoMeleeDamage(CharacterStats targetStats, float damageDone, float delay)        //TODO
+    protected void FireOnAttack()
+    {
+        if (OnAttack != null)
+            OnAttack();
+    }
+
+
+    protected IEnumerator DoMeleeDamage(CharacterStats targetStats, float damageDone, float delay)        //TODO
     {
         yield return new WaitForSeconds(delay);
         isAttacking = false;
@@ -88,14 +91,9 @@ public class CharacterCombat : NetworkBehaviour
         }
     }
 
-    //Test
-    public void TestKill()
-    {
-        StartCoroutine(DoMeleeDamage(myStats, 100000, 1));
-    }
-    //test end
+   
 
-    IEnumerator ShootProjectile(Transform target, float damageDone, float delay)
+    protected virtual  IEnumerator ShootProjectile(Transform target, float damageDone, float delay)
     {
         yield return new WaitForSeconds(delay);
         isAttacking = false;
@@ -111,7 +109,7 @@ public class CharacterCombat : NetworkBehaviour
 
     }
 
-    private void SpawnBullet(Transform target, float damageDone)
+    protected virtual void SpawnBullet(Transform target, float damageDone)
     {
         //Debug.Log("SpawnBullet(): taget="+ target+", damage ="+damageDone);
 
@@ -150,7 +148,7 @@ public class CharacterCombat : NetworkBehaviour
     }
 
     #region Crit
-    private bool CheckForCrit()
+    protected bool CheckForCrit()
     {
         bool isCrit = false;
 
@@ -164,7 +162,7 @@ public class CharacterCombat : NetworkBehaviour
         return isCrit;
     }
 
-    private float CalcCritDamage()
+    protected float CalcCritDamage()
     {
         float damage = myStats.physicalDamage.GetValue() * myStats.critDamage.GetValue();
 
@@ -186,7 +184,7 @@ public class CharacterCombat : NetworkBehaviour
 
     #region Fernkampf
     [Command]
-    void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
+    protected void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
     {
         Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
 
@@ -214,7 +212,7 @@ public class CharacterCombat : NetworkBehaviour
     }
 
     [ClientCallback]
-    void TellServerToSpawnBullet(Transform target, float damage)
+    protected void TellServerToSpawnBullet(Transform target, float damage)
     {
         NetworkInstanceId id = target.gameObject.GetComponent<NetworkIdentity>().netId;
 
@@ -229,6 +227,13 @@ public class CharacterCombat : NetworkBehaviour
     }
     #endregion
 
+    //Test
+    public void TestKill()
+    {
+        StartCoroutine(DoMeleeDamage(myStats, 100000, 1));
+    }
+    //test end
+
     #region Melee
 
     /// <summary>
@@ -236,7 +241,7 @@ public class CharacterCombat : NetworkBehaviour
     /// </summary>
     /// <param name="targetId"></param>
     [Command]
-    void CmdDoMeleeDamageOnServer(NetworkInstanceId targetId, float damageDone)
+    protected virtual void CmdDoMeleeDamageOnServer(NetworkInstanceId targetId, float damageDone)
     {
         CharacterStats targetStats = NetworkServer.FindLocalObject(targetId).GetComponent<CharacterStats>();
 
@@ -256,7 +261,7 @@ public class CharacterCombat : NetworkBehaviour
     /// </summary>
     /// <param name="targetStats"></param>
     [ClientCallback]
-    void TellServerToDoMeleeDamage(CharacterStats targetStats, float damageDone)
+    protected virtual void TellServerToDoMeleeDamage(CharacterStats targetStats, float damageDone)
     {
         NetworkInstanceId id = targetStats.transform.gameObject.GetComponent<NetworkIdentity>().netId;
 

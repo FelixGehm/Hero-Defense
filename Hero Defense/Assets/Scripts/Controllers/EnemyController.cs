@@ -49,16 +49,20 @@ public class EnemyController : CrowdControllable
         if (myStatuses.Contains(Status.stunned))
         {
             // Tue nichts, solange bis der Stun vorbei ist.
+            return;
         }
-        else
-        {
-            if (target == null && !myStatuses.Contains(Status.taunted))
-            {
-                target = FindClosestPlayer().transform;
-            }
 
+
+        if (!myStatuses.Contains(Status.taunted))
+        {
+            target = GetTarget();
+        }
+
+        if (target != null)
+        {
             distanceToTarget = Vector3.Distance(target.position, transform.position);
             distanceToDestination = Vector3.Distance(nexus.position, transform.position);
+
 
             //hier vielleicht ab einer bestimmenten distanz zum nexus den Spieler ignorieren?
             if (distanceToTarget <= lookRadius || myStatuses.Contains(Status.taunted))
@@ -92,9 +96,9 @@ public class EnemyController : CrowdControllable
                     combat.Attack(nexusStats);
                 }
             }
+
+            CheckIfStillInCombat();
         }
-
-
     }
 
     void FaceTarget(Transform _target)
@@ -105,6 +109,44 @@ public class EnemyController : CrowdControllable
     }
 
 
+    bool isInCombat = false;
+
+    /// <summary>
+    /// Achtung: das Target wird nur angegriffen/verfolgt, wenn es in Sichtreichweite ist. Der Code fafür ist aktuell in der update zu finden!
+    /// </summary>
+    /// <returns> the traget </returns>
+    private Transform GetTarget()
+    {
+        // Wenn im fight, behalte das alte Ziel
+        if (isInCombat)
+        {
+            return target;
+        }
+    
+        Transform targetPlayerTransform = null;
+
+        // nächstgelegenen Spieler finden und als Ziel setzten        
+        targetPlayerTransform = FindClosestPlayer().transform;
+
+        return targetPlayerTransform;
+    }
+
+    public void ReceivedDamageFrom(Transform damageDealer)
+    {
+        isInCombat = true;
+
+        target = damageDealer;
+    }
+
+    private void CheckIfStillInCombat()
+    {
+        distanceToTarget = Vector3.Distance(target.position, transform.position);
+        if (distanceToTarget > lookRadius)
+        {
+            isInCombat = false;
+        }
+    }
+
 
 
     // Returns the clostest Player to the Enemy
@@ -113,7 +155,7 @@ public class EnemyController : CrowdControllable
     {
         float distanceToPlayer = float.MaxValue;
         GameObject closestPlayer = null;
-
+        
 
         for (int i = 0; i < PlayerManager.instance.players.Length; i++)
         {
@@ -163,13 +205,13 @@ public class EnemyController : CrowdControllable
         {
             myStatuses.Remove(Status.stunned);
         }
-        
+
 
         myStatuses.Add(Status.stunned);
         agent.SetDestination(transform.position);       // agent-Destination auf aktuelle Position setzen
-                
+
         yield return new WaitForSeconds(duration);
-        
+
         myStatuses.Remove(Status.stunned);
     }
 
