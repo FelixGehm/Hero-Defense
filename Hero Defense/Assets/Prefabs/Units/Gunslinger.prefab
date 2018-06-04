@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 114570502394633400}
   - component: {fileID: 114131900589359770}
   - component: {fileID: 114907866130576386}
+  - component: {fileID: 114549721667703738}
   - component: {fileID: 114139479281436818}
   - component: {fileID: 114296818498798276}
   - component: {fileID: 114421281484709074}
@@ -265,7 +266,6 @@ GameObject:
   - component: {fileID: 114672753146718544}
   - component: {fileID: 114980368045429320}
   - component: {fileID: 114246536329409764}
-  - component: {fileID: 114846492038504016}
   - component: {fileID: 114765068897905960}
   - component: {fileID: 114195931830590238}
   - component: {fileID: 114437152337141624}
@@ -2366,6 +2366,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114549721667703738
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217024187637938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48f1cb5e1d9e354c8faf59a18631441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 0.3
+  isAttacking: 0
+  isBlinded: 0
+  isRanged: 1
+  projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
+    type: 2}
+  firePoint: {fileID: 4516320836597954}
 --- !u!114 &114570502394633400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2574,24 +2592,6 @@ MonoBehaviour:
   sendRate: 30
   networkChannel: 1
   childObjectToSync: {fileID: 0}
---- !u!114 &114846492038504016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1217024187637938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb7d32432d214146a4fd8f120de36ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDelay: 0.3
-  isAttacking: 0
-  isBlinded: 0
-  isRanged: 1
-  projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
-    type: 2}
-  firePoint: {fileID: 4516320836597954}
 --- !u!114 &114893598941481628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2624,7 +2624,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1217024187637938}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 585355a1c8ad85e4cb4718e24d1894e8, type: 3}
   m_Name: 
