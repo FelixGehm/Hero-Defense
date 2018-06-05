@@ -88,6 +88,7 @@ public class AbilityGunslingerE : AbilityBasic
     {
         if (isLocalPlayer && currentCooldown <= 0)
         {
+            
             playerController.IsCasting = true;
             characterEventController.isCasting = true;
             skipFrame = true;
@@ -98,9 +99,7 @@ public class AbilityGunslingerE : AbilityBasic
 
     private void CancelCast()
     {
-        isCasting = false;
-        playerController.IsCasting = false;
-        characterEventController.isCasting = false;
+        IsCasting(false);
 
         Destroy(previewGameObject);
         Destroy(maxRangeGameObject);
@@ -133,9 +132,7 @@ public class AbilityGunslingerE : AbilityBasic
 
         //Debug.Log("AnimationTime over!");
 
-        isCasting = false;
-        playerController.IsCasting = false;
-        characterEventController.isCasting = false;
+        IsCasting(false);
 
         currentCooldown = abilityCooldown;
 
@@ -158,7 +155,7 @@ public class AbilityGunslingerE : AbilityBasic
         GunslingerEGrenade grenadeScript = grenadeGO.GetComponent<GunslingerEGrenade>();
         if (grenadeScript != null)
         {
-            grenadeScript.Init(start, end, height, range, damage, stunTime);
+            grenadeScript.Init(start, end, height, range, damage, stunTime, this.transform);
         }       
 
         

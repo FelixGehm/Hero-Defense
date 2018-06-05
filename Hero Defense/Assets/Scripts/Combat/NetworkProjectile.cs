@@ -9,6 +9,8 @@ public class NetworkProjectile : NetworkBehaviour {
 
     private Transform target;
     private float damage = 0;
+
+    private Transform sender;
     
     [Server]
 	void Update () {
@@ -31,16 +33,33 @@ public class NetworkProjectile : NetworkBehaviour {
     }
 
     [Server]
+    public void InitBullet(Transform target, float _damage, Transform _sender)
+    {
+        this.target = target;
+        damage = _damage;
+        sender = _sender;
+
+    }
+
+    [Server]
     public void InitBullet(Transform target, float _damage)
     {
         this.target = target;
         damage = _damage;
+
     }
 
     [Server]
     void HitTarget()
     {
-        Damage(target.GetComponent<CharacterStats>());
+        if(sender != null)
+        {
+            Damage(target.GetComponent<EnemyStats>());
+        } else
+        {
+            Damage(target.GetComponent<CharacterStats>());
+        }
+        
 
         NetworkServer.Destroy(gameObject);
     }
@@ -49,5 +68,11 @@ public class NetworkProjectile : NetworkBehaviour {
     void Damage(CharacterStats targetStats)
     {
         targetStats.TakePhysicalDamage(damage);        
+    }
+
+    [Server]
+    void Damage(EnemyStats targetStats)
+    {
+        targetStats.TakePhysicalDamage(damage,sender);
     }
 }

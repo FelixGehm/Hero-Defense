@@ -24,7 +24,7 @@ public abstract class AbilityBasic : NetworkBehaviour
     protected PlayerController playerController;
     protected PlayerMotor playerMotor;
 
-
+    
 
     protected bool isCasting = false;
     protected bool isAnimating = false;
@@ -55,6 +55,13 @@ public abstract class AbilityBasic : NetworkBehaviour
         }
     }
 
+    protected void IsCasting(bool b)
+    {
+        isCasting = b;
+        playerController.IsCasting = b;
+        characterEventController.isCasting = b;
+    }
+
     protected abstract void Cast();
 
     protected void TriggerAnimation()
@@ -65,7 +72,7 @@ public abstract class AbilityBasic : NetworkBehaviour
 
     protected void TriggerSecondAnimation()
     {
-        if (OnAbilityCasting != null)
+        if (OnAbilitySecondCasting != null)
             OnAbilitySecondCasting();
     }
 

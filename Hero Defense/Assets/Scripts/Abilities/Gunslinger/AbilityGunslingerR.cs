@@ -86,7 +86,7 @@ public class AbilityGunslingerR : AbilityBasic
                 }
                 skipFrame = false;
             }
-            if (Input.GetKeyUp(abilityKey) && !firstAnimTriggered)  //Workaround
+            if (Input.GetKeyUp(abilityKey) && !firstAnimTriggered && isCasting)  //Workaround
             {
                 TriggerAnimation();
                 firstAnimTriggered = true;
@@ -100,9 +100,7 @@ public class AbilityGunslingerR : AbilityBasic
         playerMotor.MoveToPoint(transform.position);    // Stehen bleiben
 
         skipFrame = true;
-        isCasting = true;
-        playerController.IsCasting = true;
-        characterEventController.isCasting = true;
+        IsCasting(true);
 
         timeAtCastStart = Time.time;
 
@@ -110,8 +108,7 @@ public class AbilityGunslingerR : AbilityBasic
     }
 
     void SpawnPreview()
-    {
-        //Debug.Log("SpawnPreView()");
+    {        
         previewGameObject = Instantiate(previewPrefab, transform.position, Quaternion.Euler(90, 0, 0));
     }
 
@@ -133,9 +130,7 @@ public class AbilityGunslingerR : AbilityBasic
         }
         targets.Clear();
 
-        isCasting = false;
-        playerController.IsCasting = false;
-        characterEventController.isCasting = false;
+        IsCasting(false);
     }
 
     void MarkTarget()
@@ -168,9 +163,6 @@ public class AbilityGunslingerR : AbilityBasic
 
     private IEnumerator ShootProjectiles()
     {
-        
-        //TriggerAnimation();
-        //CancelAnimation();
         timeAtShooting = Time.time;
         foreach (Transform t in targets)
         {
@@ -228,9 +220,8 @@ public class AbilityGunslingerR : AbilityBasic
         }
 
         isAnimating = false;
-        isCasting = false;
-        playerController.IsCasting = false;
-        characterEventController.isCasting = false;
+
+        IsCasting(false);
 
         targets.Clear();
         currentCooldown = abilityCooldown;
@@ -250,7 +241,7 @@ public class AbilityGunslingerR : AbilityBasic
             Transform targetTransform = NetworkServer.FindLocalObject(id).transform;
             Debug.Log(targetTransform.name);
 
-            projectile.InitBullet(targetTransform, damage);
+            projectile.InitBullet(targetTransform, damage, this.transform);
             projectile.speed = projectileSpeed;
         }
 

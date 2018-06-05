@@ -10,25 +10,13 @@ public class CharacterStats : NetworkBehaviour
     public HealthBarManager healthBarManager;
     protected UIHealthBar uIHealthBar;
 
+    
+
     public virtual void Awake()
     {
         CurrentHealth = maxHealth.GetValue();
 
         isEnemy = gameObject.CompareTag("Enemy");
-
-        /*
-        if (!isEnemy)
-        {
-            if (GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>() != null)
-            {
-                uIHealthBar = GameObject.Find("Canvas HUD").transform.Find("CharacterInfo").Find("UIHealthBar").GetComponent<UIHealthBar>();
-            }
-            else
-            {
-                Debug.LogWarning("No UIHealthBar Script Found");
-            }
-        }
-        */
     }
 
     protected bool isEnemy;
@@ -163,7 +151,7 @@ public class CharacterStats : NetworkBehaviour
     {
         //Debug.Log("TakePhyDam");
 
-        if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
+        if (!isServer)      // Ausschließlich der Server verursacht Schaden.
         {
             return;
         }
@@ -171,7 +159,7 @@ public class CharacterStats : NetworkBehaviour
         CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
     }
 
-    private float CalcTakenPhysicalDamage(float incomingDamage)
+    protected float CalcTakenPhysicalDamage(float incomingDamage)
     {
         float damage = incomingDamage;
         damage -= armor.GetValue();
@@ -191,7 +179,7 @@ public class CharacterStats : NetworkBehaviour
         CurrentHealth -= CalcTakenPhysicalDamage(mDamage);
     }
 
-    public float CalcTakenMagicalDamage(float incomingDamage)
+    private float CalcTakenMagicalDamage(float incomingDamage)
     {
         float damage = incomingDamage;
         damage -= magicResistance.GetValue();

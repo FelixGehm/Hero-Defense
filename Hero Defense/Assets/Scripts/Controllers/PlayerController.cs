@@ -15,8 +15,8 @@ public class PlayerController : CrowdControllable
     Camera cam;
     PlayerMotor motor;
     PlayerStats stats;
-    CharacterCombat combat;
-    CharacterStats enemyStats;
+    PlayerCombat combat;
+    EnemyStats enemyStats;
     CharacterEventManager playerEventManager;
 
     //public bool isDead;
@@ -30,7 +30,7 @@ public class PlayerController : CrowdControllable
 
         motor = GetComponent<PlayerMotor>();
         stats = GetComponent<PlayerStats>();
-        combat = GetComponent<CharacterCombat>();
+        combat = GetComponent<PlayerCombat>();
         cam = Camera.main;
 
         playerEventManager = GetComponent<CharacterEventManager>();
@@ -135,7 +135,7 @@ public class PlayerController : CrowdControllable
 
                 if (focus != null && focus.GetType() == typeof(Enemy))
                 {
-                    enemyStats = focus.GetComponent<CharacterStats>();
+                    enemyStats = focus.GetComponent<EnemyStats>();
                 }
             }
         }

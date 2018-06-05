@@ -15,6 +15,7 @@ public class NetworkSetupPlayer : NetworkSetup
     {
         base.DisableComponents();
 
+        /*
         if (isLocalPlayer)
         {
             if (isServer)
@@ -38,18 +39,18 @@ public class NetworkSetupPlayer : NetworkSetup
                 transform.name = "NetworkPlayer as Client";
             }
         }
-
+        */
+        if(isServer)
+        {
+            // Register Player in PlayerManager
+            PlayerManager.instance.RegisterPlayer(transform.gameObject);
+        }
 
 
         if (isLocalPlayer)
         {
-            //localPlayer = true;
-
             // Bind Camera to Player
             Camera.main.GetComponent<CameraController>().SetLookAt(transform);
-
-            // Register Player in PlayerManager
-            PlayerManager.instance.RegisterPlayer(transform.gameObject);
         }
         else
         {

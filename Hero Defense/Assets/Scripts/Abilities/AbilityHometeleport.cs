@@ -1,8 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-//using emotitron.Network.NST;
+using Smooth;
 
 
 
@@ -11,15 +10,15 @@ public class AbilityHometeleport : NetworkBehaviour
 {
     private Vector3 teleportPoint;
 
-//    NetworkSyncTransform NST;
+    SmoothSync smoothSync;
     CharacterEventManager characterEventManager;
     CharacterEventController cec;
 
     PlayerMotor motor;
     
     void Start()
-    {        
-        //NST = GetComponent<NetworkSyncTransform>();
+    {
+        smoothSync = GetComponent<SmoothSync>();
 
         characterEventManager = GetComponent<CharacterEventManager>();
         cec = GetComponent<CharacterEventController>();
@@ -50,7 +49,9 @@ public class AbilityHometeleport : NetworkBehaviour
     {
         cec.isCasting = true;
         yield return new WaitForSeconds(delay);
-        //NST.Teleport(teleportPoint, transform.rotation);
+        int timestamp = NetworkTransport.GetNetworkTimestamp();        
+        smoothSync.teleport(timestamp, teleportPoint, transform.rotation);        
+        
         motor.MoveToPoint(teleportPoint);
         cec.isCasting = false;
     }
