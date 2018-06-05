@@ -81,6 +81,7 @@ public class CharacterCombat : NetworkBehaviour
     {
         yield return new WaitForSeconds(delay);
         isAttacking = false;
+                
         if (isServer)
         {
             targetStats.TakePhysicalDamage(damageDone);
@@ -91,48 +92,30 @@ public class CharacterCombat : NetworkBehaviour
         }
     }
 
-   
 
-    protected virtual  IEnumerator ShootProjectile(Transform target, float damageDone, float delay)
+
+    protected virtual IEnumerator ShootProjectile(Transform target, float damageDone, float delay)
     {
         yield return new WaitForSeconds(delay);
         isAttacking = false;
 
+        NetworkInstanceId idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;
+
+
         if (isServer)   // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
         {
-            SpawnBullet(target, damageDone);
+            //SpawnBullet(target, damageDone);
+            CmdSpawnBulletOnServer(idTarget, damageDone);
         }
         else
         {
-            TellServerToSpawnBullet(target, damageDone);
+            TellServerToSpawnBullet(idTarget, damageDone);
         }
 
-    }
-
-    protected virtual void SpawnBullet(Transform target, float damageDone)
-    {
-        //Debug.Log("SpawnBullet(): taget="+ target+", damage ="+damageDone);
-
-        GameObject projectileGO = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
-
-        if (projectile != null)
-        {
-            if (isBlinded)
-            {
-                projectile.InitBullet(target, 0);
-            }
-            else
-            {
-                projectile.InitBullet(target, damageDone);
-            }
-        }
-        NetworkServer.Spawn(projectileGO);
     }
 
     public void CancelAttack()
     {
-        //Debug.Log("CancelAttack()");
         if (attack != null)
             StopCoroutine(attack);
 
@@ -183,8 +166,9 @@ public class CharacterCombat : NetworkBehaviour
     /// </summary>
 
     #region Fernkampf
+
     [Command]
-    protected void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
+    protected virtual void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
     {
         Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
 
@@ -212,19 +196,15 @@ public class CharacterCombat : NetworkBehaviour
     }
 
     [ClientCallback]
-    protected void TellServerToSpawnBullet(Transform target, float damage)
+    protected void TellServerToSpawnBullet(NetworkInstanceId id, float damage)
     {
-        NetworkInstanceId id = target.gameObject.GetComponent<NetworkIdentity>().netId;
-
-
         //Debug.Log(transform.name + " TransmitBullet(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
         if (!isServer)
         {
-            CmdSpawnBulletOnServer(id, damage);               // HIER TAUCHT DIE WARNUNG AUF. ICH GLAUBE ALLES FUNKTIONIERT SO WIE ES SOLL... 
-                                                              // ABER DIE WARNUNG NERVT!! UND ICH WEIß NICHT WIE ICH DIE LOS WERDEN KANN :(
-                                                              //Debug.Log("CmdSpawnBulletOnServer()");
+            CmdSpawnBulletOnServer(id, damage);
         }
     }
+
     #endregion
 
     //Test
@@ -261,7 +241,7 @@ public class CharacterCombat : NetworkBehaviour
     /// </summary>
     /// <param name="targetStats"></param>
     [ClientCallback]
-    protected virtual void TellServerToDoMeleeDamage(CharacterStats targetStats, float damageDone)
+    protected void TellServerToDoMeleeDamage(CharacterStats targetStats, float damageDone)
     {
         NetworkInstanceId id = targetStats.transform.gameObject.GetComponent<NetworkIdentity>().netId;
 

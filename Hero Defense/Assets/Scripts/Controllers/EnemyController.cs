@@ -13,7 +13,7 @@ public class EnemyController : CrowdControllable
     Transform nexus;  //der nexus
     CharacterStats nexusStats;
 
-    public Transform target;       //der nächstgelegene spieler     // nach tests wieder protected machen!!!
+    public Transform target;       // das Ziel des Gegners
 
 
     float distanceToTarget;

@@ -19,8 +19,10 @@ public class GunslingerEGrenade : NetworkBehaviour
     private float explosionDamage = 0;
 
     private float time = 0;
+
+    private Transform damageCauser;
     
-    public void Init(Vector3 start, Vector3 end, float height, float range, float damage, float stunTime)
+    public void Init(Vector3 start, Vector3 end, float height, float range, float damage, float stunTime, Transform damageCauser)
     {
         startPos = start;
         endPos = end;
@@ -33,6 +35,8 @@ public class GunslingerEGrenade : NetworkBehaviour
 
         explosionDamage = damage;
         stunDuration = stunTime;
+
+        this.damageCauser = damageCauser;
 
         GunslingerEGrenadeDummy dummy = GetComponent<GunslingerEGrenadeDummy>();
         dummy.Init(start, end, height,speedFaktor);
@@ -59,7 +63,7 @@ public class GunslingerEGrenade : NetworkBehaviour
             {
                 if (c.CompareTag("Enemy"))
                 {
-                    c.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(explosionDamage);
+                    c.gameObject.GetComponent<EnemyStats>().TakePhysicalDamage(explosionDamage, damageCauser);
 
                     EnemyController cc = c.gameObject.GetComponent<EnemyController>();                
                     cc.GetStunned(stunDuration);
