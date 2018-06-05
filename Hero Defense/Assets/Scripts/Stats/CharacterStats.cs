@@ -148,6 +148,16 @@ public class CharacterStats : NetworkBehaviour
 
     #endregion
 
+    #region Heal
+    public void TakeHeal(float healAmount)
+    {
+        if (!isServer) return;
+
+        CurrentHealth += healAmount;
+    }
+
+    #endregion
+
     #region Physical
     public void TakePhysicalDamage(float pDamage)
     {

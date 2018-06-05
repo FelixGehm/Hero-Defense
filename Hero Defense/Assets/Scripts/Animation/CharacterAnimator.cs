@@ -59,12 +59,22 @@ public class CharacterAnimator : MonoBehaviour
 
         rev.OnCasting += StartReviveAnimation;
 
-        abilityQ.OnAbilityCasting += StartQAnimation;
+
+        if (abilityQ != null)   //tmp -> delete if statement after
+        {
+            abilityQ.OnAbilityCasting += StartQAnimation;
+            abilityW.OnAbilityCasting += StartWAnimation;
+            abilityE.OnAbilityCasting += StartEAnimation;
+            abilityR.OnAbilityCasting += StartRAnimation;
+            abilityR.OnAbilitySecondCasting += StartSecondRAnimation;
+            abilityR.OnAbilityCancaled += CancelRAnimation;
+        }
+
+        /*
+        //test
         abilityW.OnAbilityCasting += StartWAnimation;
-        abilityE.OnAbilityCasting += StartEAnimation;
-        abilityR.OnAbilityCasting += StartRAnimation;
-        abilityR.OnAbilitySecondCasting += StartSecondRAnimation;
-        abilityR.OnAbilityCancaled += CancelRAnimation;
+        //endtest
+        */
 
         UpdateAttackAnimationSpeed();
     }
