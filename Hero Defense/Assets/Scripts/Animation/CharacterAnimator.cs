@@ -70,11 +70,11 @@ public class CharacterAnimator : MonoBehaviour
             abilityR.OnAbilityCancaled += CancelRAnimation;
         }
 
-        /*
+        
         //test
         abilityW.OnAbilityCasting += StartWAnimation;
         //endtest
-        */
+        
 
         UpdateAttackAnimationSpeed();
     }

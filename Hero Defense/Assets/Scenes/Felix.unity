@@ -616,11 +616,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4353705840626042, guid: 8fe2baaa0664a114dab106d8e77e07eb, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775822082415842, guid: 8fe2baaa0664a114dab106d8e77e07eb, type: 2}
-      propertyPath: m_IsActive
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8fe2baaa0664a114dab106d8e77e07eb, type: 2}
@@ -1235,8 +1231,8 @@ MonoBehaviour:
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
-  m_OfflineScene: 
-  m_OnlineScene: 
+  m_OfflineScene: Felix
+  m_OnlineScene: Felix
   m_SpawnPrefabs:
   - {fileID: 1584452558600264, guid: 603765175ed68494a9d025eb037ebc03, type: 2}
   - {fileID: 0}
@@ -1633,7 +1629,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4495271996430726, guid: a5cfbfc8b48acec46b1620ec788755d9, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a5cfbfc8b48acec46b1620ec788755d9, type: 2}

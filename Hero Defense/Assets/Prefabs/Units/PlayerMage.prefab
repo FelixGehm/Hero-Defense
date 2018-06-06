@@ -1033,12 +1033,13 @@ GameObject:
   - component: {fileID: 114399481170393412}
   - component: {fileID: 114610418490515178}
   - component: {fileID: 114656579486634202}
-  - component: {fileID: 114322598965652718}
   - component: {fileID: 114186024392001798}
   - component: {fileID: 114301549755905992}
   - component: {fileID: 114131620269112456}
   - component: {fileID: 114785658790294776}
   - component: {fileID: 136994097796305218}
+  - component: {fileID: 114322598965652718}
+  - component: {fileID: 114102930739242952}
   m_Layer: 0
   m_Name: PlayerMage
   m_TagString: Player
@@ -2617,6 +2618,24 @@ MonoBehaviour:
   abilityThreeKey: 101
   abilityFourKey: 114
   reviveKey: 118
+--- !u!114 &114102930739242952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775822082415842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48f1cb5e1d9e354c8faf59a18631441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 0.4
+  isAttacking: 0
+  isBlinded: 0
+  isRanged: 1
+  projectilePrefab: {fileID: 1220129495896500, guid: a5cfbfc8b48acec46b1620ec788755d9,
+    type: 2}
+  firePoint: {fileID: 4545551337931446}
 --- !u!114 &114131620269112456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2765,7 +2784,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1775822082415842}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdb7d32432d214146a4fd8f120de36ea, type: 3}
   m_Name: 
