@@ -93,8 +93,7 @@ public class AbilityGunslingerQ : AbilityBasic
 
         if (isLocalPlayer && currentCooldown <= 0)
         {
-            playerController.IsCasting = true;
-            characterEventController.isCasting = true;
+            IsCasting(true);
 
             ShowPreview();
             skipFrame = true;
@@ -105,9 +104,7 @@ public class AbilityGunslingerQ : AbilityBasic
 
     public void CancelCast()
     {
-        isCasting = false;
-        playerController.IsCasting = false;
-        characterEventController.isCasting = false;
+        IsCasting(false);
 
         Destroy(previewGameObject);
     }
@@ -139,9 +136,7 @@ public class AbilityGunslingerQ : AbilityBasic
 
         //Debug.Log("ShootProjectile(): AnimationTime over!");
 
-        isCasting = false;
-        playerController.IsCasting = false;
-        characterEventController.isCasting = false;
+        IsCasting(false);
 
         currentCooldown = abilityCooldown;
 
@@ -186,6 +181,7 @@ public class AbilityGunslingerQ : AbilityBasic
             projectile.SetMaxDistance(maxDistance);
             projectile.speed = projectileSpeed;
             projectile.damage = damage;
+            projectile.damageCauser = this.transform;
         }
 
         //Debug.Log(projectileGO);

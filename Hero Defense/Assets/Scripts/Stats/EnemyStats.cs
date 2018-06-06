@@ -15,6 +15,11 @@ public class EnemyStats : CharacterStats {
 
     }
 
+    /*
+     *  Wenn beim Schaden machen Aggro erhalten werden soll,
+     *  dann eine der drei folgenden Methoden verwenden beim Schaden machen!
+     */
+
     public void TakeTrueDamage(float tDamage, Transform damageCauser)
     {
         if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
@@ -27,8 +32,6 @@ public class EnemyStats : CharacterStats {
 
         CurrentHealth -= damage;
 
-
-        Debug.Log("Hier bin ich richtig!");
         enemyController.ReceivedDamageFrom(damageCauser);
     }
     
@@ -42,8 +45,6 @@ public class EnemyStats : CharacterStats {
         }
 
         CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
-
-        Debug.Log("Hier bin ich richtig!");
         enemyController.ReceivedDamageFrom(damageCauser);
     }
 
@@ -56,8 +57,6 @@ public class EnemyStats : CharacterStats {
         }
 
         CurrentHealth -= CalcTakenPhysicalDamage(mDamage);
-
-        Debug.Log("Hier bin ich richtig!");
         enemyController.ReceivedDamageFrom(damageCauser);
     }
 

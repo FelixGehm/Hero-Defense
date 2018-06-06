@@ -1037,6 +1037,8 @@ GameObject:
   - component: {fileID: 114186024392001798}
   - component: {fileID: 114301549755905992}
   - component: {fileID: 114131620269112456}
+  - component: {fileID: 114785658790294776}
+  - component: {fileID: 136994097796305218}
   m_Layer: 0
   m_Name: PlayerMage
   m_TagString: Player
@@ -2877,7 +2879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityQ: {fileID: 0}
-  abilityW: {fileID: 0}
+  abilityW: {fileID: 114785658790294776}
   abilityE: {fileID: 0}
   abilityR: {fileID: 0}
 --- !u!114 &114409729931403580
@@ -2894,7 +2896,7 @@ MonoBehaviour:
   focus: {fileID: 0}
   rightClickMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 768
 --- !u!114 &114462352468352408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2975,6 +2977,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castTime: 2.5
+--- !u!114 &114785658790294776
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775822082415842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b919ba677c40b4bad93e6c42cc7ef2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySlot: 1
+  abilityCooldown: 4
+  currentCooldown: 0
+  abilityCastTime: 0.3
+  maxCastRange: 4
+  spellPrefab: {fileID: 1584452558600264, guid: 603765175ed68494a9d025eb037ebc03,
+    type: 2}
+  previewPrefab: {fileID: 1212285716326900, guid: f27e20abc8b42094989e10c3aed2ed59,
+    type: 2}
+  maxRangePrefab: {fileID: 1803211274329020, guid: 3a7ef53a5ec3de94588e1b551298a713,
+    type: 2}
+  rightClickMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &114836525269909084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2999,6 +3026,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &136994097796305218
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775822082415842}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137560902082767306
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

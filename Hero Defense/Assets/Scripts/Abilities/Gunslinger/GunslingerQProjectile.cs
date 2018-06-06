@@ -19,6 +19,7 @@ public class GunslingerQProjectile : NetworkBehaviour
     private int hitCounter = 0;
     private float[] damageStages = { 1.0f, 0.75f, 0.5f };
 
+    public Transform damageCauser;
 
 
     public void SetMaxDistance(float dist)
@@ -59,7 +60,7 @@ public class GunslingerQProjectile : NetworkBehaviour
 
         if (isServer && collision.transform.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(damage* damageStages[hitCounter]);
+            collision.gameObject.GetComponent<EnemyStats>().TakePhysicalDamage(damage* damageStages[hitCounter], damageCauser);
 
             if(hitCounter < damageStages.Length-1)
             {

@@ -36,7 +36,8 @@ public class PlayerCombat : CharacterCombat
         }
     }
 
-
+    #region melee
+    
 
     protected IEnumerator DoMeleeDamage(EnemyStats targetStats, float damageDone, float delay)        //TODO
     {
@@ -76,22 +77,38 @@ public class PlayerCombat : CharacterCombat
         }
     }
 
-    protected override void SpawnBullet(Transform target, float damageDone)
+    #endregion
+
+
+    #region ranged
+   
+    /// <summary>
+    /// An sich die selbe Methode wie in CharacterCombat,
+    /// ausschließlich die InitBullet()-Methode ist eine andere!
+    /// </summary>
+    /// <param name="targetId"></param>
+    /// <param name="damage"></param>
+    [Command]
+    protected override void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
     {
-        GameObject projectileGO = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
+
+        GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
         NetworkProjectile projectile = projectileGO.GetComponent<NetworkProjectile>();
 
         if (projectile != null)
         {
             if (isBlinded)
             {
-                projectile.InitBullet(target, 0, this.transform);
+                projectile.InitBullet(targetTransform, 0, this.transform);
             }
             else
             {
-                projectile.InitBullet(target, damageDone, this.transform);
+                projectile.InitBullet(targetTransform, damage, this.transform);
             }
         }
         NetworkServer.Spawn(projectileGO);
     }
+
+    #endregion
 }
