@@ -154,7 +154,6 @@ public class AbilityGunslingerQ : AbilityBasic
         }
 
         float projectilePhysicalDamage = Mathf.Lerp(projectilePhysicalDamageStart, projectilePhysicalDamageMax, percentDamage);
-        //Debug.Log("Damage done by Projectile ="+ projectilePhysicalDamage);
 
         if (isServer)
         {
@@ -177,11 +176,7 @@ public class AbilityGunslingerQ : AbilityBasic
 
         if (projectile != null)
         {
-            projectile.SetDirection(direction);
-            projectile.SetMaxDistance(maxDistance);
-            projectile.speed = projectileSpeed;
-            projectile.damage = damage;
-            projectile.damageCauser = this.transform;
+            projectile.Init(direction, maxDistance, projectileSpeed, damage, this.transform);
         }
 
         //Debug.Log(projectileGO);

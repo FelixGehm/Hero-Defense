@@ -12,9 +12,14 @@ public class NetworkProjectile : NetworkBehaviour {
 
     private Transform sender;
     
-    [Server]
 	void Update () {
-		if(target == null)
+        if (!isServer)
+        {
+            this.enabled = false;
+            return;
+        }
+
+        if (target == null)
         {
             NetworkServer.Destroy(gameObject);
             return;
@@ -32,21 +37,23 @@ public class NetworkProjectile : NetworkBehaviour {
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }
 
-    [Server]
     public void InitBullet(Transform target, float _damage, Transform _sender)
     {
         this.target = target;
         damage = _damage;
         sender = _sender;
 
+        NetworkProjectileDummy dummy = GetComponent<NetworkProjectileDummy>();
+        dummy.Init(target, speed);
     }
 
-    [Server]
     public void InitBullet(Transform target, float _damage)
     {
         this.target = target;
         damage = _damage;
 
+        NetworkProjectileDummy dummy = GetComponent<NetworkProjectileDummy>();
+        dummy.Init(target, speed);
     }
 
     [Server]

@@ -16,8 +16,8 @@ public class EnemyController : CrowdControllable
     public Transform target;       // das Ziel des Gegners
 
 
-    float distanceToTarget;
-    float distanceToDestination;
+    float distanceToTarget = float.MaxValue;
+    float distanceToDestination = float.MaxValue;
 
     NavMeshAgent agent;
     CharacterCombat combat;
@@ -52,6 +52,44 @@ public class EnemyController : CrowdControllable
             return;
         }
 
+        if (!myStatuses.Contains(Status.taunted) )
+        {
+            target = GetTarget();
+        }
+
+        if (target.Equals(nexus))
+        {
+            agent.stoppingDistance = stoppingDistanceNexus;
+        }
+        else
+        {
+            agent.stoppingDistance = stoppingDistancePlayer;
+        }
+
+        //Moving to Player and attack
+        agent.SetDestination(target.position);
+
+        if (distanceToTarget <= agent.stoppingDistance)
+        {
+            CharacterStats targetStats = target.GetComponent<CharacterStats>();
+
+            if (targetStats != null)
+            {
+                combat.Attack(targetStats);
+            }
+
+            FaceTarget(target);
+        }
+
+        CheckIfStillInCombat();
+
+        /*
+        if (myStatuses.Contains(Status.stunned))
+        {
+            // Tue nichts, solange bis der Stun vorbei ist.
+            return;
+        }
+
 
         if (!myStatuses.Contains(Status.taunted))
         {
@@ -74,11 +112,14 @@ public class EnemyController : CrowdControllable
                 if (distanceToTarget <= agent.stoppingDistance)
                 {
                     CharacterStats targetStats = target.GetComponent<CharacterStats>();
-
-                    if (targetStats != null && targetStats.CurrentHealth > 0)
+                                        
+                    if (targetStats != null && targetStats.IsAlive())
                     {
-                        //Debug.Log("Attack!");
                         combat.Attack(targetStats);
+                    }
+                    else                    
+                    {
+                        target = GetTarget();
                     }
 
                     FaceTarget(target);
@@ -90,7 +131,7 @@ public class EnemyController : CrowdControllable
                 //Moving to Nexus
                 agent.SetDestination(nexus.position);
                 agent.stoppingDistance = stoppingDistanceNexus;
-                if (distanceToDestination <= agent.stoppingDistance && nexusStats.CurrentHealth >= 0)
+                if (distanceToDestination <= agent.stoppingDistance && nexusStats.SyncedCurrentHealth >= 0)
                 {
                     FaceTarget(nexus);
                     combat.Attack(nexusStats);
@@ -99,6 +140,7 @@ public class EnemyController : CrowdControllable
 
             CheckIfStillInCombat();
         }
+        */
     }
 
     void FaceTarget(Transform _target)
@@ -112,64 +154,70 @@ public class EnemyController : CrowdControllable
     bool isInCombat = false;
 
     /// <summary>
-    /// Achtung: das Target wird nur angegriffen/verfolgt, wenn es in Sichtreichweite ist. Der Code fafür ist aktuell in der update zu finden!
+    /// 
     /// </summary>
     /// <returns> the traget </returns>
     private Transform GetTarget()
     {
         // Wenn im fight, behalte das alte Ziel
-        if (isInCombat)
+        if (isInCombat && target.GetComponent<CharacterStats>().IsAlive())
         {
-            return target;
+            return target;            
         }
-    
-        Transform targetPlayerTransform = null;
 
-        // nächstgelegenen Spieler finden und als Ziel setzten        
-        targetPlayerTransform = FindClosestPlayer().transform;
-
-        return targetPlayerTransform;
+        //isInCombat = false;
+        return FindTarget();
     }
+
+    private Transform FindTarget()
+    {
+        Transform target = nexus;
+
+        float distanceToPlayer = float.MaxValue;
+
+        List<GameObject> alivePlayer = new List<GameObject>();
+
+        for (int i = 0; i < PlayerManager.instance.players.Length; i++)     // Liste der Spielrr durchgehen
+        {
+            if (PlayerManager.instance.players[i] != null)
+            {
+                GameObject player = PlayerManager.instance.players[i];
+
+                bool playerIsAlive = player.GetComponent<PlayerStats>().IsAlive();
+
+                // Wenn Spieler am Leben, Entfernung überprüfen und ggf. als Target setzen
+                if (playerIsAlive)  
+                {
+                    float distance = Vector3.Distance(player.transform.position, transform.position);
+                    if (distanceToPlayer > distance && distance <= lookRadius)
+                    {
+                        distanceToPlayer = distance;
+                        target = player.transform;
+                    }
+                }
+            }
+        }
+        return target;
+    }
+
 
     public void ReceivedDamageFrom(Transform damageDealer)
     {
-        isInCombat = true;
-
-        target = damageDealer;
+        if(!isInCombat)
+        {
+            isInCombat = true;
+            target = damageDealer;
+        }        
     }
 
     private void CheckIfStillInCombat()
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget > lookRadius)
+        if (distanceToTarget > lookRadius && !target.GetComponent<CharacterStats>().IsAlive())
         {
             isInCombat = false;
         }
-    }
-
-
-
-    // Returns the clostest Player to the Enemy
-    // If there are no Players registered in the PlayerManager, then returns null
-    private GameObject FindClosestPlayer()
-    {
-        float distanceToPlayer = float.MaxValue;
-        GameObject closestPlayer = null;
         
-
-        for (int i = 0; i < PlayerManager.instance.players.Length; i++)
-        {
-            if (PlayerManager.instance.players[i] != null)
-            {
-                float distance = Vector3.Distance(PlayerManager.instance.players[i].transform.position, transform.position);
-                if (distanceToPlayer > distance)
-                {
-                    distanceToPlayer = distance;
-                    closestPlayer = PlayerManager.instance.players[i];
-                }
-            }
-        }
-        return closestPlayer;
     }
 
     // Draw LookRadius in Editor
@@ -247,7 +295,7 @@ public class EnemyController : CrowdControllable
 
         CharacterStats myStats = combat.GetCharacterStats();
 
-        float damageDealed = myStats.CurrentHealth * percentPerTick;
+        float damageDealed = myStats.SyncedCurrentHealth * percentPerTick;
         myStats.TakeTrueDamage(damageDealed);
 
         ticks -= 1;

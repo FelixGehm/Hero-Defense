@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarManager : MonoBehaviour {
+public class InGameHealthBar : MonoBehaviour {
 
     public Image foreGround;
 
@@ -15,7 +15,6 @@ public class HealthBarManager : MonoBehaviour {
     private float maxHealth;
     public float MaxHealth
     {
-
         get
         {
             return maxHealth;
@@ -67,8 +66,13 @@ public class HealthBarManager : MonoBehaviour {
         {
             cam = Camera.main;
         }*/
-        
+    }
 
+    void OnGUI()
+    {
+        MaxHealth = stats.maxHealth.GetValue();
+
+        CurrentHealth = stats.SyncedCurrentHealth;
     }
 
 

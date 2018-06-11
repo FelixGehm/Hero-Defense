@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -24,6 +25,7 @@ public class NetworkWaveSpawner : NetworkBehaviour
     {
         waveCoolDown = timeBetweenWavesInSec;
     }
+
 
     void Update()
     {

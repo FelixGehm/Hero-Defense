@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerStats : CharacterStats
 {
     PlayerController pc;
+
+    
+
     public override void Awake()
     {
         base.Awake();
 
-        if (GameObject.Find("UIHealthBar"))
+        if (GameObject.Find("UIHealthBar") && isLocalPlayer)
         {
-            uIHealthBar = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
+            UIHealthBar uIHealthBar = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
+            uIHealthBar.RegisterPlayerStats(this);
         }
         else
         {
