@@ -1,0 +1,13 @@
+Gunslinger AA 	--> klassisches Mündungsfeuer
+Gunslinger Q	--> ?
+Gunslinger W	--> Leuchteffekte um die Waffe?
+Gunslinger E	--> Explosion der Granate
+Gunslinger R 	--> ?
+
+Alle Charaktere Bewegung	--> Staub aufwirbeln (auf jedem Untergrund?)
+Alle Charaktere Wiederbelebung	--> leuchtender Ring mit Partikeln die nach oben steigen 
+Alle Charaktere Tod		--> Staub aufwirbeln (deutlicher als bei der Bewegung)
+
+bitte ergänzen + Ideen notieren
+
+
