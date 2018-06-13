@@ -589,6 +589,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1465933029460580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4888077149791050}
+  m_Layer: 0
+  m_Name: ESpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1480311653813450
 GameObject:
   m_ObjectHideFlags: 1
@@ -1038,8 +1053,8 @@ GameObject:
   - component: {fileID: 114131620269112456}
   - component: {fileID: 114785658790294776}
   - component: {fileID: 136994097796305218}
-  - component: {fileID: 114322598965652718}
   - component: {fileID: 114102930739242952}
+  - component: {fileID: 114824224634738826}
   m_Layer: 0
   m_Name: PlayerMage
   m_TagString: Player
@@ -1804,6 +1819,7 @@ Transform:
   m_Children:
   - {fileID: 4588458346586578}
   - {fileID: 4545551337931446}
+  - {fileID: 4888077149791050}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2465,6 +2481,19 @@ Transform:
   m_Father: {fileID: 4917801632747898}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4888077149791050
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1465933029460580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.305, y: 1, z: 0.762}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4353705840626042}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4901454601593052
 Transform:
   m_ObjectHideFlags: 1
@@ -2778,24 +2807,6 @@ MonoBehaviour:
   reviveDistance: 2
   friendlyTargetCursor: {fileID: 2800000, guid: 7ce9f781067c8974a832e7fbac57d20b,
     type: 3}
---- !u!114 &114322598965652718
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1775822082415842}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdb7d32432d214146a4fd8f120de36ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDelay: 0.4
-  isAttacking: 0
-  isBlinded: 0
-  isRanged: 1
-  projectilePrefab: {fileID: 1220129495896500, guid: a5cfbfc8b48acec46b1620ec788755d9,
-    type: 2}
-  firePoint: {fileID: 4545551337931446}
 --- !u!114 &114322757179176888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2860,7 +2871,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   physicalDamage:
-    baseValue: 10
+    baseValue: 50
     modifiers: []
   armor:
     baseValue: 5
@@ -2878,7 +2889,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   attackSpeed:
-    baseValue: 0.5
+    baseValue: 1
     modifiers: []
   attackRange:
     baseValue: 7
@@ -2899,7 +2910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityQ: {fileID: 0}
   abilityW: {fileID: 114785658790294776}
-  abilityE: {fileID: 0}
+  abilityE: {fileID: 114824224634738826}
   abilityR: {fileID: 0}
 --- !u!114 &114409729931403580
 MonoBehaviour:
@@ -3021,6 +3032,29 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &114824224634738826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775822082415842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c759f0fcf4884e445a126d728fc30e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySlot: 2
+  abilityCooldown: 4
+  currentCooldown: 0
+  abilityCastTime: 0.6
+  spellPrefab: {fileID: 1743943338343626, guid: 41687b1316148ce46b1993752433d345,
+    type: 2}
+  selectTargetIndicator: {fileID: 2800000, guid: 7ce9f781067c8974a832e7fbac57d20b,
+    type: 3}
+  clickMask:
+    serializedVersion: 2
+    m_Bits: 256
+  spawnPoint: {fileID: 4888077149791050}
 --- !u!114 &114836525269909084
 MonoBehaviour:
   m_ObjectHideFlags: 1

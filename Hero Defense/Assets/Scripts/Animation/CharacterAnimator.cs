@@ -69,12 +69,17 @@ public class CharacterAnimator : MonoBehaviour
             abilityR.OnAbilitySecondCasting += StartSecondRAnimation;
             abilityR.OnAbilityCancaled += CancelRAnimation;
         }
+        else
+        {
+            //test
+            abilityW.OnAbilityCasting += StartWAnimation;
+            abilityE.OnAbilityCasting += StartEAnimation;
+            //endtest
+        }
 
-        
-        //test
-        abilityW.OnAbilityCasting += StartWAnimation;
-        //endtest
-        
+
+
+
 
         UpdateAttackAnimationSpeed();
     }
@@ -145,6 +150,8 @@ public class CharacterAnimator : MonoBehaviour
 
     void StartAttackAnimation()
     {
+        Debug.Log("StartAttackAnimation()");
+
         animator.SetBool("cancelAttack", false);
 
         UpdateAttackAnimationSpeed(); //TODO: Nicht hier, sondern nur dann, wenn sich der AttackSpeeed ändert

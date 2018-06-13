@@ -5,6 +5,8 @@ using UnityEngine;
 
 //Hält eine Referenz auf den Spieler. So müssen nicht bei jeden Enemy Spawn alle Objekte nach dem Spieler durchsucht werden, sonder der Spieler kann über diese Klasse abgerufen werden.
 
+    //TODO: Rename in "EntityManager"
+
 public class PlayerManager : MonoBehaviour {
 
 
@@ -24,6 +26,8 @@ public class PlayerManager : MonoBehaviour {
     
 
     public GameObject[] players;
+
+    public List<GameObject> enemies;
     
     public GameObject nexus;
 
@@ -58,10 +62,25 @@ public class PlayerManager : MonoBehaviour {
         }
     }
 
+    public void RegisterEnemy(GameObject enemy)
+    {
+        enemies.Add(enemy);
+    }
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+    }
+
 
     public void KillPlayer()
     {
         //hier implementieren, was passieren soll, wenn spieler stirbt
+    }
+
+    private void OnDestroy()
+    {
+        PlayerManager.instance.RegisterEnemy(gameObject);
     }
 
 

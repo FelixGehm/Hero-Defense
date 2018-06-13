@@ -44,7 +44,7 @@ public class GunslingerQProjectile : NetworkBehaviour
             }
 
             float distanceThisFrame = speed * Time.deltaTime;
-            transform.Translate(direction.normalized * distanceThisFrame, Space.World);
+            transform.Translate(direction.normalized * distanceThisFrame, Space.World);     //Felix: direction evtl in SetDirection() normalisieren, um resourcen zu sparen?
 
             if (Vector3.Distance(startPoint, transform.position) >= maxDistance)
             {

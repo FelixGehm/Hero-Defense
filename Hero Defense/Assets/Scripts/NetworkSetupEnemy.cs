@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkSetupEnemy : NetworkSetup {
+public class NetworkSetupEnemy : NetworkSetup
+{
     public bool isAnimating = true;
 
     void Start()
     {
         base.DisableComponents();
+        if (isServer)
+        {
+            // Register Player in PlayerManager
+            PlayerManager.instance.RegisterEnemy(gameObject);
+        }
+
+
 
         if (isServer)
         {
@@ -46,7 +54,6 @@ public class NetworkSetupEnemy : NetworkSetup {
 
     private void OnDestroy()
     {
-        // Remove Enemy from PlayerManager ??
-        //PlayerManager.instance.RemovePlayer(transform.gameObject);
+        PlayerManager.instance.RemoveEnemy(gameObject);
     }
 }
