@@ -7,98 +7,69 @@ using UnityEngine.Networking;
 /// </summary>
 public class CharacterStats : NetworkBehaviour
 {
-    public HealthBarManager healthBarManager;
-    protected UIHealthBar uIHealthBar;
-
-    
-
     public virtual void Awake()
     {
-        CurrentHealth = maxHealth.GetValue();
-
-        isEnemy = gameObject.CompareTag("Enemy");
+            syncedCurrentHealth = maxHealth.GetValue();
     }
 
-    protected bool isEnemy;
+    protected static float timeBetweenTicksForHealthRegeneration = 1.0f;
+    protected float currentTickCoolDown = timeBetweenTicksForHealthRegeneration;
+    
+    protected void Update()
+    {
+        if (!isServer)
+        {
+            return;
+        }
+
+        currentTickCoolDown -= Time.deltaTime;
+
+        if (currentTickCoolDown <= 0)
+        {
+            currentTickCoolDown = timeBetweenTicksForHealthRegeneration;
 
 
-    /// <summary>
-    /// Bei SyncVars kann man sogenannte Hooks anhängen. Das sind Methoden, die ausgeführt werden, sobald der Server die aktuallisierte Variable gesendet hat. 
-    /// Sobald der Server den Wert für eine SyncVar bei den Clients ändert, wird dieser Hook dann ausgeführt.
-    /// In diesem Fall wird dies angewandt, umd den Property, der auf die Syncvar verweist ebenfalls zu aktuallisieren.
-    /// </summary>
-    [SyncVar(hook = "OnChangeHealth")]
+            if (syncedCurrentHealth > 0)
+            {
+                syncedCurrentHealth += maxHealth.GetValue() * healthRegeneration.GetValue();
+            }
+        }
+    }
+
+    [SyncVar(hook ="OnSyncedCurrendHealthChanged")]
     private float syncedCurrentHealth;
 
-    public virtual float CurrentHealth  //TODO: Das kann doch einfach in PlayerStats überschrieben werden. Dann wird das etwas übersichtlicher
+    public float SyncedCurrentHealth
     {
+        set
+        {
+            syncedCurrentHealth = value;
+
+            if (syncedCurrentHealth <= 0)
+            {
+                Die();
+            }
+        }
         get
         {
             return syncedCurrentHealth;
-        }
-        set
-        {
-            //Debug.Log("Health Changed to " + value);
-            if (value > maxHealth.GetValue())
-            {
-                value = maxHealth.GetValue();
-            }
-
-            syncedCurrentHealth = value;
-
-            if (healthBarManager != null)
-            {
-                healthBarManager.CurrentHealth = value;
-
-
-
-                if (uIHealthBar != null && !isEnemy && isLocalPlayer)
-                {
-                    uIHealthBar.CurrentHealth = value;
-                }
-
-                if (syncedCurrentHealth <= 0)
-                {
-                    Die();
-                    //Debug.Log("CurrentHealth: " + value);
-                }
-            }
-        }
+        }                 
     }
 
-
-    private void OnChangeHealth(float newHealth)
+    void OnSyncedCurrendHealthChanged(float newHealth)
     {
-        CurrentHealth = newHealth;      //Property CurrentHealth muss ebenfalls synchronisiert werden, damit die Healthbar angepasst wird.
+        SyncedCurrentHealth = newHealth;
     }
 
+    public bool IsAlive()
+    {                    
+            return syncedCurrentHealth >= 0;
+    }
 
     public Stat maxHealth;
 
 
-    protected static float timeBetweenTicksForHealthRegeneration = 1.0f;
-    protected float currentTickCoolDown = timeBetweenTicksForHealthRegeneration;
-
-    protected void Update()
-    {
-        if (isServer)
-        {
-            currentTickCoolDown -= Time.deltaTime;
-
-            if (currentTickCoolDown <= 0)
-            {
-                currentTickCoolDown = timeBetweenTicksForHealthRegeneration;
-
-                //Debug.Log("Time= "+Time.time);
-
-                if (CurrentHealth > 0)
-                    CurrentHealth += maxHealth.GetValue() * healthRegeneration.GetValue();
-            }
-        }
-
-    }
-
-    [Header("0.0 = 0% Health returned per tick, 1.0 = 100% Health returned per tick")]
+    [Tooltip("0.0 = 0% Health returned per tick, 1.0 = 100% Health returned per tick")]
     public Stat healthRegeneration;
 
     public Stat physicalDamage;
@@ -107,10 +78,10 @@ public class CharacterStats : NetworkBehaviour
     public Stat magicDamage;
     public Stat magicResistance;
 
-    [Header("0.0 = 0% CritChance, 1.0 = 100% CritChance")]
+    [Tooltip("0.0 = 0% CritChance, 1.0 = 100% CritChance")]
     public Stat critChance;
 
-    [Header("1.0 = 100% Damage, 1.5 = 150% Damage, 2 = 200% Damage")]
+    [Tooltip("1.0 = 100% CritDamage, 1.5 = 150% CritDamage, 2 = Crit200% Damage")]
     public Stat critDamage;
 
     public Stat attackSpeed;
@@ -131,7 +102,7 @@ public class CharacterStats : NetworkBehaviour
         float damage = tDamage;
         damage = Mathf.Max(damage, 0);      // Check if damage is < 0, if yes -> set to 0
 
-        CurrentHealth -= damage;
+        SyncedCurrentHealth -= damage;
     }
 
     #endregion
@@ -141,7 +112,7 @@ public class CharacterStats : NetworkBehaviour
     {
         if (!isServer) return;
 
-        CurrentHealth += healAmount;
+        SyncedCurrentHealth += healAmount;
     }
 
     #endregion
@@ -156,7 +127,7 @@ public class CharacterStats : NetworkBehaviour
             return;
         }
 
-        CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
+        SyncedCurrentHealth -= CalcTakenPhysicalDamage(pDamage);
     }
 
     protected float CalcTakenPhysicalDamage(float incomingDamage)
@@ -176,7 +147,7 @@ public class CharacterStats : NetworkBehaviour
             return;
         }
 
-        CurrentHealth -= CalcTakenPhysicalDamage(mDamage);
+        SyncedCurrentHealth -= CalcTakenPhysicalDamage(mDamage);
     }
 
     private float CalcTakenMagicalDamage(float incomingDamage)
@@ -188,6 +159,7 @@ public class CharacterStats : NetworkBehaviour
     }
 
     #endregion
+
 
     public virtual void Die()
     {

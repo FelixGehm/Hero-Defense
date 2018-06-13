@@ -81,7 +81,7 @@ public class CharacterCombat : NetworkBehaviour
     {
         yield return new WaitForSeconds(delay);
         isAttacking = false;
-                
+
         if (isServer)
         {
             targetStats.TakePhysicalDamage(damageDone);
@@ -101,8 +101,8 @@ public class CharacterCombat : NetworkBehaviour
 
         NetworkInstanceId idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;
 
-
-        if (isServer)   // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
+        // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
+        if (isServer)
         {
             //SpawnBullet(target, damageDone);
             CmdSpawnBulletOnServer(idTarget, damageDone);
@@ -160,16 +160,20 @@ public class CharacterCombat : NetworkBehaviour
     }
 
     #region Network
-    /// <summary>
-    /// Für eine (relativ) ausführliche Erklärung zu Command und ClientCallBack:
-    /// siehe CharacterEventManager
-    /// </summary>
 
     #region Fernkampf
 
+
     [Command]
-    protected virtual void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
+    protected void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
     {
+        WorkAroundCmd(targetId, damage);
+    }
+
+    [Server]
+    protected virtual void WorkAroundCmd(NetworkInstanceId targetId, float damage)
+    {
+        Debug.Log("CharacterCombat CmDSPawnBulletOnServer");
         Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
 
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
@@ -185,18 +189,13 @@ public class CharacterCombat : NetworkBehaviour
             {
                 projectile.InitBullet(targetTransform, damage);
             }
-
-
-
-            //projectile.SetTarget(transform);
         }
-
-        //Debug.Log(projectileGO);
         NetworkServer.Spawn(projectileGO);
     }
 
+
     [ClientCallback]
-    protected void TellServerToSpawnBullet(NetworkInstanceId id, float damage)
+    protected virtual void TellServerToSpawnBullet(NetworkInstanceId id, float damage)
     {
         //Debug.Log(transform.name + " TransmitBullet(): isServer = " + isServer + " hasAuthority = " + hasAuthority);
         if (!isServer)

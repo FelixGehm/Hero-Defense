@@ -124,7 +124,7 @@ public class Revive : AbilityBasic
 
     bool IsTargetDead(string _ID)
     {
-        return GameObject.Find(_ID).GetComponent<PlayerStats>().CurrentHealth <= 0;
+        return GameObject.Find(_ID).GetComponent<PlayerStats>().SyncedCurrentHealth <= 0;
     }
 
 

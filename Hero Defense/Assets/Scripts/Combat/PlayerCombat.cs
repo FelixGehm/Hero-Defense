@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 public class PlayerCombat : CharacterCombat
 {
 
-    public virtual void Attack(EnemyStats targetStats)
+    public void Attack(EnemyStats targetStats)
     {
         float damageDone = myStats.physicalDamage.GetValue();   //get normal Damage from Stats
         if (CheckForCrit())                                     //check if crit did happen
@@ -80,17 +80,16 @@ public class PlayerCombat : CharacterCombat
     #endregion
 
 
-    #region ranged
-   
+    #region ranged   
+
     /// <summary>
-    /// An sich die selbe Methode wie in CharacterCombat,
-    /// ausschließlich die InitBullet()-Methode ist eine andere!
+    /// Da Methoden die mit "[Command]" gekennzeichnet sind nicht überschrieben werden können... (FUCK YOU UNITY) muss dieser Umweg genommen werden
     /// </summary>
     /// <param name="targetId"></param>
-    /// <param name="damage"></param>
-    [Command]
-    protected override void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage)
+    /// <param name="damage"></param>    
+    protected override void WorkAroundCmd(NetworkInstanceId targetId, float damage)
     {
+        Debug.Log("PlayerCombat CmdSPawnBulletOnServer");
         Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
 
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);

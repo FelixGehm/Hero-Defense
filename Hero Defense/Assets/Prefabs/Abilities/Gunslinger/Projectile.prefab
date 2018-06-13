@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135640182961596182}
   - component: {fileID: 23408713408984296}
   - component: {fileID: 114176421464875792}
-  - component: {fileID: 114679916853845720}
+  - component: {fileID: 114959729736714710}
   m_Layer: 0
   m_Name: Projectile
   m_TagString: Untagged
@@ -99,47 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
---- !u!114 &114679916853845720
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1619547177321574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9de747ec6d608d4b984ba2628a309b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interpolationBackTime: 0.1
-  extrapolationTimeLimit: 0.3
-  extrapolationDistanceLimit: 0.3
-  sendPositionThreshold: 0.001
-  sendRotationThreshold: 0.001
-  sendScaleThreshold: 0.001
-  sendVelocityThreshold: 0.001
-  sendAngularVelocityThreshold: 0.001
-  receivedPositionThreshold: 0
-  receivedRotationThreshold: 0
-  positionSnapThreshold: 8
-  rotationSnapThreshold: 60
-  scaleSnapThreshold: 3
-  positionLerpSpeed: 0.2
-  rotationLerpSpeed: 0.2
-  scaleLerpSpeed: 0.2
-  syncPosition: 0
-  syncRotation: 0
-  syncScale: 0
-  syncVelocity: 0
-  syncAngularVelocity: 0
-  isPositionCompressed: 1
-  isRotationCompressed: 1
-  isScaleCompressed: 1
-  isVelocityCompressed: 1
-  isAngularVelocityCompressed: 1
-  whereToUpdateTransform: 1
-  sendRate: 30
-  networkChannel: 1
-  childObjectToSync: {fileID: 0}
 --- !u!114 &114875907997669616
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,6 +131,17 @@ MonoBehaviour:
     i15: 229
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!114 &114959729736714710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619547177321574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83065f3c3797514498776b03de27a6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135640182961596182
 SphereCollider:
   m_ObjectHideFlags: 1

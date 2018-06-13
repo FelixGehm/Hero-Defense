@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114680955868771718}
   - component: {fileID: 114261412780481892}
   - component: {fileID: 54477038973935176}
-  - component: {fileID: 114800832665495356}
+  - component: {fileID: 114517830943990570}
   m_Layer: 0
   m_Name: Gunslinger-Q-Projectile
   m_TagString: Gunslinger-Q-Projectile
@@ -128,6 +128,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   damage: 0
+  damageCauser: {fileID: 0}
+--- !u!114 &114517830943990570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640169703100648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa8722db59fe9f4db2c972b0fce7a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114680955868771718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,44 +172,3 @@ MonoBehaviour:
     i15: 219
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114800832665495356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1640169703100648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9de747ec6d608d4b984ba2628a309b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interpolationBackTime: 0.1
-  extrapolationTimeLimit: 0.3
-  extrapolationDistanceLimit: 0.3
-  sendPositionThreshold: 0.001
-  sendRotationThreshold: 0.001
-  sendScaleThreshold: 0.001
-  sendVelocityThreshold: 0.001
-  sendAngularVelocityThreshold: 0.001
-  receivedPositionThreshold: 0
-  receivedRotationThreshold: 0
-  positionSnapThreshold: 8
-  rotationSnapThreshold: 60
-  scaleSnapThreshold: 3
-  positionLerpSpeed: 0.2
-  rotationLerpSpeed: 0.2
-  scaleLerpSpeed: 0.2
-  syncPosition: 0
-  syncRotation: 0
-  syncScale: 0
-  syncVelocity: 0
-  syncAngularVelocity: 0
-  isPositionCompressed: 1
-  isRotationCompressed: 1
-  isScaleCompressed: 1
-  isVelocityCompressed: 1
-  isAngularVelocityCompressed: 1
-  whereToUpdateTransform: 1
-  sendRate: 30
-  networkChannel: 1
-  childObjectToSync: {fileID: 0}

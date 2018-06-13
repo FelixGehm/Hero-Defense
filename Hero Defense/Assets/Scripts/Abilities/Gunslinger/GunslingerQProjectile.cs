@@ -22,19 +22,27 @@ public class GunslingerQProjectile : NetworkBehaviour
     public Transform damageCauser;
 
 
-    public void SetMaxDistance(float dist)
+    public void Init(Vector3 direction, float maxDistance, float speed, float damage, Transform damageSender)
     {
-        maxDistance = dist;
+        this.direction = direction;
+        this.maxDistance = maxDistance;
+        this.speed = speed;
+        this.damage = damage;
+        this.damageCauser = damageSender;
+
+        GunslingerQProjectileDummy dummy = GetComponent<GunslingerQProjectileDummy>();
+        dummy.Init(direction, speed);
     }
 
-    public void SetDirection(Vector3 _direction)
+    void FixedUpdate()
     {
-        direction = _direction;
-    }
+        if (!isServer)
+        {
+            this.enabled = false;
+            return;
+        }
 
-    [Server]
-    void Update()
-    {
+
         if (isServer)
         {
             if (!hasStartPoint)

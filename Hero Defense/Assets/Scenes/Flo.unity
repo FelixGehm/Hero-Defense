@@ -1591,7 +1591,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4357193568050854, guid: 97951d0966ac77d419757a59ca8200b0, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 24
+      value: -14.67
       objectReference: {fileID: 0}
     - target: {fileID: 4357193568050854, guid: 97951d0966ac77d419757a59ca8200b0, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1599,7 +1599,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4357193568050854, guid: 97951d0966ac77d419757a59ca8200b0, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 14.4
+      value: -15.6
       objectReference: {fileID: 0}
     - target: {fileID: 4357193568050854, guid: 97951d0966ac77d419757a59ca8200b0, type: 2}
       propertyPath: m_LocalRotation.x
@@ -19139,7 +19139,7 @@ MonoBehaviour:
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 1
   m_OfflineScene: 
-  m_OnlineScene: Flo
+  m_OnlineScene: 
   m_SpawnPrefabs:
   - {fileID: 1640169703100648, guid: 9b91f52cc1c22914aa73784a985c7adb, type: 2}
   - {fileID: 1523425383353616, guid: ac5526485f72bba408c6bb7104f0a658, type: 2}

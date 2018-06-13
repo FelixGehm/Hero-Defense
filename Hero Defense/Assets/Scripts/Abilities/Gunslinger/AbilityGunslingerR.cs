@@ -166,8 +166,12 @@ public class AbilityGunslingerR : AbilityBasic
         timeAtShooting = Time.time;
         foreach (Transform t in targets)
         {
-            GameObject haloInstance = t.Find("GFX").Find("GunslingerRIndicator").gameObject;
-            haloInstance.SetActive(false);
+            if(t != null) // maybe Target is already dead
+            {
+                GameObject haloInstance = t.Find("GFX").Find("GunslingerRIndicator").gameObject;
+                haloInstance.SetActive(false);
+            }
+            
         }
 
         Destroy(previewGameObject);
@@ -196,27 +200,31 @@ public class AbilityGunslingerR : AbilityBasic
         bool isFirstShot = true;
         foreach (Transform target in targets)
         {
-            // Animation ? 
-            TriggerSecondAnimation();
-            if (!isFirstShot)
+            if(target != null)  // maybe Target is already dead
             {
-                yield return new WaitForSeconds(timeBetweenShots);
-            }
-            else
-            {
-                isFirstShot = false;
-            }
+                TriggerSecondAnimation();
+                if (!isFirstShot)
+                {
+                    yield return new WaitForSeconds(timeBetweenShots);
+                }
+                else
+                {
+                    isFirstShot = false;
+                }
 
-            NetworkInstanceId targetID = target.GetComponent<NetworkIdentity>().netId;
+                NetworkInstanceId targetID = target.GetComponent<NetworkIdentity>().netId;
 
-            if (isServer)
-            {
-                CmdSpawnProjectileOnServer(projectilePhysicalDamage, targetID);
+                if (isServer)
+                {
+                    CmdSpawnProjectileOnServer(projectilePhysicalDamage, targetID);
+                }
+                else
+                {
+                    TellServerToSpawnProjectile(projectilePhysicalDamage, targetID);
+                }
             }
-            else
-            {
-                TellServerToSpawnProjectile(projectilePhysicalDamage, targetID);
-            }
+            
+            
         }
 
         isAnimating = false;

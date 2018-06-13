@@ -30,7 +30,7 @@ public class EnemyStats : CharacterStats {
         float damage = tDamage;
         damage = Mathf.Max(damage, 0);      // Check if damage is < 0, if yes -> set to 0
 
-        CurrentHealth -= damage;
+        SyncedCurrentHealth -= damage;
 
         enemyController.ReceivedDamageFrom(damageCauser);
     }
@@ -44,7 +44,7 @@ public class EnemyStats : CharacterStats {
             return;
         }
 
-        CurrentHealth -= CalcTakenPhysicalDamage(pDamage);
+        SyncedCurrentHealth -= CalcTakenPhysicalDamage(pDamage);
         enemyController.ReceivedDamageFrom(damageCauser);
     }
 
@@ -56,7 +56,7 @@ public class EnemyStats : CharacterStats {
             return;
         }
 
-        CurrentHealth -= CalcTakenPhysicalDamage(mDamage);
+        SyncedCurrentHealth -= CalcTakenPhysicalDamage(mDamage);
         enemyController.ReceivedDamageFrom(damageCauser);
     }
 

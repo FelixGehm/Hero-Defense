@@ -219,7 +219,7 @@ public class PlayerController : CrowdControllable
     {
         IsDead = false;
 
-        stats.CurrentHealth = stats.maxHealth.GetValue();
+        stats.SyncedCurrentHealth = stats.maxHealth.GetValue();
 
         if (OnPlayerRevived != null)
             OnPlayerRevived();
@@ -292,7 +292,7 @@ public class PlayerController : CrowdControllable
     {
         yield return new WaitForSeconds(1.0f);
 
-        float damageDealed = stats.CurrentHealth * percentPerTick;
+        float damageDealed = stats.SyncedCurrentHealth * percentPerTick;
         stats.TakeTrueDamage(damageDealed);
 
         ticks -= 1;

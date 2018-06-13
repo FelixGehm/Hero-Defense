@@ -10,7 +10,7 @@ public class UIHealthBar : MonoBehaviour
     public CharacterStats stats;
 
     private float maxHealth;
-    public float MaxHealth
+    private float MaxHealth
     {
 
         get
@@ -26,7 +26,7 @@ public class UIHealthBar : MonoBehaviour
     }
 
     private float currentHealth;
-    public float CurrentHealth
+    private float CurrentHealth
     {
 
         get
@@ -52,5 +52,17 @@ public class UIHealthBar : MonoBehaviour
         stats = _stats;
         maxHealth = stats.maxHealth.GetValue();
         currentHealth = maxHealth;
+    }
+
+    private void OnGUI()
+    {
+        if(stats == null)
+        {
+            return;
+        }
+        
+        MaxHealth = stats.maxHealth.GetValue();
+
+        CurrentHealth = stats.SyncedCurrentHealth;
     }
 }
