@@ -2851,6 +2851,7 @@ MonoBehaviour:
   - {fileID: 114090624352576174}
   - {fileID: 114399481170393412}
   - {fileID: 114301549755905992}
+  - {fileID: 114824224634738826}
   remoteLayerName: RemotePlayer
 --- !u!114 &114349693581392550
 MonoBehaviour:
@@ -2863,7 +2864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c9a6863c426a14aa69a4d9c5cda8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarManager: {fileID: 114018042032917544}
   maxHealth:
     baseValue: 10000
     modifiers: []
@@ -3021,7 +3021,7 @@ MonoBehaviour:
   abilitySlot: 1
   abilityCooldown: 4
   currentCooldown: 0
-  abilityCastTime: 0.3
+  abilityCastTime: 0.7
   maxCastRange: 4
   spellPrefab: {fileID: 1584452558600264, guid: 603765175ed68494a9d025eb037ebc03,
     type: 2}
@@ -3047,6 +3047,12 @@ MonoBehaviour:
   abilityCooldown: 4
   currentCooldown: 0
   abilityCastTime: 0.6
+  spellSpeed: 5
+  maxCastRange: 5
+  maxBounceRange: 5
+  damage: 10
+  healAmount: 10
+  maxNumberOfBounces: 6
   spellPrefab: {fileID: 1743943338343626, guid: 41687b1316148ce46b1993752433d345,
     type: 2}
   selectTargetIndicator: {fileID: 2800000, guid: 7ce9f781067c8974a832e7fbac57d20b,
@@ -3054,7 +3060,12 @@ MonoBehaviour:
   clickMask:
     serializedVersion: 2
     m_Bits: 256
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 512
   spawnPoint: {fileID: 4888077149791050}
+  maxRangePrefab: {fileID: 1495573075735082, guid: c57be4c23ec7f074eaf812725a18fcc3,
+    type: 2}
 --- !u!114 &114836525269909084
 MonoBehaviour:
   m_ObjectHideFlags: 1

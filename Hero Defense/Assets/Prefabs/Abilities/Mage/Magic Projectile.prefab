@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114729197641310576}
   - component: {fileID: 114241226110337496}
   - component: {fileID: 114407681769770688}
+  - component: {fileID: 114482955642153974}
   m_Layer: 0
   m_Name: Magic Projectile
   m_TagString: Untagged
@@ -189,6 +190,17 @@ MonoBehaviour:
   sendRate: 30
   networkChannel: 1
   childObjectToSync: {fileID: 0}
+--- !u!114 &114482955642153974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220129495896500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83065f3c3797514498776b03de27a6ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114729197641310576
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -99,6 +99,11 @@ public class PlayerMotor : MonoBehaviour
         agent.ResetPath();
     }
 
+    public void SetDestination(Vector3 pos)
+    {
+        agent.SetDestination(pos);
+    }
+
     void FaceTarget()
     {
         Vector3 direction = (target.position - transform.position).normalized;

@@ -66,7 +66,7 @@ public class PlayerController : CrowdControllable
 
     void Update()
     {
-
+        //Debug.Log("isCasting: " + isCasting);
 
         //test delete after
         if (Input.GetKeyDown(KeyCode.L))

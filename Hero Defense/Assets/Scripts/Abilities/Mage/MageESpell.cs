@@ -5,24 +5,43 @@ using UnityEngine.Networking;
 
 public class MageESpell : NetworkBehaviour
 {
-    public float speed = 2;
+    private float speed = 2;
+    private float maxRange = 5;
+    private float damage = 10;
+    private float healAmount = 10;
+    private float maxBounces = 6;
+    private float currentBounces = 0;
+
     private GameObject target;
-    public void Init(GameObject firstTarget)
+    private List<GameObject> usedTargets;
+
+    public void Init(GameObject firstTarget, float speed, float maxRange, float damage, float healAmount, float maxBounces)
     {
-        //transform.position = firstTarget.transform.position;
         target = firstTarget;
+        this.speed = speed;
+        this.maxRange = maxRange;
+        this.damage = damage;
+        this.healAmount = healAmount;
+        this.maxBounces = maxBounces;
     }
 
-    // Use this for initialization
+    //[Server]
     void Start()
     {
-
+        //SearchForNextTarget();
+        usedTargets = new List<GameObject>();
     }
 
     private bool reachedTarget = false;
-    [Server]
+    //[Server]
     void Update()
     {
+        if (!isServer)
+        {
+            this.enabled = false;
+            return;
+        }
+
         if (isServer)
         {
             if (target == null)
@@ -41,11 +60,29 @@ public class MageESpell : NetworkBehaviour
 
             if (!reachedTarget && (transform.position - target.transform.position).magnitude <= 0.05f) //transform nearly reached target
             {
-                //Do Damage or Heal
                 //init hit particle effect
+
+                if (target.CompareTag("Player"))
+                {
+                    target.GetComponent<CharacterStats>().TakeHeal(healAmount);
+                }
+                else if (target.CompareTag("Enemy"))
+                {
+                    target.GetComponent<CharacterStats>().TakeMagicDamage(damage);
+                }
+
                 reachedTarget = true;
-                target = SearchForNextTarget();
-                Debug.Log("hit");
+                usedTargets.Add(target);
+                currentBounces++;
+                if (currentBounces < maxBounces)
+                {
+                    target = SearchForNextTarget();
+                }
+                else
+                {
+                    target = null;
+                }
+
             }
             else
             {
@@ -53,7 +90,43 @@ public class MageESpell : NetworkBehaviour
             }
         }
     }
-    private GameObject SearchForNextTarget()
+
+    private GameObject SearchForNextTarget()    //searches for the closest target that was not used allready
+    {
+        #region SetupList
+        List<GameObject> units = new List<GameObject>();
+        foreach (GameObject player in PlayerManager.instance.players) //Eine Liste für die Spieler wäre sehr viel praktischer
+        {
+            if (player != null)
+            {
+                units.Add(player);
+            }
+        }
+        units.AddRange(PlayerManager.instance.enemies);
+        #endregion
+        GameObject _target = null;
+        float dist = 0;
+        float lastDist = float.MaxValue;
+
+        foreach (GameObject unit in units)
+        {
+            if (unit != target && IsInRange(unit) && !WasTargetUsed(unit))
+            {
+                dist = Vector3.Distance(unit.transform.position, transform.position);
+
+                if (dist < lastDist)
+                {
+                    _target = unit;
+                }
+                lastDist = dist;
+            }
+        }
+        return _target;
+    }
+
+
+
+    private GameObject SearchForClosestTarget()
     {
         float dist = 0;
         float lastDist = float.MaxValue;
@@ -72,5 +145,33 @@ public class MageESpell : NetworkBehaviour
             }
         }
         return _target;
+    }
+
+    private bool WasTargetUsed(GameObject _target)
+    {
+        foreach (GameObject t in usedTargets)
+        {
+            if (_target == t)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool IsInRange(GameObject _target)
+    {
+        if (Vector3.Distance(_target.transform.position, this.transform.position) <= maxRange)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, maxRange);
     }
 }

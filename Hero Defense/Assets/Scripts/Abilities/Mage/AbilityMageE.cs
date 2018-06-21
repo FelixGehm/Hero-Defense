@@ -5,18 +5,30 @@ using UnityEngine.Networking;
 
 public class AbilityMageE : AbilityBasic
 {
+    [Header("Spell Settings")]
+    public float spellSpeed = 5;
+    public float maxCastRange = 10;
+    public float maxBounceRange = 5;
+    public float damage = 10;
+    public float healAmount = 10;
+    public float maxNumberOfBounces = 6;
 
+    [Header("Setup Fields")]
     public GameObject spellPrefab;
-
     public Texture2D selectTargetIndicator;
-
     public LayerMask clickMask;
-
+    public LayerMask groundMask;
     public Transform spawnPoint;
+    public GameObject maxRangePrefab;
+    private GameObject maxRangeGO;
 
     KeyCode abilityKey;
 
     private GameObject target;
+
+    private bool hasCasted = false;
+
+    private bool followTarget = false;
 
     // Use this for initialization
     protected override void Start()
@@ -30,9 +42,9 @@ public class AbilityMageE : AbilityBasic
     protected override void Update()
     {
         base.Update();
-        if (isLocalPlayer)
+        if (isLocalPlayer && maxRangeGO != null)
         {
-
+            maxRangeGO.transform.position = transform.position;
 
             if (!skipFrame && isCasting)
             {
@@ -49,20 +61,45 @@ public class AbilityMageE : AbilityBasic
                     {
                         if (hit.collider.tag == "Enemy")
                         {
-                            target = hit.collider.gameObject;
-                            StartCoroutine(CastAbility());
+                            if (Vector3.Distance(hit.transform.position, transform.position) <= maxCastRange)
+                            {
+                                target = hit.collider.gameObject;
+                                StartCoroutine(CastAbility());
+                                playerMotor.MoveToPoint(transform.position);
+                            }
+                            else
+                            {
+                                target = hit.collider.gameObject;
+                                playerMotor.MoveToPoint(target.transform.position);
+                                followTarget = true;
+                                ShowSpecialCursor(false);
+                                Destroy(maxRangeGO);
+                            }
                         }
                     }
                 }
             }
             skipFrame = false;
         }
+
+        if (isLocalPlayer && followTarget)
+        {
+            FollowTargetAndCastInRange();
+
+        }
+
+        if (isLocalPlayer && !isCasting && !isAnimating && hasCasted && Input.GetMouseButtonDown(1))
+        {
+            CancelAnimation();
+            hasCasted = false;
+        }
     }
 
     protected override void Cast()
     {
-        Debug.Log("AbilityMageE.Cast()");
+        //Debug.Log("AbilityMageE.Cast()");
         ShowSpecialCursor(true);
+        maxRangeGO = Instantiate(maxRangePrefab);
         IsCasting(true);
         skipFrame = true;
     }
@@ -71,6 +108,7 @@ public class AbilityMageE : AbilityBasic
     {
         ShowSpecialCursor(false);
         IsCasting(false);
+        Destroy(maxRangeGO);
     }
 
     private void ShowSpecialCursor(bool b)
@@ -88,13 +126,17 @@ public class AbilityMageE : AbilityBasic
 
     public IEnumerator CastAbility()
     {
+        hasCasted = false;
         ShowSpecialCursor(false);
+        Destroy(maxRangeGO);
 
         TriggerAnimation();
         transform.rotation = Quaternion.AngleAxis(GetPlayerAngle(target.transform.position), Vector3.up);
         isAnimating = true;
+        IsCasting(true);
 
         yield return new WaitForSeconds(abilityCastTime);
+        hasCasted = true;
 
         isAnimating = false;
         IsCasting(false);
@@ -103,40 +145,76 @@ public class AbilityMageE : AbilityBasic
 
         if (isServer)
         {
-            CmdSpawnSpellOnServer(spawnPoint.position);
+            CmdSpawnSpellOnServer(spawnPoint.position, target, spellSpeed, maxBounceRange, damage, healAmount, maxNumberOfBounces);
         }
         else
         {
-            TellServerToSpawnSpell(spawnPoint.position);
+            TellServerToSpawnSpell(spawnPoint.position, target, spellSpeed, maxBounceRange, damage, healAmount, maxNumberOfBounces);
         }
     }
+
+
 
 
 
 
     [Command]
-    void CmdSpawnSpellOnServer(Vector3 spawnPosition)
+    void CmdSpawnSpellOnServer(Vector3 spawnPosition, GameObject target, float spellSpeed, float maxBounceRange, float damage, float healAmount, float maxNumberOfBounces)
     {
         GameObject spellGO = Instantiate(spellPrefab, spawnPosition, transform.rotation);
-        NetworkServer.Spawn(spellGO);
 
         MageESpell spellScript = spellGO.GetComponent<MageESpell>();
+        //Debug.Log("target: " + target.name);
+        //Debug.Log("hasScript: " + spellScript != null);
         if (spellScript != null && target != null)
         {
-            spellScript.Init(target);
+            spellScript.Init(target, spellSpeed, maxBounceRange, damage, healAmount, maxNumberOfBounces);
         }
         else
         {
             Debug.Log("Failed to Init spell");
         }
+        NetworkServer.Spawn(spellGO);
     }
 
     [ClientCallback]
-    void TellServerToSpawnSpell(Vector3 spawnPosition)
+    void TellServerToSpawnSpell(Vector3 spawnPosition, GameObject target, float spellSpeed, float maxBounceRange, float damage, float healAmount, float maxNumberOfBounces)
     {
         if (!isServer)
         {
-            CmdSpawnSpellOnServer(spawnPosition);
+            CmdSpawnSpellOnServer(spawnPosition, target, spellSpeed, maxBounceRange, damage, healAmount, maxNumberOfBounces);
+        }
+    }
+
+    private void FollowTargetAndCastInRange()
+    {
+        if (Vector3.Distance(transform.position, target.transform.position) <= maxCastRange)    //cast when in range
+        {
+            StartCoroutine(CastAbility());
+            playerMotor.MoveToPoint(transform.position);
+            followTarget = false;
+        }
+        else
+        {
+            playerMotor.SetDestination(target.transform.position);      //follow the target
+        }
+        if (Input.GetMouseButtonDown(1))    //cancel Follow and Cast
+        {
+            //Debug.Log("Cancel Follow");
+            IsCasting(false);
+            followTarget = false;
+            target = null;
+            Vector3 mPos = GetMousePosOnWorld();
+
+            if (mPos != new Vector3(0, 0, 0))
+            {
+                playerMotor.MoveToPoint(mPos);
+            }
+            else
+            {
+                playerMotor.MoveToPoint(transform.position);
+            }
+
         }
     }
 
@@ -152,5 +230,25 @@ public class AbilityMageE : AbilityBasic
         }
 
         return angle;
+    }
+
+    private Vector3 GetMousePosOnWorld()
+    {
+        Vector3 mousePos = new Vector3();
+
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100, groundMask))
+        {
+            mousePos = hit.point;
+        }
+
+        return mousePos;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, maxCastRange);
     }
 }

@@ -20,6 +20,8 @@ public class AbilityMageW : AbilityBasic
 
     private Vector3 spawnPos;
 
+    private bool hasCasted = false;
+
     protected override void Start()
     {
         base.Start();
@@ -64,7 +66,12 @@ public class AbilityMageW : AbilityBasic
                 }
             }
             skipFrame = false;
+        }
 
+        if (isLocalPlayer && !isCasting && !isAnimating && hasCasted && Input.GetMouseButtonDown(1))
+        {
+            CancelAnimation();
+            hasCasted = false;
         }
     }
 
@@ -72,7 +79,6 @@ public class AbilityMageW : AbilityBasic
     {
         if (isLocalPlayer && currentCooldown <= 0)
         {
-            Debug.Log("test");
             skipFrame = true;
             SpawnPreview();
         }
@@ -99,6 +105,7 @@ public class AbilityMageW : AbilityBasic
 
     public IEnumerator CastAbility(Vector3 castPosition)
     {
+        hasCasted = false;
         Destroy(previewGO);
         Destroy(maxRangeGO);
 
@@ -107,6 +114,7 @@ public class AbilityMageW : AbilityBasic
         isAnimating = true;
 
         yield return new WaitForSeconds(abilityCastTime);
+        hasCasted = true;
 
         isAnimating = false;
         isCasting = false;
@@ -171,7 +179,7 @@ public class AbilityMageW : AbilityBasic
         Vector3 direction = Vector3.Normalize(spawnPos - transform.position);
         angle = Vector3.Angle(Vector3.forward, direction);
 
-        if(direction.x < 0)
+        if (direction.x < 0)
         {
             angle = 360 - angle;
         }
