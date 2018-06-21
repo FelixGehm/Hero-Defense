@@ -15,6 +15,10 @@ public class MageESpell : NetworkBehaviour
     private GameObject target;
     private List<GameObject> usedTargets;
 
+    Vector3 direction;
+
+    MageESpellDummy dummy;
+
     public void Init(GameObject firstTarget, float speed, float maxRange, float damage, float healAmount, float maxBounces)
     {
         target = firstTarget;
@@ -23,12 +27,16 @@ public class MageESpell : NetworkBehaviour
         this.damage = damage;
         this.healAmount = healAmount;
         this.maxBounces = maxBounces;
+
+        dummy = GetComponent<MageESpellDummy>();
+        dummy.Init(speed, target);
     }
 
     //[Server]
     void Start()
     {
         //SearchForNextTarget();
+        dummy = GetComponent<MageESpellDummy>();
         usedTargets = new List<GameObject>();
     }
 
@@ -51,7 +59,7 @@ public class MageESpell : NetworkBehaviour
             }
 
 
-            Vector3 direction = (target.transform.position - transform.position).normalized;
+            direction = (target.transform.position - transform.position).normalized;
             transform.Translate(direction * speed * Time.deltaTime, Space.World);
 
 
@@ -77,6 +85,7 @@ public class MageESpell : NetworkBehaviour
                 if (currentBounces < maxBounces)
                 {
                     target = SearchForNextTarget();
+                    dummy.SetTarget(target);
                 }
                 else
                 {

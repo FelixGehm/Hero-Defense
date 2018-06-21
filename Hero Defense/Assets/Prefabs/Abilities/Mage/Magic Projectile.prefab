@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 135303510183113204}
   - component: {fileID: 114729197641310576}
   - component: {fileID: 114241226110337496}
-  - component: {fileID: 114407681769770688}
   - component: {fileID: 114482955642153974}
   m_Layer: 0
   m_Name: Magic Projectile
@@ -149,47 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
---- !u!114 &114407681769770688
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1220129495896500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9de747ec6d608d4b984ba2628a309b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interpolationBackTime: 0.1
-  extrapolationTimeLimit: 0.3
-  extrapolationDistanceLimit: 0.3
-  sendPositionThreshold: 0.001
-  sendRotationThreshold: 0.001
-  sendScaleThreshold: 0.001
-  sendVelocityThreshold: 0.001
-  sendAngularVelocityThreshold: 0.001
-  receivedPositionThreshold: 0
-  receivedRotationThreshold: 0
-  positionSnapThreshold: 8
-  rotationSnapThreshold: 60
-  scaleSnapThreshold: 3
-  positionLerpSpeed: 0.2
-  rotationLerpSpeed: 0.2
-  scaleLerpSpeed: 0.2
-  syncPosition: 0
-  syncRotation: 0
-  syncScale: 0
-  syncVelocity: 0
-  syncAngularVelocity: 0
-  isPositionCompressed: 1
-  isRotationCompressed: 1
-  isScaleCompressed: 1
-  isVelocityCompressed: 1
-  isAngularVelocityCompressed: 1
-  whereToUpdateTransform: 1
-  sendRate: 30
-  networkChannel: 1
-  childObjectToSync: {fileID: 0}
 --- !u!114 &114482955642153974
 MonoBehaviour:
   m_ObjectHideFlags: 1
