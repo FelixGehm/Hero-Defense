@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MageESpellDummy : NetworkBehaviour {
+public class MageESpellDummy : NetworkBehaviour
+{
 
     [SyncVar]
     float speed;
@@ -13,6 +14,10 @@ public class MageESpellDummy : NetworkBehaviour {
     [SyncVar]
     Boolean wasInitiated = false;
 
+    MageESpellParticles particles;
+    private bool particlesInitiated = false;
+
+    //Wird nur auf dem Server ausgeführt
     public void Init(float speed, GameObject target)
     {
         this.speed = speed;
@@ -20,7 +25,8 @@ public class MageESpellDummy : NetworkBehaviour {
         wasInitiated = true;
     }
 
-    void Update () {
+    void Update()
+    {
         if (isServer)
         {
             this.enabled = false;
@@ -29,6 +35,15 @@ public class MageESpellDummy : NetworkBehaviour {
 
         if (wasInitiated)
         {
+            if (!particlesInitiated)
+            {
+                particles = GetComponent<MageESpellParticles>();
+                particles.Init();
+                particles.SetStartColor(target);
+                particles.SpawnParticles();
+                particlesInitiated = true;
+            }
+
             Vector3 dir = (target.transform.position - transform.position).normalized;
             transform.Translate(dir * speed * Time.deltaTime, Space.World);
         }
@@ -37,5 +52,16 @@ public class MageESpellDummy : NetworkBehaviour {
     public void SetTarget(GameObject target)
     {
         this.target = target;
+    }
+
+    [ClientRpc]
+    public void RpcSetParticleColor()
+    {
+        if (isServer)
+        {
+            this.enabled = false;
+            return;
+        }
+        particles.SetColor(target);
     }
 }

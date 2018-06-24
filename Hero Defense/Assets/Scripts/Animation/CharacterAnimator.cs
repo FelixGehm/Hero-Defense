@@ -140,6 +140,8 @@ public class CharacterAnimator : MonoBehaviour
 
     void CancelEAnimation()
     {
+        if (!IsInAnimation("AbilityE")) return;
+
         netAnimator.SetTrigger("cancelE");
         animator.ResetTrigger("cancelE");
     }
@@ -222,5 +224,14 @@ public class CharacterAnimator : MonoBehaviour
         return false;
     }
     */
+
+    private bool IsInAnimation(string animationName)
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName(animationName))
+        {
+            return true;
+        }
+        return false;
+    }
 
 }

@@ -73,7 +73,7 @@ public class CharacterEventManager : NetworkBehaviour
 
     public void AbilityOne()
     {
-        Debug.Log("AbilityOne():");
+        //Debug.Log("AbilityOne():");
 
         TransmitEvent(CharacterEventManager.eventType.one);
 
@@ -85,7 +85,7 @@ public class CharacterEventManager : NetworkBehaviour
 
     public void AbilityTwo()
     {
-        Debug.Log("AbilityTwo():");
+        //Debug.Log("AbilityTwo():");
 
         TransmitEvent(CharacterEventManager.eventType.two);
 
@@ -97,7 +97,7 @@ public class CharacterEventManager : NetworkBehaviour
 
     public void AbilityThree()
     {
-        Debug.Log("AbilityThree():");
+        //Debug.Log("AbilityThree():");
 
         TransmitEvent(CharacterEventManager.eventType.three);
 
@@ -109,7 +109,7 @@ public class CharacterEventManager : NetworkBehaviour
 
     public void AbilityFour()
     {
-        Debug.Log("AbilityFour():");
+        //Debug.Log("AbilityFour():");
 
         TransmitEvent(CharacterEventManager.eventType.four);
 
@@ -121,7 +121,7 @@ public class CharacterEventManager : NetworkBehaviour
 
     public void CastCancel()
     {
-        Debug.Log("CastCancel():");
+        //Debug.Log("CastCancel():");
 
         TransmitEvent(CharacterEventManager.eventType.cancel);
 

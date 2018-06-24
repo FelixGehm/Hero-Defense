@@ -19,6 +19,8 @@ public class MageESpell : NetworkBehaviour
 
     MageESpellDummy dummy;
 
+    MageESpellParticles particles;
+
     public void Init(GameObject firstTarget, float speed, float maxRange, float damage, float healAmount, float maxBounces)
     {
         target = firstTarget;
@@ -30,6 +32,10 @@ public class MageESpell : NetworkBehaviour
 
         dummy = GetComponent<MageESpellDummy>();
         dummy.Init(speed, target);
+        particles = GetComponent<MageESpellParticles>();
+        particles.Init();
+        particles.SetStartColor(firstTarget);
+        particles.SpawnParticles();
     }
 
     //[Server]
@@ -86,6 +92,11 @@ public class MageESpell : NetworkBehaviour
                 {
                     target = SearchForNextTarget();
                     dummy.SetTarget(target);
+                    if (target != null)
+                    {
+                        particles.SetColor(target);
+                        dummy.RpcSetParticleColor();
+                    }
                 }
                 else
                 {
