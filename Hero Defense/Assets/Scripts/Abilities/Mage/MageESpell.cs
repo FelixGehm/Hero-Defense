@@ -78,10 +78,14 @@ public class MageESpell : NetworkBehaviour
 
                 if (target.CompareTag("Player"))
                 {
+                    particles.SpawnImpactParticles(particles.healColor);
+                    dummy.RpcSpawnImpactParticles(particles.healColor);
                     target.GetComponent<CharacterStats>().TakeHeal(healAmount);
                 }
                 else if (target.CompareTag("Enemy"))
                 {
+                    particles.SpawnImpactParticles(particles.dmgColor);
+                    dummy.RpcSpawnImpactParticles(particles.dmgColor);
                     target.GetComponent<CharacterStats>().TakeMagicDamage(damage);
                 }
 
@@ -141,6 +145,25 @@ public class MageESpell : NetworkBehaviour
                 lastDist = dist;
             }
         }
+
+        //if there is no new target search for used targets
+        if (_target == null)
+        {
+            foreach (GameObject unit in usedTargets)
+            {
+                if (unit != null && unit != target && IsInRange(unit))
+                {
+                    dist = Vector3.Distance(unit.transform.position, transform.position);
+
+                    if (dist < lastDist)
+                    {
+                        _target = unit;
+                    }
+                    lastDist = dist;
+                }
+            }
+        }
+
         return _target;
     }
 

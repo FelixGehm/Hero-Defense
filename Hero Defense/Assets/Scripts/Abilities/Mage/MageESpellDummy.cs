@@ -64,4 +64,15 @@ public class MageESpellDummy : NetworkBehaviour
         }
         particles.SetColor(target);
     }
+
+    [ClientRpc]
+    public void RpcSpawnImpactParticles(Color c)
+    {
+        if (isServer)
+        {
+            this.enabled = false;
+            return;
+        }
+        particles.SpawnImpactParticles(c);
+    }
 }

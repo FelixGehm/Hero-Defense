@@ -8,6 +8,8 @@ public class MageESpellParticles : NetworkBehaviour
     [Header("Setup Fields")]
     public GameObject particles;
     private ParticleSystem[] pSystems;
+    public GameObject impactParticles;
+    private ParticleSystem[] pSystemsImpact;
     [Space]
     public Color dmgColor;
     public Color healColor;
@@ -19,18 +21,27 @@ public class MageESpellParticles : NetworkBehaviour
         pSystems = particles.GetComponentsInChildren<ParticleSystem>();
     }
 
+    private void Start()
+    {
+        pSystemsImpact = impactParticles.GetComponentsInChildren<ParticleSystem>();
+    }
+
     public void SpawnParticles()
     {
         GameObject p = Instantiate(particles, transform);
         pSystems = p.GetComponentsInChildren<ParticleSystem>();
     }
 
-    private void Start()
+    public void SpawnImpactParticles(Color c)
     {
-        //defaultColor = pSystems[0].main.startColor.color;
+        for (int i = 0; i < pSystemsImpact.Length; i++)
+        {
+            var main = pSystemsImpact[i].main;
+            main.startColor = c;
+        }
 
-
-
+        GameObject p = Instantiate(impactParticles, pSystems[0].gameObject.transform.position, transform.rotation);
+        Destroy(p, 1.5f);
     }
 
     public void SetStartColor(GameObject target)
