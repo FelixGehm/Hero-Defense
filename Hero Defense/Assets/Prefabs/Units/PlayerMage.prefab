@@ -1055,6 +1055,7 @@ GameObject:
   - component: {fileID: 136994097796305218}
   - component: {fileID: 114102930739242952}
   - component: {fileID: 114824224634738826}
+  - component: {fileID: 114096164064980812}
   m_Layer: 0
   m_Name: PlayerMage
   m_TagString: Player
@@ -2647,6 +2648,29 @@ MonoBehaviour:
   abilityThreeKey: 101
   abilityFourKey: 114
   reviveKey: 118
+--- !u!114 &114096164064980812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775822082415842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea05a0547689e14a8ccc7edd504052c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySlot: 3
+  abilityCooldown: 2
+  currentCooldown: 0
+  abilityCastTime: 0.3
+  spawnPosition: {fileID: 4545551337931446}
+  previewPrefab: {fileID: 1049300602616912, guid: 3c6efcf0ea9835a41b9b4f29b90d4945,
+    type: 2}
+  rightClickMask:
+    serializedVersion: 2
+    m_Bits: 512
+  spellPrefab: {fileID: 1428478437435056, guid: f6c46d9bda4bce04987599562267d9a2,
+    type: 2}
 --- !u!114 &114102930739242952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2889,7 +2913,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   attackSpeed:
-    baseValue: 1
+    baseValue: 0.7
     modifiers: []
   attackRange:
     baseValue: 7

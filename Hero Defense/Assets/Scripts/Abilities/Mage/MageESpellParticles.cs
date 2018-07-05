@@ -14,7 +14,7 @@ public class MageESpellParticles : NetworkBehaviour
     public Color dmgColor;
     public Color healColor;
 
-    private Color defaultColor;
+    private Color defaultColor = new Color(255, 255, 255);
 
     public void Init()
     {
