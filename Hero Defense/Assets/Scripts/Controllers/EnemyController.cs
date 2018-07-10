@@ -11,20 +11,20 @@ public class EnemyController : CrowdControllable
 
 
     Transform nexus;  //der nexus
-    CharacterStats nexusStats;
-
+    
     public Transform target;       // das Ziel des Gegners
 
 
     float distanceToTarget = float.MaxValue;
-    float distanceToDestination = float.MaxValue;
 
     NavMeshAgent agent;
     CharacterCombat combat;
 
     //Update the stopping Distances based on the target's size
-    [Header("Agent Stopping Distances")]
+    [Header("Agent Stopping Distances - Player")]
     public float stoppingDistancePlayer = 1.2f;
+
+    [Header("Agent Stopping Distances - Nexus")]
     public float stoppingDistanceNexus = 2;
 
     public override void Awake()
@@ -40,7 +40,6 @@ public class EnemyController : CrowdControllable
     {
         //nexus = PlayerManager.instance.nexus.transform;  //TODO: über GameManager holen
         nexus = GameManager.instance.nexus.transform;
-        nexusStats = nexus.GetComponent<CharacterStats>();
     }
 
 
@@ -82,65 +81,6 @@ public class EnemyController : CrowdControllable
         }
 
         CheckIfStillInCombat();
-
-        /*
-        if (myStatuses.Contains(Status.stunned))
-        {
-            // Tue nichts, solange bis der Stun vorbei ist.
-            return;
-        }
-
-
-        if (!myStatuses.Contains(Status.taunted))
-        {
-            target = GetTarget();
-        }
-
-        if (target != null)
-        {
-            distanceToTarget = Vector3.Distance(target.position, transform.position);
-            distanceToDestination = Vector3.Distance(nexus.position, transform.position);
-
-
-            //hier vielleicht ab einer bestimmenten distanz zum nexus den Spieler ignorieren?
-            if (distanceToTarget <= lookRadius || myStatuses.Contains(Status.taunted))
-            {
-                //Moving to Player and attack
-                agent.SetDestination(target.position);
-                agent.stoppingDistance = stoppingDistancePlayer;
-
-                if (distanceToTarget <= agent.stoppingDistance)
-                {
-                    CharacterStats targetStats = target.GetComponent<CharacterStats>();
-                                        
-                    if (targetStats != null && targetStats.IsAlive())
-                    {
-                        combat.Attack(targetStats);
-                    }
-                    else                    
-                    {
-                        target = GetTarget();
-                    }
-
-                    FaceTarget(target);
-                }
-
-            }
-            else
-            {
-                //Moving to Nexus
-                agent.SetDestination(nexus.position);
-                agent.stoppingDistance = stoppingDistanceNexus;
-                if (distanceToDestination <= agent.stoppingDistance && nexusStats.SyncedCurrentHealth >= 0)
-                {
-                    FaceTarget(nexus);
-                    combat.Attack(nexusStats);
-                }
-            }
-
-            CheckIfStillInCombat();
-        }
-        */
     }
 
     void FaceTarget(Transform _target)
@@ -173,9 +113,7 @@ public class EnemyController : CrowdControllable
     {
         Transform target = nexus;
 
-        float distanceToPlayer = float.MaxValue;
-
-        List<GameObject> alivePlayer = new List<GameObject>();
+        float distanceToPlayer = float.MaxValue;               
 
         for (int i = 0; i < PlayerManager.instance.players.Length; i++)     // Liste der Spielrr durchgehen
         {
@@ -213,7 +151,7 @@ public class EnemyController : CrowdControllable
     private void CheckIfStillInCombat()
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget > lookRadius && !target.GetComponent<CharacterStats>().IsAlive())
+        if (distanceToTarget > lookRadius || !target.GetComponent<CharacterStats>().IsAlive())
         {
             isInCombat = false;
         }

@@ -24,7 +24,10 @@ public class AbilityGunslingerQ : AbilityBasic
 
     KeyCode abilityKey;
 
-    float timeAtCastStart;
+    bool isTimeStartSet = false;
+    float timeAtShootStart = 0;
+
+    bool isTimeAtShootingSet = false;
     float timeAtShooting;
 
 
@@ -54,10 +57,16 @@ public class AbilityGunslingerQ : AbilityBasic
 
     protected override void Update()
     {
-        base.Update();
+        if (skipFrame)
+        {
+            skipFrame = false;
+            return;
+        }
 
         if (isLocalPlayer)
         {
+            base.Update();
+
             if (isCasting)
             {
                 if (previewGameObject != null)
@@ -67,23 +76,26 @@ public class AbilityGunslingerQ : AbilityBasic
                     previewGameObject.transform.rotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
                 }
 
-                if (!skipFrame)
+                if (Input.GetMouseButtonDown(1) && !isAnimating)        // RightClick down
                 {
-                    if (Input.GetMouseButtonDown(1) && !isAnimating)        // RightClick
-                    {
-                        CancelCast();
-                    }
-
-                    if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
-                    {
-                        playerMotor.MoveToPoint(transform.position);
-                        StartCoroutine(ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
-
-                        timeAtShooting = Time.time;
-
-                    }
+                    CancelCast();
+                    return;
                 }
-                skipFrame = false;
+
+                if (!isTimeStartSet && (Input.GetMouseButton(0) || Input.GetKey(abilityKey)))        // LeftClick or AbilityKey hold
+                {
+                    isTimeStartSet = true;
+                    Debug.Log("BUTTON DOWN");
+                    timeAtShootStart = Time.time;
+
+                }
+                if (!isTimeAtShootingSet && (Input.GetMouseButtonUp(0) || Input.GetKeyUp(abilityKey)))        // LeftClick or AbilityKey released
+                {
+                    isTimeAtShootingSet = true;
+                    Debug.Log("BUTTON UP");
+                    timeAtShooting = Time.time;
+                    StartCoroutine(ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
+                }
             }
         }
     }
@@ -95,10 +107,11 @@ public class AbilityGunslingerQ : AbilityBasic
         {
             IsCasting(true);
 
+            playerMotor.MoveToPoint(transform.position);
             ShowPreview();
             skipFrame = true;
 
-            timeAtCastStart = Time.time;
+            timeAtShootStart = Time.time;
         }
     }
 
@@ -141,8 +154,11 @@ public class AbilityGunslingerQ : AbilityBasic
         currentCooldown = abilityCooldown;
 
         // Calculate damage from projectile
-        float deltaT = timeAtShooting - timeAtCastStart;
+        float deltaT = timeAtShooting - timeAtShootStart;
         float percentDamage;
+        isTimeStartSet = false;
+        isTimeAtShootingSet = false;
+
 
         if (deltaT >= chargeTime)
         {

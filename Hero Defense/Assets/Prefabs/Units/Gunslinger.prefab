@@ -2244,7 +2244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c9a6863c426a14aa69a4d9c5cda8dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarManager: {fileID: 114073857278215730}
   maxHealth:
     baseValue: 300
     modifiers: []
@@ -2519,7 +2518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 0
-  abilityCooldown: 12
+  abilityCooldown: 1
   currentCooldown: 0
   abilityCastTime: 1
   previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
