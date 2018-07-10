@@ -24,7 +24,7 @@ public abstract class AbilityBasic : NetworkBehaviour
     protected PlayerController playerController;
     protected PlayerMotor playerMotor;
 
-    
+
 
     protected bool isCasting = false;
     protected bool isAnimating = false;

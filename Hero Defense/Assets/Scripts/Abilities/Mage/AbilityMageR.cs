@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 public class AbilityMageR : AbilityBasic
 {
     [Header("Setup Fields")]
-    public Transform spawnPosition;
     public GameObject previewPrefab;
     private GameObject previewGO;
     [Space]
@@ -14,7 +13,12 @@ public class AbilityMageR : AbilityBasic
 
     [Header("Spell Settings")]
     public GameObject spellPrefab;
+    public GameObject spellPrefab_WithLocalPlayerAuthority;
     private GameObject spellGO;
+    [Space]
+    public float spellDuration = 6;
+    private float spellStartTime;
+    public float spellRotationSpeed = 25;
 
     KeyCode abilityKey;
 
@@ -38,14 +42,14 @@ public class AbilityMageR : AbilityBasic
     {
         base.Start();
         GetComponent<CharacterEventManager>().OnAbilityFour += Cast;
-        abilityKey = characterEventController.abilityOneKey;
+        abilityKey = characterEventController.abilityFourKey;
     }
 
     bool skipFrame = false;
     protected override void Update()
     {
         base.Update();
-
+        //Debug.Log(spellGO);
         if (isLocalPlayer)
         {
             if (isCasting)
@@ -75,13 +79,44 @@ public class AbilityMageR : AbilityBasic
 
             if (IsInAbility)
             {
-                spellGO.transform.rotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
+                /*
+                if (spellGO != null)
+                {
+                    Quaternion wantedRotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
+                    spellGO.transform.rotation = Quaternion.RotateTowards(spellGO.transform.rotation, wantedRotation, Time.deltaTime * spellRotationSpeed);
+                    this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, wantedRotation, Time.deltaTime * spellRotationSpeed);
+                }
+                else
+                {
+                    //Debug.Log("spellGO is not set!");
+                }
+                */
+                Quaternion wantedRotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
+                this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, wantedRotation, Time.deltaTime * spellRotationSpeed);
+
+
+                if (Time.time - spellStartTime >= 6 || Input.GetMouseButtonDown(1))
+                {
+                    if (isServer)
+                    {
+                        CmdDestroySpellOnServer();
+                    }
+                    else
+                    {
+                        TellServerToDestroySpell();
+                    }
+
+
+                    //Destroy(spellGO);
+                    IsInAbility = false;
+                    CancelAnimation();
+                }
             }
         }
 
         if (isLocalPlayer && !isCasting && !isAnimating && hasCasted && Input.GetMouseButtonDown(1))
         {
-            CancelAnimation();
+            //CancelAnimation();
             hasCasted = false;
         }
     }
@@ -126,6 +161,7 @@ public class AbilityMageR : AbilityBasic
 
         currentCooldown = abilityCooldown;
         IsInAbility = true;
+        spellStartTime = Time.time;
         if (isServer)
         {
             CmdSpawnSpellOnServer(spawnPos);
@@ -140,7 +176,10 @@ public class AbilityMageR : AbilityBasic
     void CmdSpawnSpellOnServer(Vector3 spawnPos)
     {
         spellGO = Instantiate(spellPrefab, spawnPos, transform.rotation);
+        spellGO.transform.parent = this.transform;
         NetworkServer.Spawn(spellGO);
+        //RpcSetSpellGO(spellGO);
+        RpcSyncSpellGoOnClients(spellGO);
     }
 
     [ClientCallback]
@@ -152,10 +191,57 @@ public class AbilityMageR : AbilityBasic
         }
     }
 
+    [ClientRpc]
+    void RpcSyncSpellGoOnClients(GameObject spellGO)
+    {
+        spellGO.transform.parent = this.transform;
+    }
 
+    /*
+    [Command]
+    void CmdSpawnSpellOnServer(Vector3 spawnPos)
+    {
+        spellGO = Instantiate(spellPrefab, spawnPos, transform.rotation);
+        NetworkServer.Spawn(spellGO);
+        //RpcSetSpellGO(spellGO);
+    }
 
+    [Command]
+    void CmdSpawnSpellWithClientAuthority(Vector3 spawnPos)
+    {
+        spellGO = Instantiate(spellPrefab_WithLocalPlayerAuthority, spawnPos, transform.rotation);
+        NetworkServer.SpawnWithClientAuthority(spellGO, connectionToClient);
+        RpcSetSpellGO(spellGO);
+    }
 
+    [ClientCallback]
+    void TellServerToSpawnSpell(Vector3 spawnPos)
+    {
+        if (!isServer)
+        {
+            //CmdSpawnSpellOnServer(spawnPos);
+            CmdSpawnSpellWithClientAuthority(spawnPos);
+        }
+    }
+    */
 
+    [Command]
+    void CmdDestroySpellOnServer()
+    {
+        NetworkServer.Destroy(spellGO);
+    }
+
+    [ClientCallback]
+    void TellServerToDestroySpell()
+    {
+        CmdDestroySpellOnServer();
+    }
+
+    [ClientRpc]
+    void RpcSetSpellGO(GameObject go)
+    {
+        spellGO = go;
+    }
 
     protected Vector3 GetDirectionVectorBetweenPlayerAndMouse()
     {

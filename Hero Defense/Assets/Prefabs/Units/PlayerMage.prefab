@@ -2662,8 +2662,7 @@ MonoBehaviour:
   abilitySlot: 3
   abilityCooldown: 2
   currentCooldown: 0
-  abilityCastTime: 0.3
-  spawnPosition: {fileID: 4545551337931446}
+  abilityCastTime: 0.75
   previewPrefab: {fileID: 1049300602616912, guid: 3c6efcf0ea9835a41b9b4f29b90d4945,
     type: 2}
   rightClickMask:
@@ -2671,6 +2670,10 @@ MonoBehaviour:
     m_Bits: 512
   spellPrefab: {fileID: 1428478437435056, guid: f6c46d9bda4bce04987599562267d9a2,
     type: 2}
+  spellPrefab_WithLocalPlayerAuthority: {fileID: 1428478437435056, guid: 23f0e15339d0b5342a78beddd2a2971b,
+    type: 2}
+  spellDuration: 6
+  spellRotationSpeed: 25
 --- !u!114 &114102930739242952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2935,7 +2938,7 @@ MonoBehaviour:
   abilityQ: {fileID: 0}
   abilityW: {fileID: 114785658790294776}
   abilityE: {fileID: 114824224634738826}
-  abilityR: {fileID: 0}
+  abilityR: {fileID: 114096164064980812}
 --- !u!114 &114409729931403580
 MonoBehaviour:
   m_ObjectHideFlags: 1

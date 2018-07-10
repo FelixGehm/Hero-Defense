@@ -78,6 +78,8 @@ public class CharacterAnimator : MonoBehaviour
             abilityW.OnAbilityCancaled += CancelWAnimation;
             abilityE.OnAbilityCasting += StartEAnimation;
             abilityE.OnAbilityCancaled += CancelEAnimation;
+            abilityR.OnAbilityCasting += StartRAnimation;
+            abilityR.OnAbilityCancaled += CancelRAnimation;
             //endtest
         }
 
@@ -148,7 +150,7 @@ public class CharacterAnimator : MonoBehaviour
 
     void StartRAnimation()
     {
-        Debug.Log("CharacterAnimator: StartRAnimation()");
+        //Debug.Log("CharacterAnimator: StartRAnimation()");
         //nsa.StartRAnimation();
         netAnimator.SetTrigger("abilityR");
         animator.ResetTrigger("abilityR");

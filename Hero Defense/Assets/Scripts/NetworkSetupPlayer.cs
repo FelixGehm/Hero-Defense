@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 
 public class NetworkSetupPlayer : NetworkSetup
 {
-
     //public bool localPlayer = false;
     [SerializeField]
     string remoteLayerName = "RemotePlayer";
@@ -14,7 +13,6 @@ public class NetworkSetupPlayer : NetworkSetup
     void Start()
     {
         base.DisableComponents();
-
         /*
         if (isLocalPlayer)
         {
@@ -40,7 +38,7 @@ public class NetworkSetupPlayer : NetworkSetup
             }
         }
         */
-        if(isServer)
+        if (isServer)
         {
             // Register Player in PlayerManager
             PlayerManager.instance.RegisterPlayer(transform.gameObject);

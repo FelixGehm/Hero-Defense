@@ -200,7 +200,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1428478437435056, guid: f6c46d9bda4bce04987599562267d9a2, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6c46d9bda4bce04987599562267d9a2, type: 2}
@@ -1259,9 +1259,10 @@ MonoBehaviour:
   - {fileID: 1508824767126548, guid: d73dff591da383c4f99fffc10ac1f048, type: 2}
   - {fileID: 0}
   - {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5, type: 2}
-  - {fileID: 0}
+  - {fileID: 1428478437435056, guid: 23f0e15339d0b5342a78beddd2a2971b, type: 2}
   - {fileID: 1220129495896500, guid: a5cfbfc8b48acec46b1620ec788755d9, type: 2}
   - {fileID: 1538450666581284, guid: 66ab233049bcde942ae09c71fcb4423e, type: 2}
+  - {fileID: 1428478437435056, guid: f6c46d9bda4bce04987599562267d9a2, type: 2}
   m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:
