@@ -60,28 +60,17 @@ public class CharacterAnimator : MonoBehaviour
         rev.OnCasting += StartReviveAnimation;
 
 
-        if (abilityQ != null)   //tmp -> delete if statement after
-        {
-            abilityQ.OnAbilityCasting += StartQAnimation;
-            abilityW.OnAbilityCasting += StartWAnimation;
-            abilityW.OnAbilityCancaled += CancelWAnimation;
-            abilityE.OnAbilityCasting += StartEAnimation;
-            abilityE.OnAbilityCancaled += CancelEAnimation;
-            abilityR.OnAbilityCasting += StartRAnimation;
-            abilityR.OnAbilitySecondCasting += StartSecondRAnimation;
-            abilityR.OnAbilityCancaled += CancelRAnimation;
-        }
-        else
-        {
-            //test
-            abilityW.OnAbilityCasting += StartWAnimation;
-            abilityW.OnAbilityCancaled += CancelWAnimation;
-            abilityE.OnAbilityCasting += StartEAnimation;
-            abilityE.OnAbilityCancaled += CancelEAnimation;
-            abilityR.OnAbilityCasting += StartRAnimation;
-            abilityR.OnAbilityCancaled += CancelRAnimation;
-            //endtest
-        }
+
+        abilityQ.OnAbilityCasting += StartQAnimation;
+        abilityQ.OnAbilityCancaled += CancelQAnimation;
+        abilityW.OnAbilityCasting += StartWAnimation;
+        abilityW.OnAbilityCancaled += CancelWAnimation;
+        abilityE.OnAbilityCasting += StartEAnimation;
+        abilityE.OnAbilityCancaled += CancelEAnimation;
+        abilityR.OnAbilityCasting += StartRAnimation;
+        abilityR.OnAbilitySecondCasting += StartSecondRAnimation;
+        abilityR.OnAbilityCancaled += CancelRAnimation;
+
 
 
 
@@ -118,8 +107,17 @@ public class CharacterAnimator : MonoBehaviour
 
     void StartQAnimation()
     {
+        //nsa.StartQAnimation();
         netAnimator.SetTrigger("abilityQ");
         animator.ResetTrigger("abilityQ");
+    }
+
+    void CancelQAnimation()
+    {
+        if (!IsInAnimation("AbilityQ")) return;
+
+        netAnimator.SetTrigger("cancelQ");
+        animator.ResetTrigger("cancelQ");
     }
 
     void StartWAnimation()
@@ -130,6 +128,8 @@ public class CharacterAnimator : MonoBehaviour
 
     void CancelWAnimation()
     {
+        if (!IsInAnimation("AbilityW")) return;
+
         netAnimator.SetTrigger("cancelW");
         animator.ResetTrigger("cancelW");
     }

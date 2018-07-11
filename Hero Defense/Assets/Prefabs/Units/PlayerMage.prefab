@@ -1056,6 +1056,7 @@ GameObject:
   - component: {fileID: 114102930739242952}
   - component: {fileID: 114824224634738826}
   - component: {fileID: 114096164064980812}
+  - component: {fileID: 114738087202343038}
   m_Layer: 0
   m_Name: PlayerMage
   m_TagString: Player
@@ -2935,7 +2936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c7d2723bab92e40b08ede3161975f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityQ: {fileID: 0}
+  abilityQ: {fileID: 114738087202343038}
   abilityW: {fileID: 114785658790294776}
   abilityE: {fileID: 114824224634738826}
   abilityR: {fileID: 114096164064980812}
@@ -3034,6 +3035,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castTime: 2.5
+--- !u!114 &114738087202343038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1775822082415842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a28b489285068043bb97ef8550ed6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitySlot: 0
+  abilityCooldown: 4
+  currentCooldown: 0
+  abilityCastTime: 1.7
+  spellPrefab: {fileID: 1517131103748368, guid: 5d109e566ef2c7448b8b4cee7e32dbd6,
+    type: 2}
 --- !u!114 &114785658790294776
 MonoBehaviour:
   m_ObjectHideFlags: 1

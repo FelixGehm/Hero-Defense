@@ -63,7 +63,24 @@ public class NetworkSyncAnimations : NetworkBehaviour
         GameObject.Find(this.name).GetComponent<Animator>().SetTrigger("abilityR");
     }
     */
+    public void StartQAnimation()
+    {
+        CmdSyncQAnimation();
+    }
 
+    [Command]
+    private void CmdSyncQAnimation()
+    {
+        Debug.Log("Cmd");
+        RpcSyncQAnimation();
+    }
+
+    [ClientRpc]
+    private void RpcSyncQAnimation()
+    {
+        Debug.Log("Rpc");
+        animator.SetTrigger("abilityQ");
+    }
 
 
     public void PlayAttackAnimation()

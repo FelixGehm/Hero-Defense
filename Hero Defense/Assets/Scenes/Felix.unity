@@ -1257,9 +1257,9 @@ MonoBehaviour:
   m_SpawnPrefabs:
   - {fileID: 1584452558600264, guid: 603765175ed68494a9d025eb037ebc03, type: 2}
   - {fileID: 1508824767126548, guid: d73dff591da383c4f99fffc10ac1f048, type: 2}
-  - {fileID: 0}
+  - {fileID: 1517131103748368, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
   - {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5, type: 2}
-  - {fileID: 1428478437435056, guid: 23f0e15339d0b5342a78beddd2a2971b, type: 2}
+  - {fileID: 0}
   - {fileID: 1220129495896500, guid: a5cfbfc8b48acec46b1620ec788755d9, type: 2}
   - {fileID: 1538450666581284, guid: 66ab233049bcde942ae09c71fcb4423e, type: 2}
   - {fileID: 1428478437435056, guid: f6c46d9bda4bce04987599562267d9a2, type: 2}
@@ -4428,6 +4428,57 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1538217150}
+--- !u!1001 &1571789871
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4641119560101290, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1517131103748368, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198511103815113908, guid: 5d109e566ef2c7448b8b4cee7e32dbd6,
+        type: 2}
+      propertyPath: TrailModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 5d109e566ef2c7448b8b4cee7e32dbd6, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1581505257
 Prefab:
   m_ObjectHideFlags: 0

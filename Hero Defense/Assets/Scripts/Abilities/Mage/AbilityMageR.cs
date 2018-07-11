@@ -22,8 +22,6 @@ public class AbilityMageR : AbilityBasic
 
     KeyCode abilityKey;
 
-    private bool hasCasted = false;
-
     private bool isInAbility = false;
     public bool IsInAbility
     {
@@ -113,12 +111,6 @@ public class AbilityMageR : AbilityBasic
                 }
             }
         }
-
-        if (isLocalPlayer && !isCasting && !isAnimating && hasCasted && Input.GetMouseButtonDown(1))
-        {
-            //CancelAnimation();
-            hasCasted = false;
-        }
     }
 
     protected override void Cast()
@@ -146,7 +138,6 @@ public class AbilityMageR : AbilityBasic
 
     public IEnumerator CastAbility(Vector3 spawnPos)
     {
-        hasCasted = false;
         Destroy(previewGO);
 
         TriggerAnimation();
@@ -154,7 +145,6 @@ public class AbilityMageR : AbilityBasic
         isAnimating = true;
 
         yield return new WaitForSeconds(abilityCastTime);
-        hasCasted = true;
 
         isAnimating = false;
         IsCasting(false);
