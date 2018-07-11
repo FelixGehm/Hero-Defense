@@ -85,14 +85,11 @@ public class AbilityGunslingerQ : AbilityBasic
                 if (!isTimeStartSet && (Input.GetMouseButton(0) || Input.GetKey(abilityKey)))        // LeftClick or AbilityKey hold
                 {
                     isTimeStartSet = true;
-                    Debug.Log("BUTTON DOWN");
                     timeAtShootStart = Time.time;
-
                 }
                 if (!isTimeAtShootingSet && (Input.GetMouseButtonUp(0) || Input.GetKeyUp(abilityKey)))        // LeftClick or AbilityKey released
                 {
                     isTimeAtShootingSet = true;
-                    Debug.Log("BUTTON UP");
                     timeAtShooting = Time.time;
                     StartCoroutine(ShootProjectile(GetDirectionVectorBetweenPlayerAndMouse()));
                 }
@@ -136,7 +133,8 @@ public class AbilityGunslingerQ : AbilityBasic
 
         Vector3 firePoint = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetStartPos();
         Quaternion rotation = previewGameObject.transform.rotation;
-        transform.rotation = rotation;      //erstmal so... vielleicht lieber lerpen?
+
+        transform.LookAt(previewGameObject.transform);      //roatate Player to TaRGEt
         float maxDistance = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetDistance();
 
         Destroy(previewGameObject);

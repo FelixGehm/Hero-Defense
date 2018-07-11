@@ -26945,6 +26945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   players: []
+  enemies: []
   nexus: {fileID: 0}
 --- !u!114 &2006428313
 MonoBehaviour:
