@@ -3066,7 +3066,7 @@ MonoBehaviour:
   abilitySlot: 1
   abilityCooldown: 4
   currentCooldown: 0
-  abilityCastTime: 0.7
+  abilityCastTime: 0.5
   maxCastRange: 4
   spellPrefab: {fileID: 1584452558600264, guid: 603765175ed68494a9d025eb037ebc03,
     type: 2}
