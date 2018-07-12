@@ -102,8 +102,8 @@ MonoBehaviour:
   particles: {fileID: 1640762458379010, guid: b4bd54363519ea745b35ada55e388cc7, type: 2}
   impactParticles: {fileID: 1207206239867106, guid: efb97c338be71b7489279a66a901b679,
     type: 2}
-  dmgColor: {r: 0.5377358, g: 0, b: 0.16036803, a: 1}
-  healColor: {r: 1, g: 0.78613764, b: 0.21226418, a: 1}
+  dmgColor: {r: 0.3764706, g: 0, b: 0.9607843, a: 1}
+  healColor: {r: 0, g: 0.9607843, b: 0.5254902, a: 1}
 --- !u!114 &114888594477083596
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -46,7 +46,7 @@ public class AbilityGunslingerW : AbilityBasic
 
     protected override void Cast()
     {
-        
+
 
         if (isLocalPlayer && currentCooldown <= 0)
         {
@@ -58,12 +58,14 @@ public class AbilityGunslingerW : AbilityBasic
                 cec.isCasting = true;
                 motor.MoveToPoint(transform.position);
                 StartCoroutine(ActivateBuff());
+                IsActive = true;
             }
             else
             {
                 bonusIsActive = false;
                 physicalDamage.RemoveModifier(physicalDamageBonus);
                 critChance.RemoveModifier(critChanceBonus);
+                IsActive = false;
             }
         }
     }

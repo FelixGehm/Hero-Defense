@@ -17,6 +17,8 @@ public class CharacterCombat : NetworkBehaviour
     public event System.Action OnAttack;
     public event System.Action OnAttackCanceled;
 
+    public event System.Action OnAttackEcecuted;
+
     protected CharacterStats myStats;
 
     [HideInInspector]
@@ -96,6 +98,7 @@ public class CharacterCombat : NetworkBehaviour
     protected virtual IEnumerator ShootProjectile(Transform target, float damageDone, float delay)
     {
         yield return new WaitForSeconds(delay);
+        if (OnAttackEcecuted != null) OnAttackEcecuted();
         isAttacking = false;
 
         NetworkInstanceId idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;

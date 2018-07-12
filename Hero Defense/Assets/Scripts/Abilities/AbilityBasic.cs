@@ -79,6 +79,21 @@ public abstract class AbilityBasic : NetworkBehaviour
         OnAbilityCancaled?.Invoke();
     }
 
+    private bool isActive = false;
+    protected bool IsActive
+    {
+        get
+        {
+            return isActive;
+        }
+        set
+        {
+            isActive = value;
+            uiScript.SetAbilityActive(value);
+        }
+    }
+
+    private AbilityUI uiScript;
     private void RegisterAbilityToUI()
     {
         if (!GameObject.Find("QImage"))
@@ -93,7 +108,8 @@ public abstract class AbilityBasic : NetworkBehaviour
                 GameObject.Find("QImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
                 break;
             case Slot.W:
-                GameObject.Find("WImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                uiScript = GameObject.Find("WImage").GetComponent<AbilityUI>();
+                uiScript.RegisterAbilityToUI(this);
                 break;
             case Slot.E:
                 GameObject.Find("EImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
