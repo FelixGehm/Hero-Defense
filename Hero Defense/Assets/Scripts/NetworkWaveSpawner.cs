@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 
 public class NetworkWaveSpawner : NetworkBehaviour
 {
-    public GameObject toSpawnPrefab;
+    public GameObject enemyMeleePrefab;
+    public GameObject enemyRangePrefab;
 
     // Values for autoSpawning
     [Header("auto spawning")]
@@ -36,9 +37,17 @@ public class NetworkWaveSpawner : NetworkBehaviour
 
         if (!autoSpawn)
         {
+            if (Input.GetKeyDown("d"))
+            {
+                Spawn(enemysPerWave, waveSpawnDuration, enemyRangePrefab);
+            }
+        }
+
+        if (!autoSpawn)
+        {
             if (Input.GetKeyDown("s"))
             {
-                Spawn(enemysPerWave, waveSpawnDuration);
+                Spawn(enemysPerWave, waveSpawnDuration, enemyMeleePrefab);
             }
         }
         else
@@ -48,19 +57,28 @@ public class NetworkWaveSpawner : NetworkBehaviour
             if (waveCoolDown <= 0)
             {
                 waveCounter++;
-                Spawn(enemysPerWave, waveSpawnDuration);
+                if (waveCounter % 2 == 0)
+                {
+                    Spawn(enemysPerWave, waveSpawnDuration, enemyMeleePrefab);
+                }
+                else
+                {
+                    Spawn(enemysPerWave, waveSpawnDuration, enemyRangePrefab);
+                }
+
             }
         }
     }
 
-    private void Spawn(int no, float timeSpan)
+    private void Spawn(int no, float timeSpan, GameObject prefabToSpawn)
     {
         float gap = timeSpan / no;
 
         for (int i = 0; i < no; i++)
         {
             float delay = i * gap;
-            StartCoroutine("SpawnSingle", delay);
+            //StartCoroutine("SpawnSingle", delay, prefabToSpawn);
+            StartCoroutine(SpawnSingle(delay, prefabToSpawn));
         }
         if (autoSpawn)
         {
@@ -68,14 +86,14 @@ public class NetworkWaveSpawner : NetworkBehaviour
         }
     }
 
-    IEnumerator SpawnSingle(float delay)
+    IEnumerator SpawnSingle(float delay, GameObject prefabToSpawn)
     {
         yield return new WaitForSeconds(delay);
 
         Quaternion rot = transform.rotation;
         Vector3 pos = transform.position;
 
-        GameObject enemy = Instantiate(toSpawnPrefab, pos, rot);
+        GameObject enemy = Instantiate(prefabToSpawn, pos, rot);
         NetworkServer.Spawn(enemy);
     }
 

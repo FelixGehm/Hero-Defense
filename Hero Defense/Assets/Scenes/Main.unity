@@ -1695,6 +1695,18 @@ Prefab:
       value: 
       objectReference: {fileID: 1538450666581284, guid: 66ab233049bcde942ae09c71fcb4423e,
         type: 2}
+    - target: {fileID: 114759404899175176, guid: 97951d0966ac77d419757a59ca8200b0,
+        type: 2}
+      propertyPath: enemyMeleePrefab
+      value: 
+      objectReference: {fileID: 1538450666581284, guid: 66ab233049bcde942ae09c71fcb4423e,
+        type: 2}
+    - target: {fileID: 114759404899175176, guid: 97951d0966ac77d419757a59ca8200b0,
+        type: 2}
+      propertyPath: enemyRangePrefab
+      value: 
+      objectReference: {fileID: 1710346367430838, guid: d9630eaeacfad8c4fb4e353bc1fb0eab,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97951d0966ac77d419757a59ca8200b0, type: 2}
   m_IsPrefabParent: 0
@@ -19290,6 +19302,8 @@ MonoBehaviour:
   - {fileID: 1508824767126548, guid: d73dff591da383c4f99fffc10ac1f048, type: 2}
   - {fileID: 1428478437435056, guid: f6c46d9bda4bce04987599562267d9a2, type: 2}
   - {fileID: 1220129495896500, guid: a5cfbfc8b48acec46b1620ec788755d9, type: 2}
+  - {fileID: 1775822082415842, guid: 8fe2baaa0664a114dab106d8e77e07eb, type: 2}
+  - {fileID: 1710346367430838, guid: d9630eaeacfad8c4fb4e353bc1fb0eab, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
