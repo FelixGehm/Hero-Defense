@@ -22,7 +22,7 @@ public class UIHealthBarRegistration : NetworkBehaviour {
 
             if (isLocalPlayer)
             {
-                uiHealthBar.RegisterPlayerStats(stats);
+                uiHealthBar.RegisterCharacterStats(stats);
             }
         } else
         {

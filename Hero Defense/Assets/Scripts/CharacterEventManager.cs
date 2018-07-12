@@ -125,10 +125,7 @@ public class CharacterEventManager : NetworkBehaviour
 
         TransmitEvent(CharacterEventManager.eventType.cancel);
 
-        if (OnCastCancel != null)
-        {
-            OnCastCancel();
-        }
+        OnCastCancel?.Invoke();
     }
 
     #endregion

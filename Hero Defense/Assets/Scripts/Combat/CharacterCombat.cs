@@ -74,8 +74,7 @@ public class CharacterCombat : NetworkBehaviour
 
     protected void FireOnAttack()
     {
-        if (OnAttack != null)
-            OnAttack();
+        OnAttack?.Invoke();
     }
 
 

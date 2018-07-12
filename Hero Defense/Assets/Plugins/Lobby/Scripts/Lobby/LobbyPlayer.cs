@@ -123,8 +123,7 @@ namespace Prototype.NetworkLobby
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
-
-            //characterDropdown.onValueChanged.AddListener(OnCharChanged);
+            
                         
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);

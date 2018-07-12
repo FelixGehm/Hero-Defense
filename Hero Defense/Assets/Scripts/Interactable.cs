@@ -51,6 +51,11 @@ public class Interactable : MonoBehaviour {
         
     }
 
+    public void OnLeftClick()
+    {        
+        haloInstance.SetActive(true);
+    }
+
     public void OnDefocused()
     {
         isFocus = false;
@@ -59,10 +64,7 @@ public class Interactable : MonoBehaviour {
 
         haloInstance.SetActive(false);
 
-        if(OnDefocus != null)
-        {
-            OnDefocus();
-        }
+        OnDefocus?.Invoke();
     }
 
     private void OnDrawGizmosSelected()

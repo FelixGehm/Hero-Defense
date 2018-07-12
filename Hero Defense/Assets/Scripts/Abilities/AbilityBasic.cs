@@ -66,20 +66,17 @@ public abstract class AbilityBasic : NetworkBehaviour
 
     protected void TriggerAnimation()
     {
-        if (OnAbilityCasting != null)
-            OnAbilityCasting();
+        OnAbilityCasting?.Invoke();
     }
 
     protected void TriggerSecondAnimation()
     {
-        if (OnAbilitySecondCasting != null)
-            OnAbilitySecondCasting();
+        OnAbilitySecondCasting?.Invoke();
     }
 
     protected void CancelAnimation()
     {
-        if (OnAbilityCancaled != null)
-            OnAbilityCancaled();
+        OnAbilityCancaled?.Invoke();
     }
 
     private bool isActive = false;

@@ -15,7 +15,7 @@ public class PlayerStats : CharacterStats
         if (GameObject.Find("UIHealthBar") && isLocalPlayer)
         {
             UIHealthBar uIHealthBar = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
-            uIHealthBar.RegisterPlayerStats(this);
+            uIHealthBar.RegisterCharacterStats(this);
         }
         else
         {
