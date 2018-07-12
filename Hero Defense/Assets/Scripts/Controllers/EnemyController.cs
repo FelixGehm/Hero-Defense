@@ -18,7 +18,7 @@ public class EnemyController : CrowdControllable
     float distanceToTarget = float.MaxValue;
 
     NavMeshAgent agent;
-    CharacterCombat combat;
+    protected CharacterCombat combat;
 
     //Update the stopping Distances based on the target's size
     [Header("Agent Stopping Distances - Player")]

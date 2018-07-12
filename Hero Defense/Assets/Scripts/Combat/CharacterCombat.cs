@@ -34,7 +34,7 @@ public class CharacterCombat : NetworkBehaviour
         myStats = GetComponent<CharacterStats>();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         attackCooldown -= Time.deltaTime;
     }

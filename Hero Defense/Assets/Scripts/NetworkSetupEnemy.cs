@@ -28,6 +28,7 @@ public class NetworkSetupEnemy : NetworkSetup
         else
         {
             GetComponent<EnemyAnimator>().enabled = false;
+            Debug.Log("HÄÄÄÄÄÄÄÄÄÄ");
         }
 
     }
