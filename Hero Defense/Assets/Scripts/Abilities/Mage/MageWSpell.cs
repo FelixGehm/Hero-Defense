@@ -13,7 +13,6 @@ public class MageWSpell : NetworkBehaviour
 
 
     private float time;
-    [Server]
     void Start()
     {
         col = GetComponent<Collider>();
@@ -21,10 +20,16 @@ public class MageWSpell : NetworkBehaviour
         StartCoroutine(ActivateColliderAfterDelay());
     }
 
-    [Server]
     void Update()
     {
+        /*
         if (isServer && Time.time - time >= timeAlive)
+        {
+            Destroy(gameObject);
+        }
+        */
+
+        if (Time.time - time >= timeAlive)
         {
             Destroy(gameObject);
         }
@@ -41,13 +46,13 @@ public class MageWSpell : NetworkBehaviour
             {
                 //collision.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(damage);
                 collision.gameObject.GetComponent<CharacterStats>().TakeMagicDamage(damage);
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
 
             if (collision.transform.CompareTag("Player"))
             {
                 collision.gameObject.GetComponent<CharacterStats>().TakeHeal(heal);
-                Destroy(gameObject);
+                //Destroy(gameObject);
             }
         }
     }

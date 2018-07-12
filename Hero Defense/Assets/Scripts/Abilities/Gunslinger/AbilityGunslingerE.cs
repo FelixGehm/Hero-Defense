@@ -18,7 +18,8 @@ public class AbilityGunslingerE : AbilityBasic
     public GameObject grenadePrefab;
     public Transform firePoint;
 
-    
+    private bool hasCasted = false;
+
     KeyCode abilityKey;
 
 
@@ -37,7 +38,7 @@ public class AbilityGunslingerE : AbilityBasic
         GetComponent<CharacterEventManager>().OnAbilityThree += Cast;
 
 
-        abilityKey = characterEventController.abilityThreeKey;        
+        abilityKey = characterEventController.abilityThreeKey;
 
     }
 
@@ -82,13 +83,19 @@ public class AbilityGunslingerE : AbilityBasic
             }
             skipFrame = false;
         }
+
+        if (isLocalPlayer && !isCasting && !isAnimating && hasCasted && Input.GetMouseButtonDown(1))
+        {
+            CancelAnimation();
+            hasCasted = false;
+        }
     }
 
     protected override void Cast()
     {
         if (isLocalPlayer && currentCooldown <= 0)
         {
-            
+
             playerController.IsCasting = true;
             characterEventController.isCasting = true;
             skipFrame = true;
@@ -112,15 +119,15 @@ public class AbilityGunslingerE : AbilityBasic
 
 
         maxRangeGameObject = Instantiate(maxRangePrefab);
-        previewGameObject = Instantiate(previewPrefab);        
+        previewGameObject = Instantiate(previewPrefab);
 
         //maxRangeGameObject.transform.localScale += (new Vector3(1,1,0) * maxThrowRange);
     }
 
     private IEnumerator ThrowGrenade(Vector3 landingPoint)
-    {   
+    {
         TriggerAnimation();
-
+        hasCasted = false;
         transform.LookAt(previewGameObject.transform);   // rotate Player in correct direction
 
         Destroy(maxRangeGameObject);
@@ -131,7 +138,7 @@ public class AbilityGunslingerE : AbilityBasic
 
         yield return new WaitForSeconds(abilityCastTime);
         isAnimating = false;
-
+        hasCasted = true;
         //Debug.Log("AnimationTime over!");
 
         IsCasting(false);
@@ -158,9 +165,9 @@ public class AbilityGunslingerE : AbilityBasic
         if (grenadeScript != null)
         {
             grenadeScript.Init(start, end, height, range, damage, stunTime, this.transform);
-        }       
+        }
 
-        
+
     }
 
     [ClientCallback]
