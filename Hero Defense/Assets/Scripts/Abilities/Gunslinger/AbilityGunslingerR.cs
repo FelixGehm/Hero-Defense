@@ -201,7 +201,9 @@ public class AbilityGunslingerR : AbilityBasic
         foreach (Transform target in targets)
         {
             if(target != null)  // maybe Target is already dead
-            {
+            {                
+                transform.LookAt(target);    // rotate Player in correct direction
+
                 TriggerSecondAnimation();
                 if (!isFirstShot)
                 {

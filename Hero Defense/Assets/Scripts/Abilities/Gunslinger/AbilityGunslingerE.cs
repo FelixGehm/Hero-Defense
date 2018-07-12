@@ -118,8 +118,10 @@ public class AbilityGunslingerE : AbilityBasic
     }
 
     private IEnumerator ThrowGrenade(Vector3 landingPoint)
-    {
+    {   
         TriggerAnimation();
+
+        transform.LookAt(previewGameObject.transform);   // rotate Player in correct direction
 
         Destroy(maxRangeGameObject);
         Destroy(previewGameObject);

@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1442855806579978}
+  m_IsPrefabParent: 1
+--- !u!1 &1442855806579978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4042759448253950}
+  - component: {fileID: 114854636694086326}
+  - component: {fileID: 114276742107794124}
+  m_Layer: 0
+  m_Name: BlankPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4042759448253950
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442855806579978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 176.45312, y: 112.625, z: -289.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114276742107794124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442855806579978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d1ce20525de324f89d7abd8fbbecc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playableCharacterMage: {fileID: 1775822082415842, guid: 8fe2baaa0664a114dab106d8e77e07eb,
+    type: 2}
+  playableCharacterGunslinger: {fileID: 1217024187637938, guid: 64bc7a2f26e3e3e469805a4c3e97d9c7,
+    type: 2}
+  playerName: 
+--- !u!114 &114854636694086326
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1442855806579978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 170
+    i1: 101
+    i2: 218
+    i3: 164
+    i4: 2
+    i5: 199
+    i6: 140
+    i7: 244
+    i8: 90
+    i9: 11
+    i10: 175
+    i11: 74
+    i12: 180
+    i13: 22
+    i14: 123
+    i15: 87
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

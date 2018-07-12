@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a9d1ce20525de324f89d7abd8fbbecc0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playableCharacterMage: {fileID: 1775822082415842, guid: 8fe2baaa0664a114dab106d8e77e07eb,
+      type: 2}
+  - playableCharacterGunslinger: {fileID: 1217024187637938, guid: 64bc7a2f26e3e3e469805a4c3e97d9c7,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
