@@ -131,8 +131,7 @@ public class Revive : AbilityBasic
     IEnumerator CastAfterDelay(float delay)
     {
         targetClicked = false;
-        if (OnCasting != null)
-            OnCasting();
+        OnCasting?.Invoke();
 
         Debug.Log("Test");
 

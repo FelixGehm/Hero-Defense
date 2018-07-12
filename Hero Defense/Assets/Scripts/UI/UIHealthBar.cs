@@ -47,7 +47,7 @@ public class UIHealthBar : MonoBehaviour
         foreGround.fillAmount = 1.0f;
     }
 
-    public void RegisterPlayerStats(CharacterStats _stats)
+    public void RegisterCharacterStats(CharacterStats _stats)
     {
         stats = _stats;
         maxHealth = stats.maxHealth.GetValue();

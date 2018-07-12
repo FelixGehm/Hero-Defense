@@ -13,9 +13,8 @@ public class NexusStats : CharacterStats
     {
         base.Die();
 
-        if (OnNexusDestroyed != null)
-            OnNexusDestroyed();
-        
+        OnNexusDestroyed?.Invoke();
+
         //Destroy Object, Animationen und so, vllt coole Kamerafahrt, GameLost einblenden, keine ahnung
     }
 

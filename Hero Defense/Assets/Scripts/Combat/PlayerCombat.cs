@@ -89,7 +89,7 @@ public class PlayerCombat : CharacterCombat
     /// <param name="damage"></param>    
     protected override void WorkAroundCmd(NetworkInstanceId targetId, float damage)
     {
-        Debug.Log("PlayerCombat CmdSPawnBulletOnServer");
+        //Debug.Log("PlayerCombat CmdSpawnBulletOnServer");
         Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
 
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);

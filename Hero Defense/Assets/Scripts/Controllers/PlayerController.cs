@@ -8,6 +8,10 @@ public class PlayerController : CrowdControllable
     public Interactable focus;
     private Interactable oldFocus;
 
+
+    public delegate void OnFocusChanged(Interactable newFocus);
+    public OnFocusChanged focusChanged;
+
     public event System.Action OnFocusNull;
 
     public LayerMask rightClickMask;
@@ -80,8 +84,10 @@ public class PlayerController : CrowdControllable
         //test end
 
 
-
-        OnFocusNull?.Invoke();
+        if(focus == null)
+        {
+            OnFocusNull?.Invoke();
+        }        
 
         if (myStatuses.Contains(Status.stunned) || IsDead)
         {
@@ -126,7 +132,10 @@ public class PlayerController : CrowdControllable
                 else
                 {
                     Interactable interactable = hit.collider.GetComponent<Interactable>();
-                    if (interactable != null) SetFocus(interactable);
+                    if (interactable != null)
+                    {
+                        SetFocus(interactable);
+                    }
 
                     if (combat.isAttacking && focus != oldFocus) combat.CancelAttack();
 
@@ -176,6 +185,8 @@ public class PlayerController : CrowdControllable
     {
         if (newFocus != focus)
         {
+            focusChanged?.Invoke(newFocus);     // invoke the delegate!
+
             if (focus != null)
                 focus.OnDefocused();
 
@@ -211,8 +222,7 @@ public class PlayerController : CrowdControllable
 
         IsDead = true;
 
-        if (OnPlayerKilled != null)
-            OnPlayerKilled();
+        OnPlayerKilled?.Invoke();
     }
 
     public void RevivePlayer()
@@ -221,8 +231,7 @@ public class PlayerController : CrowdControllable
 
         stats.SyncedCurrentHealth = stats.maxHealth.GetValue();
 
-        if (OnPlayerRevived != null)
-            OnPlayerRevived();
+        OnPlayerRevived?.Invoke();
     }
 
 

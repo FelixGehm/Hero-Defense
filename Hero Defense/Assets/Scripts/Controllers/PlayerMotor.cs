@@ -46,8 +46,7 @@ public class PlayerMotor : MonoBehaviour
     public void MoveToPoint(Vector3 point)
     {
         agent.SetDestination(point);
-        if (OnPlayerMoved != null)
-            OnPlayerMoved();
+        OnPlayerMoved?.Invoke();
     }
 
     public void FollowTarget(Interactable newTarget)
@@ -59,8 +58,7 @@ public class PlayerMotor : MonoBehaviour
 
         faceOnly = false;
 
-        if (OnFollowTarget != null)
-            OnFollowTarget();
+        OnFollowTarget?.Invoke();
     }
 
     public void StopFollowingTarget()

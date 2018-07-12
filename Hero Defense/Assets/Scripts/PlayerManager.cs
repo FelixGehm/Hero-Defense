@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 //using UnityEngine.Networking;
 
 //Hält eine Referenz auf den Spieler. So müssen nicht bei jeden Enemy Spawn alle Objekte nach dem Spieler durchsucht werden, sonder der Spieler kann über diese Klasse abgerufen werden.
 
-    //TODO: Rename in "EntityManager"
+//TODO: Rename in "EntityManager"
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : MonoBehaviour
+{
 
 
     #region Singleton
@@ -23,12 +25,12 @@ public class PlayerManager : MonoBehaviour {
     }
     #endregion
 
-    
+
 
     public GameObject[] players;
 
     public List<GameObject> enemies;
-    
+
     public GameObject nexus;
 
     private void Start()
@@ -36,10 +38,10 @@ public class PlayerManager : MonoBehaviour {
         players = new GameObject[4]; // Maximal 4 Spieler pro Lobby
 
     }
-    
+
     public void RegisterPlayer(GameObject _player)
     {
-        for ( int i = 0; i< players.Length; i++)
+        for (int i = 0; i < players.Length; i++)
         {
             if (players[i] == null)
             {
@@ -60,6 +62,18 @@ public class PlayerManager : MonoBehaviour {
                 return;
             }
         }
+    }
+
+    public GameObject GetLocalPlayer()
+    {
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null && players[i].GetComponent<NetworkIdentity>().isLocalPlayer)
+            {
+                return players[i];
+            }
+        }
+        return null;    // hier sollte man eigentlich nie landen...
     }
 
     public void RegisterEnemy(GameObject enemy)

@@ -170,7 +170,7 @@ public class CharacterAnimator : MonoBehaviour
 
     void StartAttackAnimation()
     {
-        Debug.Log("StartAttackAnimation()");
+        //Debug.Log("StartAttackAnimation()");
 
         animator.SetBool("cancelAttack", false);
 
