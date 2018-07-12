@@ -1278,7 +1278,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1288858380092610}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.54, z: 0.26}
+  m_LocalPosition: {x: 0, y: 1.54, z: 0.886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4371927576001136}
@@ -2406,7 +2406,7 @@ MonoBehaviour:
     type: 2}
   maxRangePrefab: {fileID: 1185851477789976, guid: bc1a89c6827e8cd4d905341ad1e5c14b,
     type: 2}
-  grenadePrefab: {fileID: 1523425383353616, guid: ac5526485f72bba408c6bb7104f0a658,
+  grenadePrefab: {fileID: 1194507523770242, guid: 1ddaa54e7a16ea8409cc3c5230e4f19b,
     type: 2}
   firePoint: {fileID: 4171625610971312}
   peakHeight: 1
@@ -2455,7 +2455,7 @@ MonoBehaviour:
   isAttacking: 0
   isBlinded: 0
   isRanged: 1
-  projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
+  projectilePrefab: {fileID: 1431553493882784, guid: 7c5ecb3c00f61054db291aeb3aa3f12f,
     type: 2}
   firePoint: {fileID: 4516320836597954}
 --- !u!114 &114570502394633400
@@ -2601,7 +2601,7 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512
-  projectilePrefab: {fileID: 1640169703100648, guid: 9b91f52cc1c22914aa73784a985c7adb,
+  projectilePrefab: {fileID: 1933282926290282, guid: 1a3855ceb6e36584c87e30bcde30ee84,
     type: 2}
   projectileSpeed: 15
   projectilePhysicalDamageStart: 40

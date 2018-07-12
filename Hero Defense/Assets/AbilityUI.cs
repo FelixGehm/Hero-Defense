@@ -31,6 +31,8 @@ public class AbilityUI : MonoBehaviour
 
     public void SetAbilityActive(bool a)
     {
+        if (activeRing == null) return;
+
         if (a)
         {
             activeRing.SetActive(true);
