@@ -3094,13 +3094,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    baseValue: 100
+    baseValue: 80
     modifiers: []
   healthRegeneration:
     baseValue: 0
     modifiers: []
   physicalDamage:
-    baseValue: 15
+    baseValue: 9
     modifiers: []
   armor:
     baseValue: 5

@@ -1621,12 +1621,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114759404899175176, guid: 97951d0966ac77d419757a59ca8200b0,
-        type: 2}
-      propertyPath: toSpawnPrefab
-      value: 
-      objectReference: {fileID: 1538450666581284, guid: 66ab233049bcde942ae09c71fcb4423e,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 97951d0966ac77d419757a59ca8200b0, type: 2}
   m_IsPrefabParent: 0
@@ -6770,6 +6764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8ab5f55a70c2545bc8e8478f9d5115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeRing: {fileID: 0}
   img: {fileID: 1850183423}
 --- !u!114 &472598787
 MonoBehaviour:
@@ -21047,6 +21042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8ab5f55a70c2545bc8e8478f9d5115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeRing: {fileID: 0}
   img: {fileID: 325912988}
 --- !u!114 &1641150339
 MonoBehaviour:
@@ -21421,6 +21417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8ab5f55a70c2545bc8e8478f9d5115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeRing: {fileID: 0}
   img: {fileID: 410868835}
 --- !u!114 &1663543088
 MonoBehaviour:
@@ -24302,6 +24299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8ab5f55a70c2545bc8e8478f9d5115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeRing: {fileID: 0}
   img: {fileID: 915970759}
 --- !u!114 &1829473195
 MonoBehaviour:

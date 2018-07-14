@@ -94,7 +94,7 @@ public class CharacterStats : NetworkBehaviour
     #region TrueDamage
     public void TakeTrueDamage(float tDamage)
     {
-        if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
+        if (!isServer)      // Ausschließlich der Server verursacht Schaden.
         {
             return;
         }

@@ -44,25 +44,14 @@ public class Interactable : MonoBehaviour {
     {
         isFocus = true;
         player = playerTransform;
-        hasInteracted = false;
-
-        haloInstance.SetActive(true);
-
-        
-    }
-
-    public void OnLeftClick()
-    {        
-        haloInstance.SetActive(true);
-    }
+        hasInteracted = false;        
+    } 
 
     public void OnDefocused()
     {
         isFocus = false;
         player = null;
         hasInteracted = false;
-
-        haloInstance.SetActive(false);
 
         OnDefocus?.Invoke();
     }

@@ -9,59 +9,45 @@ public class TargetInfo : MonoBehaviour
 
     public GameObject visuals;
 
-    PlayerController localPlayerController;
+    // UI Refferences:
+    public Text physicalText;
+    public Text armorText;
+    public Text magicText;
+    public Text resistanceText;
+    public Text attackSpeedText;
+    public Text movementSpeedText;
+    public Text healthText;
 
     Interactable currentTarget;
+    CharacterStats targetStats;
 
-
-    bool isReady = false;
+        
     private void Update()
     {
-        if (!isReady)
+        if (Input.GetMouseButtonDown(0))
         {
-            GameObject localPlayer = GameObject.Find("_Game").GetComponent<PlayerManager>().GetLocalPlayer();
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
 
-            if (localPlayer != null)
+            if (Physics.Raycast(ray, out hit, 100))
             {
-                localPlayerController = localPlayer.GetComponent<PlayerController>();
-                localPlayerController.focusChanged += OnTargetChanged;  // es leben Delegates!
-
-                isReady = true;
-            }
-        }
-        else
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, 100))
+                if (hit.collider.tag == "Enemy")
                 {
-                    if (hit.collider.tag == "Enemy")
-                    {
-                        Interactable newFocus = hit.transform.GetComponent<Interactable>();
+                    Interactable newFocus = hit.transform.GetComponent<Interactable>();
 
-                        if (newFocus != currentTarget)
-                        {
-                            OnTargetChanged(newFocus);
-                            newFocus.OnLeftClick();
-                        }
+                    if (newFocus != currentTarget)
+                    {
+                        OnTargetChanged(newFocus);                        
                     }
                 }
             }
-            if (Input.GetMouseButtonDown(1))
-            {
-                if (currentTarget != null)
-                {
-                    currentTarget.OnDefocused();
-                    currentTarget = null;
-                    visuals.SetActive(false);
-                }
-            }
         }
 
-        if (currentTarget == null)
+        if (currentTarget != null)
+        {
+            SetTargetCurrentHealth();
+        }
+        else 
         {
             visuals.SetActive(false);
         }
@@ -76,14 +62,36 @@ public class TargetInfo : MonoBehaviour
             visuals.SetActive(true);
 
             if (currentTarget != null)
-            {
-                currentTarget.OnDefocused();
+            {                
+                currentTarget.haloInstance.SetActive(false);
             }
 
             currentTarget = newTarget;
+            newTarget.haloInstance.SetActive(true);
 
-            CharacterStats targetStats = newTarget.interactionTransform.GetComponent<CharacterStats>();
+            targetStats = newTarget.interactionTransform.GetComponent<CharacterStats>();
             targetHealthBar.RegisterCharacterStats(targetStats);
+
+            SetTargetStatsInUI(targetStats);
         }
     }
+
+    private void SetTargetStatsInUI(CharacterStats targetStats)
+    {
+        physicalText.text = targetStats.physicalDamage.GetValue().ToString();
+        armorText.text = targetStats.armor.GetValue().ToString();
+        attackSpeedText.text = targetStats.attackSpeed.GetValue().ToString();
+
+        magicText.text = targetStats.magicDamage.GetValue().ToString();
+        resistanceText.text = targetStats.magicResistance.GetValue().ToString();
+        movementSpeedText.text = targetStats.moveSpeed.GetValue().ToString();
+    }
+
+    private void SetTargetCurrentHealth()
+    {
+        string tmp = targetStats.SyncedCurrentHealth + "/" + targetStats.maxHealth.GetValue();
+
+        healthText.text = tmp;
+    }
+
 }
