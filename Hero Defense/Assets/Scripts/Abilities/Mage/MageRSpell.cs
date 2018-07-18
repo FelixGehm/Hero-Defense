@@ -5,14 +5,23 @@ using UnityEngine.Networking;
 
 public class MageRSpell : NetworkBehaviour
 {
-    public float damage = 10;
-    public float heal;
+    private float damage = 10;
+    private float heal = 10;
     public float tickRate = 0.5f;
 
     private List<GameObject> enemiesInsideCollider;
     private List<GameObject> playersInsideCollider;
 
     private float timeStemp;
+
+    private Transform sender;
+
+    public void Init(Transform sender, float damage, float healAmount)
+    {
+        this.sender = sender;
+        this.damage = damage;
+        this.heal = healAmount;
+    }
 
     void Start()
     {
@@ -52,15 +61,13 @@ public class MageRSpell : NetworkBehaviour
         foreach (GameObject enemy in enemiesInsideCollider)
         {
             if (enemy != null)
-                enemy.GetComponent<CharacterStats>().TakeMagicDamage(damage);
+                enemy.GetComponent<EnemyStats>().TakeMagicDamage(damage, sender);
         }
 
         foreach (GameObject player in playersInsideCollider)
         {
             if (player != null)
                 player.GetComponent<CharacterStats>().TakeHeal(heal);
-
-            if (player != null) Debug.Log(player.name + " healed");
         }
     }
 

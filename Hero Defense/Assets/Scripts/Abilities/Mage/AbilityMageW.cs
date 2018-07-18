@@ -16,6 +16,18 @@ public class AbilityMageW : AbilityBasic
 
     public LayerMask rightClickMask;
 
+    [Tooltip("the fixed base damage of the ability")]
+    public float baseDamage;
+    [Tooltip("the factor the magicDamage of the Character is multiplied with to crate additional damage to the base damage")]
+    public float damageFactor;
+    public float baseHealAmount;
+    public float healFactor;
+
+    private float damage = 20;
+    private float healAmount = 20;
+
+    private PlayerStats myStats;
+
     KeyCode abilityKey;
 
     private Vector3 spawnPos;
@@ -27,6 +39,8 @@ public class AbilityMageW : AbilityBasic
         base.Start();
         GetComponent<CharacterEventManager>().OnAbilityTwo += Cast;
         abilityKey = characterEventController.abilityTwoKey;
+        myStats = GetComponent<PlayerStats>();
+        CalcDamage();
     }
 
     bool skipFrame = false;
@@ -103,6 +117,13 @@ public class AbilityMageW : AbilityBasic
         maxRangeGO = Instantiate(maxRangePrefab);
     }
 
+    private void CalcDamage()
+    {
+        float mDmg = myStats.magicDamage.GetValue();
+        damage = baseDamage + mDmg * damageFactor;
+        healAmount = baseHealAmount + mDmg * healFactor;
+    }
+
     public IEnumerator CastAbility(Vector3 castPosition)
     {
         hasCasted = false;
@@ -122,7 +143,7 @@ public class AbilityMageW : AbilityBasic
         characterEventController.isCasting = false;
 
         currentCooldown = abilityCooldown;
-
+        CalcDamage();
         if (isServer)
         {
             CmdSpawnSpellOnServer(spawnPos);
@@ -140,6 +161,8 @@ public class AbilityMageW : AbilityBasic
     void CmdSpawnSpellOnServer(Vector3 spawnPosition)
     {
         GameObject spellGO = Instantiate(spellPrefab, spawnPosition, transform.rotation);
+        MageWSpell spellScript = spellGO.GetComponent<MageWSpell>();
+        spellScript.Init(this.transform, damage, healAmount);
         NetworkServer.Spawn(spellGO);
     }
 

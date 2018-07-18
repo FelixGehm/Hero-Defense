@@ -11,6 +11,7 @@ public abstract class AbilityBasic : NetworkBehaviour
     }
 
     public Slot abilitySlot;
+    public Sprite abilitySprite;
 
     public float abilityCooldown = 4.0f;
     //[HideInInspector]
@@ -111,17 +112,17 @@ public abstract class AbilityBasic : NetworkBehaviour
         switch (abilitySlot)
         {
             case Slot.Q:
-                GameObject.Find("QImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                GameObject.Find("QImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this, abilitySprite);
                 break;
             case Slot.W:
                 uiScript = GameObject.Find("WImage").GetComponent<AbilityUI>();
-                uiScript.RegisterAbilityToUI(this);
+                uiScript.RegisterAbilityToUI(this, abilitySprite);
                 break;
             case Slot.E:
-                GameObject.Find("EImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                GameObject.Find("EImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this, abilitySprite);
                 break;
             case Slot.R:
-                GameObject.Find("RImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this);
+                GameObject.Find("RImage").GetComponent<AbilityUI>().RegisterAbilityToUI(this, abilitySprite);
                 break;
             case Slot.Revive:
                 Debug.Log("implmentierung hier fehlt noch");

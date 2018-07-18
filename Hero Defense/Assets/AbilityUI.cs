@@ -8,8 +8,8 @@ public class AbilityUI : MonoBehaviour
 
     private AbilityBasic ability;
     public GameObject activeRing;
-    public Image img;
-
+    public Image cdImg;
+    public Image abilityImg;
     // Use this for initialization
     void Start()
     {
@@ -21,12 +21,23 @@ public class AbilityUI : MonoBehaviour
     {
         if (ability == null) return;
 
-        img.fillAmount = ability.currentCooldown / ability.abilityCooldown;
+        cdImg.fillAmount = ability.currentCooldown / ability.abilityCooldown;
     }
 
     public void RegisterAbilityToUI(AbilityBasic ability)
     {
         this.ability = ability;
+    }
+
+    public void RegisterAbilityToUI(AbilityBasic ability, Sprite abilitySprite)
+    {
+        this.ability = ability;
+        if (abilitySprite != null)
+        {
+            cdImg.sprite = abilitySprite;
+            abilityImg.sprite = abilitySprite;
+        }
+
     }
 
     public void SetAbilityActive(bool a)

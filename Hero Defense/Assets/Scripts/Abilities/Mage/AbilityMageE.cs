@@ -9,9 +9,18 @@ public class AbilityMageE : AbilityBasic
     public float spellSpeed = 5;
     public float maxCastRange = 10;
     public float maxBounceRange = 5;
-    public float damage = 10;
-    public float healAmount = 10;
+    
     public float maxNumberOfBounces = 6;
+
+    [Tooltip("the fixed base damage of the ability")]
+    public float baseDamage;
+    [Tooltip("the factor the magicDamage of the Character is multiplied with to crate additional damage to the base damage")]
+    public float damageFactor;
+    public float baseHealAmount;
+    public float healFactor;
+
+    private float damage = 10;
+    private float healAmount = 10;
 
     [Header("Setup Fields")]
     public GameObject spellPrefab;
@@ -21,6 +30,8 @@ public class AbilityMageE : AbilityBasic
     public Transform spawnPoint;
     public GameObject maxRangePrefab;
     private GameObject maxRangeGO;
+
+    private PlayerStats myStats;
 
     KeyCode abilityKey;
 
@@ -36,6 +47,8 @@ public class AbilityMageE : AbilityBasic
         base.Start();
         GetComponent<CharacterEventManager>().OnAbilityThree += Cast;
         abilityKey = characterEventController.abilityThreeKey;
+        myStats = GetComponent<PlayerStats>();
+        CalcDamage();
     }
 
     bool skipFrame;
@@ -127,6 +140,13 @@ public class AbilityMageE : AbilityBasic
         }
     }
 
+    private void CalcDamage()
+    {
+        float mDmg = myStats.magicDamage.GetValue();
+        damage = baseDamage + mDmg * damageFactor;
+        healAmount = baseHealAmount + mDmg * healFactor;
+    }
+
     public IEnumerator CastAbility()
     {
         hasCasted = false;
@@ -145,7 +165,7 @@ public class AbilityMageE : AbilityBasic
         IsCasting(false);
 
         currentCooldown = abilityCooldown;
-
+        CalcDamage();
         if (isServer)
         {
             CmdSpawnSpellOnServer(spawnPoint.position, target, spellSpeed, maxBounceRange, damage, healAmount, maxNumberOfBounces);
@@ -171,7 +191,7 @@ public class AbilityMageE : AbilityBasic
         //Debug.Log("hasScript: " + spellScript != null);
         if (spellScript != null && target != null)
         {
-            spellScript.Init(target, spellSpeed, maxBounceRange, damage, healAmount, maxNumberOfBounces);
+            spellScript.Init(target, spellSpeed, maxBounceRange, damage, healAmount, maxNumberOfBounces, this.transform);
         }
         else
         {

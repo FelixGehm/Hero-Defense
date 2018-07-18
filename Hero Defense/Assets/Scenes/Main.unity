@@ -3528,7 +3528,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint 4
   m_TagString: Untagged
-  m_Icon: {fileID: 8220585740371884164, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -4537,7 +4537,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint 2
   m_TagString: Untagged
-  m_Icon: {fileID: 1654036009018553494, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6919,7 +6919,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeRing: {fileID: 0}
-  img: {fileID: 1850183423}
+  cdImg: {fileID: 1850183423}
+  abilityImg: {fileID: 472598787}
 --- !u!114 &472598787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20745,7 +20746,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawn Points
   m_TagString: Untagged
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -21201,7 +21202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeRing: {fileID: 0}
-  img: {fileID: 325912988}
+  cdImg: {fileID: 325912988}
+  abilityImg: {fileID: 1641150339}
 --- !u!114 &1641150339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21577,7 +21579,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeRing: {fileID: 93962108}
-  img: {fileID: 410868835}
+  cdImg: {fileID: 410868835}
+  abilityImg: {fileID: 1663543088}
 --- !u!114 &1663543088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21811,7 +21814,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint 3
   m_TagString: Untagged
-  m_Icon: {fileID: -3701561207968579530, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -22843,7 +22846,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint 1
   m_TagString: Untagged
-  m_Icon: {fileID: 4660412927644837186, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24459,7 +24462,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeRing: {fileID: 0}
-  img: {fileID: 915970759}
+  cdImg: {fileID: 915970759}
+  abilityImg: {fileID: 1829473195}
 --- !u!114 &1829473195
 MonoBehaviour:
   m_ObjectHideFlags: 0

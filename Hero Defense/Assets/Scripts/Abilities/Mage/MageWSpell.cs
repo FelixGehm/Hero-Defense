@@ -5,11 +5,20 @@ using UnityEngine.Networking;
 
 public class MageWSpell : NetworkBehaviour
 {
-    public float damage = 20;
-    public float heal = 40;
+    private float damage = 20;
+    private float heal = 40;
     public float delay = 1;
     public float timeAlive = 2;
     Collider col;
+
+    private Transform sender;
+
+    public void Init(Transform sender, float damage, float healAmount)
+    {
+        this.sender = sender;
+        this.damage = damage;
+        this.heal = healAmount;
+    }
 
 
     private float time;
@@ -45,7 +54,8 @@ public class MageWSpell : NetworkBehaviour
             if (collision.transform.CompareTag("Enemy"))
             {
                 //collision.gameObject.GetComponent<CharacterStats>().TakePhysicalDamage(damage);
-                collision.gameObject.GetComponent<CharacterStats>().TakeMagicDamage(damage);
+                //collision.gameObject.GetComponent<CharacterStats>().TakeMagicDamage(damage);
+                collision.gameObject.GetComponent<EnemyStats>().TakeMagicDamage(damage, sender);
                 //Destroy(gameObject);
             }
 

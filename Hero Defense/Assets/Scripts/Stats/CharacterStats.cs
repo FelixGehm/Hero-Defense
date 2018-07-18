@@ -9,12 +9,12 @@ public class CharacterStats : NetworkBehaviour
 {
     public virtual void Awake()
     {
-            syncedCurrentHealth = maxHealth.GetValue();
+        syncedCurrentHealth = maxHealth.GetValue();
     }
 
     protected static float timeBetweenTicksForHealthRegeneration = 1.0f;
     protected float currentTickCoolDown = timeBetweenTicksForHealthRegeneration;
-    
+
     protected void Update()
     {
         if (!isServer)
@@ -36,7 +36,7 @@ public class CharacterStats : NetworkBehaviour
         }
     }
 
-    [SyncVar(hook ="OnSyncedCurrendHealthChanged")]
+    [SyncVar(hook = "OnSyncedCurrendHealthChanged")]
     private float syncedCurrentHealth;
 
     public float SyncedCurrentHealth
@@ -53,7 +53,7 @@ public class CharacterStats : NetworkBehaviour
         get
         {
             return syncedCurrentHealth;
-        }                 
+        }
     }
 
     void OnSyncedCurrendHealthChanged(float newHealth)
@@ -62,8 +62,8 @@ public class CharacterStats : NetworkBehaviour
     }
 
     public bool IsAlive()
-    {                    
-            return syncedCurrentHealth >= 0;
+    {
+        return syncedCurrentHealth >= 0;
     }
 
     public Stat maxHealth;
@@ -113,6 +113,9 @@ public class CharacterStats : NetworkBehaviour
         if (!isServer) return;
 
         SyncedCurrentHealth += healAmount;
+
+        if (SyncedCurrentHealth >= maxHealth.GetValue())
+            SyncedCurrentHealth = maxHealth.GetValue();
     }
 
     #endregion

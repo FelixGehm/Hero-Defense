@@ -2661,6 +2661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 3
+  abilitySprite: {fileID: 21300000, guid: b7fea2eecd907ec42a36758d32d9cb51, type: 3}
   abilityCooldown: 1
   currentCooldown: 0
   abilityCastTime: 0.75
@@ -2675,6 +2676,10 @@ MonoBehaviour:
     type: 2}
   spellDuration: 6
   spellRotationSpeed: 25
+  baseDamage: 0
+  damageFactor: 0.5
+  baseHealAmount: 0
+  healFactor: 0.5
 --- !u!114 &114102930739242952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2826,6 +2831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 4
+  abilitySprite: {fileID: 0}
   abilityCooldown: 4
   currentCooldown: 0
   abilityCastTime: 1
@@ -2896,19 +2902,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth:
-    baseValue: 10000
+    baseValue: 300
     modifiers: []
   healthRegeneration:
-    baseValue: 0
+    baseValue: 0.001
     modifiers: []
   physicalDamage:
-    baseValue: 50
+    baseValue: 15
     modifiers: []
   armor:
     baseValue: 5
     modifiers: []
   magicDamage:
-    baseValue: 0
+    baseValue: 20
     modifiers: []
   magicResistance:
     baseValue: 0
@@ -3050,6 +3056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 0
+  abilitySprite: {fileID: 21300000, guid: 08b86042e238e5344b2d1ea884f84c85, type: 3}
   abilityCooldown: 15
   currentCooldown: 0
   abilityCastTime: 1.7
@@ -3067,6 +3074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 1
+  abilitySprite: {fileID: 21300000, guid: 31a5eef0b69fcce46b0df4c7488745fa, type: 3}
   abilityCooldown: 4
   currentCooldown: 0
   abilityCastTime: 0.5
@@ -3080,6 +3088,10 @@ MonoBehaviour:
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512
+  baseDamage: 0
+  damageFactor: 0.5
+  baseHealAmount: 0
+  healFactor: 0.5
 --- !u!114 &114824224634738826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3092,15 +3104,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 2
+  abilitySprite: {fileID: 21300000, guid: b08ac5ff88169ac46b355ee65d81003a, type: 3}
   abilityCooldown: 8
   currentCooldown: 0
   abilityCastTime: 0.6
   spellSpeed: 5
   maxCastRange: 5
   maxBounceRange: 5
-  damage: 10
-  healAmount: 10
   maxNumberOfBounces: 6
+  baseDamage: 0
+  damageFactor: 0.5
+  baseHealAmount: 0
+  healFactor: 0.5
   spellPrefab: {fileID: 1508824767126548, guid: d73dff591da383c4f99fffc10ac1f048,
     type: 2}
   selectTargetIndicator: {fileID: 2800000, guid: 7ce9f781067c8974a832e7fbac57d20b,
@@ -3284,7 +3299,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 3.5
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 5000

@@ -20,6 +20,18 @@ public class AbilityMageR : AbilityBasic
     private float spellStartTime;
     public float spellRotationSpeed = 25;
 
+    [Tooltip("the fixed base damage of the ability")]
+    public float baseDamage;
+    [Tooltip("the factor the magicDamage of the Character is multiplied with to crate additional damage to the base damage")]
+    public float damageFactor;
+    public float baseHealAmount;
+    public float healFactor;
+
+    private float damage = 10;
+    private float healAmount = 10;
+
+    private PlayerStats myStats;
+
     KeyCode abilityKey;
 
     private bool isInAbility = false;
@@ -41,6 +53,8 @@ public class AbilityMageR : AbilityBasic
         base.Start();
         GetComponent<CharacterEventManager>().OnAbilityFour += Cast;
         abilityKey = characterEventController.abilityFourKey;
+        myStats = GetComponent<PlayerStats>();
+        CalcDamage();
     }
 
     bool spellSpawned = false;
@@ -137,6 +151,13 @@ public class AbilityMageR : AbilityBasic
         previewGO = Instantiate(previewPrefab);
     }
 
+    private void CalcDamage()
+    {
+        float mDmg = myStats.magicDamage.GetValue();
+        damage = baseDamage + mDmg * damageFactor;
+        healAmount = baseHealAmount + mDmg * healFactor;
+    }
+
 
     public IEnumerator CastAbility(Vector3 spawnPos)
     {
@@ -154,6 +175,7 @@ public class AbilityMageR : AbilityBasic
         currentCooldown = abilityCooldown;
         IsInAbility = true;
         spellStartTime = Time.time;
+        CalcDamage();
         if (isServer)
         {
             CmdSpawnSpellOnServer(spawnPos);
@@ -169,6 +191,8 @@ public class AbilityMageR : AbilityBasic
     {
         spellGO = Instantiate(spellPrefab, spawnPos, transform.rotation);
         spellGO.transform.parent = this.transform;
+        MageRSpell spellScript = spellGO.GetComponent<MageRSpell>();
+        spellScript.Init(this.transform, damage, healAmount);
         NetworkServer.Spawn(spellGO);
         //RpcSetSpellGO(spellGO);
         RpcSyncSpellGoOnClients(spellGO);

@@ -393,8 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093f67f315e705d4c8693e65d1fd234b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  heal: 100
   delay: 0.1
   timeAlive: 1
 --- !u!136 &136682885784520096

@@ -17,6 +17,7 @@ public class MageQSpell : NetworkBehaviour
     private float startTime;
     public Transform[] particlesTransform;
 
+
     void Start()
     {
         startTime = Time.time;

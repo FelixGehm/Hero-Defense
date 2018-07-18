@@ -2199,6 +2199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 3
+  abilitySprite: {fileID: 21300000, guid: 3215402d2f7836e45a78a23f24662612, type: 3}
   abilityCooldown: 60
   currentCooldown: 0
   abilityCastTime: 0.3
@@ -2282,6 +2283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 1
+  abilitySprite: {fileID: 21300000, guid: 63396ab8d6fc9114b8e0d56a0c60c15b, type: 3}
   abilityCooldown: 1
   currentCooldown: 0
   abilityCastTime: 0.6
@@ -2300,6 +2302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 4
+  abilitySprite: {fileID: 0}
   abilityCooldown: 60
   currentCooldown: 0
   abilityCastTime: 5
@@ -2396,6 +2399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 2
+  abilitySprite: {fileID: 21300000, guid: ff37fefbbb7299648a7079352bf011e2, type: 3}
   abilityCooldown: 18
   currentCooldown: 0
   abilityCastTime: 0.8
@@ -2594,7 +2598,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 0
-  abilityCooldown: 1
+  abilitySprite: {fileID: 21300000, guid: 0d17584baa3f85f46beb09906c35ba6a, type: 3}
+  abilityCooldown: 10
   currentCooldown: 0
   abilityCastTime: 0.5
   previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
@@ -2846,7 +2851,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 3.5
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 5000

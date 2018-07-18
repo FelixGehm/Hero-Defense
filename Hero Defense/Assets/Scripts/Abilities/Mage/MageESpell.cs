@@ -21,7 +21,9 @@ public class MageESpell : NetworkBehaviour
 
     MageESpellParticles particles;
 
-    public void Init(GameObject firstTarget, float speed, float maxRange, float damage, float healAmount, float maxBounces)
+    private Transform sender;
+
+    public void Init(GameObject firstTarget, float speed, float maxRange, float damage, float healAmount, float maxBounces, Transform sender)
     {
         target = firstTarget;
         this.speed = speed;
@@ -29,6 +31,8 @@ public class MageESpell : NetworkBehaviour
         this.damage = damage;
         this.healAmount = healAmount;
         this.maxBounces = maxBounces;
+
+        this.sender = sender;
 
         dummy = GetComponent<MageESpellDummy>();
         dummy.Init(speed, target);
@@ -86,7 +90,8 @@ public class MageESpell : NetworkBehaviour
                 {
                     particles.SpawnImpactParticles(particles.dmgColor);
                     dummy.RpcSpawnImpactParticles(particles.dmgColor);
-                    target.GetComponent<CharacterStats>().TakeMagicDamage(damage);
+                    //target.GetComponent<CharacterStats>().TakeMagicDamage(damage);
+                    target.GetComponent<EnemyStats>().TakeMagicDamage(damage, sender);
                 }
 
                 reachedTarget = true;
