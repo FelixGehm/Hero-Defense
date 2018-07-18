@@ -32,6 +32,7 @@ public abstract class AbilityBasic : NetworkBehaviour
     public event System.Action OnAbilityCasting;
     public event System.Action OnAbilitySecondCasting;
     public event System.Action OnAbilityCancaled;
+    public event System.Action OnAbilitySecondCanceled;
 
     protected virtual void Start()
     {
@@ -77,6 +78,11 @@ public abstract class AbilityBasic : NetworkBehaviour
     protected void CancelAnimation()
     {
         OnAbilityCancaled?.Invoke();
+    }
+
+    protected void CancelSecondAnimation()
+    {
+        OnAbilitySecondCanceled?.Invoke();
     }
 
     private bool isActive = false;

@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 114082407873826526}
   - component: {fileID: 114820691516849382}
   - component: {fileID: 114104628576147446}
+  - component: {fileID: 136163449113694952}
   m_Layer: 0
   m_Name: Gunslinger
   m_TagString: Player
@@ -2595,7 +2596,7 @@ MonoBehaviour:
   abilitySlot: 0
   abilityCooldown: 1
   currentCooldown: 0
-  abilityCastTime: 1
+  abilityCastTime: 0.5
   previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
     type: 2}
   rightClickMask:
@@ -2704,6 +2705,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castTime: 2.5
+--- !u!136 &136163449113694952
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1217024187637938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136830531515588752
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -218,8 +218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  heal: 0
+  heal: 10
   tickRate: 0.5
+  enemiesInsideCollider: []
+  playersInsideCollider: []
 --- !u!136 &136128399212761310
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -43,6 +43,7 @@ public class AbilityMageR : AbilityBasic
         abilityKey = characterEventController.abilityFourKey;
     }
 
+    bool spellSpawned = false;
     bool skipFrame = false;
     protected override void Update()
     {
@@ -66,10 +67,11 @@ public class AbilityMageR : AbilityBasic
                         CancelCast();
                     }
 
-                    if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey))        // LeftClick or AbilityKey
+                    if ((Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey)) && !spellSpawned)        // LeftClick or AbilityKey
                     {
                         playerMotor.MoveToPoint(transform.position);
                         StartCoroutine(CastAbility(transform.position));
+                        spellSpawned = true;
                     }
                 }
             }
@@ -93,7 +95,7 @@ public class AbilityMageR : AbilityBasic
                 this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, wantedRotation, Time.deltaTime * spellRotationSpeed);
 
 
-                if (Time.time - spellStartTime >= 6 || Input.GetMouseButtonDown(1))
+                if (Time.time - spellStartTime >= spellDuration || Input.GetMouseButtonDown(1))
                 {
                     if (isServer)
                     {
@@ -148,7 +150,7 @@ public class AbilityMageR : AbilityBasic
 
         isAnimating = false;
         IsCasting(false);
-
+        spellSpawned = false;
         currentCooldown = abilityCooldown;
         IsInAbility = true;
         spellStartTime = Time.time;

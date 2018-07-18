@@ -62,7 +62,9 @@ public class CharacterAnimator : MonoBehaviour
 
 
         abilityQ.OnAbilityCasting += StartQAnimation;
+        abilityQ.OnAbilitySecondCasting += StartSecondQAnimation;
         abilityQ.OnAbilityCancaled += CancelQAnimation;
+        abilityQ.OnAbilitySecondCanceled += CancelSecondQAnimation;
         abilityW.OnAbilityCasting += StartWAnimation;
         abilityW.OnAbilityCancaled += CancelWAnimation;
         abilityE.OnAbilityCasting += StartEAnimation;
@@ -112,12 +114,27 @@ public class CharacterAnimator : MonoBehaviour
         animator.ResetTrigger("abilityQ");
     }
 
+    void StartSecondQAnimation()
+    {
+        netAnimator.SetTrigger("abilityQ2");
+        animator.ResetTrigger("abilityQ2");
+    }
+
     void CancelQAnimation()
     {
         if (!IsInAnimation("AbilityQ")) return;
 
         netAnimator.SetTrigger("cancelQ");
         animator.ResetTrigger("cancelQ");
+
+    }
+
+    void CancelSecondQAnimation()
+    {
+        if (!IsInAnimation("AbilityQ2")) return;
+
+        netAnimator.SetTrigger("cancelQ2");
+        animator.ResetTrigger("cancelQ2");
     }
 
     void StartWAnimation()

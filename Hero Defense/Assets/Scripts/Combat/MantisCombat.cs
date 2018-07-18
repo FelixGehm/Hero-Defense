@@ -14,7 +14,6 @@ public class MantisCombat : CharacterCombat
 
     public override void Attack(CharacterStats targetStats)
     {
-        Debug.Log("test");
         float damageDone = myStats.physicalDamage.GetValue();   //get normal Damage from Stats
         if (CheckForCrit())                                     //check if crit did happen
         {

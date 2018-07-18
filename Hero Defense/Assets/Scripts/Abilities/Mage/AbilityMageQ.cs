@@ -34,10 +34,12 @@ public class AbilityMageQ : AbilityBasic
 
     protected override void Cast()
     {
-        if (!isLocalPlayer) return;
-        playerMotor.MoveToPoint(transform.position);
-        IsCasting(true);
-        StartCoroutine(CastAbility(transform.position));
+        if (isLocalPlayer && currentCooldown <= 0)
+        {
+            playerMotor.MoveToPoint(transform.position);
+            IsCasting(true);
+            StartCoroutine(CastAbility(transform.position));
+        }
     }
 
     public IEnumerator CastAbility(Vector3 castPosition)

@@ -2661,7 +2661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 3
-  abilityCooldown: 2
+  abilityCooldown: 1
   currentCooldown: 0
   abilityCastTime: 0.75
   previewPrefab: {fileID: 1049300602616912, guid: 3c6efcf0ea9835a41b9b4f29b90d4945,
@@ -2879,7 +2879,10 @@ MonoBehaviour:
   - {fileID: 114090624352576174}
   - {fileID: 114399481170393412}
   - {fileID: 114301549755905992}
+  - {fileID: 114738087202343038}
+  - {fileID: 114785658790294776}
   - {fileID: 114824224634738826}
+  - {fileID: 114096164064980812}
   remoteLayerName: RemotePlayer
 --- !u!114 &114349693581392550
 MonoBehaviour:
@@ -3047,7 +3050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 0
-  abilityCooldown: 4
+  abilityCooldown: 15
   currentCooldown: 0
   abilityCastTime: 1.7
   spellPrefab: {fileID: 1517131103748368, guid: 5d109e566ef2c7448b8b4cee7e32dbd6,
@@ -3089,7 +3092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitySlot: 2
-  abilityCooldown: 4
+  abilityCooldown: 8
   currentCooldown: 0
   abilityCastTime: 0.6
   spellSpeed: 5

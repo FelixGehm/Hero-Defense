@@ -30,6 +30,7 @@ public class AbilityGunslingerQ : AbilityBasic
     bool isTimeAtShootingSet = false;
     float timeAtShooting;
 
+    private bool hasCasted = false;
 
     protected override void Start()
     {
@@ -98,6 +99,12 @@ public class AbilityGunslingerQ : AbilityBasic
                 }
             }
         }
+
+        if (isLocalPlayer && !isCasting && !isAnimating && hasCasted && Input.GetMouseButtonDown(1))
+        {
+            CancelSecondAnimation();
+            hasCasted = false;
+        }
     }
 
     protected override void Cast()
@@ -106,7 +113,7 @@ public class AbilityGunslingerQ : AbilityBasic
         if (isLocalPlayer && currentCooldown <= 0)
         {
             IsCasting(true);
-
+            TriggerAnimation();
             playerMotor.MoveToPoint(transform.position);
             ShowPreview();
             skipFrame = true;
@@ -118,7 +125,7 @@ public class AbilityGunslingerQ : AbilityBasic
     public void CancelCast()
     {
         IsCasting(false);
-
+        CancelAnimation();
         Destroy(previewGameObject);
     }
 
@@ -132,7 +139,9 @@ public class AbilityGunslingerQ : AbilityBasic
 
     private IEnumerator ShootProjectile(Vector3 direction)
     {
-        TriggerAnimation();
+        hasCasted = false;
+        //TriggerAnimation();
+        TriggerSecondAnimation();
 
         Vector3 firePoint = previewGameObject.GetComponent<CalcDistanceFromStartToEnd>().GetStartPos();
         Quaternion rotation = previewGameObject.transform.rotation;
@@ -147,7 +156,7 @@ public class AbilityGunslingerQ : AbilityBasic
 
         yield return new WaitForSeconds(abilityCastTime);
         isAnimating = false;
-
+        hasCasted = true;
         //Debug.Log("ShootProjectile(): AnimationTime over!");
 
         IsCasting(false);

@@ -97,11 +97,14 @@ public class AbilityMageE : AbilityBasic
 
     protected override void Cast()
     {
-        //Debug.Log("AbilityMageE.Cast()");
-        ShowSpecialCursor(true);
-        maxRangeGO = Instantiate(maxRangePrefab);
-        IsCasting(true);
-        skipFrame = true;
+        if (currentCooldown <= 0)
+        {
+            ShowSpecialCursor(true);
+            maxRangeGO = Instantiate(maxRangePrefab);
+            IsCasting(true);
+            skipFrame = true;
+        }
+
     }
 
     private void CancelCast()

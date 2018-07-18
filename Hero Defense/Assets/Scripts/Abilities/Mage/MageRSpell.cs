@@ -59,6 +59,8 @@ public class MageRSpell : NetworkBehaviour
         {
             if (player != null)
                 player.GetComponent<CharacterStats>().TakeHeal(heal);
+
+            if (player != null) Debug.Log(player.name + " healed");
         }
     }
 

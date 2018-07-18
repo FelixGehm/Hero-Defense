@@ -3145,7 +3145,7 @@ MonoBehaviour:
     type: 2}
   firePoint: {fileID: 4531937097982046}
   secondFirePoint: {fileID: 4319263263619796}
-  delayToSecondShot: 0.22
+  delayToSecondShot: 0.2
 --- !u!114 &114503583144026134
 MonoBehaviour:
   m_ObjectHideFlags: 1
