@@ -82,12 +82,15 @@ public class AbilityGunslingerQ : AbilityBasic
                     return;
                 }
 
-                if (!isTimeStartSet && (Input.GetMouseButton(0) || Input.GetKey(abilityKey)))        // LeftClick or AbilityKey hold
+                /*
+                if (!isTimeStartSet && (Input.GetMouseButton(0) || Input.GetKey(abilityKey)))
                 {
                     isTimeStartSet = true;
-                    timeAtShootStart = Time.time;
-                }
-                if (!isTimeAtShootingSet && (Input.GetMouseButtonUp(0) || Input.GetKeyUp(abilityKey)))        // LeftClick or AbilityKey released
+                    //timeAtShootStart = Time.time;
+                }*/
+
+
+                if (!isTimeAtShootingSet && (Input.GetMouseButtonDown(0) || Input.GetKeyDown(abilityKey)))        // LeftClick or AbilityKey released
                 {
                     isTimeAtShootingSet = true;
                     timeAtShooting = Time.time;
@@ -168,6 +171,8 @@ public class AbilityGunslingerQ : AbilityBasic
         }
 
         float projectilePhysicalDamage = Mathf.Lerp(projectilePhysicalDamageStart, projectilePhysicalDamageMax, percentDamage);
+
+        Debug.Log("Damage: " + projectilePhysicalDamage);
 
         if (isServer)
         {
