@@ -10,14 +10,14 @@ public class EnemyController : CrowdControllable
     public float lookRadius = 10;
 
 
-    Transform nexus;  //der nexus
-    
+    protected Transform nexus;  //der nexus
+
     public Transform target;       // das Ziel des Gegners
 
 
-    float distanceToTarget = float.MaxValue;
+    protected float distanceToTarget = float.MaxValue;
 
-    NavMeshAgent agent;
+    protected NavMeshAgent agent;
     protected CharacterCombat combat;
 
     //Update the stopping Distances based on the target's size
@@ -43,7 +43,7 @@ public class EnemyController : CrowdControllable
     }
 
 
-    void Update()
+    protected virtual void Update()
     {
         if (myStatuses.Contains(Status.stunned))
         {
@@ -51,7 +51,7 @@ public class EnemyController : CrowdControllable
             return;
         }
 
-        if (!myStatuses.Contains(Status.taunted) )
+        if (!myStatuses.Contains(Status.taunted))
         {
             target = GetTarget();
         }
@@ -66,7 +66,8 @@ public class EnemyController : CrowdControllable
         }
 
         //Moving to Player and attack
-        agent.SetDestination(target.position);
+        if (!combat.isAttacking)
+            agent.SetDestination(target.position);
 
         if (distanceToTarget <= agent.stoppingDistance)
         {
@@ -83,7 +84,7 @@ public class EnemyController : CrowdControllable
         CheckIfStillInCombat();
     }
 
-    void FaceTarget(Transform _target)
+    protected void FaceTarget(Transform _target)
     {
         Vector3 direction = (_target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
@@ -97,12 +98,12 @@ public class EnemyController : CrowdControllable
     /// 
     /// </summary>
     /// <returns> the traget </returns>
-    private Transform GetTarget()
+    protected Transform GetTarget()
     {
         // Wenn im fight, behalte das alte Ziel
         if (isInCombat && target.GetComponent<CharacterStats>().IsAlive())
         {
-            return target;            
+            return target;
         }
 
         //isInCombat = false;
@@ -113,7 +114,7 @@ public class EnemyController : CrowdControllable
     {
         Transform target = nexus;
 
-        float distanceToPlayer = float.MaxValue;               
+        float distanceToPlayer = float.MaxValue;
 
         for (int i = 0; i < PlayerManager.instance.players.Length; i++)     // Liste der Spielrr durchgehen
         {
@@ -124,7 +125,7 @@ public class EnemyController : CrowdControllable
                 bool playerIsAlive = player.GetComponent<PlayerStats>().IsAlive();
 
                 // Wenn Spieler am Leben, Entfernung überprüfen und ggf. als Target setzen
-                if (playerIsAlive)  
+                if (playerIsAlive)
                 {
                     float distance = Vector3.Distance(player.transform.position, transform.position);
                     if (distanceToPlayer > distance && distance <= lookRadius)
@@ -141,21 +142,21 @@ public class EnemyController : CrowdControllable
 
     public void ReceivedDamageFrom(Transform damageDealer)
     {
-        if(!isInCombat)
+        if (!isInCombat)
         {
             isInCombat = true;
             target = damageDealer;
-        }        
+        }
     }
 
-    private void CheckIfStillInCombat()
+    protected void CheckIfStillInCombat()
     {
         distanceToTarget = Vector3.Distance(target.position, transform.position);
         if (distanceToTarget > lookRadius || !target.GetComponent<CharacterStats>().IsAlive())
         {
             isInCombat = false;
         }
-        
+
     }
 
     // Draw LookRadius in Editor

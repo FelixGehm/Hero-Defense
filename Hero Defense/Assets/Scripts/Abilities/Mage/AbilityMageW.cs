@@ -14,6 +14,9 @@ public class AbilityMageW : AbilityBasic
     public GameObject maxRangePrefab;
     private GameObject maxRangeGO;
 
+    public GameObject spawnIndicatorPrefab;
+    private GameObject spawnIndicatorGO;
+
     public LayerMask rightClickMask;
 
     [Tooltip("the fixed base damage of the ability")]
@@ -126,6 +129,14 @@ public class AbilityMageW : AbilityBasic
 
     public IEnumerator CastAbility(Vector3 castPosition)
     {
+        if (isServer)
+        {
+            CmdSpawnIndicatorOnServer(castPosition);
+        }
+        else
+        {
+            TellServerToSpawnIndicator(castPosition);
+        }
         hasCasted = false;
         Destroy(previewGO);
         Destroy(maxRangeGO);
@@ -146,11 +157,13 @@ public class AbilityMageW : AbilityBasic
         CalcDamage();
         if (isServer)
         {
-            CmdSpawnSpellOnServer(spawnPos);
+            CmdSpawnSpellOnServer(castPosition);
+            CmdDestroyIndicatorOnServer();
         }
         else
         {
-            TellServerToSpawnSpell(spawnPos);
+            TellServerToSpawnSpell(castPosition);
+            TellServerToDestroyIndicator();
         }
     }
 
@@ -175,6 +188,33 @@ public class AbilityMageW : AbilityBasic
         }
     }
 
+    [Command]
+    void CmdSpawnIndicatorOnServer(Vector3 spawnPosition)
+    {
+        spawnIndicatorGO = Instantiate(spawnIndicatorPrefab, spawnPosition, spawnIndicatorPrefab.transform.rotation);
+        NetworkServer.Spawn(spawnIndicatorGO);
+    }
+
+    [ClientCallback]
+    void TellServerToSpawnIndicator(Vector3 spawnPosition)
+    {
+        if (!isServer)
+        {
+            CmdSpawnIndicatorOnServer(spawnPosition);
+        }
+    }
+
+    [Command]
+    void CmdDestroyIndicatorOnServer()
+    {
+        NetworkServer.Destroy(spawnIndicatorGO);
+    }
+
+    [ClientCallback]
+    void TellServerToDestroyIndicator()
+    {
+        CmdDestroyIndicatorOnServer();
+    }
 
     private Vector3 GetMousePosOnWorld()
     {

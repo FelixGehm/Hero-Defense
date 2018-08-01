@@ -7,10 +7,36 @@ using UnityEngine.Networking;
 public class MantisCombat : CharacterCombat
 {
     public Transform secondFirePoint;
+    [Header("Attack Settings")]
     public float delayToSecondShot = 0.2f;
-    
 
+    [HideInInspector]
+    public bool isFiringMortar = false;
+    private AbilityMortar mortar;
 
+    [Header("Mortar Settings (set only if AbilityMortar is attached)")]
+    public Transform firstMortarPoint;
+    public Transform secondMortarPoint;
+    public float mortarDelay = 0.3f;
+    public float mortarDelayToSecondShot = 0.3f;
+    public float mortarDelayToNextAA = 2;
+    public float mortarCooldown = 5;
+    private float currentMortarCooldown = 0;
+
+    private EnemyAnimator anim;
+
+    public override void Start()
+    {
+        base.Start();
+        mortar = GetComponent<AbilityMortar>();
+        anim = GetComponent<EnemyAnimator>();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        currentMortarCooldown -= Time.deltaTime;
+    }
 
     public override void Attack(CharacterStats targetStats)
     {
@@ -36,10 +62,21 @@ public class MantisCombat : CharacterCombat
         }
     }
 
+    public void DoubleMortarAttack(Vector3 targetPosition)
+    {
+        if (currentMortarCooldown <= 0)
+        {
+            StartCoroutine(ShootMortarTwice(targetPosition, mortarDelay, mortarDelayToSecondShot));
+            //mortar.Fire(firePoint.position, targetPosition);
+            currentMortarCooldown = mortarCooldown;
+        }
+    }
+
     protected IEnumerator ShootTwoProjectiles(Transform target, float damageDone, float delay, float timeBetweenProjectiles)
     {
+        isAttacking = true;
         yield return new WaitForSeconds(delay);
-        isAttacking = false;
+
 
         NetworkInstanceId idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;
         if (isServer)
@@ -63,10 +100,35 @@ public class MantisCombat : CharacterCombat
         {
             TellServerToSpawnBullet(idTarget, damageDone, secondFirePoint.position);
         }
+        isAttacking = false;
     }
 
+    public bool IsMortarReady
+    {
+        get
+        {
+            return currentMortarCooldown <= 0;
+        }
+    }
 
+    protected IEnumerator ShootMortarTwice(Vector3 targetPosition, float delay, float timeBetweenProjectiles)
+    {
+        mortar.SpawnPreview(targetPosition);
+        anim.StartMortarAnimation();
+        isFiringMortar = true;
+        yield return new WaitForSeconds(delay);
+        mortar.Fire(firstMortarPoint.position, targetPosition);
+        
 
+        yield return new WaitForSeconds(timeBetweenProjectiles);
+
+        mortar.Fire(secondMortarPoint.position, targetPosition);
+        yield return new WaitForSeconds(mortarDelayToNextAA);
+        mortar.DestroyPreview();
+        isFiringMortar = false;
+    }
+
+    #region Network Auto Attack
     [Command]
     protected void CmdSpawnBulletOnServer(NetworkInstanceId targetId, float damage, Vector3 spawnPosition)
     {
@@ -106,4 +168,5 @@ public class MantisCombat : CharacterCombat
             CmdSpawnBulletOnServer(id, damage, spawnPosition);
         }
     }
+    #endregion
 }

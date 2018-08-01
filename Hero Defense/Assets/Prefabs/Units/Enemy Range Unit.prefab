@@ -3100,7 +3100,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   physicalDamage:
-    baseValue: 9
+    baseValue: 5
     modifiers: []
   armor:
     baseValue: 5
@@ -3146,6 +3146,13 @@ MonoBehaviour:
   firePoint: {fileID: 4531937097982046}
   secondFirePoint: {fileID: 4319263263619796}
   delayToSecondShot: 0.2
+  isFiringMortar: 0
+  firstMortarPoint: {fileID: 0}
+  secondMortarPoint: {fileID: 0}
+  mortarDelay: 0.3
+  mortarDelayToSecondShot: 0.3
+  mortarDelayToNextAA: 2
+  mortarCooldown: 5
 --- !u!114 &114503583144026134
 MonoBehaviour:
   m_ObjectHideFlags: 1

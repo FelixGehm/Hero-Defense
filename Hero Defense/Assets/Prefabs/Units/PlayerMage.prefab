@@ -3085,6 +3085,8 @@ MonoBehaviour:
     type: 2}
   maxRangePrefab: {fileID: 1803211274329020, guid: 3a7ef53a5ec3de94588e1b551298a713,
     type: 2}
+  spawnIndicatorPrefab: {fileID: 1903979029498298, guid: c9a55629597ad534499717829cb50f81,
+    type: 2}
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512
