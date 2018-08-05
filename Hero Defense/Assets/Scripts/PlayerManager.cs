@@ -33,6 +33,9 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject nexus;
 
+    public delegate void PlayerRegisteredDelegate(GameObject player);
+    public PlayerRegisteredDelegate  OnPlayerRegistered;
+
     private void Start()
     {
         players = new GameObject[4]; // Maximal 4 Spieler pro Lobby
@@ -46,6 +49,8 @@ public class PlayerManager : MonoBehaviour
             if (players[i] == null)
             {
                 players[i] = _player;
+
+                OnPlayerRegistered(_player);
                 return;
             }
         }
@@ -76,6 +81,23 @@ public class PlayerManager : MonoBehaviour
         return null;    // hier sollte man eigentlich nie landen...
     }
 
+    public GameObject[] GetNetworkPlayer()
+    {
+        GameObject[] nwPlayer = new GameObject[players.Length - 1];
+
+        int m = 0;
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null && players[i].GetComponent<NetworkIdentity>().isLocalPlayer)
+            {
+                nwPlayer[m]  = players[i];
+                m++;
+            }
+        }
+
+        return nwPlayer;
+    }
+
     public void RegisterEnemy(GameObject enemy)
     {
         enemies.Add(enemy);
@@ -94,7 +116,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerManager.instance.RegisterEnemy(gameObject);
+       // PlayerManager.instance.RegisterEnemy(gameObject);
     }
 
 

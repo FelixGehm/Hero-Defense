@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Felix.unity
     guid: a8080b6b646ef8747af57cc09b3227df
   - enabled: 0
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Felix2.unity
     guid: 1e7c7eaf3cd455a4895b94172c0471e8
+  - enabled: 1
+    path: Assets/Scenes/Flo.unity
+    guid: 3c57efc74111cfe40b9ccd264179bb67
   m_configObjects: {}

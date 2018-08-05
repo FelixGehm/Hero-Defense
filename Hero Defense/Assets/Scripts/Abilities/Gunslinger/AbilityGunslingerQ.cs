@@ -72,9 +72,11 @@ public class AbilityGunslingerQ : AbilityBasic
             {
                 if (previewGameObject != null)
                 {
-                    // Position und Rotation der Preview anpassen
-                    previewGameObject.transform.position = transform.position;
-                    previewGameObject.transform.rotation = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
+                    // Rotation der Preview & des Modells  anpassen                  
+                    Quaternion rot = Quaternion.AngleAxis(GetAngleFromDirection(), Vector3.up);
+
+                    previewGameObject.transform.rotation = rot;
+                    this.gameObject.transform.rotation = rot;
                 }
 
                 if (Input.GetMouseButtonDown(1) && !isAnimating)        // RightClick down
@@ -135,6 +137,7 @@ public class AbilityGunslingerQ : AbilityBasic
         isCasting = true;
 
         previewGameObject = Instantiate(previewPrefab);
+        previewGameObject.transform.position = transform.position;
     }
 
     private IEnumerator ShootProjectile(Vector3 direction)

@@ -13,37 +13,9 @@ public class NetworkSetupPlayer : NetworkSetup
     void Start()
     {
         base.DisableComponents();
-        /*
-        if (isLocalPlayer)
-        {
-            if (isServer)
-            {
-                transform.name = "LocalPlayer as Server";
-            }
-            else
-            {
-                transform.name = "LocalPlayer as Client";
-            }
 
-        }
-        else
-        {
-            if (isClient)
-            {
-                transform.name = "NetworkPlayer as Server";
-            }
-            else
-            {
-                transform.name = "NetworkPlayer as Client";
-            }
-        }
-        */
-        if (isServer)
-        {
-            // Register Player in PlayerManager
-            PlayerManager.instance.RegisterPlayer(transform.gameObject);
-        }
-
+        // Register Player in PlayerManager
+        PlayerManager.instance.RegisterPlayer(transform.gameObject);
 
         if (isLocalPlayer)
         {
