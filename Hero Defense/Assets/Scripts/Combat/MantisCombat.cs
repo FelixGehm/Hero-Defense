@@ -25,6 +25,11 @@ public class MantisCombat : CharacterCombat
 
     private EnemyAnimator anim;
 
+    public event System.Action OnLeftShotFired;
+    public event System.Action OnRightShotFired;
+    public event System.Action OnLeftMortarFired;
+    public event System.Action OnRightMortarFired;
+
     public override void Start()
     {
         base.Start();
@@ -76,6 +81,7 @@ public class MantisCombat : CharacterCombat
     {
         isAttacking = true;
         yield return new WaitForSeconds(delay);
+        if (OnRightShotFired != null) OnRightShotFired();
 
 
         NetworkInstanceId idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;
@@ -86,11 +92,11 @@ public class MantisCombat : CharacterCombat
         }
         else
         {
-            TellServerToSpawnBullet(idTarget, damageDone, firePoint.position);
+            //TellServerToSpawnBullet(idTarget, damageDone, firePoint.position);
         }
 
         yield return new WaitForSeconds(timeBetweenProjectiles);
-
+        if (OnLeftShotFired != null) OnLeftShotFired();
         if (isServer)
         {
             //SpawnBullet(target, damageDone);
@@ -98,7 +104,7 @@ public class MantisCombat : CharacterCombat
         }
         else
         {
-            TellServerToSpawnBullet(idTarget, damageDone, secondFirePoint.position);
+            //TellServerToSpawnBullet(idTarget, damageDone, secondFirePoint.position);
         }
         isAttacking = false;
     }
@@ -117,11 +123,12 @@ public class MantisCombat : CharacterCombat
         anim.StartMortarAnimation();
         isFiringMortar = true;
         yield return new WaitForSeconds(delay);
+        if (OnLeftMortarFired != null) OnLeftMortarFired();
         mortar.Fire(firstMortarPoint.position, targetPosition);
-        
+
 
         yield return new WaitForSeconds(timeBetweenProjectiles);
-
+        if (OnRightMortarFired != null) OnRightMortarFired();
         mortar.Fire(secondMortarPoint.position, targetPosition);
         yield return new WaitForSeconds(mortarDelayToNextAA);
         mortar.DestroyPreview();
@@ -158,7 +165,7 @@ public class MantisCombat : CharacterCombat
         NetworkServer.Spawn(projectileGO);
     }
 
-
+    /*
     [ClientCallback]
     protected void TellServerToSpawnBullet(NetworkInstanceId id, float damage, Vector3 spawnPosition)
     {
@@ -168,5 +175,6 @@ public class MantisCombat : CharacterCombat
             CmdSpawnBulletOnServer(id, damage, spawnPosition);
         }
     }
+    */
     #endregion
 }

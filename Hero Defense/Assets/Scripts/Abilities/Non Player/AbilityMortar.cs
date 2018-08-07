@@ -23,10 +23,6 @@ public class AbilityMortar : NetworkBehaviour
         {
             CmdSpawnIndicatorOnServer(landingPoint);
         }
-        else
-        {
-            TellServerToSpawnIndicator(landingPoint);
-        }
     }
 
     public void DestroyPreview()
@@ -34,10 +30,6 @@ public class AbilityMortar : NetworkBehaviour
         if (isServer)
         {
             CmdDestroyIndicatorOnServer();
-        }
-        else
-        {
-            TellServerToDestroyIndicator();
         }
     }
 
@@ -47,12 +39,8 @@ public class AbilityMortar : NetworkBehaviour
         {
             CmdSpawnProjectileOnServer(startingPoint, landingPoint, peakHeight, explosionRadius, damage);
         }
-        else
-        {
-            TellServerToSpawnProjectile(startingPoint, landingPoint, peakHeight, explosionRadius, damage);
-        }
     }
-    #region Network Projectile Functions
+    #region Network
     [Command]
     void CmdSpawnProjectileOnServer(Vector3 start, Vector3 end, float height, float range, float damage)
     {
@@ -62,15 +50,6 @@ public class AbilityMortar : NetworkBehaviour
         projectileGO.GetComponent<MortarProjectile>().Init(start, end, height, range, damage);
     }
 
-    [ClientCallback]
-    void TellServerToSpawnProjectile(Vector3 start, Vector3 end, float height, float range, float damage)
-    {
-        if (!isServer)
-        {
-            CmdSpawnProjectileOnServer(start, end, height, range, damage);
-        }
-    }
-    #endregion
 
 
     [Command]
@@ -80,24 +59,11 @@ public class AbilityMortar : NetworkBehaviour
         NetworkServer.Spawn(spawnIndicatorGO);
     }
 
-    [ClientCallback]
-    void TellServerToSpawnIndicator(Vector3 spawnPosition)
-    {
-        if (!isServer)
-        {
-            CmdSpawnIndicatorOnServer(spawnPosition);
-        }
-    }
-
     [Command]
     void CmdDestroyIndicatorOnServer()
     {
         NetworkServer.Destroy(spawnIndicatorGO);
     }
 
-    [ClientCallback]
-    void TellServerToDestroyIndicator()
-    {
-        CmdDestroyIndicatorOnServer();
-    }
+    #endregion
 }
