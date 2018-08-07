@@ -14924,79 +14924,15 @@ Prefab:
       propertyPath: playerManager
       value: 
       objectReference: {fileID: 2006428312}
-    - target: {fileID: 224358225064325410, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 1200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114152468101221462, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_Text
-      value: 'Parts: 0'
-      objectReference: {fileID: 0}
-    - target: {fileID: 224358225064325410, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 114565925033810646, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 114565925033810646, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_FontData.m_MinSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114152468101221462, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 114152468101221462, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_FontData.m_MinSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114565925033810646, guid: 741d75045c5af3348be12ac0da6dbc49,
-        type: 2}
-      propertyPath: m_Text
-      value: 'Cash: 0'
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 741d75045c5af3348be12ac0da6dbc49, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1389472790 stripped
+--- !u!114 &1389472793 stripped
 MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114152468101221462, guid: 741d75045c5af3348be12ac0da6dbc49,
+  m_PrefabParentObject: {fileID: 114532362321443488, guid: 741d75045c5af3348be12ac0da6dbc49,
     type: 2}
   m_PrefabInternal: {fileID: 1389472789}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!114 &1389472791 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114565925033810646, guid: 741d75045c5af3348be12ac0da6dbc49,
-    type: 2}
-  m_PrefabInternal: {fileID: 1389472789}
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1 &1389472792 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1377508419313314, guid: 741d75045c5af3348be12ac0da6dbc49,
-    type: 2}
-  m_PrefabInternal: {fileID: 1389472789}
---- !u!114 &1389472793
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1389472792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 525dff4d385fa6840ab1f37033dd9581, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cashText: {fileID: 1389472791}
-  partsText: {fileID: 1389472790}
 --- !u!1 &1389642699
 GameObject:
   m_ObjectHideFlags: 0

@@ -755,6 +755,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224358225064325410}
+  - component: {fileID: 114532362321443488}
   m_Layer: 5
   m_Name: Currencies
   m_TagString: Untagged
@@ -3003,10 +3004,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -3014,7 +3015,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cash: '
+  m_Text: 'Parts: 0'
 --- !u!114 &114169573245366944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4814,6 +4815,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114532362321443488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377508419313314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525dff4d385fa6840ab1f37033dd9581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cashText: {fileID: 114565925033810646}
+  partsText: {fileID: 114152468101221462}
 --- !u!114 &114532801584844824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5028,10 +5042,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 3
     m_AlignByGeometry: 0
@@ -5039,7 +5053,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Cash: '
+  m_Text: 'Cash: 0'
 --- !u!114 &114573497248055100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8668,8 +8682,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 500, y: 0}
-  m_SizeDelta: {x: 290, y: 50}
+  m_AnchoredPosition: {x: 1200, y: 0}
+  m_SizeDelta: {x: 290, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &224376267127610208
 RectTransform:

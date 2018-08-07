@@ -11,9 +11,17 @@ public class AlliesInfo : MonoBehaviour
 
     private int registeredPlayers = -1;
 
-    void Awake()
+    void Start()
     {
-        playerManager.OnPlayerRegistered += AddPlayerInfoToTrack;
+        if(playerManager == null)
+        {
+            playerManager = GameObject.Find("_Game").GetComponent<PlayerManager>();
+        }
+
+        if (playerManager != null)
+        {
+            playerManager.OnPlayerRegistered += AddPlayerInfoToTrack;
+        }            
     }
 
 
