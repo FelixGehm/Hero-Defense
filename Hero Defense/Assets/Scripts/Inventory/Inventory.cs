@@ -19,6 +19,8 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
+    public CurrenciesUI currenciesUI;
+
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
@@ -47,4 +49,93 @@ public class Inventory : MonoBehaviour
         items.Remove(item);
         onItemChangedCallback.Invoke();
     }
+
+    #region Currencies
+
+    private int cash = 0;
+    public int Cash
+    {
+        private set
+        {
+            cash = value;
+
+            currenciesUI.SetCash(cash);
+
+        }
+
+        get
+        {
+            return cash;
+        }
+    }
+
+    public bool SpendCash(int amount)
+    {
+        if (amount > Cash || amount < 0)
+        {
+            return false;
+        }
+        else
+        {
+            Cash -= amount;
+            return true;
+        }
+    }
+    public bool AddCash(int amount)
+    {
+        if (amount < 0)
+        {
+            return false;
+        }
+        else
+        {
+            Cash += amount;
+            return true;
+        }
+    }
+
+
+    private int parts = 0;
+    public int Parts
+    {
+        private set
+        {
+            parts = value;
+
+            currenciesUI.SetParts(parts);
+        }
+
+        get
+        {
+            return parts;
+        }
+    }
+
+    public bool SpendParts(int amount)
+    {
+        if (amount > Parts || amount < 0)
+        {
+            return false;
+        }
+        else
+        {
+            Cash -= amount;
+            return true;
+        }
+    }
+    public bool AddParts(int amount)
+    {
+        if (amount < 0)
+        {
+            return false;
+        }
+        else
+        {
+            Parts += amount;
+            return true;
+        }
+    }
+
+
+    #endregion
 }

@@ -10,7 +10,7 @@ public class NetworkSetupEnemy : NetworkSetup
     void Start()
     {
         base.DisableComponents();
-        if (isServer)
+        //if (isServer)
         {
             // Register Player in PlayerManager
             PlayerManager.instance.RegisterEnemy(gameObject);

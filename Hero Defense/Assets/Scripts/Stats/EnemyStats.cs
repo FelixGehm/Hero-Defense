@@ -7,11 +7,17 @@ public class EnemyStats : CharacterStats {
 
     EnemyController enemyController;
 
+    public int cashValue = 20;
+    public int partsValue = 0;
+    public Inventory inventory;
+
     public override void Awake()
     {
         base.Awake();
 
         enemyController = GetComponent<EnemyController>();
+
+        inventory = GameObject.Find("_Game").GetComponent<Inventory>();
 
     }
 
@@ -63,9 +69,9 @@ public class EnemyStats : CharacterStats {
 
     public override void Die()
     {
-        base.Die();
+        inventory.AddCash(cashValue);
+        inventory.AddParts(partsValue);
 
-        //death stuff
-        NetworkServer.Destroy(gameObject);
+        base.Die();
     }
 }
