@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Flo.unity
     guid: 3c57efc74111cfe40b9ccd264179bb67
+  - enabled: 0
+    path: Assets/Scenes/Sven.unity
+    guid: c24e70689f0f04f47ad2fd6bc5a32c71
   m_configObjects: {}
