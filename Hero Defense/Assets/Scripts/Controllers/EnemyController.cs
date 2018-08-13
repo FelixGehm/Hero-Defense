@@ -13,21 +13,23 @@ public class EnemyController : CrowdControllable
     /*
      * Movement Behaviour
      */
-    public float stillStandingProbability = 0.04f;
+    public float waitProbability = 0.04f;
 
     public float minimumTimeBetweenRandomStops = 2.5f;
     private float timeSinceLastStop = 0;
 
-    public float stillStandingDurationMin = 0.5f;
-    public float stillStandingDurationMax = 1.3f;
+    public float waitDurationMin = 0.5f;
+    public float waitDurationMax = 1.3f;
 
-    
-    
-
+    public float bufferDistanceToTarget = 1.4f;
 
     protected Transform nexus;  //der nexus
 
-    public Transform target;       // das Ziel des Gegners
+    public Waypoint currentWaypoint;
+    private Vector3 currentWaypointDestination;
+    
+
+    public Transform targetTransform;       // das Ziel des Gegners
 
 
     protected float distanceToTarget = float.MaxValue;
@@ -65,11 +67,33 @@ public class EnemyController : CrowdControllable
          */
         timeSinceLastStop += Time.deltaTime;
 
-        if(timeSinceLastStop >= minimumTimeBetweenRandomStops && target == nexus)
+        if(isWaiting)
         {
-            StayStill(stillStandingProbability, Random.Range(stillStandingDurationMin, stillStandingDurationMax));
-        }      
+            if(CheckIfWaitingShouldEnd())
+            {
+                isWaiting = false;
+                agent.isStopped = false;
+            } 
+            else
+            {
+                return;
+            }
+        }
+        else if(timeSinceLastStop >= minimumTimeBetweenRandomStops && targetTransform == nexus)
+        {
+            StayStill(waitProbability, Random.Range(waitDurationMin, waitDurationMax));
+        }
 
+
+        if (!currentWaypoint.isNexus && CheckIfWaypointReached())
+        {
+            currentWaypoint = currentWaypoint.next;
+            currentWaypointDestination = currentWaypoint.GetDestinationInRadius();
+        }
+
+        /*
+        * Movement Behaviour end
+        */
 
 
 
@@ -82,10 +106,11 @@ public class EnemyController : CrowdControllable
 
         if (!myStatuses.Contains(Status.taunted))
         {
-            target = GetTarget();
+            targetTransform = GetTarget();
+            distanceToTarget = Vector3.Distance(targetTransform.position, transform.position);
         }
 
-        if (target.Equals(nexus))
+        if (targetTransform.Equals(nexus))
         {
             agent.stoppingDistance = stoppingDistanceNexus;
         }
@@ -96,18 +121,28 @@ public class EnemyController : CrowdControllable
 
         //Moving to Player and attack
         if (!combat.isAttacking)
-            agent.SetDestination(target.position);
+        {
+            if(targetTransform.gameObject.name.Contains("Waypoint"))
+            {                
+                agent.SetDestination(currentWaypointDestination);
+            }
+            else
+            {
+                agent.SetDestination(targetTransform.position);
+            }
+        }
+            
 
         if (distanceToTarget <= agent.stoppingDistance)
         {
-            CharacterStats targetStats = target.GetComponent<CharacterStats>();
+            CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 
             if (targetStats != null)
             {
                 combat.Attack(targetStats);
             }
 
-            FaceTarget(target);
+            FaceTarget(targetTransform);
         }
 
         CheckIfStillInCombat();
@@ -130,9 +165,9 @@ public class EnemyController : CrowdControllable
     protected Transform GetTarget()
     {
         // Wenn im fight, behalte das alte Ziel
-        if (isInCombat && target.GetComponent<CharacterStats>().IsAlive())
+        if (isInCombat && targetTransform.GetComponent<CharacterStats>().IsAlive())
         {
-            return target;
+            return targetTransform;
         }
 
         //isInCombat = false;
@@ -141,7 +176,15 @@ public class EnemyController : CrowdControllable
 
     private Transform FindTarget()
     {
-        Transform target = nexus;
+        Transform target;
+        if (currentWaypoint == null)
+        {
+            target = nexus;
+        }
+        else
+        {
+            target = currentWaypoint.transform;
+        }
 
         float distanceToPlayer = float.MaxValue;
 
@@ -160,14 +203,19 @@ public class EnemyController : CrowdControllable
                     if (distanceToPlayer > distance && distance <= lookRadius)
                     {
                         distanceToPlayer = distance;
-                        target = player.transform;
-                        //isInCombat = true;
+                        target = player.transform;                        
                     }
                 }
             }
         }
         return target;
     }
+
+    #region Movement Behaviour
+
+    bool isWaiting = false;
+
+    private float timeLeftToWait;
 
     /// <summary>
     /// Außerhalb des Kampfes wird abhängig von den Paramtertn  zufällig entschieden,
@@ -180,15 +228,36 @@ public class EnemyController : CrowdControllable
         float r = Random.Range(0, 1.0f);
 
         if(!isInCombat && r <= probability)
+        {            
+            isWaiting = true;
+            agent.isStopped = true;
+
+            timeLeftToWait = duration;
+            timeSinceLastStop = -duration;
+        }        
+    }
+
+    private bool CheckIfWaitingShouldEnd()
+    {
+        bool b = false;
+        timeLeftToWait -= Time.deltaTime;       
+
+        if(timeLeftToWait <= 0 )
         {
-            this.GetStunned(duration);
-            timeSinceLastStop = 0;
-
-
+            b = true;
         }
 
-        
+        return b;
     }
+
+    private bool CheckIfWaypointReached()
+    {        
+        return  Vector3.Distance(transform.position, currentWaypointDestination) <= bufferDistanceToTarget;
+    }
+
+
+
+    #endregion
 
 
     public void ReceivedDamageFrom(Transform damageDealer)
@@ -196,18 +265,17 @@ public class EnemyController : CrowdControllable
         if (!isInCombat)
         {
             isInCombat = true;
-            target = damageDealer;
+            targetTransform = damageDealer;
         }
     }
 
     protected void CheckIfStillInCombat()
     {
-        distanceToTarget = Vector3.Distance(target.position, transform.position);
-        if (distanceToTarget > lookRadius || !target.GetComponent<CharacterStats>().IsAlive())
+        distanceToTarget = Vector3.Distance(targetTransform.position, transform.position);
+        if (distanceToTarget > lookRadius || (targetTransform.GetComponent<CharacterStats>() != null && !targetTransform.GetComponent<CharacterStats>().IsAlive()))
         {
             isInCombat = false;
-        }
-
+        }        
     }
 
     // Draw LookRadius in Editor
@@ -229,7 +297,7 @@ public class EnemyController : CrowdControllable
 
         myStatuses.Add(Status.taunted);
 
-        target = tauntTarget;
+        targetTransform = tauntTarget;
 
         yield return new WaitForSeconds(duration);
         myStatuses.Remove(Status.taunted);
