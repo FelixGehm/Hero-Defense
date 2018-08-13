@@ -10,6 +10,21 @@ public class EnemyController : CrowdControllable
     public float lookRadius = 10;
 
 
+    /*
+     * Movement Behaviour
+     */
+    public float stillStandingProbability = 0.04f;
+
+    public float minimumTimeBetweenRandomStops = 2.5f;
+    private float timeSinceLastStop = 0;
+
+    public float stillStandingDurationMin = 0.5f;
+    public float stillStandingDurationMax = 1.3f;
+
+    
+    
+
+
     protected Transform nexus;  //der nexus
 
     public Transform target;       // das Ziel des Gegners
@@ -45,6 +60,20 @@ public class EnemyController : CrowdControllable
 
     protected virtual void Update()
     {
+        /*
+         * Movement Behaviour
+         */
+        timeSinceLastStop += Time.deltaTime;
+
+        if(timeSinceLastStop >= minimumTimeBetweenRandomStops && target == nexus)
+        {
+            StayStill(stillStandingProbability, Random.Range(stillStandingDurationMin, stillStandingDurationMax));
+        }      
+
+
+
+
+
         if (myStatuses.Contains(Status.stunned))
         {
             // Tue nichts, solange bis der Stun vorbei ist.
@@ -116,7 +145,7 @@ public class EnemyController : CrowdControllable
 
         float distanceToPlayer = float.MaxValue;
 
-        for (int i = 0; i < PlayerManager.instance.players.Length; i++)     // Liste der Spielrr durchgehen
+        for (int i = 0; i < PlayerManager.instance.players.Length; i++)     // Liste der Spieler durchgehen
         {
             if (PlayerManager.instance.players[i] != null)
             {
@@ -132,11 +161,33 @@ public class EnemyController : CrowdControllable
                     {
                         distanceToPlayer = distance;
                         target = player.transform;
+                        //isInCombat = true;
                     }
                 }
             }
         }
         return target;
+    }
+
+    /// <summary>
+    /// Außerhalb des Kampfes wird abhängig von den Paramtertn  zufällig entschieden,
+    /// ob der Gegner kurzzeitig stehen bleibt oder nicht.
+    /// </summary>
+    /// <param name="probability"></param>
+    /// <param name="duration"></param>
+    private void StayStill(float probability, float duration)
+    {
+        float r = Random.Range(0, 1.0f);
+
+        if(!isInCombat && r <= probability)
+        {
+            this.GetStunned(duration);
+            timeSinceLastStop = 0;
+
+
+        }
+
+        
     }
 
 
