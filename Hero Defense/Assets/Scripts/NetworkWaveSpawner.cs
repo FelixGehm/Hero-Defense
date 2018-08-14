@@ -31,7 +31,6 @@ public class NetworkWaveSpawner : NetworkBehaviour
     private void Awake()
     {
         waveCoolDown = timeBetweenWavesInSec;
-        //nexus = GameManager.instance.nexus;
     }
 
 
@@ -108,6 +107,7 @@ public class NetworkWaveSpawner : NetworkBehaviour
         GameObject enemy = Instantiate(prefabToSpawn, pos, rot);
 
         enemy.GetComponent<EnemyController>().currentWaypoint = SetupFirstWaypoint();
+        enemy.GetComponent<EnemyController>().currentWaypointDestination = enemy.GetComponent<EnemyController>().currentWaypoint.GetDestinationInRadius();
         NetworkServer.Spawn(enemy);
     }
 
@@ -118,9 +118,11 @@ public class NetworkWaveSpawner : NetworkBehaviour
         switch (lane)
         {
             case Lane.Top:
+                
                 waypoint = nexus.transform.Find("WayPointsTop").GetChild(0).GetComponent<Waypoint>();
                 break;
             case Lane.Middle:
+                
                 waypoint = nexus.transform.Find("WayPointsMiddle").GetChild(0).GetComponent<Waypoint>();
                 break;
             case Lane.Bot:
@@ -129,8 +131,7 @@ public class NetworkWaveSpawner : NetworkBehaviour
             default:
                 waypoint = nexus.GetComponent<Waypoint>();
                 break;
-        }
+        }        
         return waypoint;
     }
-
 }

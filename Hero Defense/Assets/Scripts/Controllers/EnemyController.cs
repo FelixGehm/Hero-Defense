@@ -26,7 +26,7 @@ public class EnemyController : CrowdControllable
     protected Transform nexus;  //der nexus
 
     public Waypoint currentWaypoint;
-    private Vector3 currentWaypointDestination;
+    public Vector3 currentWaypointDestination;
     
 
     public Transform targetTransform;       // das Ziel des Gegners
@@ -79,7 +79,7 @@ public class EnemyController : CrowdControllable
                 return;
             }
         }
-        else if(timeSinceLastStop >= minimumTimeBetweenRandomStops && targetTransform == nexus)
+        else if(timeSinceLastStop >= minimumTimeBetweenRandomStops && targetTransform.GetComponent<Waypoint>() != null)
         {
             StayStill(waitProbability, Random.Range(waitDurationMin, waitDurationMax));
         }
