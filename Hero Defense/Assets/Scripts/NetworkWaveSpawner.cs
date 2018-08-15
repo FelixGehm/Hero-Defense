@@ -22,6 +22,13 @@ public class NetworkWaveSpawner : NetworkBehaviour
     public int enemysPerWave = 5;
     public float waveSpawnDuration = 4.0f;
 
+    public enum Lane { Top, Middle, Bot };
+
+    public Lane lane;
+
+    [HideInInspector]
+    public GameObject nexus;
+
     private void Awake()
     {
         waveCoolDown = timeBetweenWavesInSec;
@@ -30,6 +37,11 @@ public class NetworkWaveSpawner : NetworkBehaviour
 
     void Update()
     {
+        if (nexus == null)
+        {
+            nexus = GameManager.instance.nexus;
+        }
+
         if (Input.GetKeyDown("a") && isServer)
         {
             autoSpawn = !autoSpawn;
@@ -94,7 +106,33 @@ public class NetworkWaveSpawner : NetworkBehaviour
         Vector3 pos = transform.position;
 
         GameObject enemy = Instantiate(prefabToSpawn, pos, rot);
+
+        enemy.GetComponent<EnemyController>().currentWaypoint = SetupFirstWaypoint();
+        enemy.GetComponent<EnemyController>().currentWaypointDestination = enemy.GetComponent<EnemyController>().currentWaypoint.GetDestinationInRadius();
         NetworkServer.Spawn(enemy);
     }
 
+    private Waypoint SetupFirstWaypoint()
+    {
+        Waypoint waypoint;
+
+        switch (lane)
+        {
+            case Lane.Top:
+
+                waypoint = nexus.transform.Find("WayPointsTop").GetChild(0).GetComponent<Waypoint>();
+                break;
+            case Lane.Middle:
+
+                waypoint = nexus.transform.Find("WayPointsMiddle").GetChild(0).GetComponent<Waypoint>();
+                break;
+            case Lane.Bot:
+                waypoint = nexus.transform.Find("WayPointsBottom").GetChild(0).GetComponent<Waypoint>();
+                break;
+            default:
+                waypoint = nexus.GetComponent<Waypoint>();
+                break;
+        }
+        return waypoint;
+    }
 }

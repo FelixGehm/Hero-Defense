@@ -16,7 +16,7 @@ public class TestTauntOnPlayer : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            player = GetComponent<EnemyController>().target;
+            player = GetComponent<EnemyController>().targetTransform;
 
             pc = player.GetComponent<PlayerController>();
 

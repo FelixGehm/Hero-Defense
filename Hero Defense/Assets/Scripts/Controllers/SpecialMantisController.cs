@@ -26,19 +26,19 @@ public class SpecialMantisController : EnemyController
 
         if (!myStatuses.Contains(Status.taunted))
         {
-            target = GetTarget();
+            targetTransform = GetTarget();
         }
 
         //Moving to Player and attack
         if (!mCombat.isAttacking && !mCombat.isFiringMortar)
-            agent.SetDestination(target.position);
+            agent.SetDestination(targetTransform.position);
 
         if (distanceToTarget <= attackRange)
         {
             agent.ResetPath();
             if (!mCombat.isFiringMortar)
             {
-                CharacterStats targetStats = target.GetComponent<CharacterStats>();
+                CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 
                 if (targetStats != null)
                 {
@@ -46,7 +46,7 @@ public class SpecialMantisController : EnemyController
                     //combat.MortarAttack(target.position);
                 }
 
-                FaceTarget(target);
+                FaceTarget(targetTransform);
             }
 
         }
@@ -54,14 +54,14 @@ public class SpecialMantisController : EnemyController
         if (distanceToTarget <= mortarRange && !mCombat.isAttacking && mCombat.IsMortarReady)
         {
             agent.ResetPath();
-            CharacterStats targetStats = target.GetComponent<CharacterStats>();
+            CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 
             if (targetStats != null)
             {
-                mCombat.DoubleMortarAttack(target.position);
+                mCombat.DoubleMortarAttack(targetTransform.position);
             }
 
-            FaceTarget(target);
+            FaceTarget(targetTransform);
         }
 
         CheckIfStillInCombat();

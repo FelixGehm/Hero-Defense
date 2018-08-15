@@ -20,23 +20,23 @@ public class MantisController : EnemyController
 
         if (!myStatuses.Contains(Status.taunted))
         {
-            target = GetTarget();
+            targetTransform = GetTarget();
         }
 
         //Moving to Player and attack
         if (!combat.isAttacking)
-            agent.SetDestination(target.position);
+            agent.SetDestination(targetTransform.position);
 
         if (distanceToTarget <= agent.stoppingDistance)
         {
-            CharacterStats targetStats = target.GetComponent<CharacterStats>();
+            CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 
             if (targetStats != null)
             {
                 combat.Attack(targetStats);
             }
 
-            FaceTarget(target);
+            FaceTarget(targetTransform);
         }
 
         CheckIfStillInCombat();

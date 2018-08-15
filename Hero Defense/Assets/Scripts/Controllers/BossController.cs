@@ -27,12 +27,12 @@ public class BossController : EnemyController
 
         if (!myStatuses.Contains(Status.taunted))
         {
-            target = GetTarget();
+            targetTransform = GetTarget();
         }
 
         //Moving to Player and attack
         if (!bCombat.isAttacking && !bCombat.isFiringMortar && !bCombat.IsBodySlamming && !bCombat.IsFiringCanons)
-            agent.SetDestination(target.position);
+            agent.SetDestination(targetTransform.position);
 
         if (distanceToTarget <= attackRange)
         {
@@ -40,14 +40,14 @@ public class BossController : EnemyController
             if (!bCombat.isFiringMortar && !bCombat.IsBodySlamming && !bCombat.IsFiringCanons)
             {
                 agent.ResetPath();
-                CharacterStats targetStats = target.GetComponent<CharacterStats>();
+                CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 
                 if (targetStats != null)
                 {
                     bCombat.Attack(targetStats);
                 }
 
-                FaceTarget(target);
+                FaceTarget(targetTransform);
             }
 
         }
@@ -55,24 +55,24 @@ public class BossController : EnemyController
         if (distanceToTarget <= mortarRange && !bCombat.isAttacking && !bCombat.IsBodySlamming && !bCombat.IsFiringCanons && bCombat.IsMortarReady)
         {
             agent.ResetPath();
-            CharacterStats targetStats = target.GetComponent<CharacterStats>();
+            CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 
             if (targetStats != null)
             {
-                bCombat.MortarAttack(target.position);
+                bCombat.MortarAttack(targetTransform.position);
             }
 
-            FaceTarget(target);
+            FaceTarget(targetTransform);
         }
 
         if (distanceToTarget <= bodySlamRange && !bCombat.isAttacking && !bCombat.isFiringMortar && !bCombat.IsFiringCanons && bCombat.IsBodySlamReady)
         {
             //agent.ResetPath();
-            CharacterStats targetStats = target.GetComponent<CharacterStats>();
+            CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 
             if (targetStats != null)
             {
-                bCombat.BodySlam(target);
+                bCombat.BodySlam(targetTransform);
             }
 
             //FaceTarget(target);
