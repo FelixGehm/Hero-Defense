@@ -79,7 +79,7 @@ public class EnemyController : CrowdControllable
                 return;
             }
         }
-        else if (timeSinceLastStop >= minimumTimeBetweenRandomStops && targetTransform.GetComponent<Waypoint>() != null)
+        else if (timeSinceLastStop >= minimumTimeBetweenRandomStops && targetTransform != null && targetTransform.GetComponent<Waypoint>() != null)
         {
             StayStill(waitProbability, Random.Range(waitDurationMin, waitDurationMax));
         }

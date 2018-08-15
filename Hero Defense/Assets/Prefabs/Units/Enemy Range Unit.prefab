@@ -3059,7 +3059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 10
-  waitProbability: 0
+  waitProbability: 0.04
   minimumTimeBetweenRandomStops: 2.5
   waitDurationMin: 0.5
   waitDurationMax: 1.3
