@@ -76,6 +76,7 @@ public class SpecialMantisController : EnemyController
             else
             {
                 agent.SetDestination(targetTransform.position);
+                distanceToTarget = Vector3.Distance(targetTransform.position, transform.position);      //schneller fix: sonst stimmt die ditanceToTarget beim wechseln für einen frame nicht, wodurch fälscherweise eine attack ausgelöst wird
             }
         }
 
@@ -97,7 +98,7 @@ public class SpecialMantisController : EnemyController
 
         }
 
-        if (distanceToTarget <= mortarRange && !mCombat.isAttacking && mCombat.IsMortarReady && targetTransform.GetComponent<CharacterStats>() != null)
+        if (distanceToTarget <= mortarRange && !mCombat.isAttacking && mCombat.IsMortarReady && targetTransform.GetComponent<PlayerStats>() != null)
         {
             agent.ResetPath();
             CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
