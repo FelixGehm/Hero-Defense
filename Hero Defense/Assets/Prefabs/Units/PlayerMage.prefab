@@ -2662,7 +2662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilitySlot: 3
   abilitySprite: {fileID: 21300000, guid: b7fea2eecd907ec42a36758d32d9cb51, type: 3}
-  abilityCooldown: 1
+  abilityCooldown: 20
   currentCooldown: 0
   abilityCastTime: 0.75
   previewPrefab: {fileID: 1049300602616912, guid: 3c6efcf0ea9835a41b9b4f29b90d4945,
@@ -2911,7 +2911,7 @@ MonoBehaviour:
     baseValue: 15
     modifiers: []
   armor:
-    baseValue: 5
+    baseValue: 0
     modifiers: []
   magicDamage:
     baseValue: 20
@@ -2960,7 +2960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf1849bec2afb2479dcde953e8bd966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portrait: {fileID: 21300000, guid: a6800b9867e0727498855e380b9b4042, type: 3}
+  portrait: {fileID: 21300000, guid: 54d250bd5132acd4a83011346b7bc6bd, type: 3}
   focus: {fileID: 0}
   rightClickMask:
     serializedVersion: 2
@@ -3121,11 +3121,6 @@ MonoBehaviour:
   healFactor: 0.5
   spellPrefab: {fileID: 1508824767126548, guid: d73dff591da383c4f99fffc10ac1f048,
     type: 2}
-  selectionCursorNeutral: {fileID: 2800000, guid: 2782e91389b61ba47a5e4a230a1110b3,
-    type: 3}
-  selectionCursorAttack: {fileID: 2800000, guid: 686bc68138ef68247a132a41f9b633b2,
-    type: 3}
-  selectionCursorHeal: {fileID: 2800000, guid: c3b40a0bf5ff0004da17d8ed247fc506, type: 3}
   clickMask:
     serializedVersion: 2
     m_Bits: 1280

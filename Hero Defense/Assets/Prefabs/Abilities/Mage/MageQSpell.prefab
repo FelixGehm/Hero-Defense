@@ -211,8 +211,8 @@ MonoBehaviour:
   startSize: 0.1
   fullSize: 5
   expandingSpeed: 8
-  dmgBuff: 50
-  armorBuff: 50
+  dmgBuff: 10
+  armorBuff: 10
   particlesTransform:
   - {fileID: 4862601281393296}
   - {fileID: 4742776253907450}

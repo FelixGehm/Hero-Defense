@@ -23778,10 +23778,15 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114224215749012470, guid: 741d75045c5af3348be12ac0da6dbc49,
+    - target: {fileID: 224129206291511220, guid: 741d75045c5af3348be12ac0da6dbc49,
         type: 2}
-      propertyPath: spawner
-      value: 
+      propertyPath: m_AnchoredPosition.y
+      value: -3.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 224129206291511220, guid: 741d75045c5af3348be12ac0da6dbc49,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -207.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 741d75045c5af3348be12ac0da6dbc49, type: 2}
@@ -24593,6 +24598,7 @@ MonoBehaviour:
   - {fileID: 1420979319549846, guid: 72e688c88733ab246916b1bf0c32509f, type: 2}
   - {fileID: 1110684039345546, guid: 86edd666984cc0842a41579ec4af92d1, type: 2}
   - {fileID: 1133058471752278, guid: cf6907b80a0852649bd4da5a6e8d3649, type: 2}
+  - {fileID: 1903979029498298, guid: c9a55629597ad534499717829cb50f81, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -27868,6 +27874,7 @@ GameObject:
   - component: {fileID: 1839714736}
   - component: {fileID: 1839714735}
   - component: {fileID: 1839714734}
+  - component: {fileID: 1839714738}
   m_Layer: 0
   m_Name: NexusPlus
   m_TagString: Untagged
@@ -27887,7 +27894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4fcda1ebb6f6a4a9caa54b0f2bdbdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 2
+  radius: 6
   next: {fileID: 0}
   isNexus: 1
 --- !u!114 &1839714735
@@ -27986,6 +27993,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1839714738
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1839714733}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 40ff959df55cc114b85b327d1b9b4faf, type: 3}
+  m_Controller: {fileID: 9100000, guid: 39d31bc5033336f4888dd997ad8fcd37, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1846018345
 Prefab:
   m_ObjectHideFlags: 0

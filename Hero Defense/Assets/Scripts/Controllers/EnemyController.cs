@@ -133,7 +133,7 @@ public class EnemyController : CrowdControllable
         }
 
 
-        if (distanceToTarget <= agent.stoppingDistance)
+        if (distanceToTarget <= agent.stoppingDistance + 0.01) //??
         {
             CharacterStats targetStats = targetTransform.GetComponent<CharacterStats>();
 

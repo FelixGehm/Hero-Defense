@@ -3341,7 +3341,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 20
-  target: {fileID: 0}
+  waitProbability: 0.04
+  minimumTimeBetweenRandomStops: 2.5
+  waitDurationMin: 0.5
+  waitDurationMax: 1.3
+  bufferDistanceToTarget: 1.4
+  currentWaypoint: {fileID: 0}
+  currentWaypointDestination: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   stoppingDistancePlayer: 10
   stoppingDistanceNexus: 10
   mortarRange: 15
@@ -3360,7 +3367,7 @@ MonoBehaviour:
     type: 2}
   projectilePrefab: {fileID: 1194507523770242, guid: f12e419a9c3924041b387170e6cb023f,
     type: 2}
-  damage: 40
+  damage: 20
   peakHeight: 5
   explosionRadius: 2.5
 --- !u!114 &114783759530431148
@@ -3514,6 +3521,9 @@ MonoBehaviour:
   moveSpeed:
     baseValue: 0
     modifiers: []
+  cashValue: 20
+  partsValue: 0
+  inventory: {fileID: 0}
 --- !u!114 &114885239239319818
 MonoBehaviour:
   m_ObjectHideFlags: 1
