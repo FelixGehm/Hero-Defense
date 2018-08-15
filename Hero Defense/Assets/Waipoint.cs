@@ -8,14 +8,14 @@ public class Waipoint : MonoBehaviour {
 
     private void Update()
     {
-        /*
+        
         if(Input.GetKeyDown(KeyCode.P))
         {
             GameObject obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 
-            obj.transform.position = GetDestination();
+            obj.transform.position = GetDestinationInRadius();
         }
-        */
+        
     }
 
     public Vector3 GetDestinationInRadius()
