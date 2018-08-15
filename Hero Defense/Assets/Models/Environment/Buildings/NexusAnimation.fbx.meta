@@ -1,0 +1,187 @@
+fileFormatVersion: 2
+guid: 40ff959df55cc114b85b327d1b9b4faf
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: ArmaturePump
+    100002: Body
+    100004: Body_end
+    100006: IK
+    100008: IK_end
+    100010: //RootNode
+    100012: Pump
+    100014: Pumpe
+    100016: Pumpe_end
+    100018: PumpenKopf
+    100020: Rad1
+    100022: Rad1_end
+    100024: Rad2
+    100026: Rad2_end
+    100028: Rad3
+    100030: Rad3_end
+    100032: Rad4
+    100034: Rad4_end
+    100036: Rad5
+    100038: Rad5_end
+    100040: Rad6
+    100042: Rad6_end
+    100044: RadVorne
+    100046: RadVorne_end
+    100048: "Tr\xE4gerMitte"
+    100050: "Tr\xE4gerPumpe"
+    100052: "Tr\xE4gerZahnrad"
+    400000: ArmaturePump
+    400002: Body
+    400004: Body_end
+    400006: IK
+    400008: IK_end
+    400010: //RootNode
+    400012: Pump
+    400014: Pumpe
+    400016: Pumpe_end
+    400018: PumpenKopf
+    400020: Rad1
+    400022: Rad1_end
+    400024: Rad2
+    400026: Rad2_end
+    400028: Rad3
+    400030: Rad3_end
+    400032: Rad4
+    400034: Rad4_end
+    400036: Rad5
+    400038: Rad5_end
+    400040: Rad6
+    400042: Rad6_end
+    400044: RadVorne
+    400046: RadVorne_end
+    400048: "Tr\xE4gerMitte"
+    400050: "Tr\xE4gerPumpe"
+    400052: "Tr\xE4gerZahnrad"
+    2100000: Atlas
+    4300000: Pump
+    7400000: ArmaturePump|ArmatureAction
+    7400002: ArmaturePump|EngineAction
+    7400004: ArmaturePump|G1Action
+    7400006: ArmaturePump|G2Action
+    7400008: ArmaturePump|G3Action
+    7400010: ArmaturePump|G4Action
+    7400012: ArmaturePump|G5Action
+    7400014: ArmaturePump|G6Action
+    7400016: ArmaturePump|GearAction
+    7400018: ArmaturePump|GearWheelAction
+    9500000: //RootNode
+    13700000: Pump
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Atlas
+    second: {fileID: 2100000, guid: 505d85eb0dc46f24f8a1f4ef54fc325a, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: ArmaturePump|ArmatureAction
+      takeName: ArmaturePump|ArmatureAction
+      firstFrame: 0
+      lastFrame: 239
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
