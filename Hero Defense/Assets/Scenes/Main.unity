@@ -30511,6 +30511,7 @@ GameObject:
   - component: {fileID: 2006428313}
   - component: {fileID: 2006428312}
   - component: {fileID: 2006428316}
+  - component: {fileID: 2006428317}
   m_Layer: 0
   m_Name: _Game
   m_TagString: Untagged
@@ -30588,6 +30589,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nexus: {fileID: 358075931}
+--- !u!114 &2006428317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2006428311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad8125341cfb4c43a7da1d5e3458dbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveCursor: {fileID: 2800000, guid: 664e2200913923d4cbb843c4828ee214, type: 3}
+  friendlyCursor: {fileID: 2800000, guid: d700b37ecb783344ca95e685d70186c7, type: 3}
+  attackCursor: {fileID: 2800000, guid: a9df6cad5083a2c438b3e175bb69b798, type: 3}
+  defaultSelection: {fileID: 2800000, guid: 2782e91389b61ba47a5e4a230a1110b3, type: 3}
+  friendlySelection: {fileID: 2800000, guid: c3b40a0bf5ff0004da17d8ed247fc506, type: 3}
+  enemySelection: {fileID: 2800000, guid: 686bc68138ef68247a132a41f9b633b2, type: 3}
+  isSelecting: 0
 --- !u!1001 &2006457186
 Prefab:
   m_ObjectHideFlags: 0

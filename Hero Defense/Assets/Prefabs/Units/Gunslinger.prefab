@@ -2694,6 +2694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bf1849bec2afb2479dcde953e8bd966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portrait: {fileID: 21300000, guid: a97f2ff9bc68bd94b976191b396c3f62, type: 3}
   focus: {fileID: 0}
   rightClickMask:
     serializedVersion: 2

@@ -53,20 +53,21 @@ public class Revive : AbilityBasic
             if (Physics.Raycast(ray, out hit, 100, remotePlayerMask))
             {
                 if (hit.collider.tag == "Player" && IsTargetDead(hit.collider.name))
-                {      
+                {
                     MoveToTarget(hit.collider.transform, hit);
                 }
             }
         }
 
-        if(IsAbilityActivated && Input.GetMouseButtonDown(1))
+        if (IsAbilityActivated && Input.GetMouseButtonDown(1))
         {
             DisableAbility();
         }
 
         if (targetClicked)
         {
-            if (Input.GetMouseButtonDown(1)){
+            if (Input.GetMouseButtonDown(1))
+            {
                 targetClicked = false;
                 DisableAbility();
             }
@@ -93,12 +94,16 @@ public class Revive : AbilityBasic
             if (value)
             {
                 //set mouse indicator to revive
-                Cursor.SetCursor(friendlyTargetCursor, Vector2.zero, CursorMode.Auto);
+                //Cursor.SetCursor(friendlyTargetCursor, Vector2.zero, CursorMode.Auto);
+                UICursor.instance.isSelecting = true;
+                UICursor.instance.SetMoveCursor();
             }
             else
             {
                 //set mouse indicator to standard
-                Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                //Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+                UICursor.instance.isSelecting = false;
+                UICursor.instance.SetMoveCursor();
             }
         }
     }

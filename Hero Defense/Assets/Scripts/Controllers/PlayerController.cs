@@ -5,6 +5,8 @@ using System.Collections;
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : CrowdControllable
 {
+    public Sprite portrait;
+
     public Interactable focus;
     private Interactable oldFocus;
 
@@ -40,13 +42,21 @@ public class PlayerController : CrowdControllable
         playerEventManager = GetComponent<CharacterEventManager>();
     }
 
+    private void Start()
+    {
+        if (portrait != null)
+        {
+            HUD.instance.RegisterPlayerPortrait(portrait);
+        }
+    }
+
     public void SetupCam()
     {
         cam = Camera.main;
         cam.GetComponent<CameraController>().SetLookAt(transform);
     }
 
-   
+
 
     private bool isCasting = false;
     public bool IsCasting
@@ -84,10 +94,10 @@ public class PlayerController : CrowdControllable
         //test end
 
 
-        if(focus == null)
+        if (focus == null)
         {
             OnFocusNull?.Invoke();
-        }        
+        }
 
         if (myStatuses.Contains(Status.stunned) || IsDead)
         {

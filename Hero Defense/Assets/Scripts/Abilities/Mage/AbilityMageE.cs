@@ -9,7 +9,7 @@ public class AbilityMageE : AbilityBasic
     public float spellSpeed = 5;
     public float maxCastRange = 10;
     public float maxBounceRange = 5;
-    
+
     public float maxNumberOfBounces = 6;
 
     [Tooltip("the fixed base damage of the ability")]
@@ -24,7 +24,6 @@ public class AbilityMageE : AbilityBasic
 
     [Header("Setup Fields")]
     public GameObject spellPrefab;
-    public Texture2D selectTargetIndicator;
     public LayerMask clickMask;
     public LayerMask groundMask;
     public Transform spawnPoint;
@@ -72,7 +71,7 @@ public class AbilityMageE : AbilityBasic
                     Ray ray = cam.ScreenPointToRay(Input.mousePosition);
                     if (Physics.Raycast(ray, out hit, 100, clickMask))
                     {
-                        if (hit.collider.tag == "Enemy")
+                        if (hit.collider.tag == "Enemy" || hit.collider.tag == "Player")
                         {
                             if (Vector3.Distance(hit.transform.position, transform.position) <= maxCastRange)
                             {
@@ -131,12 +130,13 @@ public class AbilityMageE : AbilityBasic
     {
         if (b)
         {
-            //set mouse indicator to target
-            Cursor.SetCursor(selectTargetIndicator, new Vector2(selectTargetIndicator.width / 2, selectTargetIndicator.height / 2), CursorMode.Auto);
+            UICursor.instance.isSelecting = true;
+            UICursor.instance.SetMoveCursor();
         }
         else
         {
-            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            UICursor.instance.isSelecting = false;
+            UICursor.instance.SetMoveCursor();
         }
     }
 

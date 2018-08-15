@@ -62,4 +62,20 @@ public class CharacterEventController : MonoBehaviour
         }
     }
 
+
+
+    //erstmal hier??
+
+    private void OnMouseEnter()
+    {
+        if (gameObject.layer == 10)
+            UICursor.instance.SetFriendlyCursor();
+    }
+
+    private void OnMouseExit()
+    {
+        if (gameObject.layer == 10)
+            UICursor.instance.SetMoveCursor();
+    }
+
 }

@@ -19,4 +19,14 @@ public class Enemy : Interactable
     {
         base.Interact();
     }
+
+    private void OnMouseOver()
+    {
+        UICursor.instance.SetAttackCursor();
+    }
+
+    private void OnMouseExit()
+    {
+        UICursor.instance.SetMoveCursor();
+    }
 }
