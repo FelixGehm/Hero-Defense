@@ -81,6 +81,19 @@ public class PlayerManager : MonoBehaviour
         return null;    // hier sollte man eigentlich nie landen...
     }
 
+    public int GetNoOfPlayers()
+    {
+        int no = 0;
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i] != null)
+            {
+                no++;
+            }
+        }
+        return no;
+    }
+
     public GameObject[] GetNetworkPlayer()
     {
         GameObject[] nwPlayer = new GameObject[players.Length - 1];

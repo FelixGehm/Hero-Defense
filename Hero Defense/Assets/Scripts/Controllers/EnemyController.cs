@@ -16,7 +16,7 @@ public class EnemyController : CrowdControllable
     public float waitProbability = 0.04f;
 
     public float minimumTimeBetweenRandomStops = 2.5f;
-    private float timeSinceLastStop = 0;
+    protected float timeSinceLastStop = 0;
 
     public float waitDurationMin = 0.5f;
     public float waitDurationMax = 1.3f;
@@ -213,7 +213,7 @@ public class EnemyController : CrowdControllable
 
     #region Movement Behaviour
 
-    bool isWaiting = false;
+    protected bool isWaiting = false;
 
     private float timeLeftToWait;
 
@@ -223,7 +223,7 @@ public class EnemyController : CrowdControllable
     /// </summary>
     /// <param name="probability"></param>
     /// <param name="duration"></param>
-    private void StayStill(float probability, float duration)
+    protected void StayStill(float probability, float duration)
     {
         float r = Random.Range(0, 1.0f);
 
@@ -237,7 +237,7 @@ public class EnemyController : CrowdControllable
         }
     }
 
-    private bool CheckIfWaitingShouldEnd()
+    protected bool CheckIfWaitingShouldEnd()
     {
         bool b = false;
         timeLeftToWait -= Time.deltaTime;
@@ -250,7 +250,7 @@ public class EnemyController : CrowdControllable
         return b;
     }
 
-    private bool CheckIfWaypointReached()
+    protected bool CheckIfWaypointReached()
     {
         return Vector3.Distance(transform.position, currentWaypointDestination) <= bufferDistanceToTarget;
     }
