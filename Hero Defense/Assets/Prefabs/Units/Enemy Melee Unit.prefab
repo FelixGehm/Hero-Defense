@@ -1930,10 +1930,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 8.1
-  stillStandingProbability: 0.02
-  minimumTimeBetweenRandomStops: 5
-  stillStandingDurationMin: 5
-  stillStandingDurationMax: 5
+  stillStandingProbability: 0.04
+  minimumTimeBetweenRandomStops: 2.5
+  stillStandingDurationMin: 0.5
+  stillStandingDurationMax: 1.3
   target: {fileID: 0}
   stoppingDistancePlayer: 1.2
   stoppingDistanceNexus: 2
