@@ -69,9 +69,11 @@ public class EnemyStats : CharacterStats {
 
     public override void Die()
     {
+        base.Die();
+
         inventory.AddCash(cashValue);
         inventory.AddParts(partsValue);
 
-        base.Die();
+        NetworkServer.Destroy(gameObject);        
     }
 }

@@ -101,19 +101,23 @@ public class CharacterCombat : NetworkBehaviour
         if (OnAttackEcecuted != null) OnAttackEcecuted();
         isAttacking = false;
 
-        NetworkInstanceId idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;
+        NetworkInstanceId idTarget;
 
-        // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
-        if (isServer)
+        if(target.gameObject != null)
         {
-            //SpawnBullet(target, damageDone);
-            CmdSpawnBulletOnServer(idTarget, damageDone);
-        }
-        else
-        {
-            TellServerToSpawnBullet(idTarget, damageDone);
-        }
+            idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;
 
+            // Projektil vom Server erzeugen lassen bzw. als Server selbst das Projektil für alle spawnen
+            if (isServer)
+            {
+                //SpawnBullet(target, damageDone);
+                CmdSpawnBulletOnServer(idTarget, damageDone);
+            }
+            else
+            {
+                TellServerToSpawnBullet(idTarget, damageDone);
+            }
+        }    
     }
 
     public void CancelAttack()

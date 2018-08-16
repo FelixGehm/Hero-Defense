@@ -168,7 +168,7 @@ public class CharacterStats : NetworkBehaviour
     {
         Debug.Log(transform.name + " died.");
 
-        NetworkServer.Destroy(gameObject);
+        //NetworkServer.Destroy(gameObject);
     }
 
     #region Editor
