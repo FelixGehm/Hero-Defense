@@ -129,6 +129,7 @@ public class PlayerController : CrowdControllable
                     if (!combat.isAttacking)
                     {
                         motor.MoveToPoint(hit.point);
+                        UICursor.instance.PlayMovementClickEffectAtPosition(hit.point);
                         RemoveFocus();
                     }
                     else //cancel Auto attack

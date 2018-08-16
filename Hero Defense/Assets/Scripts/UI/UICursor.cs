@@ -13,6 +13,10 @@ public class UICursor : MonoBehaviour
     public Texture2D defaultSelection;
     public Texture2D friendlySelection;
     public Texture2D enemySelection;
+    [Space]
+    public GameObject movementClickEffectPrefab;
+    private GameObject movementClickEffectGO;
+    private ParticleSystem movementClickEffectPs;
 
     [HideInInspector]
     public bool isSelecting = false;
@@ -35,6 +39,8 @@ public class UICursor : MonoBehaviour
     void Start()
     {
         SetMoveCursor();
+        movementClickEffectGO = Instantiate(movementClickEffectPrefab);
+        movementClickEffectPs = movementClickEffectGO.GetComponent<ParticleSystem>();
     }
 
     public void SetMoveCursor()
@@ -73,5 +79,11 @@ public class UICursor : MonoBehaviour
         {
             Cursor.SetCursor(friendlySelection, new Vector2(friendlySelection.width / 2, friendlySelection.height / 2), CursorMode.Auto);
         }
+    }
+
+    public void PlayMovementClickEffectAtPosition(Vector3 pos)
+    {
+        movementClickEffectGO.transform.position = pos;
+        movementClickEffectPs.Play();
     }
 }

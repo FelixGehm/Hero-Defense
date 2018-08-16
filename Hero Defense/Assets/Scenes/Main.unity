@@ -29776,6 +29776,8 @@ MonoBehaviour:
   defaultSelection: {fileID: 2800000, guid: 2782e91389b61ba47a5e4a230a1110b3, type: 3}
   friendlySelection: {fileID: 2800000, guid: c3b40a0bf5ff0004da17d8ed247fc506, type: 3}
   enemySelection: {fileID: 2800000, guid: 686bc68138ef68247a132a41f9b633b2, type: 3}
+  movementClickEffectPrefab: {fileID: 1630188250916456, guid: ea86803dc271d2c4e807b422d133833e,
+    type: 2}
   isSelecting: 0
 --- !u!1001 &2035073723
 Prefab:
