@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 
 namespace Prototype.NetworkLobby
 {
-    public enum CharacterEnum { Gunslinger, Mage };
+    public enum CharacterEnum { Gunslinger, Mage, Test1, Test2 };
 
 
     public class LobbyPlayer : NetworkLobbyPlayer

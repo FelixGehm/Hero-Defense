@@ -103,7 +103,7 @@ public class CharacterCombat : NetworkBehaviour
 
         NetworkInstanceId idTarget;
 
-        if(target.gameObject != null)
+        if(target != null)
         {
             idTarget = target.gameObject.GetComponent<NetworkIdentity>().netId;
 
