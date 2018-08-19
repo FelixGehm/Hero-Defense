@@ -266,7 +266,7 @@ namespace Prototype.NetworkLobby
             foreach (UnityEngine.Networking.PlayerController p in ClientScene.localPlayers)
                 localPlayerCount += (p == null || p.playerControllerId == -1) ? 0 : 1;
 
-            addPlayerButton.SetActive(localPlayerCount < maxPlayersPerConnection && _playerNumber < maxPlayers);
+            addPlayerButton.SetActive(localPlayerCount < maxPlayersPerConnection && _playerNumber < maxPlayers);            
         }
 
         // ----------------- Server callbacks ------------------
@@ -403,6 +403,7 @@ namespace Prototype.NetworkLobby
                 backDelegate = StopClientClbk;
                 SetServerInfo("Client", networkAddress);
             }
+
         }
 
 

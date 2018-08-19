@@ -19,6 +19,8 @@ public class DropDownHandler : MonoBehaviour
         lobbyPlayer = GetComponent<LobbyPlayer>();
 
         PopulateList();
+
+        //dropdown.itemText.text = Enum.GetName(typeof(CharacterEnum), lobbyPlayer.playerChar);
     }
 
 

@@ -21,9 +21,7 @@ namespace Prototype.NetworkLobby
 
         //OnMyName function will be invoked on clients when server change the value of playerName
         [SyncVar(hook = "OnMyName")]
-        public string playerName = "MyName";        
-
-
+        public string playerName = "WerDasLiestIstDoof";
 
         [SyncVar(hook = "OnMyChar")]
         public CharacterEnum playerChar = CharacterEnum.Gunslinger;
@@ -61,6 +59,8 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyChar(playerChar);
+
+            
         }
 
         public override void OnStartAuthority()
@@ -91,6 +91,8 @@ namespace Prototype.NetworkLobby
             removePlayerButton.interactable = NetworkServer.active;
 
             ChangeReadyButtonColor(NotReadyColor);
+
+            
 
             readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
             readyButton.interactable = false;
@@ -123,7 +125,7 @@ namespace Prototype.NetworkLobby
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
-            
+                                  
                         
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
@@ -176,7 +178,7 @@ namespace Prototype.NetworkLobby
 
         public void OnPlayerListChanged(int idx)
         { 
-            GetComponent<Image>().color = (idx % 2 == 0) ? EvenRowColor : OddRowColor;
+            GetComponent<Image>().color = (idx % 2 == 0) ? EvenRowColor : OddRowColor;            
         }
 
         ///===== callback from sync var
