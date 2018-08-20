@@ -14,7 +14,7 @@ public class DropDownHandler : MonoBehaviour
 
     
 
-    private void Start()
+    private void Awake()
     {
         lobbyPlayer = GetComponent<LobbyPlayer>();
 
@@ -36,6 +36,8 @@ public class DropDownHandler : MonoBehaviour
             names.Add(enumNames[i]);
         }
         dropdown.AddOptions(names);
+
+        Debug.Log("I am the PopulateList Function");
     }
 
     public void Dropdown_IndexChanged(int index)

@@ -60,7 +60,7 @@ namespace Prototype.NetworkLobby
             OnMyName(playerName);
             OnMyChar(playerChar);
 
-            
+            Debug.Log("I am the OnCLientENterLobby Function");
         }
 
         public override void OnStartAuthority()
@@ -91,11 +91,11 @@ namespace Prototype.NetworkLobby
             removePlayerButton.interactable = NetworkServer.active;
 
             ChangeReadyButtonColor(NotReadyColor);
-
             
-
             readyButton.transform.GetChild(0).GetComponent<Text>().text = "...";
             readyButton.interactable = false;
+
+            Debug.Log("PlayerChar = " + playerChar);
 
             OnClientReady(false);
         }
@@ -119,13 +119,14 @@ namespace Prototype.NetworkLobby
             //have to use child count of player prefab already setup as "this.slot" is not set yet
             if (playerName == "")
                 CmdNameChanged("Player" + (LobbyPlayerList._instance.playerListContentTransform.childCount-1));
+            
 
             //we switch from simple name display to name input            
             nameInput.interactable = true;
 
             nameInput.onEndEdit.RemoveAllListeners();
             nameInput.onEndEdit.AddListener(OnNameChanged);
-                                  
+                        
                         
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
