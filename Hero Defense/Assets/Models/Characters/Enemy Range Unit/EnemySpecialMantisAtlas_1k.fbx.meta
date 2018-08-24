@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e39f48b2d90f82f4c90c2031666ba268
+guid: b0cef20b27fe8534a8ccf7abc5d73722
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -72,25 +72,29 @@ ModelImporter:
     100132: LowerFrontLeg.L
     100134: LowerFrontLeg.R
     100136: Neck
-    100138: TargetArm.L
-    100140: TargetArm.L_end
-    100142: TargetArm.R
-    100144: TargetArm.R_end
-    100146: TargetBackLeg.L
-    100148: TargetBackLeg.L_end
-    100150: TargetBackLeg.R
-    100152: TargetBackLeg.R_end
-    100154: TargetFrontLeg.L
-    100156: TargetFrontLeg.L_end
-    100158: TargetFrontLeg.R
-    100160: TargetFrontLeg.R_end
-    100162: UpperArm.L
-    100164: UpperArm.R
-    100166: UpperBackLeg.L
-    100168: UpperBackLeg.R
-    100170: UpperFrontLeg.L
-    100172: UpperFrontLeg.R
-    100174: UpperNeck
+    100138: Seil1.001
+    100140: Seil1.L
+    100142: Seil2.001
+    100144: Seil2.L
+    100146: TargetArm.L
+    100148: TargetArm.L_end
+    100150: TargetArm.R
+    100152: TargetArm.R_end
+    100154: TargetBackLeg.L
+    100156: TargetBackLeg.L_end
+    100158: TargetBackLeg.R
+    100160: TargetBackLeg.R_end
+    100162: TargetFrontLeg.L
+    100164: TargetFrontLeg.L_end
+    100166: TargetFrontLeg.R
+    100168: TargetFrontLeg.R_end
+    100170: UpperArm.L
+    100172: UpperArm.R
+    100174: UpperBackLeg.L
+    100176: UpperBackLeg.R
+    100178: UpperFrontLeg.L
+    100180: UpperFrontLeg.R
+    100182: UpperNeck
     400000: ArmatureRanged
     400002: BladeBackLeg.L
     400004: BladeBackLeg.L_end
@@ -160,32 +164,45 @@ ModelImporter:
     400132: LowerFrontLeg.L
     400134: LowerFrontLeg.R
     400136: Neck
-    400138: TargetArm.L
-    400140: TargetArm.L_end
-    400142: TargetArm.R
-    400144: TargetArm.R_end
-    400146: TargetBackLeg.L
-    400148: TargetBackLeg.L_end
-    400150: TargetBackLeg.R
-    400152: TargetBackLeg.R_end
-    400154: TargetFrontLeg.L
-    400156: TargetFrontLeg.L_end
-    400158: TargetFrontLeg.R
-    400160: TargetFrontLeg.R_end
-    400162: UpperArm.L
-    400164: UpperArm.R
-    400166: UpperBackLeg.L
-    400168: UpperBackLeg.R
-    400170: UpperFrontLeg.L
-    400172: UpperFrontLeg.R
-    400174: UpperNeck
-    2100000: MainMetal
-    2100002: Details
-    2100004: Gears
-    2100006: Display
-    2100008: Blade
-    2100010: Element
+    400138: Seil1.001
+    400140: Seil1.L
+    400142: Seil2.001
+    400144: Seil2.L
+    400146: TargetArm.L
+    400148: TargetArm.L_end
+    400150: TargetArm.R
+    400152: TargetArm.R_end
+    400154: TargetBackLeg.L
+    400156: TargetBackLeg.L_end
+    400158: TargetBackLeg.R
+    400160: TargetBackLeg.R_end
+    400162: TargetFrontLeg.L
+    400164: TargetFrontLeg.L_end
+    400166: TargetFrontLeg.R
+    400168: TargetFrontLeg.R_end
+    400170: UpperArm.L
+    400172: UpperArm.R
+    400174: UpperBackLeg.L
+    400176: UpperBackLeg.R
+    400178: UpperFrontLeg.L
+    400180: UpperFrontLeg.R
+    400182: UpperNeck
+    2100000: Atlas
+    2100002: Element
+    2100004: No Name
+    2300000: Seil1.001
+    2300002: Seil1.L
+    2300004: Seil2.001
+    2300006: Seil2.L
+    3300000: Seil1.001
+    3300002: Seil1.L
+    3300004: Seil2.001
+    3300006: Seil2.L
     4300000: "K\xF6rper"
+    4300002: Seil1.001
+    4300004: Seil2.001
+    4300006: Seil1.L
+    4300008: Seil2.L
     7400000: ArmatureRanged|Attack
     7400002: ArmatureRanged|Death
     7400004: ArmatureRanged|Default
@@ -198,33 +215,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Blade
-    second: {fileID: 2100000, guid: 02fddf4f44c5db141ac41c87b6d5b560, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Details
-    second: {fileID: 2100000, guid: 79ac9abefd701d0418c89866ea8cc124, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Display
-    second: {fileID: 2100000, guid: ec449957ba0c49d4883588942b9bc34e, type: 2}
+      name: Atlas
+    second: {fileID: 2100000, guid: 40ece500081a0974aa980f2adeb91792, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Element
-    second: {fileID: 2100000, guid: 7e5ef970a1455c3468c2af32a8f1f325, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Gears
-    second: {fileID: 2100000, guid: 20f634b7ef18d1346840dfa5f56e5ddc, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: MainMetal
-    second: {fileID: 2100000, guid: d2e4d20632fe23e4799eba8847306fb4, type: 2}
+    second: {fileID: 2100000, guid: ec449957ba0c49d4883588942b9bc34e, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -255,7 +252,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.4
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
