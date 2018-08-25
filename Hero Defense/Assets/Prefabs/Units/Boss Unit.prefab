@@ -1589,6 +1589,9 @@ MonoBehaviour:
   moveSpeed:
     baseValue: 0
     modifiers: []
+  cashValue: 20
+  partsValue: 0
+  inventory: {fileID: 0}
 --- !u!114 &114038735524091826
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1686,6 +1689,9 @@ MonoBehaviour:
   moveSpeed:
     baseValue: 0
     modifiers: []
+  cashValue: 20
+  partsValue: 0
+  inventory: {fileID: 0}
 --- !u!114 &114189876770013424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1724,7 +1730,7 @@ MonoBehaviour:
   isVelocityCompressed: 1
   isAngularVelocityCompressed: 1
   whereToUpdateTransform: 1
-  sendRate: 30
+  sendRate: 10
   networkChannel: 1
   childObjectToSync: {fileID: 0}
 --- !u!114 &114200395345653676
@@ -1788,7 +1794,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookRadius: 20
-  target: {fileID: 0}
+  waitProbability: 0.04
+  minimumTimeBetweenRandomStops: 2.5
+  waitDurationMin: 0.5
+  waitDurationMax: 1.3
+  bufferDistanceToTarget: 1.4
+  currentWaypoint: {fileID: 0}
+  currentWaypointDestination: {x: 0, y: 0, z: 0}
+  targetTransform: {fileID: 0}
   stoppingDistancePlayer: 1.2
   stoppingDistanceNexus: 2
   mortarRange: 15
@@ -2017,6 +2030,7 @@ MonoBehaviour:
   mortarDelayToNextAA: 2
   mortarCooldown: 15
   bodySlamCooldown: 10
+  canonsCooldown: 10
 --- !u!135 &135455202986270884
 SphereCollider:
   m_ObjectHideFlags: 1
