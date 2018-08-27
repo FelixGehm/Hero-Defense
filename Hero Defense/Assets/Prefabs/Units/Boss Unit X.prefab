@@ -553,7 +553,6 @@ GameObject:
   - component: {fileID: 195410553277371470}
   - component: {fileID: 136561322471256270}
   - component: {fileID: 114172872377818586}
-  - component: {fileID: 114332175681597656}
   - component: {fileID: 114218600288533346}
   - component: {fileID: 114287894435771588}
   - component: {fileID: 95793953739228206}
@@ -566,7 +565,7 @@ GameObject:
   - component: {fileID: 114437850562900000}
   - component: {fileID: 114634568527786264}
   m_Layer: 8
-  m_Name: Boss Unit
+  m_Name: Boss Unit X
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2927,7 +2926,7 @@ MonoBehaviour:
   moveSpeed:
     baseValue: 0
     modifiers: []
-  cashValue: 20
+  cashValue: 100
   partsValue: 0
   inventory: {fileID: 0}
 --- !u!114 &114301913050167998
@@ -2980,53 +2979,6 @@ MonoBehaviour:
   damage: 3
   peakHeight: 5
   explosionRadius: 5
---- !u!114 &114332175681597656
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1371108049240692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0606f572cf382c43aaea27921044445, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth:
-    baseValue: 1000
-    modifiers: []
-  healthRegeneration:
-    baseValue: 0
-    modifiers: []
-  physicalDamage:
-    baseValue: 10
-    modifiers: []
-  armor:
-    baseValue: 0
-    modifiers: []
-  magicDamage:
-    baseValue: 0
-    modifiers: []
-  magicResistance:
-    baseValue: 0
-    modifiers: []
-  critChance:
-    baseValue: 0
-    modifiers: []
-  critDamage:
-    baseValue: 0
-    modifiers: []
-  attackSpeed:
-    baseValue: 1
-    modifiers: []
-  attackRange:
-    baseValue: 10
-    modifiers: []
-  moveSpeed:
-    baseValue: 0
-    modifiers: []
-  cashValue: 20
-  partsValue: 0
-  inventory: {fileID: 0}
 --- !u!114 &114345926872621080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3131,7 +3083,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1133058471752278, guid: cf6907b80a0852649bd4da5a6e8d3649,
     type: 2}
   damage: 50
-  force: 400
+  force: 800
   projectileLifetime: 5
   isInAbility: 0
 --- !u!114 &114678040932017126
@@ -3215,7 +3167,7 @@ MonoBehaviour:
   isVelocityCompressed: 1
   isAngularVelocityCompressed: 1
   whereToUpdateTransform: 1
-  sendRate: 30
+  sendRate: 10
   networkChannel: 1
   childObjectToSync: {fileID: 0}
 --- !u!114 &114741941757755708

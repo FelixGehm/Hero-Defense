@@ -3507,7 +3507,7 @@ MonoBehaviour:
   isVelocityCompressed: 1
   isAngularVelocityCompressed: 1
   whereToUpdateTransform: 1
-  sendRate: 30
+  sendRate: 10
   networkChannel: 1
   childObjectToSync: {fileID: 0}
 --- !u!114 &114161986723167450
