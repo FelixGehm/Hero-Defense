@@ -12898,6 +12898,24 @@ Prefab:
       value: 
       objectReference: {fileID: 1182527252113496, guid: 3c39cf5ef9f2e504e98326a116c85840,
         type: 2}
+    - target: {fileID: 114850219724629106, guid: 30e5d74ea4f60ba4db78d494c08dacb1,
+        type: 2}
+      propertyPath: enemyBoss
+      value: 
+      objectReference: {fileID: 1371108049240692, guid: 2bd44ac7be5bec1469169f6fdc289fd1,
+        type: 2}
+    - target: {fileID: 114349375483789478, guid: 30e5d74ea4f60ba4db78d494c08dacb1,
+        type: 2}
+      propertyPath: enemyBoss
+      value: 
+      objectReference: {fileID: 1371108049240692, guid: 2bd44ac7be5bec1469169f6fdc289fd1,
+        type: 2}
+    - target: {fileID: 114448947155569426, guid: 30e5d74ea4f60ba4db78d494c08dacb1,
+        type: 2}
+      propertyPath: enemyBoss
+      value: 
+      objectReference: {fileID: 1371108049240692, guid: 2bd44ac7be5bec1469169f6fdc289fd1,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30e5d74ea4f60ba4db78d494c08dacb1, type: 2}
   m_IsPrefabParent: 0
@@ -31102,7 +31120,7 @@ MonoBehaviour:
   - {fileID: 1194507523770242, guid: f12e419a9c3924041b387170e6cb023f, type: 2}
   - {fileID: 1182527252113496, guid: 3c39cf5ef9f2e504e98326a116c85840, type: 2}
   - {fileID: 0}
-  - {fileID: 1505207752778506, guid: 6740a55abaf8fb24d9698644b08b3f5a, type: 2}
+  - {fileID: 0}
   - {fileID: 1088551905673022, guid: 27899e912011bd344a2015d724cad363, type: 2}
   - {fileID: 1420979319549846, guid: 72e688c88733ab246916b1bf0c32509f, type: 2}
   - {fileID: 1110684039345546, guid: 86edd666984cc0842a41579ec4af92d1, type: 2}

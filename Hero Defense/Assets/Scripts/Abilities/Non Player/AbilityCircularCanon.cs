@@ -31,18 +31,21 @@ public class AbilityCircularCanon : NetworkBehaviour
     private bool isRotating = false;
 
 
+    BossAnimator animator;
+
     public void Execute()
     {
         isInAbility = true;
         isRotating = true;
         currentAngle = 0;
         currentCycle = 0;
+        animator.StartCanonIdleAnimation();
     }
 
     // Use this for initialization
     void Start()
     {
-
+        animator = GetComponent<BossAnimator>();
     }
 
     // Update is called once per frame
@@ -82,8 +85,11 @@ public class AbilityCircularCanon : NetworkBehaviour
     {
         isShooting = true;
         yield return new WaitForSeconds(delayToFirstShot);
+        int i = 0;
         foreach (Transform fp in firePoints)
         {
+            animator.StartCanonAnimation(i);
+            i++;
             ShootProjectile(fp);
             yield return new WaitForSeconds(delayBetweenShots);
         }
@@ -106,7 +112,7 @@ public class AbilityCircularCanon : NetworkBehaviour
     {
         if (isServer)
         {
-            CmdSpawnProjectileOnServer(damage, firePoint.position, firePoint.rotation, firePoint.forward);
+            CmdSpawnProjectileOnServer(damage, firePoint.position, firePoint.rotation, firePoint.up);       //up, da firepoints aus blender falsch ausgerichtet
         }
     }
 

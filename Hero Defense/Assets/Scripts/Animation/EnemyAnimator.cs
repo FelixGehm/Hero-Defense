@@ -7,15 +7,15 @@ using UnityEngine.Networking;
 public class EnemyAnimator : MonoBehaviour
 {
 
-    NavMeshAgent agent;
-    Animator animator;
-    NetworkAnimator netAnimator;
-    CharacterCombat characterCombat;
+    protected NavMeshAgent agent;
+    protected Animator animator;
+    protected NetworkAnimator netAnimator;
+    protected CharacterCombat characterCombat;
 
-    const float locomotionAnimationSmoothTime = .1f;
+    protected const float locomotionAnimationSmoothTime = .1f;
     float speedPercent;
     // Use this for initialization
-    void Start()
+    protected void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -25,14 +25,14 @@ public class EnemyAnimator : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         speedPercent = agent.velocity.magnitude / agent.speed;
 
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
 
-    void StartAttackAnimation()
+    protected void StartAttackAnimation()
     {
         //animator.SetTrigger("attack");
 

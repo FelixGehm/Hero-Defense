@@ -31,7 +31,7 @@ public class BossCombat : CharacterCombat
     public float canonsCooldown = 10;
     private float currentCanonsCooldown = 0;
 
-    private EnemyAnimator anim;
+    private BossAnimator anim;
 
     public override void Start()
     {
@@ -39,7 +39,7 @@ public class BossCombat : CharacterCombat
         mortar = GetComponent<AbilityMortar>();
         bodySlam = GetComponent<AbilityBodySlam>();
         canons = GetComponent<AbilityCircularCanon>();
-        anim = GetComponent<EnemyAnimator>();
+        anim = GetComponent<BossAnimator>();
     }
 
     protected override void Update()
@@ -65,6 +65,7 @@ public class BossCombat : CharacterCombat
         mortar.SpawnPreview(targetPosition);
         //anim.StartMortarAnimation();
         isFiringMortar = true;
+        anim.StartMortarIdleAnimation();
         yield return new WaitForSeconds(delay);
         for (int i = 1; i <= nrOfShots; i++)
         {

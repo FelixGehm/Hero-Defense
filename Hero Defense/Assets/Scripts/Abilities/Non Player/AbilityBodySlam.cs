@@ -27,11 +27,13 @@ public class AbilityBodySlam : NetworkBehaviour
     private bool isRunningToTarget = false;
 
     private AbilityCircularCanon canons;
+    BossAnimator animator;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         canons = GetComponent<AbilityCircularCanon>();
         defaultSpeed = agent.speed;
+        animator = GetComponent<BossAnimator>();
     }
 
     private void Update()
@@ -54,20 +56,22 @@ public class AbilityBodySlam : NetworkBehaviour
         isInAbility = true;
         distanceToTarget = float.MaxValue;
         target = targetTransform;
+        animator.StartSprintAnimation();
     }
 
     private void RunToTarget(Transform targetTransform)
     {
         agent.SetDestination(targetTransform.position);
         agent.speed = chargeSpeed;
-        Debug.Log("run");
+        //Debug.Log("run");
     }
 
     private void Slam()
     {
         //agent.ResetPath();
+        animator.StartSlamAnimation();
         agent.SetDestination(transform.position);
-        StartCoroutine(SpawnCollider(transform.position, slamDelay));
+        StartCoroutine(SpawnCollider(transform.position, slamDelay));       
     }
 
     public IEnumerator SpawnCollider(Vector3 spawnPosition, float delay)
