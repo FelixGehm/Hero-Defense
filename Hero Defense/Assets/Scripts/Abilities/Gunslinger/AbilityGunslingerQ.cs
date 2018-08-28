@@ -24,7 +24,7 @@ public class AbilityGunslingerQ : AbilityBasic
 
     KeyCode abilityKey;
 
-    bool isTimeStartSet = false;
+    //bool isTimeStartSet = false;
     float timeAtShootStart = 0;
 
     bool isTimeAtShootingSet = false;
@@ -169,7 +169,7 @@ public class AbilityGunslingerQ : AbilityBasic
         // Calculate damage from projectile
         float deltaT = timeAtShooting - timeAtShootStart;
         float percentDamage;
-        isTimeStartSet = false;
+        //isTimeStartSet = false;
         isTimeAtShootingSet = false;
 
 

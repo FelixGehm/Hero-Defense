@@ -9,8 +9,10 @@ public class WaveInfo : NetworkBehaviour {
     public Text text;
 
     public Color textColor;
+    
+    public WaveManager waveManager;
 
-    public NetworkWaveSpawner spawner;
+
 
     [SyncVar(hook = "OnChangeText")]
     private string networkString;
@@ -20,10 +22,8 @@ public class WaveInfo : NetworkBehaviour {
     {
         text.text = newText;
     }
-
-    // Use this for initialization
+        
     void Start () {
-
         text.color = textColor;
 	}
 
@@ -32,24 +32,20 @@ public class WaveInfo : NetworkBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if ( spawner == null || !isServer)
+        if ( waveManager == null || !isServer)
         {
             return;
         }
 
-        int cooldown = (int) spawner.waveCoolDown;
+        int cooldown = (int) waveManager.TimeTillNextWave;
 
-        if(  cooldown != oldCooldown || oldWave != spawner.waveCounter)
+        if(  cooldown != oldCooldown || oldWave != waveManager.currentWaveNo)
         {
             oldCooldown = cooldown;
 
-            networkString = "Wave " + spawner.waveCounter + "; Cooldown: " + cooldown + "; autospawn = " + spawner.autoSpawn;
+            networkString = "Wave " + waveManager.currentWaveNo + " in " + cooldown + " Seconds";
 
             text.text = networkString;
         }
-
-
-        
-
     }
 }

@@ -79,15 +79,16 @@ public class AbilityGunslingerR : AbilityBasic
 
                     }
 
-                    if (Input.GetKeyDown(abilityKey))
+                    if (Input.GetKeyDown(abilityKey) && targets.Count > 0)
                     {
                         StartCoroutine(ShootProjectiles());
                     }
                 }
                 skipFrame = false;
             }
+
             if (Input.GetKeyUp(abilityKey) && !firstAnimTriggered && isCasting)  //Workaround
-            {
+            {                   
                 TriggerAnimation();
                 firstAnimTriggered = true;
             }
@@ -96,20 +97,27 @@ public class AbilityGunslingerR : AbilityBasic
 
     protected override void Cast()
     {
-        //TriggerAnimation();                      // Felix: Wird die Animation hier getriggert funktioneirt sie beim Client nicht. Ich kann leider nicht nachvollziehen woran das liegen könnte. Methoden werden alle korrekt aufgerufen.
-        playerMotor.MoveToPoint(transform.position);    // Stehen bleiben
+        if (isLocalPlayer && currentCooldown <= 0 && !isCasting)
+        {
 
-        skipFrame = true;
-        IsCasting(true);
+            //TriggerAnimation();                      // Felix: Wird die Animation hier getriggert funktioneirt sie beim Client nicht. Ich kann leider nicht nachvollziehen woran das liegen könnte. Methoden werden alle korrekt aufgerufen.
+            playerMotor.MoveToPoint(transform.position);    // Stehen bleiben
 
-        timeAtCastStart = Time.time;
+            skipFrame = true;
+            IsCasting(true);
 
-        SpawnPreview();
+            timeAtCastStart = Time.time;
+
+            SpawnPreview();
+        }
     }
 
     void SpawnPreview()
     {        
-        previewGameObject = Instantiate(previewPrefab, transform.position, Quaternion.Euler(90, 0, 0));
+        if (previewGameObject == null)
+        {
+            previewGameObject = Instantiate(previewPrefab, transform.position, Quaternion.Euler(90, 0, 0));
+        }        
     }
 
     void CancelCast()
@@ -225,8 +233,6 @@ public class AbilityGunslingerR : AbilityBasic
                     TellServerToSpawnProjectile(projectilePhysicalDamage, targetID);
                 }
             }
-            
-            
         }
 
         isAnimating = false;

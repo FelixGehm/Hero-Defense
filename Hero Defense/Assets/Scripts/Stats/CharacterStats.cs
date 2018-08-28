@@ -94,7 +94,7 @@ public class CharacterStats : NetworkBehaviour
     #region TrueDamage
     public void TakeTrueDamage(float tDamage)
     {
-        if (!isServer)      // Ausschließlich der Server verursacht Schaden.
+        if (!isServer || !IsAlive())      // Ausschließlich der Server verursacht Schaden.
         {
             return;
         }
@@ -125,7 +125,7 @@ public class CharacterStats : NetworkBehaviour
     {
         //Debug.Log("TakePhyDam");
 
-        if (!isServer)      // Ausschließlich der Server verursacht Schaden.
+        if (!isServer || !IsAlive())      // Ausschließlich der Server verursacht Schaden.
         {
             return;
         }
@@ -145,7 +145,7 @@ public class CharacterStats : NetworkBehaviour
     #region Magical
     public void TakeMagicDamage(float mDamage)
     {
-        if (!isServer)      // Ausschließlich der Server verursacht so Schaden.
+        if (!isServer || !IsAlive())      // Ausschließlich der Server verursacht so Schaden.
         {
             return;
         }

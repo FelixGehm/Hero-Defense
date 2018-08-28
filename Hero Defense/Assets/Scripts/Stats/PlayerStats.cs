@@ -10,17 +10,7 @@ public class PlayerStats : CharacterStats
 
     public override void Awake()
     {
-        base.Awake();
-
-        if (GameObject.Find("UIHealthBar") && isLocalPlayer)
-        {
-            UIHealthBar uIHealthBar = GameObject.Find("UIHealthBar").GetComponent<UIHealthBar>();
-            uIHealthBar.RegisterCharacterStats(this);
-        }
-        else
-        {
-            Debug.LogWarning("No UIHealthBar Script Found");
-        }
+        base.Awake();   
     }
 
     // Use this for initialization

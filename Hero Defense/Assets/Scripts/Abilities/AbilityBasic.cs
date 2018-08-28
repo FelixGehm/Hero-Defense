@@ -27,7 +27,8 @@ public abstract class AbilityBasic : NetworkBehaviour
 
 
 
-    protected bool isCasting = false;
+    //protected bool isCasting = false;
+    public bool isCasting = false;
     protected bool isAnimating = false;
 
     public event System.Action OnAbilityCasting;
