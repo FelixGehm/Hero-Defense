@@ -156,13 +156,13 @@ public class EnemyController : CrowdControllable
     }
 
 
-    bool isInCombat = false;
+    protected bool isInCombat = false;
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns> the traget </returns>
-    protected Transform GetTarget()
+    protected virtual Transform GetTarget()
     {
         // Wenn im fight, behalte das alte Ziel
         if (isInCombat && targetTransform.GetComponent<CharacterStats>().IsAlive())
@@ -269,9 +269,10 @@ public class EnemyController : CrowdControllable
         }
     }
 
-    protected void CheckIfStillInCombat()
+    protected virtual void CheckIfStillInCombat()
     {
-        distanceToTarget = Vector3.Distance(targetTransform.position, transform.position);
+        distanceToTarget = Vector3.Distance(targetTransform.position, transform.position);        
+
         if (distanceToTarget > lookRadius || (targetTransform.GetComponent<CharacterStats>() != null && !targetTransform.GetComponent<CharacterStats>().IsAlive()))
         {
             isInCombat = false;

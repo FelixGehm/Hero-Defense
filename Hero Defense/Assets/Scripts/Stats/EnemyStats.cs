@@ -9,6 +9,8 @@ public class EnemyStats : CharacterStats {
 
     public int cashValue = 20;
     public int partsValue = 0;
+
+    [HideInInspector]
     public Inventory inventory;
 
     public override void Awake()

@@ -2203,6 +2203,7 @@ MonoBehaviour:
   abilityCooldown: 60
   currentCooldown: 0
   abilityCastTime: 0.3
+  isCasting: 0
   previewPrefab: {fileID: 1651264465648246, guid: d46b8a545a11ece4a8580b8aa299f2ac,
     type: 2}
   projectilePrefab: {fileID: 1619547177321574, guid: d326aa04fff88814a87602d07108b2e5,
@@ -2287,6 +2288,7 @@ MonoBehaviour:
   abilityCooldown: 1
   currentCooldown: 0
   abilityCastTime: 0.6
+  isCasting: 0
   manaPerSeconds: 0
   physicalDamageBonus: 5
   critChanceBonus: 0.05
@@ -2306,6 +2308,7 @@ MonoBehaviour:
   abilityCooldown: 60
   currentCooldown: 0
   abilityCastTime: 5
+  isCasting: 0
   remotePlayerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -2351,7 +2354,7 @@ MonoBehaviour:
     baseValue: 1
     modifiers: []
   attackRange:
-    baseValue: 8
+    baseValue: 7.5
     modifiers: []
   moveSpeed:
     baseValue: 0
@@ -2403,6 +2406,7 @@ MonoBehaviour:
   abilityCooldown: 18
   currentCooldown: 0
   abilityCastTime: 0.8
+  isCasting: 0
   rightClickMask:
     serializedVersion: 2
     m_Bits: 512
@@ -2602,6 +2606,7 @@ MonoBehaviour:
   abilityCooldown: 10
   currentCooldown: 0
   abilityCastTime: 0.5
+  isCasting: 0
   previewPrefab: {fileID: 1222957086260034, guid: e19c18fb4f4bc5b439a23d2e36799f35,
     type: 2}
   rightClickMask:

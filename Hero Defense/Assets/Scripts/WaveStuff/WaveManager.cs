@@ -19,6 +19,8 @@ public class WaveManager : MonoBehaviour
 
     private float timeTillNextWave = 0;
 
+    public bool pause = true;
+
     public float TimeTillNextWave
     {
         private set { }
@@ -53,8 +55,20 @@ public class WaveManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
-        if(currentWave != null)
+    {
+        
+        if (Input.GetKeyDown("p"))
+        {
+            pause = !pause;
+        }
+
+        if (pause)
+        {
+            return;
+        }
+        
+
+        if (currentWave != null)
         {
             if (timeTillNextWave <= 0)
             {
@@ -67,16 +81,6 @@ public class WaveManager : MonoBehaviour
                 timeTillNextWave -= Time.deltaTime;
             }
         }
-        
-        /*
-         * Für Tests
-        if (Input.GetKeyDown("s"))
-        {
-            TellSlavesToStartWave(currentWave);
-
-            currentWave = GetNextWave();
-        }
-        */
     }
 
     private void LoadAllWaves()
