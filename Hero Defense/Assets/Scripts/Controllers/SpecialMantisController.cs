@@ -44,7 +44,7 @@ public class SpecialMantisController : EnemyController
         }
 
 
-        if (!currentWaypoint.isNexus && CheckIfWaypointReached())
+        if (currentWaypoint != null && !currentWaypoint.isNexus && CheckIfWaypointReached())
         {
             currentWaypoint = currentWaypoint.next;
             currentWaypointDestination = currentWaypoint.GetDestinationInRadius();

@@ -66,4 +66,10 @@ public class AbilityMortar : NetworkBehaviour
     }
 
     #endregion
+
+    private void OnDestroy()
+    {
+        DestroyPreview();
+        Destroy(spawnIndicatorGO);
+    }
 }

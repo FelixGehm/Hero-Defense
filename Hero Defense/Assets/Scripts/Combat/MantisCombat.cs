@@ -145,7 +145,7 @@ public class MantisCombat : CharacterCombat
     [Server]
     protected void WorkAroundCmd(NetworkInstanceId targetId, float damage, Vector3 spawnPosition)
     {
-        Debug.Log("CharacterCombat CmDSPawnBulletOnServer");
+        //Debug.Log("CharacterCombat CmDSPawnBulletOnServer");
         Transform targetTransform = NetworkServer.FindLocalObject(targetId).transform;
 
         GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, spawnPosition, firePoint.rotation);

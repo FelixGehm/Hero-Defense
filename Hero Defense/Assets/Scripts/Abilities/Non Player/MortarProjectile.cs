@@ -57,7 +57,7 @@ public class MortarProjectile : NetworkBehaviour
             {
                 if (c.CompareTag("Player"))
                 {
-                    Debug.Log("boom: " + explosionDamage);
+                    //Debug.Log("boom: " + explosionDamage);
                     c.gameObject.GetComponent<PlayerStats>().TakePhysicalDamage(explosionDamage);
                 }
             }
