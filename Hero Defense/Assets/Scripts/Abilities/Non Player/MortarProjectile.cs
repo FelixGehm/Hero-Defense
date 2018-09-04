@@ -20,6 +20,9 @@ public class MortarProjectile : NetworkBehaviour
 
     private float time = 0;
 
+    [Header("FX")]
+    public GameObject explosionEffect;
+
     public void Init(Vector3 start, Vector3 end, float height, float range, float damage)
     {
         startPos = start;
@@ -61,6 +64,8 @@ public class MortarProjectile : NetworkBehaviour
                     c.gameObject.GetComponent<PlayerStats>().TakePhysicalDamage(explosionDamage);
                 }
             }
+            if (explosionEffect != null)
+                CmdSpawnExplosionEffectOnServer(transform.position);
             NetworkServer.Destroy(this.gameObject);
         }
     }
@@ -74,5 +79,12 @@ public class MortarProjectile : NetworkBehaviour
         var mid = Vector3.Lerp(start, end, t);
 
         return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
+    }
+
+    [Command]
+    void CmdSpawnExplosionEffectOnServer(Vector3 spawnPosition)
+    {
+        GameObject g = Instantiate(explosionEffect, spawnPosition, explosionEffect.transform.rotation);
+        NetworkServer.Spawn(g);
     }
 }
