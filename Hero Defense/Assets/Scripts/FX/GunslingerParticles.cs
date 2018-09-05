@@ -7,12 +7,15 @@ public class GunslingerParticles : NetworkBehaviour
 {
     public ParticleSystem aaParticles;
     CharacterCombat cb;
+    AbilityGunslingerR abilityR;
 
     // Use this for initialization
     void Start()
     {
         cb = GetComponent<CharacterCombat>();
+        abilityR = GetComponent<AbilityGunslingerR>();
         cb.OnAttackEcecuted += PlayParticleEffect;
+        abilityR.OnProjectileFired += PlayParticleEffect;
     }
 
     private void PlayParticleEffect()

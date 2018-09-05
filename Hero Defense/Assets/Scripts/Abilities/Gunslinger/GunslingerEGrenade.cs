@@ -21,6 +21,9 @@ public class GunslingerEGrenade : NetworkBehaviour
     private float time = 0;
 
     private Transform damageCauser;
+
+    [Header("FX")]
+    public GameObject explosionEffect;
     
     public void Init(Vector3 start, Vector3 end, float height, float range, float damage, float stunTime, Transform damageCauser)
     {
@@ -69,6 +72,7 @@ public class GunslingerEGrenade : NetworkBehaviour
                     cc.GetStunned(stunDuration);
                 }
             }
+            CmdSpawnExplosionEffectOnServer(transform.position);
             NetworkServer.Destroy(this.gameObject);
         }
     }
@@ -82,5 +86,12 @@ public class GunslingerEGrenade : NetworkBehaviour
         var mid = Vector3.Lerp(start, end, t);
 
         return new Vector3(mid.x, f(t) + Mathf.Lerp(start.y, end.y, t), mid.z);
+    }
+
+    [Command]
+    void CmdSpawnExplosionEffectOnServer(Vector3 spawnPosition)
+    {
+        GameObject g = Instantiate(explosionEffect, spawnPosition, explosionEffect.transform.rotation);
+        NetworkServer.Spawn(g);
     }
 }

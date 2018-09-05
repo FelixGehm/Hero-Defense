@@ -33,6 +33,8 @@ public class AbilityGunslingerR : AbilityBasic
 
     public List<Transform> targets;
 
+    public event System.Action OnProjectileFired;
+
 
     KeyCode abilityKey;
 
@@ -88,7 +90,7 @@ public class AbilityGunslingerR : AbilityBasic
             }
 
             if (Input.GetKeyUp(abilityKey) && !firstAnimTriggered && isCasting)  //Workaround
-            {                   
+            {
                 TriggerAnimation();
                 firstAnimTriggered = true;
             }
@@ -113,11 +115,11 @@ public class AbilityGunslingerR : AbilityBasic
     }
 
     void SpawnPreview()
-    {        
+    {
         if (previewGameObject == null)
         {
             previewGameObject = Instantiate(previewPrefab, transform.position, Quaternion.Euler(90, 0, 0));
-        }        
+        }
     }
 
     void CancelCast()
@@ -174,12 +176,12 @@ public class AbilityGunslingerR : AbilityBasic
         timeAtShooting = Time.time;
         foreach (Transform t in targets)
         {
-            if(t != null) // maybe Target is already dead
+            if (t != null) // maybe Target is already dead
             {
                 GameObject haloInstance = t.Find("GFX").Find("GunslingerRIndicator").gameObject;
                 haloInstance.SetActive(false);
             }
-            
+
         }
 
         Destroy(previewGameObject);
@@ -208,10 +210,11 @@ public class AbilityGunslingerR : AbilityBasic
         bool isFirstShot = true;
         foreach (Transform target in targets)
         {
-            if(target != null)  // maybe Target is already dead
-            {                
+            if (target != null)  // maybe Target is already dead
+            {
                 transform.LookAt(target);    // rotate Player in correct direction
 
+                if (OnProjectileFired != null) OnProjectileFired();
                 TriggerSecondAnimation();
                 if (!isFirstShot)
                 {
