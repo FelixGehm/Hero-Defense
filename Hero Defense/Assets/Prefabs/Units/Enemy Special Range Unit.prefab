@@ -3622,7 +3622,7 @@ MonoBehaviour:
     type: 2}
   projectilePrefab: {fileID: 1194507523770242, guid: f12e419a9c3924041b387170e6cb023f,
     type: 2}
-  damage: 20
+  damage: 10
   peakHeight: 5
   explosionRadius: 2.5
 --- !u!114 &114545141934501198
@@ -3682,7 +3682,7 @@ MonoBehaviour:
     baseValue: 0
     modifiers: []
   physicalDamage:
-    baseValue: 7.5
+    baseValue: 4
     modifiers: []
   armor:
     baseValue: 5
